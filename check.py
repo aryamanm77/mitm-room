@@ -17,14 +17,18 @@ def get_active_github_token():
         }
         resp = requests.get("https://api.github.com/rate_limit", headers=headers)
         if resp.status_code == 200:
-            code_scan = resp.json()["resources"]["code_scanning_upload"]
-            if code_scan["remaining"] > 0:
-                return token, code_scan["remaining"]
-    return None  # All tokens exhausted
+            data = resp.json()
+            # Check the 'core' rate limit (used for most REST API calls)
+            core = data.get("resources", {}).get("core")
+            if core and core.get("remaining", 0) > 0:
+                return token, core["remaining"]
+    return None, None  # Return two None values
 
 # On app load
-GITHUB_TOKEN,TOKEN_REMAIN = get_active_github_token()
-
+GITHUB_TOKEN, TOKEN_REMAIN = get_active_github_token()
+if GITHUB_TOKEN is None:
+    st.error("No GitHub token with available rate limit. Please check your secrets.")
+    st.stop()
 
 GITHUB_REPO = "2005lakshmi/locorom"
 BASE_PATH = "Rooms"
