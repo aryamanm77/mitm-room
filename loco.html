@@ -1,260 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LOCOROM Navigation</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: #f0f2f5;
-      overflow-x: hidden;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔍 Room [MITM] - Locorom</title>
+<link rel="icon" href="https://raw.githubusercontent.com/2005lakshmi/locorom/main/logo_locorom.png">
+<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      min-height: 100vh;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: #ffffff; color: #262730; padding: 16px; max-width: 900px; margin: 0 auto;
     }
-
-    /* HEADER */
-    .header-container {
-      position: relative;
-      background: white;
-      padding: 0.8rem 2rem;
-      text-align: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      overflow: hidden;
-      z-index: 10;
-      width: 100vw;
-      left: 0;
+    .logo-container { display: flex; align-items: center; justify-content: space-between; }
+    .room-title { font-size: 24px; font-weight: bold; }
+    .room-code { color: green; font-size: 15px; }
+    .logo img { width: 68px; height: 68px; }
+    hr { border: none; border-top: 1px solid gray; margin: 10px 0; }
+    input#search {
+        width: 100%; padding: 10px 14px; font-size: 16px;
+        border: 1px solid #ccc; border-radius: 8px; outline: none;
     }
-    .header-container::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background:
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M20,50 Q50,20 80,50 T20,50" fill="none" stroke="%23ced4da" stroke-width="0.5"/></svg>') repeat;
-      opacity: 0.3;
-      z-index: 1;
+    input#search:focus { border-color: #0d92f4; }
+    .room-radio { display: flex; flex-direction: column; gap: 6px; margin: 12px 0; }
+    .room-radio label { cursor: pointer; padding: 4px 8px; border-radius: 6px; }
+    .room-radio label:hover { background: #f0f2f6; }
+    h2.room-head { margin: 12px 0; }
+    h2.room-head span { color: #ff4b4b; }
+    h4.from-point { color: green; margin: 18px 0 8px; }
+    h5.loc-info-head { color: #0d92f4; margin-bottom: 4px; }
+    .row { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+    .row .thumb { flex: 0 0 200px; }
+    .row .thumb img { width: 200px; border-radius: 8px; }
+    .row .info { flex: 1; min-width: 220px; }
+    .info-text { font-size: 15px; white-space: pre-wrap; }
+    .swiper { width: 100%; margin: 10px 0 20px; }
+    .swiper-slide { display: flex; justify-content: center; align-items: center; }
+    .swiper-slide img, .swiper-slide video {
+        max-height: 400px; width: 100%; object-fit: contain;
+        border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
-    .header-container h1 {
-      font-family: 'Times New Roman', serif;
-      font-size: 2.5rem;
-      font-weight: normal;
-      letter-spacing: 0.05em;
-      color: #212529;
-      position: relative;
-      z-index: 2;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.05);
-      margin: 0;
-      padding: 0.1rem 0;
+    .swiper-pagination-fraction {
+        font-size: 16px; font-weight: bold; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5);
     }
-
-    /* IFRAME */
-    .iframe-container {
-      width: 100vw;
-      height: calc(100vh - 70px); /* 70px is approx header height */
-      position: relative;
-      z-index: 1;
-      left: 0;
+    .divider { border-top: 1px solid gray; margin: 16px 0; }
+    .no-media { background: #eaf4ff; color: #0d92f4; padding: 10px 14px; border-radius: 8px; margin: 10px 0; }
+    @media (max-width: 600px) {
+        .swiper-slide img, .swiper-slide video { max-height: 300px; }
+        .row .thumb { flex: 0 0 140px; }
+        .row .thumb img { width: 140px; }
     }
-    .iframe-container iframe {
-      width: 100vw;
-      height: 100%;
-      border: none;
-      display: block;
-      left: 0;
-    }
-
-    /* BOTTOM AD - reduced by 15% */
-    .bottom-ad {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 85vw; /* reduced from 100vw */
-      background: white;
-      box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
-      border-radius: 0;
-      padding: 12.75px 42.5px 12.75px 12.75px; /* 15% smaller padding */
-      display: flex;
-      align-items: center;
-      gap: 12.75px; /* 15% smaller gap */
-      min-width: 255px; /* 300px * 0.85 */
-      max-width: 85vw; /* reduced max width */
-      cursor: move;
-      z-index: 9999;
-      user-select: none;
-      transition: box-shadow 0.2s;
-    }
-    .bottom-ad img {
-      width: 68px; /* 80px * 0.85 */
-      height: auto;
-      border-radius: 4px;
-      pointer-events: none;
-      user-select: none;
-    }
-    .bottom-ad-text {
-      flex: 1;
-      font-size: 0.765rem; /* 0.9rem * 0.85 */
-      color: #333;
-    }
-    .bottom-ad-text .highlight {
-      color: #0066cc;
-      font-weight: bold;
-    }
-    .close-btn {
-      position: absolute;
-      top: 7px; /* 8px * 0.85 */
-      right: 17px; /* 20px * 0.85 */
-      width: 20.4px; /* 24px * 0.85 */
-      height: 20.4px; /* 24px * 0.85 */
-      background: #ec6b5e;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      font-size: 15.3px; /* 18px * 0.85 */
-      line-height: 20.4px;
-      text-align: center;
-      cursor: pointer;
-      user-select: none;
-      transition: background 0.2s;
-      z-index: 10000;
-    }
-    .close-btn:hover {
-      background: #c0392b;
-    }
-    .bottom-ad.dragging {
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-      opacity: 0.95;
-    }
-
-    @media (max-width: 500px) {
-      .header-container h1 {
-        font-size: 1.5rem;
-      }
-      .bottom-ad {
-        min-width: 187px; /* 220px * 0.85 */
-        padding: 8.5px 34px 8.5px 8.5px;
-      }
-      .bottom-ad img {
-        width: 42.5px; /* 50px * 0.85 */
-      }
-    }
-  </style>
+</style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <div class="header-container">
-    <h1>LOCOROM</h1>
-  </div>
+<div class="logo-container">
+    <h1 class="room-title">🔍 Room <span class="room-code">[MITM]</span></h1>
+    <div class="logo"><img src="https://raw.githubusercontent.com/2005lakshmi/locorom/main/logo_locorom.png" alt="Logo"></div>
+</div>
 
-  <!-- FULL WIDTH/HEIGHT IFRAME BELOW HEADER -->
-  <div class="iframe-container">
-    <iframe 
-      src="https://locorom.streamlit.app/?embedded=true" 
-      title="LOCOROM Interface" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-      allowfullscreen>
-    </iframe>
-  </div>
+<hr>
+<input type="text" id="search" placeholder="example., 415B" autocomplete="off">
+<div class="room-radio" id="roomList"></div>
+<hr>
 
-  <!-- MOVABLE, CLOSABLE AD AT BOTTOM -->
-  <div class="bottom-ad" id="bottomAd" role="dialog" aria-label="Notification">
-    <img src="https://i.ibb.co/N25rht9L/Screenshot-2025-05-01-161830.png" alt="Notification" />
-    <div class="bottom-ad-text">
-      If you see <span class="highlight">"Yes, get this app back up!"</span>, then <strong style="color:red;">Click it</strong> and wait
+<div id="content"></div>
+
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<script>
+const REPO_USER = "2005lakshmi";
+const REPO_NAME = "locorom";
+const BASE_PATH = "Rooms";
+// Free CDN - no GitHub API tokens needed
+const TREE_URL = `https://data.jsdelivr.com/v1/packages/gh/REPOUSER/{REPO_USER}/REPOU​SER/{REPO_NAME}@main?structure=flat`;
+const RAW = f => `https://cdn.jsdelivr.net/gh/REPOUSER/{REPO_USER}/REPOU​SER/{REPO_NAME}@main/${f}`;
+const MEDIA_EXT = ["jpg","jpeg","png","gif","mp4"];
+
+let allRoomFiles = [];   // all file paths under Rooms/
+let rooms = [];
+let selectedRoom = null;
+
+async function loadTree() {
+    const resp = await fetch(TREE_URL);
+    if (!resp.ok) { document.getElementById("content").innerHTML = "<p>Failed to load room data.</p>"; return; }
+    const data = await resp.json();
+    allRoomFiles = data.files.map(f => f.name).filter(n => n.startsWith(BASE_PATH + "/"));
+    // rooms = first-level directories under Rooms/
+    const roomSet = new Set();
+    allRoomFiles.forEach(p => {
+        const rest = p.slice(BASE_PATH.length + 1);
+        const room = rest.split("/")[0];
+        if (room) roomSet.add(room);
+    });
+    rooms = [...roomSet].sort();
+    renderRoomList();
+}
+
+function renderRoomList() {
+    const q = document.getElementById("search").value.trim().toLowerCase();
+    const list = q ? rooms.filter(r => r.toLowerCase().includes(q)) : rooms;
+    const el = document.getElementById("roomList");
+    el.innerHTML = "";
+    if (q && list.length === 0) {
+        el.innerHTML = "<p style='color:red'>No rooms found</p>";
+        document.getElementById("content").innerHTML = "";
+        return;
+    }
+    if (!q) {
+        el.innerHTML = "<p style='color:#888'>Please enter room number to search..!</p>";
+        document.getElementById("content").innerHTML = "";
+        return;
+    }
+    list.forEach(r => {
+        const lbl = document.createElement("label");
+        lbl.innerHTML = `<input type="radio" name="room" value="r"{r}"r"{r===selectedRoom?"checked":""}> ${r}`;
+        lbl.querySelector("input").addEventListener("change", () => { selectedRoom = r; showRoom(r); });
+        el.appendChild(lbl);
+    });
+}
+
+function filesUnder(prefix) {
+    return allRoomFiles
+        .filter(p => p.startsWith(prefix + "/"))
+        .map(p => p.slice(prefix.length + 1))
+        .filter(n => n && !n.includes("/"));
+}
+function dirsUnder(prefix) {
+    const set = new Set();
+    allRoomFiles.filter(p => p.startsWith(prefix + "/")).forEach(p => {
+        const rest = p.slice(prefix.length + 1);
+        if (rest.includes("/")) set.add(rest.split("/")[0]);
+    });
+    return [...set];
+}
+const isMedia = n => MEDIA_EXT.includes(n.split(".").pop().toLowerCase());
+
+async function fetchText(path) {
+    try {
+        const resp = await fetch(RAW(path));
+        return resp.ok ? await resp.text() : "";
+    } catch { return ""; }
+}
+
+function carouselHTML(files) {
+    if (!files.length) return "";
+    const slides = files.map(f => {
+        const url = RAW(f);
+        const ext = f.split(".").pop().toLowerCase();
+        const inner = ext === "mp4"
+            ? `<video controls><source src="${url}" type="video/mp4"></video>`
+            : `<img src="${url}" loading="lazy">`;
+        return `<div class="swiper-slide">${inner}</div>`;
+    }).join("");
+    const id = "sw" + Math.random().toString(36).slice(2);
+    setTimeout(() => {
+        new Swiper("." + id, {
+            loop: true,
+            pagination: { el: "." + id + " .swiper-pagination", type: "fraction" },
+            navigation: { nextEl: "." + id + " .swiper-button-next", prevEl: "." + id + " .swiper-button-prev" },
+        });
+    }, 0);
+    return `
+    <div class="swiper ${id}">
+        <div class="swiper-wrapper">${slides}</div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>`;
+}
+
+function mediaRow(thumbURL, info, files, heading) {
+    return `
+    <h4 class="from-point">From Point:</h4>
+    <div class="row">
+        <div class="thumb"><img src="${thumbURL}" loading="lazy"></div>
+        <div class="info">
+            <h5 class="loc-info-head">Location Info :</h5>
+            <div class="info-text">${info || "No information available"}</div>
+        </div>
     </div>
-    <button class="close-btn" id="closeBtn" aria-label="Close notification">&times;</button>
-  </div>
+    {files.length ? `<h5>Photos</h5><p style="font-size:13px;color:#666">Path through Photos</p>{carouselHTML(files)}`
+                   : `<div class="no-media">No media available</div>`}
+    <div class="divider"></div>`;
+}
 
-  <script>
-    (function() {
-      const ad = document.getElementById('bottomAd');
-      const closeBtn = document.getElementById('closeBtn');
+async function showRoom(room) {
+    const content = document.getElementById("content");
+    content.innerHTML = `<h2 class="room-head">Room: <span>${room}</span></h2><p>Loading…</p>`;
 
-      // Close button hides the ad
-      closeBtn.addEventListener('click', () => {
-        ad.style.display = 'none';
-      });
+    const roomPrefix = `BASEPATH/{BASE_PATH}/BASEP​ATH/{room}`;
+    const roomInfo = await fetchText(`${roomPrefix}/info.txt`);
 
-      // Drag functionality
-      let isDragging = false;
-      let startX, startY, initialLeft, initialTop;
+    // Main area media (files directly in room folder, excluding info.txt)
+    const mainMedia = filesUnder(roomPrefix)
+        .filter(n => isMedia(n))
+        .sort();
+    const mainThumb = mainMedia.length ? RAW(mainMedia[0]) : "";
 
-      ad.addEventListener('mousedown', dragStart);
-      ad.addEventListener('touchstart', dragStart);
+    let html = `<h2 class="room-head">Room: <span>${room}</span></h2>`;
+    if (mainMedia.length) {
+        html += mediaRow(mainThumb, roomInfo, mainMedia.map(n => `roomPrefix/{roomPrefix}/roomPrefix/{n}`));
+    }
 
-      function dragStart(e) {
-        if (e.target === closeBtn) return; // Don't drag when clicking close
-        e.preventDefault();
-        isDragging = true;
-        ad.classList.add('dragging');
+    // Subfolders
+    const subs = dirsUnder(roomPrefix).sort();
+    for (const sub of subs) {
+        const subPrefix = `roomPrefix/{roomPrefix}/roomPrefix/{sub}`;
+        const info = await fetchText(`${subPrefix}/info.txt`);
+        const media = filesUnder(subPrefix).filter(n => isMedia(n) && n.toLowerCase() !== "thumbnail.jpg").sort();
+        const thumbURL = RAW(`${subPrefix}/thumbnail.jpg`);
+        html += mediaRow(thumbURL, info, media.map(n => `subPrefix/{subPrefix}/subPrefix/{n}`));
+    }
 
-        const rect = ad.getBoundingClientRect();
+    content.innerHTML = html;
+}
 
-        if (e.type === 'touchstart') {
-          startX = e.touches[0].clientX;
-          startY = e.touches[0].clientY;
-        } else {
-          startX = e.clientX;
-          startY = e.clientY;
-        }
-        initialLeft = rect.left;
-        initialTop = rect.top;
+document.getElementById("search").addEventListener("input", () => {
+    selectedRoom = null;
+    document.getElementById("content").innerHTML = "";
+    renderRoomList();
+});
 
-        document.addEventListener('mousemove', dragMove);
-        document.addEventListener('touchmove', dragMove, {passive:false});
-        document.addEventListener('mouseup', dragEnd);
-        document.addEventListener('touchend', dragEnd);
-      }
-
-      function dragMove(e) {
-        if (!isDragging) return;
-        e.preventDefault();
-
-        let clientX, clientY;
-        if (e.type === 'touchmove') {
-          clientX = e.touches[0].clientX;
-          clientY = e.touches[0].clientY;
-        } else {
-          clientX = e.clientX;
-          clientY = e.clientY;
-        }
-
-        let newLeft = initialLeft + (clientX - startX);
-        let newTop = initialTop + (clientY - startY);
-
-        // Constrain within viewport horizontally
-        const adRect = ad.getBoundingClientRect();
-        const windowWidth = window.innerWidth;
-        const windowHeight = window.innerHeight;
-
-        if (newLeft < 0) newLeft = 0;
-        if (newLeft + adRect.width > windowWidth) newLeft = windowWidth - adRect.width;
-
-        // Constrain vertically (keep it visible)
-        if (newTop < 0) newTop = 0;
-        if (newTop + adRect.height > windowHeight) newTop = windowHeight - adRect.height;
-
-        ad.style.left = newLeft + 'px';
-        ad.style.top = newTop + 'px';
-        ad.style.bottom = 'auto';
-        ad.style.transform = ''; // reset translateX(-50%) when dragging
-      }
-
-      function dragEnd() {
-        isDragging = false;
-        ad.classList.remove('dragging');
-        document.removeEventListener('mousemove', dragMove);
-        document.removeEventListener('touchmove', dragMove);
-        document.removeEventListener('mouseup', dragEnd);
-        document.removeEventListener('touchend', dragEnd);
-      }
-    })();
-  </script>
-
+loadTree();
+</script>
 </body>
 </html>
