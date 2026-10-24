@@ -1,0 +1,17 @@
+{
+  "name": "mitm-room",
+  "version": "1.0.0",
+  "description": "LOCOROM • Smart Campus Indoor Navigation [MITM]",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "mitm",
+    "campus-navigation",
+    "indoor-navigation",
+    "locorom",
+    "wayfinding"
+  ],
+  "author": "aryamanm77",
+  "license": "MIT"
+}
