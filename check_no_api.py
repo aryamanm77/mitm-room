@@ -1,245 +1,446 @@
 import streamlit as st
+import json
+import os
 import requests
 import streamlit.components.v1 as components
-import string
 
-# Configuration
+# Streamlit Page Configuration
+st.set_page_config(
+    page_title="LOCOROM • Campus Indoor Navigation",
+    page_icon="🔍",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 GITHUB_REPO = "2005lakshmi/locorom"
-BASE_PATH = "Rooms"
 BRANCH = "main"
+BASE_PATH = "Rooms"
 
-def get_raw_url(*path_parts):
-    """Construct raw GitHub URL for a file"""
-    return f"https://raw.githubusercontent.com/{GITHUB_REPO}/{BRANCH}/{'/'.join(path_parts)}"
-
-def get_rooms():
-    """Get list of rooms using GitHub API"""
-    api_url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{BASE_PATH}"
-    response = requests.get(api_url)
-    if response.status_code == 200:
-        return [item['name'] for item in response.json() if item['type'] == 'dir']
-    return []
-
-def get_room_info(room_name):
-    """Fetch room information from info.txt"""
-    info_url = get_raw_url(BASE_PATH, room_name, "info.txt")
-    response = requests.get(info_url)
-    return response.text if response.status_code == 200 else "No information available"
-
-def generate_alphabetical_files(room_name, subfolder=None):
-    """Generate possible alphabetical filenames and check existence"""
-    base_path = [BASE_PATH, room_name]
-    if subfolder:
-        base_path.append(subfolder)
+# Premium CSS Theme Injection
+st.markdown("""
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
     
-    files = []
-    sequence = ['']
+    html, body, [class*="css"] {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+    }
     
-    while True:
-        current = sequence.pop(0)
-        for letter in string.ascii_lowercase:
-            candidate = current + letter
-            for ext in ['jpg', 'jpeg', 'png', 'gif', 'mp4']:
-                url = get_raw_url(*base_path, f"{candidate}.{ext}")
-                if requests.head(url).status_code == 200:
-                    files.append(url)
-            sequence.append(candidate)
-        if len(current) > 1:  # Limit depth for practical purposes
-            break
-    return files
+    /* Header Gradient & Hero */
+    .hero-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(6, 182, 212, 0.08) 100%);
+        border: 1px solid rgba(99, 102, 241, 0.25);
+        border-radius: 18px;
+        padding: 20px 28px;
+        margin-bottom: 24px;
+        backdrop-filter: blur(12px);
+    }
+    
+    .hero-title-box h1 {
+        font-family: 'Outfit', sans-serif;
+        font-size: 32px;
+        font-weight: 800;
+        background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0;
+        line-height: 1.1;
+    }
+    
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #10b981;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-top: 4px;
+    }
+    
+    .hero-badge .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background-color: #10b981;
+        box-shadow: 0 0 8px #10b981;
+    }
+    
+    .logo-img {
+        width: 64px;
+        height: 64px;
+        border-radius: 14px;
+        object-fit: contain;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 4px;
+    }
+    
+    /* Card Styling */
+    .room-card-header {
+        background: rgba(17, 24, 39, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .room-title-text {
+        font-family: 'Outfit', sans-serif;
+        font-size: 26px;
+        font-weight: 700;
+        color: #f8fafc;
+        margin-bottom: 8px;
+    }
+    
+    .floor-badge {
+        background: rgba(99, 102, 241, 0.15);
+        color: #a5b4fc;
+        border: 1px solid rgba(99, 102, 241, 0.3);
+        border-radius: 9999px;
+        padding: 4px 12px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    
+    .wayfinding-box {
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(6, 182, 212, 0.05));
+        border: 1px solid rgba(99, 102, 241, 0.25);
+        border-radius: 14px;
+        padding: 16px 20px;
+        margin: 16px 0;
+    }
+    
+    .wayfinding-label {
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #38bdf8;
+        margin-bottom: 4px;
+    }
+    
+    .wayfinding-text {
+        font-size: 15px;
+        font-weight: 500;
+        color: #f1f5f9;
+        line-height: 1.5;
+    }
+    
+    /* Hide Streamlit default branding */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+</style>
+""", unsafe_allow_html=True)
 
-def get_subfolders(room_name):
-    """Detect subfolders by checking for thumbnail.jpg"""
-    subfolders = []
-    for char in string.ascii_lowercase:
-        thumb_url = get_raw_url(BASE_PATH, room_name, char, "thumbnail.jpg")
-        if requests.head(thumb_url).status_code == 200:
-            subfolders.append(char)
-    return subfolders
+# Helper: Load repository index
+@st.cache_data(ttl=3600)
+def load_rooms_catalog():
+    # 1. Try local rooms_data.json
+    local_json_path = os.path.join(os.path.dirname(__file__), "rooms_data.json")
+    if os.path.exists(local_json_path):
+        try:
+            with open(local_json_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+            
+    # 2. Try remote raw GitHub
+    raw_json_url = f"https://raw.githubusercontent.com/{GITHUB_REPO}/{BRANCH}/rooms_data.json"
+    try:
+        resp = requests.get(raw_json_url, timeout=5)
+        if resp.status_code == 200:
+            return resp.json()
+    except Exception:
+        pass
+        
+    return {}
 
-def display_carousel(files, zoom=True):
-    """Display media files in a carousel matching original styling"""
-    carousel_items = ""
-    for file_url in files:
-        if file_url.split('.')[-1].lower() in ['mp4', 'webm']:
-            media_html = f"""
-                <video controls style="max-height: 400px; width: 100%;">
-                    <source src="{file_url}" type="video/mp4">
-                </video>
-            """
+def resolve_url(path):
+    if not path:
+        return ""
+    if path.startswith("http://") or path.startswith("https://"):
+        return path
+    return f"https://raw.githubusercontent.com/{GITHUB_REPO}/{BRANCH}/{path}"
+
+def render_swiper_carousel(files, carousel_id="locorom_sw"):
+    if not files:
+        st.info("No media walkthrough available for this route.")
+        return
+        
+    slides_html = ""
+    thumbs_html = ""
+    for idx, f in enumerate(files):
+        url = resolve_url(f)
+        is_video = f.lower().endswith((".mp4", ".webm"))
+        
+        if is_video:
+            media_elem = f'<video controls playsinline preload="metadata" style="max-height: 480px; width: 100%; border-radius: 12px;"><source src="{url}" type="video/mp4"></video>'
         else:
-            zoom_class = "swiper-zoom-container" if zoom else ""
-            media_html = f'''
-            <div class="{zoom_class}">
-                <img src="{file_url}" 
-                     style="max-height: 400px; width: 100%; object-fit: contain;">
-            </div>
-            '''
-        carousel_items += f'<div class="swiper-slide">{media_html}</div>'
+            media_elem = f'<img src="{url}" alt="Step {idx+1}" style="max-height: 480px; width: 100%; object-fit: contain; border-radius: 12px;">'
+            
+        slides_html += f'<div class="swiper-slide">{media_elem}</div>'
+        thumbs_html += f'<div class="swiper-slide"><img src="{url}" style="width:100%; height:100%; object-fit:cover; border-radius:6px;"></div>'
 
-    carousel_html = f"""
-    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
+    html_code = f"""
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <style>
-        .swiper {{
+        .swiper-container-wrap {{
+            background: #090d16;
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            margin: 12px 0 24px 0;
+        }}
+        .swiper-main {{
             width: 100%;
-            height: auto;
+            height: 480px;
+            border-radius: 12px;
+            background: #030712;
         }}
         .swiper-slide {{
-            text-align: center;
             display: flex;
             justify-content: center;
             align-items: center;
         }}
-        .swiper-slide img, .swiper-slide video {{
-            max-height: 400px;
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
-            object-fit: contain;
-        }}
-        .swiper-pagination-fraction {{
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            text-shadow: 0 0 5px rgba(0,0,0,0.5);
-        }}
-        .swiper-button-next,
-        .swiper-button-prev {{
-            width: 30px;
-            height: 30px;
-            background-color: rgba(0, 0, 0, 0.4);
+        .swiper-button-next, .swiper-button-prev {{
+            color: #ffffff;
+            background: rgba(15, 23, 42, 0.7);
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.2s;
         }}
-        .swiper-button-next:after,
-        .swiper-button-prev:after {{
-            font-size: 20px;
-            color: white;
+        .swiper-button-next:hover, .swiper-button-prev:hover {{
+            background: #6366f1;
+            border-color: transparent;
         }}
-        .swiper-zoom-container {{
-            cursor: zoom-in;
+        .swiper-button-next:after, .swiper-button-prev:after {{
+            font-size: 16px;
+            font-weight: bold;
         }}
-        .swiper-slide-zoomed .swiper-zoom-container {{
-            cursor: move;
+        .swiper-thumbs {{
+            height: 70px;
+            margin-top: 12px;
+        }}
+        .swiper-thumbs .swiper-slide {{
+            opacity: 0.4;
+            cursor: pointer;
+            border-radius: 6px;
+            border: 2px solid transparent;
+            overflow: hidden;
+            transition: all 0.2s;
+        }}
+        .swiper-thumbs .swiper-slide:hover {{
+            opacity: 0.8;
+        }}
+        .swiper-thumbs .swiper-slide-thumb-active {{
+            opacity: 1;
+            border-color: #6366f1;
+            box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
+        }}
+        .step-counter-badge {{
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            z-index: 10;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-size: 13px;
+            font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }}
     </style>
     
-    <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
-            {carousel_items}
+    <div class="swiper-container-wrap">
+        <div style="position:relative;">
+            <div class="step-counter-badge" id="stepBadge_{carousel_id}">Photo Walkthrough</div>
+            <div class="swiper swiper-main myMain_{carousel_id}">
+                <div class="swiper-wrapper">
+                    {slides_html}
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
         </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+        
+        <div class="swiper swiper-thumbs myThumbs_{carousel_id}">
+            <div class="swiper-wrapper">
+                {thumbs_html}
+            </div>
+        </div>
     </div>
     
-    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        const swiper = new Swiper('.mySwiper', {{
-            loop: true,
-            zoom: {'true' if zoom else 'false'},
-            pagination: {{
-                el: '.swiper-pagination',
-                type: 'fraction',
-            }},
+        const totalSlides = {len(files)};
+        const thumbs = new Swiper('.myThumbs_{carousel_id}', {{
+            spaceBetween: 8,
+            slidesPerView: 5,
+            freeMode: true,
+            watchSlidesProgress: true,
+        }});
+        
+        const main = new Swiper('.myMain_{carousel_id}', {{
+            spaceBetween: 10,
             navigation: {{
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             }},
+            pagination: {{
+                el: '.swiper-pagination',
+                type: 'progressbar',
+            }},
+            thumbs: {{
+                swiper: thumbs,
+            }},
+            on: {{
+                slideChange: function () {{
+                    const cur = this.realIndex + 1;
+                    const b = document.getElementById('stepBadge_{carousel_id}');
+                    if (b) b.textContent = 'Step ' + cur + ' of ' + totalSlides;
+                }}
+            }}
         }});
+        document.getElementById('stepBadge_{carousel_id}').textContent = 'Step 1 of ' + totalSlides;
     </script>
     """
-    components.html(carousel_html, height=500)
+    components.html(html_code, height=620)
 
-def display_main_content(room_name):
-    """Display room content matching original layout"""
-    # Main area
-    main_files = generate_alphabetical_files(room_name)
-    info_content = get_room_info(room_name)
-    
-    if main_files:
-        st.markdown("<h4 style='color: green;'>From Point:</h4>", unsafe_allow_html=True)
-        col1, col2 = st.columns([2, 3])
-        with col1:
-            st.image(main_files[0], width=200)
-        with col2:
-            st.markdown("<h5 style='color:#0D92F4;'>Location Info :</h5>", unsafe_allow_html=True)
-            st.markdown(f"###### {info_content}")
-        
-        st.markdown("##### Photos")
-        st.write("Path through Photos")
-        display_carousel(main_files, zoom=True)
-        st.markdown("<hr style='border: 1px solid gray; margin: 0px 0;'>", unsafe_allow_html=True)
-
-    # Subfolders
-    for sub in get_subfolders(room_name):
-        st.markdown("<h4 style='color: green;'>From Point:</h4>", unsafe_allow_html=True)
-        col1, col2 = st.columns([2, 3])
-        with col1:
-            thumb_url = get_raw_url(BASE_PATH, room_name, sub, "thumbnail.jpg")
-            st.image(thumb_url, width=200)
-        with col2:
-            sub_info_url = get_raw_url(BASE_PATH, room_name, sub, "info.txt")
-            sub_info = requests.get(sub_info_url).text
-            st.markdown("<h5 style='color:#0D92F4;'>Location Info :</h5>", unsafe_allow_html=True)
-            st.markdown(f"###### {sub_info}")
-        
-        sub_files = generate_alphabetical_files(room_name, sub)
-        if sub_files:
-            st.markdown("##### Photos")
-            display_carousel(sub_files, zoom=True)
-        else:
-            st.info(f"No media available in {sub}")
-        st.markdown("<hr style='border: 1px solid gray; margin: 0px 0;'>", unsafe_allow_html=True)
-
-# Streamlit UI
+# ----------------- APP HEADER -----------------
 st.markdown("""
-    <style>
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-        .logo {
-            width: 83px;
-            height: 83px;
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 10px;
-        }
-        .logo img {
-            width: 68px;
-            height: 68px;
-        }
-        .room-title {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .room-code {
-            color: green;
-            font-size: 15px;
-        }
-    </style>
-
-    <div class="logo-container">
-        <h1 class="room-title">🔍 Room <span class="room-code">[MITM]</span></h1>
-        <div class="logo">
-            <img src="https://raw.githubusercontent.com/2005lakshmi/locorom/main/logo_locorom.png" alt="Logo">
+<div class="hero-container">
+    <div class="hero-title-box">
+        <h1>LOCOROM</h1>
+        <div class="hero-badge">
+            <span class="dot"></span>
+            <span>MITM Campus Indoor Navigation</span>
         </div>
+    </div>
+    <div>
+        <img class="logo-img" src="https://raw.githubusercontent.com/2005lakshmi/locorom/main/logo_locorom.png" alt="Locorom Logo">
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# Load catalog
+rooms_data = load_rooms_catalog()
+
+if not rooms_data:
+    st.error("Could not load campus rooms catalog. Please check network connection.")
+    st.stop()
+
+# ----------------- SIDEBAR: SEARCH & FILTERS -----------------
+with st.sidebar:
+    st.markdown("### 🔍 Search Destinations")
+    search_query = st.text_input("Room or Lab Name", "", placeholder="e.g. 415B, 205, CSBS, DSP").strip().lower()
+    
+    floor_options = [
+        "All Floors",
+        "Basement & Ground",
+        "1st Floor",
+        "2nd Floor",
+        "3rd Floor",
+        "4th Floor",
+        "5th Floor",
+        "Mechanical Block",
+        "Campus Amenities"
+    ]
+    selected_floor = st.selectbox("Filter by Floor / Block", floor_options)
+    
+    # Filter rooms
+    all_room_keys = list(rooms_data.keys())
+    
+    def matches_filter(key):
+        room = rooms_data[key]
+        if search_query:
+            q_match = (
+                search_query in key.lower() or
+                (room.get("info") and search_query in room["info"].lower()) or
+                (room.get("dept") and search_query in room["dept"].lower())
+            )
+            if not q_match:
+                return False
+                
+        if selected_floor != "All Floors":
+            if room.get("floor") != selected_floor:
+                return False
+                
+        return True
+
+    filtered_keys = [k for k in all_room_keys if matches_filter(k)]
+    
+    st.markdown(f"**Found {len(filtered_keys)} Destinations**")
+    
+    if filtered_keys:
+        selected_room_name = st.radio("Select Destination", filtered_keys, label_visibility="collapsed")
+    else:
+        st.warning("No destinations match your search.")
+        selected_room_name = None
+
+# ----------------- MAIN VIEW -----------------
+if selected_room_name:
+    room = rooms_data[selected_room_name]
+    
+    # Destination Card Header
+    dept_str = f" • <span style='color:#38bdf8;'>{room['dept']}</span>" if room.get("dept") else ""
+    st.markdown(f"""
+    <div class="room-card-header">
+        <div class="room-title-text">📍 {room['name']}</div>
+        <span class="floor-badge">{room.get('floor', 'MITM Campus')}</span>{dept_str}
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown("<hr style='border: 1px solid gray; margin: 5px 0;'>", unsafe_allow_html=True)
+    access_points = room.get("accessPoints", [])
+    direct_photos = room.get("photos", [])
 
-# Room search and selection
-search_term = st.text_input("**Search Room**", "", placeholder="example., 415B").strip().lower()
-all_rooms = get_rooms()
-filtered_rooms = [room for room in all_rooms if search_term in room.lower()]
+    if access_points:
+        # Multiple starting points tab selector
+        if len(access_points) > 1:
+            ap_names = [ap["name"] for ap in access_points]
+            selected_ap_name = st.selectbox("Select Starting Access Point", ap_names)
+            chosen_ap = next(ap for ap in access_points if ap["name"] == selected_ap_name)
+        else:
+            chosen_ap = access_points[0]
 
-if not filtered_rooms:
-    st.error("No rooms found" if search_term else "Please enter room number to search..!")
+        # Wayfinding instructions banner
+        info_text = chosen_ap.get("info") or room.get("info") or "Follow the visual photo path below."
+        st.markdown(f"""
+        <div class="wayfinding-box">
+            <div class="wayfinding-label">Route Instructions from {chosen_ap['name']}:</div>
+            <div class="wayfinding-text">{info_text}</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # Walkthrough Carousel
+        render_swiper_carousel(chosen_ap.get("photos", []), carousel_id="ap_view")
+
+    elif direct_photos:
+        # Direct room photos
+        info_text = room.get("info") or "Follow the visual corridor path to destination."
+        st.markdown(f"""
+        <div class="wayfinding-box">
+            <div class="wayfinding-label">Route Instructions:</div>
+            <div class="wayfinding-text">{info_text}</div>
+        </div>
+        """, unsafe_allow_html=True)
+        render_swiper_carousel(direct_photos, carousel_id="direct_view")
+    else:
+        info_text = room.get("info") or "No walkthrough media currently uploaded."
+        st.markdown(f"""
+        <div class="wayfinding-box">
+            <div class="wayfinding-label">Information:</div>
+            <div class="wayfinding-text">{info_text}</div>
+        </div>
+        """, unsafe_allow_html=True)
 else:
-    selected_room = st.radio("Select Room", filtered_rooms)
-    st.markdown("<hr style='border: 1px solid gray; margin: 0px 0;'>", unsafe_allow_html=True)
-    st.header(f"Room: :red[{selected_room}]")
-    display_main_content(selected_room)
+    st.info("👈 Use the search bar in the sidebar or select a floor to browse destinations.")

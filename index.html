@@ -2,238 +2,1996 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🔍 Room [MITM] - Locorom</title>
-<link rel="icon" href="https://raw.githubusercontent.com/2005lakshmi/locorom/main/logo_locorom.png">
-<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>LOCOROM • Smart Campus Indoor Navigation [MITM]</title>
+<meta name="description" content="Visual step-by-step indoor wayfinding and room locator for MITM campus. Search classrooms, labs, seminar halls, and departments with photo walkthroughs.">
+<link rel="icon" type="image/png" href="logo_locorom.png">
+
+<!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
 <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        background: #ffffff; color: #262730; padding: 16px; max-width: 900px; margin: 0 auto;
-    }
-    .logo-container { display: flex; align-items: center; justify-content: space-between; }
-    .room-title { font-size: 24px; font-weight: bold; }
-    .room-code { color: green; font-size: 15px; }
-    .logo img { width: 68px; height: 68px; }
-    hr { border: none; border-top: 1px solid gray; margin: 10px 0; }
-    input#search {
-        width: 100%; padding: 10px 14px; font-size: 16px;
-        border: 1px solid #ccc; border-radius: 8px; outline: none;
-    }
-    input#search:focus { border-color: #0d92f4; }
-    .room-radio { display: flex; flex-direction: column; gap: 6px; margin: 12px 0; }
-    .room-radio label { cursor: pointer; padding: 6px 10px; border-radius: 6px; font-size: 16px; }
-    .room-radio label:hover { background: #f0f2f6; }
-    h2.room-head { margin: 12px 0; }
-    h2.room-head span { color: #ff4b4b; }
-    h4.from-point { color: green; margin: 18px 0 8px; }
-    h5.loc-info-head { color: #0d92f4; margin-bottom: 4px; }
-    .row { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
-    .row .thumb { flex: 0 0 200px; }
-    .row .thumb img { width: 200px; border-radius: 8px; }
-    .row .info { flex: 1; min-width: 220px; }
-    .info-text { font-size: 15px; white-space: pre-wrap; }
-    .swiper { width: 100%; margin: 10px 0 20px; }
-    .swiper-slide { display: flex; justify-content: center; align-items: center; }
-    .swiper-slide img, .swiper-slide video {
-        max-height: 400px; width: 100%; object-fit: contain;
-        border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-    .swiper-pagination-fraction {
-        font-size: 16px; font-weight: bold; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5);
-    }
-    .divider { border-top: 1px solid gray; margin: 16px 0; }
-    .no-media { background: #eaf4ff; color: #0d92f4; padding: 10px 14px; border-radius: 8px; margin: 10px 0; }
-    .error-box { background: #ffeaea; color: #c62828; padding: 12px 14px; border-radius: 8px; margin: 10px 0; }
-    @media (max-width: 600px) {
-        .swiper-slide img, .swiper-slide video { max-height: 300px; }
-        .row .thumb { flex: 0 0 140px; }
-        .row .thumb img { width: 140px; }
-    }
+:root {
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: 'Outfit', sans-serif;
+
+  /* Theme Tokens - Dark by default for ultra-modern aesthetic */
+  --bg-page: #0b0f19;
+  --bg-surface: #111827;
+  --bg-card: rgba(17, 24, 39, 0.75);
+  --bg-card-hover: rgba(31, 41, 55, 0.85);
+  --bg-glass: rgba(17, 24, 39, 0.65);
+  --bg-input: rgba(15, 23, 42, 0.8);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-focus: #6366f1;
+  --border-subtle: rgba(255, 255, 255, 0.05);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --accent-primary: #6366f1;
+  --accent-secondary: #06b6d4;
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+  --accent-glow: rgba(99, 102, 241, 0.35);
+  --accent-success: #10b981;
+  --accent-warning: #f59e0b;
+  --accent-danger: #ef4444;
+
+  --badge-bg: rgba(99, 102, 241, 0.12);
+  --badge-border: rgba(99, 102, 241, 0.25);
+  --badge-text: #a5b4fc;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 35px -5px var(--accent-glow);
+  --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] {
+  --bg-page: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-card-hover: rgba(241, 245, 249, 0.95);
+  --bg-glass: rgba(255, 255, 255, 0.8);
+  --bg-input: #ffffff;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-focus: #4f46e5;
+  --border-subtle: rgba(0, 0, 0, 0.04);
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  --accent-primary: #4f46e5;
+  --accent-secondary: #0284c7;
+  --accent-gradient: linear-gradient(135deg, #4f46e5 0%, #0284c7 100%);
+  --accent-glow: rgba(79, 70, 229, 0.2);
+
+  --badge-bg: rgba(79, 70, 229, 0.08);
+  --badge-border: rgba(79, 70, 229, 0.2);
+  --badge-text: #4338ca;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 12px 30px -8px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.5;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+}
+
+/* Ambient glow in background */
+.bg-ambient {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  max-width: 1400px;
+  height: 600px;
+  background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.15) 0%, rgba(6, 182, 212, 0.06) 45%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 20px 80px 20px;
+}
+
+/* ------------------- HEADER ------------------- */
+header.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 28px;
+  position: sticky;
+  top: 12px;
+  z-index: 100;
+}
+
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.brand-logo-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.brand-logo-wrap img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.brand-text h1 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+}
+
+.brand-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.brand-tag .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-success);
+  box-shadow: 0 0 8px var(--accent-success);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.theme-toggle, .nav-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.theme-toggle:hover, .nav-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+  transform: translateY(-1px);
+}
+
+/* ------------------- HERO & SEARCH ------------------- */
+.hero-section {
+  text-align: center;
+  padding: 20px 0 32px 0;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--badge-bg);
+  border: 1px solid var(--badge-border);
+  color: var(--badge-text);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: 16px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.hero-subtitle {
+  color: var(--text-secondary);
+  font-size: 15px;
+  max-width: 540px;
+  margin: 0 auto 28px auto;
+}
+
+/* Search Box Container */
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 6px 16px;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+}
+
+.search-bar:focus-within {
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-glow), var(--shadow-md);
+  background: var(--bg-surface);
+}
+
+.search-icon {
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  margin-right: 12px;
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--text-primary);
+  padding: 10px 0;
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.search-badge {
+  background: var(--border-subtle);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+.clear-search-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.clear-search-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Popular Quick Chips */
+.quick-tags {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.quick-label {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.tag-chip {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.tag-chip:hover {
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  background: var(--badge-bg);
+}
+
+/* Floor Filter Scroll Bar */
+.floor-filter-wrapper {
+  margin: 24px 0 20px 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 4px;
+}
+
+.floor-filter-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.floor-filters {
+  display: flex;
+  gap: 8px;
+  min-width: max-content;
+  padding: 2px;
+}
+
+.floor-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.floor-btn .count {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+.floor-btn:hover {
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.floor-btn.active {
+  background: var(--accent-gradient);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 4px 14px var(--accent-glow);
+}
+
+.floor-btn.active .count {
+  opacity: 0.9;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+}
+
+/* ------------------- ROOMS CATALOG / RESULTS ------------------- */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding: 0 4px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-count {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.room-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+.room-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent-gradient);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.room-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: var(--shadow-md), 0 0 20px -5px var(--accent-glow);
+  background: var(--bg-card-hover);
+}
+
+.room-card:hover::before {
+  opacity: 1;
+}
+
+.room-card.selected {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px var(--accent-primary), var(--shadow-md);
+  background: var(--bg-card-hover);
+}
+
+.room-card.selected::before {
+  opacity: 1;
+}
+
+.rc-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.rc-title-group h3 {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+
+.rc-dept {
+  font-size: 12px;
+  color: var(--accent-secondary);
+  font-weight: 500;
+}
+
+.rc-floor-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--border-subtle);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.rc-info-snippet {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-bottom: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 36px;
+}
+
+.rc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+}
+
+.rc-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+}
+
+.rc-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rc-cta {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-primary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: var(--transition);
+}
+
+.room-card:hover .rc-cta {
+  transform: translateX(3px);
+  color: var(--accent-secondary);
+}
+
+/* Empty state */
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--bg-card);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-xl);
+  color: var(--text-muted);
+}
+
+.no-results svg {
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+/* ------------------- ROOM DETAILS / WALKTHROUGH VIEW ------------------- */
+.room-view-container {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Top Back / Action Bar */
+.view-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.back-btn:hover {
+  border-color: var(--accent-primary);
+  background: var(--bg-card-hover);
+  transform: translateX(-2px);
+}
+
+.room-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.action-pill-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+}
+
+/* Room Hero Details Card */
+.room-header-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(12px);
+}
+
+.room-header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.room-main-title {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.room-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.pill-badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.badge-floor {
+  background: var(--badge-bg);
+  border: 1px solid var(--badge-border);
+  color: var(--badge-text);
+}
+
+.badge-dept {
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px solid rgba(6, 182, 212, 0.25);
+  color: #38bdf8;
+}
+
+/* Access Point Tabs */
+.ap-tabs-section {
+  margin-bottom: 20px;
+}
+
+.ap-tabs-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ap-tabs-list {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ap-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.ap-tab:hover {
+  border-color: rgba(99, 102, 241, 0.5);
+  color: var(--text-primary);
+}
+
+.ap-tab.active {
+  background: var(--badge-bg);
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.ap-tab .ap-count {
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+}
+
+/* Wayfinding Directions Banner */
+.wayfinding-card {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.06), rgba(6, 182, 212, 0.04));
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.wayfinding-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--accent-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.wayfinding-content h4 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-secondary);
+  margin-bottom: 4px;
+}
+
+.wayfinding-content p {
+  font-size: 15px;
+  color: var(--text-primary);
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+/* ------------------- CAROUSEL / WALKTHROUGH ------------------- */
+.walkthrough-wrapper {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 20px;
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(12px);
+  margin-bottom: 30px;
+}
+
+.walkthrough-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.wt-title-block h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wt-title-block p {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.wt-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wt-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.wt-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+}
+
+.wt-btn.active {
+  background: var(--accent-primary);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+/* Main Swiper Container */
+.swiper-main-container {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #000000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.swiper-main {
+  width: 100%;
+  height: 500px;
+}
+
+@media (max-width: 768px) {
+  .swiper-main {
+    height: 380px;
+  }
+}
+
+.swiper-main .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #05070d;
+  overflow: hidden;
+}
+
+.swiper-main .swiper-slide img,
+.swiper-main .swiper-slide video {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  user-select: none;
+}
+
+/* Step Bar Overlay */
+.step-bar-overlay {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.step-indicator {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.fullscreen-btn {
+  pointer-events: auto;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.fullscreen-btn:hover {
+  background: var(--accent-primary);
+  border-color: transparent;
+  transform: scale(1.08);
+}
+
+/* Custom Swiper Nav Arrows */
+.swiper-button-prev,
+.swiper-button-next {
+  width: 44px;
+  height: 44px;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  color: #ffffff;
+  transition: var(--transition);
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background: var(--accent-primary);
+  border-color: transparent;
+  transform: scale(1.08);
+}
+
+/* Progress bar along the bottom of the slide */
+.swiper-pagination-progressbar {
+  background: rgba(255, 255, 255, 0.2);
+  height: 4px !important;
+}
+
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+  background: var(--accent-gradient);
+}
+
+/* Thumbnail Strip / Dock */
+.thumbnail-strip-wrapper {
+  margin-top: 14px;
+  padding: 4px 0;
+}
+
+.swiper-thumbs {
+  width: 100%;
+  height: 80px;
+}
+
+.swiper-thumbs .swiper-slide {
+  opacity: 0.45;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: var(--transition);
+  background: #000000;
+}
+
+.swiper-thumbs .swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-thumbs .swiper-slide:hover {
+  opacity: 0.8;
+  border-color: rgba(99, 102, 241, 0.5);
+}
+
+.swiper-thumbs .swiper-slide-thumb-active {
+  opacity: 1;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* ------------------- TOAST NOTIFICATIONS ------------------- */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.toast {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 12px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow-md), 0 0 20px -5px var(--accent-glow);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: toastIn 0.3s forwards cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+}
+
+@keyframes toastIn {
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.toast.fade-out {
+  animation: toastOut 0.3s forwards cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes toastOut {
+  to { transform: translateY(20px); opacity: 0; }
+}
+
+/* ------------------- FOOTER ------------------- */
+footer.app-footer {
+  margin-top: 60px;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+footer a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+footer a:hover {
+  color: var(--accent-primary);
+}
 </style>
 </head>
 <body>
 
-<div class="logo-container">
-    <h1 class="room-title">🔍 Room <span class="room-code">[MITM]</span></h1>
-    <div class="logo"><img src="https://raw.githubusercontent.com/2005lakshmi/locorom/main/logo_locorom.png" alt="Logo"></div>
+<div class="bg-ambient"></div>
+
+<div class="app-wrapper">
+
+  <!-- Top Navigation -->
+  <header class="navbar">
+    <div class="brand-group" id="brandBtn">
+      <div class="brand-logo-wrap">
+        <img src="logo_locorom.png" alt="Locorom Logo" onerror="this.src='https://raw.githubusercontent.com/2005lakshmi/locorom/main/logo_locorom.png'">
+      </div>
+      <div class="brand-text">
+        <h1>LOCOROM</h1>
+        <div class="brand-tag">
+          <span class="dot"></span>
+          <span>MITM Campus Navigation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggleBtn" title="Toggle Theme" aria-label="Toggle Dark/Light Mode">
+        <svg id="themeIconSun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="themeIconMoon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero & Command Search View -->
+  <section class="hero-section" id="heroSection">
+    <div class="hero-pill">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+      <span>Interactive Wayfinding & Walkthroughs</span>
+    </div>
+
+    <h2 class="hero-title">Find Your Destination Instantly</h2>
+    <p class="hero-subtitle">Visual step-by-step corridor paths from campus access points to classrooms, laboratories, and departments.</p>
+
+    <!-- Search Box -->
+    <div class="search-wrapper">
+      <div class="search-bar">
+        <div class="search-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search room number, lab, or department (e.g. 415B, 205, CSBS, DSP)..." autocomplete="off" spellcheck="false">
+        <button class="clear-search-btn" id="clearSearchBtn" title="Clear search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <div class="search-badge" id="searchKbdBadge">/</div>
+      </div>
+    </div>
+
+    <!-- Quick Tags -->
+    <div class="quick-tags">
+      <span class="quick-label">Popular:</span>
+      <button class="tag-chip" data-search="Auditorium">Auditorium</button>
+      <button class="tag-chip" data-search="CSBS">CSBS Lab</button>
+      <button class="tag-chip" data-search="205">Room 205</button>
+      <button class="tag-chip" data-search="319">319 (Theater)</button>
+      <button class="tag-chip" data-search="DSP">DSP Lab</button>
+      <button class="tag-chip" data-search="Machine">Machine Shop</button>
+      <button class="tag-chip" data-search="B-003">B-003</button>
+    </div>
+  </section>
+
+  <!-- Floor Category Filter Pills -->
+  <div class="floor-filter-wrapper" id="floorFilterWrapper">
+    <div class="floor-filters" id="floorFiltersContainer">
+      <button class="floor-btn active" data-floor="all">All Rooms <span class="count" id="countAll">62</span></button>
+      <button class="floor-btn" data-floor="Basement & Ground">Basement & Ground <span class="count">7</span></button>
+      <button class="floor-btn" data-floor="1st Floor">1st Floor <span class="count">7</span></button>
+      <button class="floor-btn" data-floor="2nd Floor">2nd Floor <span class="count">14</span></button>
+      <button class="floor-btn" data-floor="3rd Floor">3rd Floor <span class="count">13</span></button>
+      <button class="floor-btn" data-floor="4th Floor">4th Floor <span class="count">11</span></button>
+      <button class="floor-btn" data-floor="5th Floor">5th Floor <span class="count">4</span></button>
+      <button class="floor-btn" data-floor="Mechanical Block">Mechanical Block <span class="count">2</span></button>
+      <button class="floor-btn" data-floor="Campus Amenities">Amenities & Labs <span class="count">4</span></button>
+    </div>
+  </div>
+
+  <!-- Rooms Catalog Grid View -->
+  <main id="catalogSection">
+    <div class="section-header">
+      <h3 class="section-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span>Campus Directory</span>
+      </h3>
+      <span class="section-count" id="resultsCount">Showing 62 rooms</span>
+    </div>
+
+    <div class="rooms-grid" id="roomsGrid">
+      <!-- Dynamic Room Cards rendered here -->
+    </div>
+  </main>
+
+  <!-- Room Walkthrough & Details View -->
+  <section class="room-view-container" id="roomViewContainer">
+    <!-- View Navigation Bar -->
+    <div class="view-nav-bar">
+      <button class="back-btn" id="backToCatalogBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        <span>Back to Directory</span>
+      </button>
+
+      <div class="room-actions">
+        <button class="action-pill-btn" id="shareRoomBtn" title="Share room link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          <span>Share</span>
+        </button>
+        <button class="action-pill-btn" id="copyDirectionsBtn" title="Copy directions">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span>Copy Path</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Room Main Details Card -->
+    <div class="room-header-card">
+      <div class="room-header-top">
+        <div>
+          <h2 class="room-main-title" id="roomTitleDisplay">Room 205</h2>
+          <div class="room-badges">
+            <span class="pill-badge badge-floor" id="roomFloorDisplay">2nd Floor</span>
+            <span class="pill-badge badge-dept" id="roomDeptDisplay" style="display:none;">CSE Dept</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Access Point Selector (Tabs) -->
+      <div class="ap-tabs-section" id="apTabsSection">
+        <div class="ap-tabs-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Select Starting Point:</span>
+        </div>
+        <div class="ap-tabs-list" id="apTabsList">
+          <!-- Dynamic Access Point buttons rendered here -->
+        </div>
+      </div>
+
+      <!-- Wayfinding Instructions -->
+      <div class="wayfinding-card" id="wayfindingCard">
+        <div class="wayfinding-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+        </div>
+        <div class="wayfinding-content">
+          <h4 id="wayfindingTitle">Route Instructions</h4>
+          <p id="wayfindingText">From Point A, take first floor corridor to the right.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visual Walkthrough Carousel Section -->
+    <div class="walkthrough-wrapper" id="walkthroughWrapper">
+      <div class="walkthrough-header">
+        <div class="wt-title-block">
+          <h3>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Visual Path Walkthrough</span>
+          </h3>
+          <p>Follow the photo sequence from starting point to the destination room</p>
+        </div>
+
+        <div class="wt-controls">
+          <button class="wt-btn" id="tourAutoplayBtn" title="Play walkthrough">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span id="tourBtnText">Play Tour</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Swiper Main Carousel -->
+      <div class="swiper-main-container">
+        <!-- Floating Step Indicator -->
+        <div class="step-bar-overlay">
+          <div class="step-indicator" id="stepIndicator">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+            <span id="stepText">Step 1 of 10</span>
+          </div>
+          <button class="fullscreen-btn" id="fullscreenToggleBtn" title="Fullscreen">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+          </button>
+        </div>
+
+        <div class="swiper swiper-main" id="mainSwiper">
+          <div class="swiper-wrapper" id="mainSwiperWrapper">
+            <!-- Dynamic Slides rendered here -->
+          </div>
+          <!-- Swiper Navigation Arrows -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+          <!-- Progress Bar -->
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+
+      <!-- Swiper Thumbnail Dock -->
+      <div class="thumbnail-strip-wrapper">
+        <div class="swiper swiper-thumbs" id="thumbsSwiper">
+          <div class="swiper-wrapper" id="thumbsSwiperWrapper">
+            <!-- Dynamic Thumbnails rendered here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div>
+      <b>LOCOROM</b> • Maharaja Institute of Technology Mysore (MITM) Indoor Guide
+    </div>
+    <div>
+      <a href="https://github.com/2005lakshmi/locorom" target="_blank" rel="noopener">GitHub Repository</a>
+    </div>
+  </footer>
+
 </div>
 
-<hr>
-<input type="text" id="search" placeholder="example., 415B" autocomplete="off">
-<div class="room-radio" id="roomList"></div>
-<hr>
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
 
-<div id="content"></div>
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<!-- Embedded Precompiled Data / Fallback -->
+<script src="rooms_data.js"></script>
+
 <script>
-const REPO_USER = "2005lakshmi";
-const REPO_NAME = "locorom";
-const BASE_PATH = "Rooms";
-// Unauthenticated GitHub API - works for public repos, NO token needed.
-// Only 1 request per page load (60/hour allowed per IP, plenty).
-const TREE_URL = `https://api.github.com/repos/REPOUSER/{REPO_USER}/REPOU​SER/{REPO_NAME}/git/trees/main?recursive=1`;
-const RAW = f => `https://raw.githubusercontent.com/REPOUSER/{REPO_USER}/REPOU​SER/{REPO_NAME}/main/${f}`;
-const MEDIA_EXT = ["jpg","jpeg","png","gif","mp4"];
+/**
+ * LOCOROM Premium Redesign Application Logic
+ */
+const GITHUB_REPO = "2005lakshmi/locorom";
+const GITHUB_RAW = "https://raw.githubusercontent.com/2005lakshmi/locorom/main/";
 
-let allRoomFiles = [];
-let rooms = [];
-let selectedRoom = null;
+// State
+let allRooms = {};
+let currentRoom = null;
+let currentAccessPoint = null;
+let activeFloor = "all";
+let mainSwiper = null;
+let thumbsSwiper = null;
+let isTourPlaying = false;
+let tourInterval = null;
 
-async function loadTree() {
-    const listEl = document.getElementById("roomList");
+// Determine asset base URL (handles file://, localhost, and GitHub Pages)
+function resolveAssetUrl(path) {
+  if (!path) return "";
+  if (path.startsWith("http://") || path.startsWith("https://")) return path;
+  
+  // If hosted on GitHub Pages or custom domain without local repo
+  if (window.location.protocol === "https:" && !window.location.hostname.includes("localhost") && !window.location.hostname.includes("127.0.0.1")) {
+    return GITHUB_RAW + path;
+  }
+  // Otherwise resolve relative local path
+  return path;
+}
+
+// Toast Helper
+function showToast(message, iconSvg) {
+  const container = document.getElementById("toastContainer");
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.innerHTML = (iconSvg || `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`) + `<span>${message}</span>`;
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.classList.add("fade-out");
+    setTimeout(() => toast.remove(), 300);
+  }, 2600);
+}
+
+// Initialize Application
+async function initApp() {
+  initTheme();
+  initSearch();
+  initFloorFilters();
+  initKeyboardShortcuts();
+
+  // Load Data
+  if (window.LOCOROM_DATA && Object.keys(window.LOCOROM_DATA).length > 0) {
+    allRooms = window.LOCOROM_DATA;
+    onDataLoaded();
+  } else {
     try {
-        const resp = await fetch(TREE_URL);
-        if (!resp.ok) throw new Error("GitHub API returned HTTP " + resp.status);
-        const data = await resp.json();
-        if (!data.tree) throw new Error("Unexpected API response");
-
-        allRoomFiles = data.tree
-            .filter(f => f.type === "blob" && f.path.startsWith(BASE_PATH + "/"))
-            .map(f => f.path);
-
-        const roomSet = new Set();
-        allRoomFiles.forEach(p => {
-            const room = p.slice(BASE_PATH.length + 1).split("/")[0];
-            if (room) roomSet.add(room);
-        });
-        rooms = [...roomSet].sort();
-        renderRoomList();
-    } catch (err) {
-        listEl.innerHTML = `<div class="error-box">Failed to load rooms: ${err.message}<br>
-        Make sure the repo is public and try refreshing.</div>`;
+      const resp = await fetch("rooms_data.json");
+      if (resp.ok) {
+        allRooms = await resp.json();
+        onDataLoaded();
+      } else {
+        throw new Error("Local index not found");
+      }
+    } catch (e) {
+      console.warn("Could not load local index, fetching GitHub API tree...", e);
+      await fetchGitHubTreeFallback();
     }
+  }
+
+  // Handle URL deep-linking (?room=205)
+  const urlParams = new URLSearchParams(window.location.search);
+  const roomParam = urlParams.get("room") || window.location.hash.replace("#", "");
+  if (roomParam && allRooms[roomParam]) {
+    openRoom(roomParam);
+  }
 }
 
-function renderRoomList() {
-    const q = document.getElementById("search").value.trim().toLowerCase();
-    const el = document.getElementById("roomList");
-    el.innerHTML = "";
-    if (!q) {
-        el.innerHTML = "<p style='color:#888'>Please enter room number to search..!</p>";
-        return;
+// Fallback GitHub Tree fetcher if local JSON isn't present
+async function fetchGitHubTreeFallback() {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/git/trees/main?recursive=1`);
+    if (!res.ok) throw new Error("API status " + res.status);
+    const data = await res.json();
+    if (!data.tree) return;
+
+    const files = data.tree.filter(f => f.type === "blob" && f.path.startsWith("Rooms/")).map(f => f.path);
+    const roomMap = {};
+    files.forEach(p => {
+      const parts = p.slice("Rooms/".length).split("/");
+      const rName = parts[0];
+      if (!roomMap[rName]) {
+        let floor = "Other";
+        if (/^B|Basement|Machine|Foundry|Fluid/i.test(rName)) floor = "Basement & Ground";
+        else if (/^1/.test(rName)) floor = "1st Floor";
+        else if (/^2/.test(rName)) floor = "2nd Floor";
+        else if (/^3/.test(rName)) floor = "3rd Floor";
+        else if (/^4/.test(rName)) floor = "4th Floor";
+        else if (/^5/.test(rName)) floor = "5th Floor";
+
+        roomMap[rName] = {
+          name: rName,
+          floor: floor,
+          dept: "",
+          info: "",
+          thumbnail: "",
+          photos: [],
+          accessPoints: []
+        };
+      }
+      if (parts.length === 2 && /\.(jpg|png|jpeg)$/i.test(parts[1])) {
+        roomMap[rName].photos.push(p);
+      }
+    });
+
+    allRooms = roomMap;
+    onDataLoaded();
+  } catch (err) {
+    showToast("Error loading rooms catalog", "⚠️");
+  }
+}
+
+function onDataLoaded() {
+  renderCatalog();
+  updateFloorCounts();
+}
+
+// Theme handling
+function initTheme() {
+  const saved = localStorage.getItem("locorom_theme") || "dark";
+  document.documentElement.setAttribute("data-theme", saved);
+  updateThemeIcons(saved);
+
+  document.getElementById("themeToggleBtn").addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme") || "dark";
+    const next = current === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("locorom_theme", next);
+    updateThemeIcons(next);
+  });
+}
+
+function updateThemeIcons(theme) {
+  const sun = document.getElementById("themeIconSun");
+  const moon = document.getElementById("themeIconMoon");
+  if (theme === "light") {
+    sun.style.display = "none";
+    moon.style.display = "block";
+  } else {
+    sun.style.display = "block";
+    moon.style.display = "none";
+  }
+}
+
+// Floor Filtering
+function initFloorFilters() {
+  document.querySelectorAll(".floor-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".floor-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeFloor = btn.getAttribute("data-floor");
+      renderCatalog();
+    });
+  });
+}
+
+function updateFloorCounts() {
+  const counts = { all: 0 };
+  Object.values(allRooms).forEach(r => {
+    counts.all = (counts.all || 0) + 1;
+    const f = r.floor || "Other";
+    counts[f] = (counts[f] || 0) + 1;
+  });
+  document.getElementById("countAll").textContent = counts.all || Object.keys(allRooms).length;
+}
+
+// Search System
+function initSearch() {
+  const input = document.getElementById("searchInput");
+  const clearBtn = document.getElementById("clearSearchBtn");
+
+  input.addEventListener("input", () => {
+    const val = input.value.trim();
+    clearBtn.style.display = val ? "flex" : "none";
+    renderCatalog();
+  });
+
+  clearBtn.addEventListener("click", () => {
+    input.value = "";
+    clearBtn.style.display = "none";
+    input.focus();
+    renderCatalog();
+  });
+
+  // Popular Quick Tags
+  document.querySelectorAll(".tag-chip").forEach(tag => {
+    tag.addEventListener("click", () => {
+      input.value = tag.getAttribute("data-search");
+      clearBtn.style.display = "flex";
+      renderCatalog();
+      input.focus();
+    });
+  });
+
+  // Logo Click -> Reset
+  document.getElementById("brandBtn").addEventListener("click", () => {
+    input.value = "";
+    clearBtn.style.display = "none";
+    activeFloor = "all";
+    document.querySelectorAll(".floor-btn").forEach(b => b.classList.toggle("active", b.getAttribute("data-floor") === "all"));
+    closeRoomView();
+  });
+}
+
+// Keyboard shortcuts
+function initKeyboardShortcuts() {
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "/" && document.activeElement.id !== "searchInput") {
+      e.preventDefault();
+      document.getElementById("searchInput").focus();
     }
-    const list = rooms.filter(r => r.toLowerCase().includes(q));
-    if (list.length === 0) {
-        el.innerHTML = "<p style='color:red'>No rooms found</p>";
-        return;
+    if (e.key === "Escape") {
+      if (document.getElementById("roomViewContainer").style.display === "block") {
+        closeRoomView();
+      } else {
+        document.getElementById("searchInput").blur();
+      }
     }
-    list.forEach(r => {
-        const lbl = document.createElement("label");
-        lbl.innerHTML = `<input type="radio" name="room" value="r"{r}"r"{r === selectedRoom ? "checked" : ""}> <b>${r}</b>`;
-        lbl.querySelector("input").addEventListener("change", () => {
-            selectedRoom = r;
-            showRoom(r);
-        });
-        el.appendChild(lbl);
-    });
+  });
 }
 
-function filesUnder(prefix) {
-    return allRoomFiles
-        .filter(p => p.startsWith(prefix + "/"))
-        .map(p => p.slice(prefix.length + 1))
-        .filter(n => n && !n.includes("/"));
-}
-function dirsUnder(prefix) {
-    const set = new Set();
-    allRoomFiles.filter(p => p.startsWith(prefix + "/")).forEach(p => {
-        const rest = p.slice(prefix.length + 1);
-        if (rest.includes("/")) set.add(rest.split("/")[0]);
-    });
-    return [...set];
-}
-const isMedia = n => MEDIA_EXT.includes(n.split(".").pop().toLowerCase());
+// Render Room Catalog Cards
+function renderCatalog() {
+  const query = document.getElementById("searchInput").value.trim().toLowerCase();
+  const grid = document.getElementById("roomsGrid");
+  const countEl = document.getElementById("resultsCount");
+  grid.innerHTML = "";
 
-async function fetchText(path) {
-    try {
-        const resp = await fetch(RAW(path));
-        return resp.ok ? (await resp.text()).trim() : "";
-    } catch { return ""; }
-}
+  const roomKeys = Object.keys(allRooms).sort((a, b) => {
+    // Natural number sort if both start with digits
+    const numA = parseInt(a, 10);
+    const numB = parseInt(b, 10);
+    if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+    return a.localeCompare(b);
+  });
 
-function initCarousel(id) {
-    new Swiper("." + id, {
-        loop: true,
-        pagination: { el: "." + id + " .swiper-pagination", type: "fraction" },
-        navigation: { nextEl: "." + id + " .swiper-button-next", prevEl: "." + id + " .swiper-button-prev" },
-    });
-}
+  const matched = roomKeys.filter(k => {
+    const r = allRooms[k];
+    // Search query matching
+    const matchQuery = !query ||
+      k.toLowerCase().includes(query) ||
+      (r.info && r.info.toLowerCase().includes(query)) ||
+      (r.dept && r.dept.toLowerCase().includes(query)) ||
+      (r.accessPoints && r.accessPoints.some(ap => ap.name.toLowerCase().includes(query) || (ap.info && ap.info.toLowerCase().includes(query))));
 
-function carouselHTML(files) {
-    if (!files.length) return "";
-    const slides = files.map(f => {
-        const url = RAW(f);
-        const ext = f.split(".").pop().toLowerCase();
-        const inner = ext === "mp4"
-            ? `<video controls preload="metadata"><source src="${url}" type="video/mp4"></video>`
-            : `<img src="${url}" loading="lazy">`;
-        return `<div class="swiper-slide">${inner}</div>`;
-    }).join("");
-    const id = "sw" + Math.random().toString(36).slice(2);
-    return `
-    <div class="swiper ${id}">
-        <div class="swiper-wrapper">${slides}</div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
-    <script>initCarousel("${id}");<\/script>`;
-}
+    // Floor filter matching
+    const matchFloor = activeFloor === "all" || r.floor === activeFloor;
 
-function mediaRow(thumbURL, info, files) {
-    return `
-    <h4 class="from-point">From Point:</h4>
-    <div class="row">
-        <div class="thumb"><img src="${thumbURL}" loading="lazy" onerror="this.style.display='none'"></div>
-        <div class="info">
-            <h5 class="loc-info-head">Location Info :</h5>
-            <div class="info-text">${info || "No information available"}</div>
+    return matchQuery && matchFloor;
+  });
+
+  countEl.textContent = `Showing ${matched.length} of ${roomKeys.length} rooms`;
+
+  if (matched.length === 0) {
+    grid.innerHTML = `
+      <div class="no-results" style="grid-column: 1 / -1;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <h4 style="font-size:16px;font-weight:700;margin-bottom:6px;">No destinations found</h4>
+        <p style="font-size:14px;">Try searching for a different room number or select "All Rooms".</p>
+      </div>`;
+    return;
+  }
+
+  matched.forEach(key => {
+    const r = allRooms[key];
+    const totalPhotos = (r.photos ? r.photos.length : 0) + (r.accessPoints ? r.accessPoints.reduce((acc, ap) => acc + (ap.photos ? ap.photos.length : 0), 0) : 0);
+    const apCount = (r.accessPoints && r.accessPoints.length > 0) ? r.accessPoints.length : (r.photos && r.photos.length > 0 ? 1 : 0);
+
+    // Get preview direction text
+    let infoSnippet = r.info || "";
+    if (!infoSnippet && r.accessPoints && r.accessPoints.length > 0) {
+      infoSnippet = r.accessPoints[0].info || "";
+    }
+    if (!infoSnippet) infoSnippet = "Step-by-step corridor path available.";
+
+    const card = document.createElement("div");
+    card.className = "room-card" + (currentRoom && currentRoom.name === key ? " selected" : "");
+    card.innerHTML = `
+      <div>
+        <div class="rc-top">
+          <div class="rc-title-group">
+            <h3>${r.name}</h3>
+            ${r.dept ? `<div class="rc-dept">${r.dept}</div>` : ""}
+          </div>
+          <span class="rc-floor-badge">${r.floor || "Campus"}</span>
         </div>
-    </div>
-    ${files.length
-        ? `<h5>Photos</h5><p style="font-size:13px;color:#666">Path through Photos</p>${carouselHTML(files)}`
-        : `<div class="no-media">No media available</div>`}
-    <div class="divider"></div>`;
+        <div class="rc-info-snippet">${infoSnippet}</div>
+      </div>
+      <div class="rc-footer">
+        <div class="rc-meta">
+          <span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+            ${apCount} Point${apCount > 1 ? 's' : ''}
+          </span>
+          ${totalPhotos > 0 ? `<span>• ${totalPhotos} Photos</span>` : ""}
+        </div>
+        <div class="rc-cta">
+          <span>Navigate</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+    `;
+
+    card.addEventListener("click", () => openRoom(key));
+    grid.appendChild(card);
+  });
 }
 
-async function showRoom(room) {
-    const content = document.getElementById("content");
-    content.innerHTML = `<h2 class="room-head">Room: <span>${room}</span></h2><p>Loading…</p>`;
+// Open Room Details and Walkthrough
+function openRoom(roomKey) {
+  const room = allRooms[roomKey];
+  if (!room) return;
 
-    const roomPrefix = `BASEPATH/{BASE_PATH}/BASEP​ATH/{room}`;
-    const roomInfo = await fetchText(`${roomPrefix}/info.txt`);
+  currentRoom = room;
 
-    const mainMedia = filesUnder(roomPrefix).filter(isMedia).sort();
-    const mainThumb = mainMedia.length ? RAW(`roomPrefix/{roomPrefix}/roomPrefix/{mainMedia[0]}`) : "";
+  // Update URL without reload
+  const newUrl = window.location.pathname + "?room=" + encodeURIComponent(roomKey);
+  window.history.pushState({ room: roomKey }, "", newUrl);
 
-    let html = `<h2 class="room-head">Room: <span>${room}</span></h2>`;
-    if (mainMedia.length) {
-        html += mediaRow(mainThumb, roomInfo, mainMedia.map(n => `roomPrefix/{roomPrefix}/roomPrefix/{n}`));
-    }
+  // Switch Views
+  document.getElementById("heroSection").style.display = "none";
+  document.getElementById("floorFilterWrapper").style.display = "none";
+  document.getElementById("catalogSection").style.display = "none";
+  const viewContainer = document.getElementById("roomViewContainer");
+  viewContainer.style.display = "block";
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    const subs = dirsUnder(roomPrefix).sort();
-    for (const sub of subs) {
-        const subPrefix = `roomPrefix/{roomPrefix}/roomPrefix/{sub}`;
-        const info = await fetchText(`${subPrefix}/info.txt`);
-        const media = filesUnder(subPrefix)
-            .filter(n => isMedia(n) && n.toLowerCase() !== "thumbnail.jpg")
-            .sort();
-        html += mediaRow(RAW(`subPrefix/thumbnail.jpg‘),info,media.map(n=>‘{subPrefix}/thumbnail.jpg`), info, media.map(n => `subPrefix/thumbnail.jpg‘),info,media.map(n=>‘{subPrefix}/${n}`));
-    }
+  // Populate Header
+  document.getElementById("roomTitleDisplay").textContent = room.name;
+  document.getElementById("roomFloorDisplay").textContent = room.floor || "MITM Campus";
+  const deptEl = document.getElementById("roomDeptDisplay");
+  if (room.dept) {
+    deptEl.textContent = room.dept;
+    deptEl.style.display = "inline-block";
+  } else {
+    deptEl.style.display = "none";
+  }
 
-    content.innerHTML = html;
+  // Determine Access Points
+  const apList = document.getElementById("apTabsList");
+  const apSection = document.getElementById("apTabsSection");
+  apList.innerHTML = "";
+
+  const points = [];
+  if (room.accessPoints && room.accessPoints.length > 0) {
+    room.accessPoints.forEach(ap => points.push(ap));
+  } else if (room.photos && room.photos.length > 0) {
+    points.push({
+      name: "Main Access Point",
+      info: room.info || "Follow corridor directly to destination.",
+      thumbnail: room.thumbnail || room.photos[0],
+      photos: room.photos
+    });
+  }
+
+  if (points.length <= 1) {
+    apSection.style.display = "none";
+  } else {
+    apSection.style.display = "block";
+  }
+
+  points.forEach((ap, idx) => {
+    const tab = document.createElement("button");
+    tab.className = "ap-tab" + (idx === 0 ? " active" : "");
+    const photoCount = ap.photos ? ap.photos.length : 0;
+    tab.innerHTML = `
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/></svg>
+      <span>${ap.name}</span>
+      ${photoCount > 0 ? `<span class="ap-count">${photoCount}</span>` : ""}
+    `;
+
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".ap-tab").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      selectAccessPoint(ap);
+    });
+
+    apList.appendChild(tab);
+  });
+
+  // Select first access point by default
+  if (points.length > 0) {
+    selectAccessPoint(points[0]);
+  } else {
+    renderEmptyWalkthrough(room.info || "No route media currently uploaded for this destination.");
+  }
+
+  // Update card selection state in catalog
+  document.querySelectorAll(".room-card").forEach(c => {
+    c.classList.toggle("selected", c.querySelector("h3").textContent === roomKey);
+  });
 }
 
-document.getElementById("search").addEventListener("input", () => {
-    selectedRoom = null;
-    document.getElementById("content").innerHTML = "";
-    renderRoomList();
+// Select an Access Point
+function selectAccessPoint(ap) {
+  currentAccessPoint = ap;
+
+  // Wayfinding text
+  const wayfindingCard = document.getElementById("wayfindingCard");
+  const wayfindingText = document.getElementById("wayfindingText");
+  const wayfindingTitle = document.getElementById("wayfindingTitle");
+
+  const routeInfo = ap.info || currentRoom.info || "Follow visual photo sequence to arrive at destination.";
+  wayfindingTitle.textContent = ap.name ? `Route from ${ap.name}` : "Route Instructions";
+  wayfindingText.textContent = routeInfo;
+  wayfindingCard.style.display = "flex";
+
+  // Build Carousel
+  buildWalkthroughCarousel(ap.photos || []);
+}
+
+// Build Swiper Carousel for Photos
+function buildWalkthroughCarousel(photos) {
+  const mainWrapper = document.getElementById("mainSwiperWrapper");
+  const thumbsWrapper = document.getElementById("thumbsSwiperWrapper");
+  const wtWrapper = document.getElementById("walkthroughWrapper");
+  const stepText = document.getElementById("stepText");
+
+  // Destroy previous swiper instances
+  if (mainSwiper) { mainSwiper.destroy(true, true); mainSwiper = null; }
+  if (thumbsSwiper) { thumbsSwiper.destroy(true, true); thumbsSwiper = null; }
+  stopTour();
+
+  mainWrapper.innerHTML = "";
+  thumbsWrapper.innerHTML = "";
+
+  if (!photos || photos.length === 0) {
+    wtWrapper.style.display = "none";
+    return;
+  }
+
+  wtWrapper.style.display = "block";
+  stepText.textContent = `Step 1 of ${photos.length}`;
+
+  photos.forEach((p, idx) => {
+    const isVideo = /\.(mp4|webm)$/i.test(p);
+    const mediaUrl = resolveAssetUrl(p);
+
+    // Main Slide
+    const slide = document.createElement("div");
+    slide.className = "swiper-slide";
+    if (isVideo) {
+      slide.innerHTML = `<video controls playsinline preload="metadata"><source src="${mediaUrl}" type="video/mp4"></video>`;
+    } else {
+      slide.innerHTML = `<img src="${mediaUrl}" alt="Step ${idx + 1}" loading="lazy" onerror="this.onerror=null; this.src='logo_locorom.png';">`;
+    }
+    mainWrapper.appendChild(slide);
+
+    // Thumbs Slide
+    const thumb = document.createElement("div");
+    thumb.className = "swiper-slide";
+    thumb.innerHTML = `<img src="${mediaUrl}" alt="Thumb ${idx + 1}" loading="lazy" onerror="this.onerror=null; this.src='logo_locorom.png';">`;
+    thumbsWrapper.appendChild(thumb);
+  });
+
+  // Initialize Swiper Thumbs
+  thumbsSwiper = new Swiper("#thumbsSwiper", {
+    spaceBetween: 8,
+    slidesPerView: 4,
+    freeMode: true,
+    watchSlidesProgress: true,
+    breakpoints: {
+      480: { slidesPerView: 5 },
+      768: { slidesPerView: 7 },
+      1024: { slidesPerView: 9 }
+    }
+  });
+
+  // Initialize Main Swiper
+  mainSwiper = new Swiper("#mainSwiper", {
+    spaceBetween: 10,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      type: "progressbar",
+    },
+    thumbs: {
+      swiper: thumbsSwiper,
+    },
+    on: {
+      slideChange: function () {
+        const current = this.realIndex + 1;
+        const total = photos.length;
+        stepText.textContent = `Step ${current} of ${total}`;
+      }
+    }
+  });
+}
+
+function renderEmptyWalkthrough(msg) {
+  document.getElementById("walkthroughWrapper").style.display = "none";
+  document.getElementById("wayfindingText").textContent = msg;
+}
+
+// Close Room View -> Back to Directory
+function closeRoomView() {
+  currentRoom = null;
+  currentAccessPoint = null;
+  stopTour();
+
+  // Reset URL
+  window.history.pushState({}, "", window.location.pathname);
+
+  document.getElementById("roomViewContainer").style.display = "none";
+  document.getElementById("heroSection").style.display = "block";
+  document.getElementById("floorFilterWrapper").style.display = "block";
+  document.getElementById("catalogSection").style.display = "block";
+
+  renderCatalog();
+}
+
+// Tour Autoplay Mode
+function toggleTour() {
+  if (isTourPlaying) {
+    stopTour();
+  } else {
+    startTour();
+  }
+}
+
+function startTour() {
+  if (!mainSwiper) return;
+  isTourPlaying = true;
+  const btn = document.getElementById("tourAutoplayBtn");
+  btn.classList.add("active");
+  document.getElementById("tourBtnText").textContent = "Pause Tour";
+  btn.querySelector("svg").innerHTML = `<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>`;
+  showToast("Tour walkthrough started", "▶️");
+
+  tourInterval = setInterval(() => {
+    if (mainSwiper.isEnd) {
+      mainSwiper.slideTo(0);
+    } else {
+      mainSwiper.slideNext();
+    }
+  }, 2600);
+}
+
+function stopTour() {
+  isTourPlaying = false;
+  if (tourInterval) clearInterval(tourInterval);
+  tourInterval = null;
+  const btn = document.getElementById("tourAutoplayBtn");
+  if (btn) {
+    btn.classList.remove("active");
+    document.getElementById("tourBtnText").textContent = "Play Tour";
+    btn.querySelector("svg").innerHTML = `<polygon points="5 3 19 12 5 21 5 3"/>`;
+  }
+}
+
+// Share & Copy Actions
+document.getElementById("backToCatalogBtn").addEventListener("click", closeRoomView);
+
+document.getElementById("tourAutoplayBtn").addEventListener("click", toggleTour);
+
+document.getElementById("fullscreenToggleBtn").addEventListener("click", () => {
+  const container = document.querySelector(".swiper-main-container");
+  if (!document.fullscreenElement) {
+    container.requestFullscreen().catch(err => {
+      showToast("Fullscreen not supported by browser", "⚠️");
+    });
+  } else {
+    document.exitFullscreen();
+  }
 });
 
-loadTree();
+document.getElementById("shareRoomBtn").addEventListener("click", () => {
+  if (!currentRoom) return;
+  const url = window.location.origin + window.location.pathname + "?room=" + encodeURIComponent(currentRoom.name);
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => {
+      showToast("Room link copied to clipboard!");
+    });
+  } else {
+    prompt("Copy room link:", url);
+  }
+});
+
+document.getElementById("copyDirectionsBtn").addEventListener("click", () => {
+  if (!currentRoom) return;
+  const apName = currentAccessPoint ? currentAccessPoint.name : "Starting Point";
+  const info = currentAccessPoint ? currentAccessPoint.info : currentRoom.info;
+  const text = `📍 Destination: ${currentRoom.name} (${currentRoom.floor || "MITM Campus"})\n🧭 From ${apName}: ${info || "Follow photo path"}`;
+  
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast("Directions copied to clipboard!");
+    });
+  } else {
+    prompt("Copy directions:", text);
+  }
+});
+
+// History popstate navigation
+window.addEventListener("popstate", (e) => {
+  if (e.state && e.state.room && allRooms[e.state.room]) {
+    openRoom(e.state.room);
+  } else {
+    closeRoomView();
+  }
+});
+
+// Launch on DOM ready
+document.addEventListener("DOMContentLoaded", initApp);
 </script>
+
 </body>
 </html>
