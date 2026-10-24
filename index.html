@@ -1,813 +1,935 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>Locorom — MITM Indoor Navigation</title>
-<meta name="description" content="Minimal, high-precision indoor navigation and visual corridor walkthroughs for MITM campus.">
-<link rel="icon" type="image/png" href="logo_locorom.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=no">
+<title>LOCOROM • Campus Indoor Navigation</title>
+<meta name="description" content="Enterprise indoor visual wayfinding and corridor walkthrough system for MITM campus.">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
 
-<!-- Inter Font -->
+<!-- Inter & JetBrains Mono Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-/* -------------------------------------------------------------
-   Design System: Neutral Minimalist (Claude / OpenAI / Google)
-   ------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   MNC ENTERPRISE DESIGN SYSTEM (Google / Apple / Linear / Uber Inspired)
+   -------------------------------------------------------------------------- */
 :root {
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Light Theme (Default: Clean paper white & neutral zinc) */
-  --bg-app: #ffffff;
-  --bg-subtle: #f8f9fa;
-  --bg-surface: #ffffff;
-  --bg-muted: #f1f3f5;
-  --bg-hover: #f1f3f5;
-  --bg-canvas: #09090b;
+  /* Dark Theme Tokens (Default) */
+  --bg-app: #090a0f;
+  --bg-sidebar: #0f1118;
+  --bg-surface: #141722;
+  --bg-elevated: #1a1e2d;
+  --bg-input: #121520;
+  --bg-hover: #1f2436;
+  --bg-active: #252b40;
+  --bg-canvas: #020408;
 
-  --border: #e5e7eb;
-  --border-subtle: #f3f4f6;
-  --border-focus: #18181b;
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border: rgba(255, 255, 255, 0.09);
+  --border-focus: #3b82f6;
 
-  --text-main: #09090b;
-  --text-secondary: #52525b;
-  --text-muted: #71717a;
-  --text-inverse: #ffffff;
+  --text-main: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-inverse: #090a0f;
 
-  --accent: #18181b;
-  --accent-subtle: #f4f4f5;
-  --accent-blue: #2563eb;
-  --accent-green: #15803d;
+  --accent-blue: #3b82f6;
+  --accent-cyan: #06b6d4;
+  --accent-indigo: #6366f1;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+
+  --sidebar-width: 400px;
+  --header-height: 52px;
 
   --radius-xs: 4px;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-full: 9999px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
 
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 12px 32px -4px rgba(0, 0, 0, 0.12);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.7);
 
-  --transition-fast: 150ms ease;
+  --transition: 160ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-[data-theme="dark"] {
-  --bg-app: #09090b;
-  --bg-subtle: #121215;
-  --bg-surface: #18181b;
-  --bg-muted: #27272a;
-  --bg-hover: #222226;
-  --bg-canvas: #000000;
+[data-theme="light"] {
+  --bg-app: #f8fafc;
+  --bg-sidebar: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-elevated: #f1f5f9;
+  --bg-input: #f1f5f9;
+  --bg-hover: #e2e8f0;
+  --bg-active: #cbd5e1;
+  --bg-canvas: #0f172a;
 
-  --border: #27272a;
-  --border-subtle: #1f1f23;
-  --border-focus: #e4e4e7;
+  --border-subtle: rgba(0, 0, 0, 0.04);
+  --border: rgba(0, 0, 0, 0.09);
+  --border-focus: #2563eb;
 
-  --text-main: #fafafa;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
-  --text-inverse: #09090b;
+  --text-main: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --text-inverse: #ffffff;
 
-  --accent: #fafafa;
-  --accent-subtle: #27272a;
-  --accent-blue: #60a5fa;
-  --accent-green: #22c55e;
-
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 16px -2px rgba(0, 0, 0, 0.6);
-  --shadow-lg: 0 16px 40px -4px rgba(0, 0, 0, 0.8);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
-/* Reset */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-html {
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 }
 
-body {
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
   font-family: var(--font-sans);
   background-color: var(--bg-app);
   color: var(--text-main);
-  min-height: 100vh;
-  line-height: 1.5;
-  transition: background-color var(--transition-fast), color var(--transition-fast);
+  line-height: 1.45;
+  user-select: none;
 }
 
-/* -------------------------------------------------------------
-   Layout Structure
-   ------------------------------------------------------------- */
-.app-container {
+/* --------------------------------------------------------------------------
+   App Shell Layout (Full Viewport)
+   -------------------------------------------------------------------------- */
+.app-shell {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 0 20px;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 
-/* Header */
-header.app-header {
+/* Top App Bar */
+header.app-bar {
+  height: var(--header-height);
+  background: var(--bg-sidebar);
+  border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 60px;
-  border-bottom: 1px solid var(--border);
-  padding: 0 4px;
+  padding: 0 16px;
+  z-index: 100;
+  flex-shrink: 0;
 }
 
-.brand {
+.brand-wrapper {
   display: flex;
   align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  color: inherit;
+  gap: 12px;
   cursor: pointer;
 }
 
-.brand-logo {
-  width: 28px;
-  height: 28px;
+.brand-icon {
+  width: 30px;
+  height: 30px;
   border-radius: var(--radius-sm);
-  object-fit: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .brand-title {
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.brand-badge {
   font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  padding: 1px 6px;
-  border-radius: var(--radius-xs);
-  background: var(--bg-muted);
-  color: var(--text-secondary);
-  border: 1px solid var(--border);
-}
-
-.header-actions {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-main);
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.icon-button {
+.brand-tag {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  padding: 2px 7px;
+  border-radius: var(--radius-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.app-bar-center {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.radar-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-emerald);
+  box-shadow: 0 0 6px var(--accent-emerald);
+}
+
+.app-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tool-btn {
   background: transparent;
   border: 1px solid transparent;
   color: var(--text-secondary);
-  width: 32px;
   height: 32px;
+  width: 32px;
   border-radius: var(--radius-sm);
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all var(--transition);
 }
 
-.icon-button:hover {
-  background: var(--bg-muted);
+.tool-btn:hover {
+  background: var(--bg-hover);
   color: var(--text-main);
   border-color: var(--border);
 }
 
-/* -------------------------------------------------------------
-   Browse View: Minimal Command Bar & Grid
-   ------------------------------------------------------------- */
-.browse-view {
+/* Main Workspace */
+.workspace {
   flex: 1;
-  padding: 36px 0 60px 0;
-  max-width: 960px;
-  width: 100%;
-  margin: 0 auto;
+  display: flex;
+  height: calc(100vh - var(--header-height));
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
 }
 
-.search-container {
-  margin-bottom: 24px;
+/* --------------------------------------------------------------------------
+   Left Command & Route Sidebar
+   -------------------------------------------------------------------------- */
+aside.sidebar {
+  width: var(--sidebar-width);
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-shrink: 0;
+  z-index: 50;
+  overflow: hidden;
+  transition: transform var(--transition);
 }
 
-.search-box {
+/* Search Header */
+.sidebar-search-header {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-sidebar);
+}
+
+.command-input-wrap {
   display: flex;
   align-items: center;
-  background: var(--bg-surface);
+  background: var(--bg-input);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 10px 14px;
-  box-shadow: var(--shadow-sm);
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  transition: all var(--transition);
 }
 
-.search-box:focus-within {
+.command-input-wrap:focus-within {
   border-color: var(--border-focus);
-  box-shadow: 0 0 0 1px var(--border-focus), var(--shadow-sm);
+  background: var(--bg-surface);
+  box-shadow: 0 0 0 1px var(--border-focus);
 }
 
-.search-box svg {
+.command-input-wrap svg {
   color: var(--text-muted);
   flex-shrink: 0;
-  margin-right: 12px;
+  margin-right: 10px;
 }
 
-.search-input {
+.command-input {
   flex: 1;
   background: transparent;
   border: none;
   outline: none;
   font-family: var(--font-sans);
-  font-size: 15px;
+  font-size: 13.5px;
   color: var(--text-main);
 }
 
-.search-input::placeholder {
+.command-input::placeholder {
   color: var(--text-muted);
 }
 
-.kbd-badge {
+.kbd-shortcut {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-muted);
-  background: var(--bg-muted);
+  background: var(--bg-surface);
   border: 1px solid var(--border);
+  padding: 1px 5px;
   border-radius: var(--radius-xs);
-  padding: 2px 6px;
-  user-select: none;
 }
 
-.clear-search {
+.clear-btn {
   background: none;
   border: none;
   color: var(--text-muted);
   cursor: pointer;
-  padding: 4px;
   display: none;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-xs);
+  padding: 2px;
 }
 
-.clear-search:hover {
+.clear-btn:hover {
   color: var(--text-main);
 }
 
-/* Filter Bar */
-.filter-bar {
+/* Filter Strip */
+.filter-strip {
   display: flex;
-  gap: 6px;
+  gap: 5px;
   overflow-x: auto;
   scrollbar-width: none;
-  padding: 2px 0 16px 0;
-  margin-bottom: 12px;
+  padding: 10px 14px 6px 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
 }
 
-.filter-bar::-webkit-scrollbar {
+.filter-strip::-webkit-scrollbar {
   display: none;
 }
 
-.filter-chip {
+.filter-tab {
   background: transparent;
   border: 1px solid var(--border);
   color: var(--text-secondary);
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 500;
-  padding: 5px 12px;
-  border-radius: var(--radius-full);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
   cursor: pointer;
   white-space: nowrap;
-  transition: all var(--transition-fast);
+  transition: all var(--transition);
 }
 
-.filter-chip:hover {
-  border-color: var(--text-muted);
+.filter-tab:hover {
+  background: var(--bg-hover);
   color: var(--text-main);
-  background: var(--bg-muted);
 }
 
-.filter-chip.active {
-  background: var(--accent);
+.filter-tab.active {
+  background: var(--text-main);
   color: var(--text-inverse);
-  border-color: var(--accent);
+  border-color: var(--text-main);
+  font-weight: 600;
 }
 
-/* Quick destination tags */
-.quick-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-bottom: 28px;
-}
-
-.quick-chip {
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-secondary);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  padding: 2px 8px;
-  border-radius: var(--radius-xs);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.quick-chip:hover {
-  border-color: var(--border);
-  color: var(--text-main);
-  background: var(--bg-muted);
-}
-
-/* Directory List / Grid */
-.directory-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-bottom: 12px;
-  padding: 0 2px;
-}
-
-.directory-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 10px;
-}
-
-.item-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 14px 16px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: border-color var(--transition-fast), background var(--transition-fast);
+/* Sidebar Scrollable Body */
+.sidebar-body {
+  flex: 1;
+  overflow-y: auto;
   position: relative;
 }
 
-.item-card:hover {
-  border-color: var(--text-muted);
-  background: var(--bg-hover);
+/* Mode 1: Directory List View */
+.directory-view {
+  padding: 8px 10px;
 }
 
-.item-top {
+.dest-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 8px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition);
+  margin-bottom: 2px;
 }
 
-.item-name {
-  font-family: var(--font-mono);
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--text-main);
-  letter-spacing: -0.01em;
+.dest-item:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-subtle);
 }
 
-.item-dept {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-top: 2px;
-  font-family: var(--font-sans);
+.dest-item.active {
+  background: var(--bg-active);
+  border-color: var(--border-focus);
 }
 
-.item-badge {
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--text-muted);
-  background: var(--bg-muted);
-  padding: 2px 6px;
-  border-radius: var(--radius-xs);
-  white-space: nowrap;
-}
-
-.item-snippet {
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 1.45;
-  margin-bottom: 12px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+.dest-info-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   overflow: hidden;
 }
 
-.item-bottom {
+.dest-icon-box {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-xs);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-blue);
+  flex-shrink: 0;
+}
+
+.dest-texts {
+  overflow: hidden;
+}
+
+.dest-name {
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dest-meta {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dest-floor-badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  padding: 2px 7px;
+  border-radius: var(--radius-xs);
+  flex-shrink: 0;
+}
+
+/* Mode 2: Route Detail Panel (Slide-in) */
+.route-panel {
+  display: none;
+  padding: 14px;
+}
+
+.route-top-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 11px;
-  color: var(--text-muted);
-  padding-top: 8px;
-  border-top: 1px solid var(--border-subtle);
+  margin-bottom: 12px;
 }
 
-.item-action {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-main);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-/* -------------------------------------------------------------
-   Active Room Walkthrough: Dual-Pane Clean Workspace
-   ------------------------------------------------------------- */
-.walkthrough-view {
-  display: none;
-  flex: 1;
-  padding: 20px 0 40px 0;
-}
-
-.split-layout {
-  display: grid;
-  grid-template-columns: 380px 1fr;
-  gap: 24px;
-  align-items: start;
-}
-
-@media (max-width: 900px) {
-  .split-layout {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Left Sidebar / Info Rail */
-.info-rail {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 20px;
-  box-shadow: var(--shadow-sm);
-  position: sticky;
-  top: 76px;
-}
-
-.rail-back-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
+.back-link {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
   padding: 0;
-  margin-bottom: 16px;
-  transition: color var(--transition-fast);
 }
 
-.rail-back-btn:hover {
+.back-link:hover {
   color: var(--text-main);
 }
 
-.room-title-block {
-  margin-bottom: 16px;
+.close-route-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
 }
 
-.room-title-h2 {
+.close-route-btn:hover {
+  color: var(--text-main);
+}
+
+.route-dest-header {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.route-dest-title {
   font-family: var(--font-mono);
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--text-main);
-  letter-spacing: -0.02em;
 }
 
-.room-meta-row {
+.route-dest-dept {
+  font-size: 12px;
+  color: var(--accent-cyan);
+  margin-top: 2px;
+}
+
+.route-tags {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 4px;
-  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
 }
 
-.tag-badge {
+.mini-badge {
   font-size: 11px;
   font-weight: 500;
   padding: 2px 7px;
   border-radius: var(--radius-xs);
-  background: var(--bg-muted);
-  color: var(--text-secondary);
+  background: var(--bg-elevated);
   border: 1px solid var(--border);
+  color: var(--text-secondary);
 }
 
-/* Clean Segmented Control for Starting Points */
-.ap-segmented {
-  margin: 16px 0;
+/* Starting Point Segmented Tab Switcher */
+.ap-block {
+  margin-bottom: 14px;
 }
 
-.ap-label {
+.ap-header-label {
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--text-muted);
   margin-bottom: 6px;
-  display: block;
 }
 
-.ap-pills {
+.ap-segmented-tabs {
   display: flex;
-  background: var(--bg-muted);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
   padding: 3px;
   border-radius: var(--radius-sm);
   gap: 3px;
-  flex-wrap: wrap;
 }
 
-.ap-pill {
+.ap-seg-tab {
   flex: 1;
-  min-width: 100px;
-  text-align: center;
   background: transparent;
   border: none;
-  padding: 6px 10px;
-  border-radius: var(--radius-xs);
-  font-family: var(--font-sans);
+  color: var(--text-secondary);
   font-size: 12px;
   font-weight: 500;
-  color: var(--text-secondary);
+  padding: 6px 8px;
+  border-radius: var(--radius-xs);
   cursor: pointer;
-  transition: all var(--transition-fast);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: center;
+  transition: all var(--transition);
 }
 
-.ap-pill:hover {
+.ap-seg-tab:hover {
   color: var(--text-main);
 }
 
-.ap-pill.active {
+.ap-seg-tab.active {
   background: var(--bg-surface);
   color: var(--text-main);
   font-weight: 600;
   box-shadow: var(--shadow-sm);
 }
 
-/* Wayfinding Text Box */
-.directions-box {
-  background: var(--bg-subtle);
+/* Turn-by-Turn Directions Card */
+.route-nav-card {
+  background: var(--bg-surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 14px;
-  margin: 16px 0;
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin-bottom: 14px;
 }
 
-.directions-header {
+.nav-card-label {
   font-size: 11px;
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--accent-blue);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-.directions-content {
-  font-size: 13.5px;
+.nav-card-text {
+  font-size: 13px;
   color: var(--text-main);
   line-height: 1.5;
   white-space: pre-wrap;
 }
 
-/* Rail Action Toolbar */
-.rail-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 16px;
+/* Waypoint Step Timeline Checklist */
+.step-checklist-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin: 14px 0 8px 0;
 }
 
-.btn-secondary {
+.step-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.step-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  transition: all var(--transition);
+  border: 1px solid transparent;
+}
+
+.step-row:hover {
+  background: var(--bg-hover);
+  color: var(--text-main);
+}
+
+.step-row.active {
+  background: var(--bg-active);
+  color: var(--text-main);
+  border-color: var(--border-focus);
+}
+
+.step-num-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-row.active .step-num-circle {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: #ffffff;
+}
+
+/* Route Action Buttons */
+.route-actions-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.btn-route {
   flex: 1;
   background: var(--bg-surface);
   border: 1px solid var(--border);
   color: var(--text-main);
   font-size: 12px;
   font-weight: 500;
-  padding: 7px 12px;
+  padding: 7px 10px;
   border-radius: var(--radius-sm);
-  cursor: pointer;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  transition: all var(--transition-fast);
+  cursor: pointer;
+  transition: all var(--transition);
 }
 
-.btn-secondary:hover {
-  background: var(--bg-muted);
+.btn-route:hover {
+  background: var(--bg-hover);
 }
 
-/* Right Pane: Minimalist Visual Canvas */
-.walkthrough-canvas-pane {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.canvas-viewport {
-  position: relative;
+/* --------------------------------------------------------------------------
+   Right Main Viewport Canvas (Visual Corridor Stage)
+   -------------------------------------------------------------------------- */
+main.viewport-canvas {
+  flex: 1;
   background: var(--bg-canvas);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 520px;
-  max-height: 680px;
-  box-shadow: var(--shadow-md);
 }
 
-@media (max-width: 640px) {
-  .canvas-viewport {
-    min-height: 380px;
-    max-height: 480px;
-  }
+/* Image Display Layer */
+.media-stage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
-.canvas-viewport img,
-.canvas-viewport video {
+.media-stage img,
+.media-stage video {
   max-width: 100%;
-  max-height: 640px;
+  max-height: 100%;
   width: auto;
   height: auto;
   object-fit: contain;
   user-select: none;
-}
-
-/* Top Canvas Bar (Step counter & Fullscreen) */
-.canvas-top-bar {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  right: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 10;
   pointer-events: none;
 }
 
-.step-count-badge {
-  pointer-events: auto;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 500;
-  color: #fafafa;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(8px);
-  padding: 4px 10px;
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.canvas-fs-btn {
-  pointer-events: auto;
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-sm);
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #fafafa;
+/* Floating Top HUD Capsule */
+.hud-top-capsule {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  right: 20px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background var(--transition-fast);
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 40;
 }
 
-.canvas-fs-btn:hover {
-  background: rgba(0, 0, 0, 0.95);
+.hud-location-badge {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(15, 17, 24, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-md);
 }
 
-/* Canvas Navigation Controls */
-.canvas-nav-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
+.hud-room {
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.hud-divider {
+  width: 1px;
+  height: 12px;
+  background: var(--border);
+}
+
+.hud-step-counter {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent-cyan);
+}
+
+.hud-right-actions {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hud-btn {
+  width: 36px;
+  height: 36px;
   border-radius: var(--radius-full);
-  background: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(15, 17, 24, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all var(--transition-fast);
-  z-index: 10;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-md);
 }
 
-.canvas-nav-arrow:hover {
-  background: rgba(0, 0, 0, 0.9);
-  transform: translateY(-50%) scale(1.05);
+.hud-btn:hover {
+  background: rgba(30, 35, 50, 0.95);
+  transform: scale(1.05);
 }
 
-.canvas-nav-arrow.prev { left: 14px; }
-.canvas-nav-arrow.next { right: 14px; }
+/* Large Center Left/Right Arrow Paddles */
+.nav-paddle {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: rgba(15, 17, 24, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition);
+  z-index: 40;
+}
 
-/* Bottom Canvas Controls Bar */
-.canvas-bottom-controls {
+.nav-paddle:hover {
+  background: rgba(59, 130, 246, 0.9);
+  border-color: transparent;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.nav-paddle.left { left: 20px; }
+.nav-paddle.right { right: 20px; }
+
+/* Floating Bottom Navigation Deck (Tesla / Apple Maps Deck) */
+.hud-deck {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 680px;
+  background: rgba(15, 17, 24, 0.88);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 12px 16px;
+  box-shadow: var(--shadow-lg);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.deck-controls-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 4px 2px;
+  gap: 14px;
 }
 
-.tour-btn {
+.deck-btn-prev, .deck-btn-next {
   background: var(--bg-surface);
   border: 1px solid var(--border);
-  color: var(--text-main);
-  font-size: 12px;
-  font-weight: 500;
-  padding: 6px 14px;
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 7px 16px;
   border-radius: var(--radius-sm);
   display: inline-flex;
   align-items: center;
   gap: 6px;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all var(--transition);
 }
 
-.tour-btn:hover {
-  background: var(--bg-muted);
+.deck-btn-prev:hover, .deck-btn-next:hover {
+  background: var(--bg-hover);
+  border-color: var(--accent-blue);
 }
 
-.tour-btn.playing {
-  background: var(--accent);
-  color: var(--text-inverse);
-  border-color: var(--accent);
+.deck-btn-tour {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all var(--transition);
 }
 
-/* Scrubber / Dots Dock */
-.scrubber-track {
-  flex: 1;
+.deck-btn-tour:hover {
+  color: #ffffff;
+  border-color: var(--text-muted);
+}
+
+.deck-btn-tour.playing {
+  background: var(--accent-blue);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+/* Timeline Step Scrubber Bar */
+.deck-timeline-track {
   display: flex;
   gap: 4px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  padding: 6px 0;
+  width: 100%;
+  padding-top: 2px;
 }
 
-.scrubber-track::-webkit-scrollbar {
-  display: none;
-}
-
-.scrubber-dot {
+.timeline-segment {
   flex: 1;
-  height: 4px;
-  min-width: 14px;
-  background: var(--border);
-  border-radius: var(--radius-full);
+  height: 5px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-pill);
   cursor: pointer;
-  transition: background var(--transition-fast), transform var(--transition-fast);
+  transition: all var(--transition);
 }
 
-.scrubber-dot:hover {
-  background: var(--text-muted);
+.timeline-segment:hover {
+  background: rgba(255, 255, 255, 0.4);
 }
 
-.scrubber-dot.active {
-  background: var(--accent);
-  transform: scaleY(1.5);
+.timeline-segment.active {
+  background: var(--accent-cyan);
+  box-shadow: 0 0 8px var(--accent-cyan);
 }
 
-/* -------------------------------------------------------------
-   Toast Notifications
-   ------------------------------------------------------------- */
-.toast-shelf {
+.timeline-segment.past {
+  background: var(--accent-blue);
+}
+
+/* Toast Floating Shelf */
+.toast-host {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 24px;
+  right: 24px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -815,72 +937,96 @@ header.app-header {
   pointer-events: none;
 }
 
-.toast-msg {
-  background: var(--accent);
-  color: var(--text-inverse);
-  font-size: 13px;
+.toast-pill {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  font-size: 12.5px;
   font-weight: 500;
-  padding: 8px 14px;
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-md);
+  padding: 9px 16px;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-lg);
   display: flex;
   align-items: center;
   gap: 8px;
-  animation: toastSlideIn 180ms ease forwards;
+  pointer-events: auto;
+  animation: slideUp 180ms ease forwards;
 }
 
-@keyframes toastSlideIn {
-  from { opacity: 0; transform: translateY(8px); }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* -------------------------------------------------------------
-   Footer
-   ------------------------------------------------------------- */
-footer.app-footer {
-  height: 50px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12px;
-  color: var(--text-muted);
-  padding: 0 4px;
-  margin-top: auto;
-}
-
-footer a {
-  color: inherit;
-  text-decoration: none;
-}
-
-footer a:hover {
-  color: var(--text-main);
+/* Mobile Responsiveness */
+@media (max-width: 840px) {
+  .workspace {
+    flex-direction: column-reverse;
+  }
+  aside.sidebar {
+    width: 100vw;
+    height: 48vh;
+    border-right: none;
+    border-top: 1px solid var(--border);
+  }
+  main.viewport-canvas {
+    height: 52vh;
+    width: 100vw;
+  }
+  .hud-deck {
+    bottom: 10px;
+    width: 95%;
+    padding: 8px 12px;
+  }
+  .nav-paddle {
+    display: none;
+  }
 }
 </style>
 </head>
 <body>
 
-<div class="app-container">
+<div class="app-shell">
 
-  <!-- Header -->
-  <header class="app-header">
-    <a class="brand" id="brandReset" href="javascript:void(0)" title="Locorom Home">
-      <img class="brand-logo" src="logo_locorom.png" alt="Locorom Logo" onerror="this.src='https://raw.githubusercontent.com/aryamanm77/mitm-room/main/logo_locorom.png'">
-      <span class="brand-title">
-        Locorom
-        <span class="brand-badge">MITM</span>
-      </span>
-    </a>
+  <!-- Top Enterprise App Bar -->
+  <header class="app-bar">
+    <div class="brand-wrapper" id="brandBtn">
+      <div class="brand-icon">
+        <svg viewBox="0 0 512 512" width="30" height="30">
+          <defs>
+            <linearGradient id="pGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#3b82f6"/>
+              <stop offset="100%" stop-color="#06b6d4"/>
+            </linearGradient>
+          </defs>
+          <rect width="512" height="512" rx="110" fill="#090d16"/>
+          <circle cx="256" cy="220" r="130" fill="none" stroke="url(#pGrad)" stroke-width="6" opacity="0.25"/>
+          <path d="M140 370 L210 300 L300 300 L370 220" fill="none" stroke="url(#pGrad)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="140" cy="370" r="26" fill="#090d16" stroke="#3b82f6" stroke-width="12"/>
+          <circle cx="370" cy="220" r="34" fill="url(#pGrad)"/>
+          <circle cx="370" cy="220" r="16" fill="#ffffff"/>
+        </svg>
+      </div>
+      <div class="brand-title">
+        LOCOROM
+        <span class="brand-tag">MITM Campus</span>
+      </div>
+    </div>
 
-    <div class="header-actions">
-      <span style="font-size:12px; color:var(--text-muted); margin-right:4px;" id="statusCounter">62 destinations</span>
-      <button class="icon-button" id="themeBtn" title="Toggle Theme (Dark / Light)">
-        <svg id="themeSvg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    <div class="app-bar-center">
+      <div class="status-pill">
+        <span class="radar-dot"></span>
+        <span id="destCountDisplay">62 Destinations</span>
+      </div>
+    </div>
+
+    <div class="app-bar-actions">
+      <button class="tool-btn" id="themeBtn" title="Toggle Dark / Light Mode">
+        <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
         </svg>
       </button>
-      <a class="icon-button" href="https://github.com/aryamanm77/mitm-room" target="_blank" rel="noopener" title="View Source on GitHub">
+      <a class="tool-btn" href="https://github.com/aryamanm77/mitm-room" target="_blank" rel="noopener" title="GitHub Repository">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
         </svg>
@@ -888,175 +1034,183 @@ footer a:hover {
     </div>
   </header>
 
-  <!-- Browse Directory View -->
-  <main class="browse-view" id="browseSection">
-    <!-- Command Search Bar -->
-    <div class="search-container">
-      <div class="search-box">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-        <input type="text" id="searchInput" class="search-input" placeholder="Search room number, laboratory, or department (e.g. 205, 415B, CSBS, DSP)..." autocomplete="off" spellcheck="false">
-        <button class="clear-search" id="clearSearchBtn" title="Clear search">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-        <span class="kbd-badge" id="kbdShortcut">/</span>
+  <!-- Workspace: Split View (Sidebar + Full Canvas) -->
+  <div class="workspace">
+
+    <!-- Left Command & Route Explorer Sidebar -->
+    <aside class="sidebar" id="sidebarEl">
+      <!-- Search Box -->
+      <div class="sidebar-search-header">
+        <div class="command-input-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="text" id="searchInput" class="command-input" placeholder="Search room, lab, or department..." autocomplete="off" spellcheck="false">
+          <button class="clear-btn" id="clearBtn">✕</button>
+          <span class="kbd-shortcut">/</span>
+        </div>
       </div>
-    </div>
 
-    <!-- Minimal Category Chips -->
-    <div class="filter-bar" id="filterBar">
-      <button class="filter-chip active" data-floor="all">All</button>
-      <button class="filter-chip" data-floor="Basement & Ground">Basement & Ground</button>
-      <button class="filter-chip" data-floor="1st Floor">1st Floor</button>
-      <button class="filter-chip" data-floor="2nd Floor">2nd Floor</button>
-      <button class="filter-chip" data-floor="3rd Floor">3rd Floor</button>
-      <button class="filter-chip" data-floor="4th Floor">4th Floor</button>
-      <button class="filter-chip" data-floor="5th Floor">5th Floor</button>
-      <button class="filter-chip" data-floor="Mechanical Block">Mechanical</button>
-      <button class="filter-chip" data-floor="Campus Amenities">Amenities & Labs</button>
-    </div>
+      <!-- Category Filter Strip -->
+      <div class="filter-strip" id="filterStrip">
+        <button class="filter-tab active" data-floor="all">All</button>
+        <button class="filter-tab" data-floor="Basement & Ground">Basement</button>
+        <button class="filter-tab" data-floor="1st Floor">1st Fl</button>
+        <button class="filter-tab" data-floor="2nd Floor">2nd Fl</button>
+        <button class="filter-tab" data-floor="3rd Floor">3rd Fl</button>
+        <button class="filter-tab" data-floor="4th Floor">4th Fl</button>
+        <button class="filter-tab" data-floor="5th Floor">5th Fl</button>
+        <button class="filter-tab" data-floor="Mechanical Block">Mech</button>
+        <button class="filter-tab" data-floor="Campus Amenities">Labs & Hall</button>
+      </div>
 
-    <!-- Quick Shortcuts -->
-    <div class="quick-row">
-      <span>Quick jump:</span>
-      <span class="quick-chip" data-query="Auditorium">Auditorium</span>
-      <span class="quick-chip" data-query="CSBS">CSBS Lab</span>
-      <span class="quick-chip" data-query="205">205</span>
-      <span class="quick-chip" data-query="319">319 Theater</span>
-      <span class="quick-chip" data-query="DSP">DSP Lab</span>
-      <span class="quick-chip" data-query="Machine Shop">Machine Shop</span>
-      <span class="quick-chip" data-query="B-003">B-003</span>
-    </div>
-
-    <!-- Directory Counter -->
-    <div class="directory-meta">
-      <span id="resultsCount">Showing 62 destinations</span>
-      <span id="sortIndicator">Sorted numerically</span>
-    </div>
-
-    <!-- Directory Grid -->
-    <div class="directory-grid" id="directoryGrid">
-      <!-- Injected dynamically -->
-    </div>
-  </main>
-
-  <!-- Active Walkthrough View (Dual Pane) -->
-  <section class="walkthrough-view" id="walkthroughSection">
-    <div class="split-layout">
-      <!-- Left Info Rail -->
-      <aside class="info-rail">
-        <button class="rail-back-btn" id="backBtn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-          <span>All destinations</span>
-        </button>
-
-        <div class="room-title-block">
-          <h2 class="room-title-h2" id="railRoomName">Room 205</h2>
-          <div class="room-meta-row">
-            <span class="tag-badge" id="railFloor">2nd Floor</span>
-            <span class="tag-badge" id="railDept" style="display:none;">CSE</span>
-          </div>
+      <!-- Scrollable Body -->
+      <div class="sidebar-body">
+        <!-- 1. Destination Directory List -->
+        <div class="directory-view" id="directoryView">
+          <!-- Injected dynamically -->
         </div>
 
-        <!-- Starting Point Selector (if multiple) -->
-        <div class="ap-segmented" id="apContainer">
-          <span class="ap-label">Starting Access Point:</span>
-          <div class="ap-pills" id="apPillsList">
+        <!-- 2. Turn-by-Turn Route Details Panel -->
+        <div class="route-panel" id="routePanel">
+          <div class="route-top-bar">
+            <button class="back-link" id="routeBackBtn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+              <span>Back to search</span>
+            </button>
+            <button class="close-route-btn" id="routeCloseBtn" title="Close Route">✕</button>
+          </div>
+
+          <div class="route-dest-header">
+            <div class="route-dest-title" id="panelDestName">Room 205</div>
+            <div class="route-dest-dept" id="panelDestDept">CSE Department</div>
+            <div class="route-tags">
+              <span class="mini-badge" id="panelDestFloor">2nd Floor</span>
+              <span class="mini-badge" id="panelPhotosCount">12 Photos</span>
+            </div>
+          </div>
+
+          <!-- Starting Point Tabs -->
+          <div class="ap-block" id="apBlock">
+            <div class="ap-header-label">Starting Access Point</div>
+            <div class="ap-segmented-tabs" id="apTabsRow">
+              <!-- Injected dynamically -->
+            </div>
+          </div>
+
+          <!-- Directions Card -->
+          <div class="route-nav-card">
+            <div class="nav-card-label" id="panelDirTitle">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+              <span>Route Wayfinding</span>
+            </div>
+            <div class="nav-card-text" id="panelDirText">Directions will appear here.</div>
+          </div>
+
+          <!-- Step-by-Step Waypoint Checklist -->
+          <div class="step-checklist-title">Corridor Waypoints</div>
+          <div class="step-checklist" id="stepChecklist">
             <!-- Injected dynamically -->
           </div>
-        </div>
 
-        <!-- Route Notes -->
-        <div class="directions-box">
-          <div class="directions-header" id="dirHeader">Route Instructions</div>
-          <div class="directions-content" id="dirContent">Loading navigation instructions...</div>
-        </div>
-
-        <!-- Rail Actions -->
-        <div class="rail-actions">
-          <button class="btn-secondary" id="copyBtn">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            <span>Copy route</span>
-          </button>
-          <button class="btn-secondary" id="shareBtn">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-            <span>Share link</span>
-          </button>
-        </div>
-      </aside>
-
-      <!-- Right Walkthrough Canvas -->
-      <div class="walkthrough-canvas-pane">
-        <div class="canvas-viewport" id="canvasViewport">
-          <!-- Top info overlay -->
-          <div class="canvas-top-bar">
-            <span class="step-count-badge" id="stepBadge">Step 1 of 12</span>
-            <button class="canvas-fs-btn" id="fsBtn" title="Fullscreen">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+          <!-- Actions -->
+          <div class="route-actions-row">
+            <button class="btn-route" id="copyRouteBtn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span>Copy</span>
+            </button>
+            <button class="btn-route" id="shareRouteBtn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+              <span>Share</span>
             </button>
           </div>
-
-          <!-- Photo Container -->
-          <div id="mediaContainer" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
-            <!-- Injected image/video -->
-          </div>
-
-          <!-- Nav arrows -->
-          <button class="canvas-nav-arrow prev" id="prevBtn" title="Previous photo (←)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <button class="canvas-nav-arrow next" id="nextBtn" title="Next photo (→)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
-        </div>
-
-        <!-- Bottom Controls Bar -->
-        <div class="canvas-bottom-controls">
-          <button class="tour-btn" id="tourBtn">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            <span id="tourBtnLabel">Auto-play tour</span>
-          </button>
-
-          <!-- Scrubber Track -->
-          <div class="scrubber-track" id="scrubberTrack">
-            <!-- Injected dynamically -->
-          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </aside>
 
-  <!-- Footer -->
-  <footer class="app-footer">
-    <div>Locorom • Maharaja Institute of Technology Mysore</div>
-    <div><a href="https://github.com/aryamanm77/mitm-room" target="_blank" rel="noopener">GitHub</a></div>
-  </footer>
+    <!-- Right Main Viewport Stage -->
+    <main class="viewport-canvas" id="viewportCanvas">
+      <!-- Media Stage -->
+      <div class="media-stage" id="mediaStage">
+        <!-- Photo/video injected here -->
+      </div>
+
+      <!-- Floating Top HUD Capsule -->
+      <div class="hud-top-capsule">
+        <div class="hud-location-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span class="hud-room" id="hudRoomName">Room 205</span>
+          <div class="hud-divider"></div>
+          <span class="hud-step-counter" id="hudStepCounter">Step 1 of 12</span>
+        </div>
+
+        <div class="hud-right-actions">
+          <button class="hud-btn" id="hudFsBtn" title="Toggle Fullscreen">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Center Left/Right Arrow Paddles -->
+      <button class="nav-paddle left" id="paddlePrev" title="Previous photo (←)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="nav-paddle right" id="paddleNext" title="Next photo (→)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
+      <!-- Floating Bottom Navigation Deck -->
+      <div class="hud-deck">
+        <div class="deck-controls-row">
+          <button class="deck-btn-prev" id="deckPrev">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>Previous</span>
+          </button>
+
+          <button class="deck-btn-tour" id="deckTourBtn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span id="deckTourLabel">Auto-Pilot</span>
+          </button>
+
+          <button class="deck-btn-next" id="deckNext">
+            <span>Next</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+
+        <!-- Timeline Progress Scrubber Track -->
+        <div class="deck-timeline-track" id="timelineTrack">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+    </main>
+
+  </div>
 
 </div>
 
-<!-- Toast Shelf -->
-<div class="toast-shelf" id="toastShelf"></div>
+<!-- Floating Toast Host -->
+<div class="toast-host" id="toastHost"></div>
 
-<!-- Data -->
+<!-- Indexed Data -->
 <script src="rooms_data.js"></script>
 
 <script>
 /**
- * Locorom — High-performance, zero-dependency indoor walkthrough engine
+ * LOCOROM Enterprise Navigation Engine
  */
 const GITHUB_RAW = "https://raw.githubusercontent.com/aryamanm77/mitm-room/main/";
 
 // State
 let allRooms = {};
-let currentRoom = null;
-let currentAp = null;
+let currentRoomKey = null;
+let currentApIndex = 0;
 let currentPhotos = [];
-let currentIndex = 0;
+let currentPhotoIndex = 0;
 let activeFloor = "all";
-let isTourActive = false;
-let tourTimer = null;
-const preloadedCache = new Set();
+let isAutoPilot = false;
+let autoPilotTimer = null;
+const preloadedUrls = new Set();
 
 function resolveUrl(path) {
   if (!path) return "";
@@ -1067,13 +1221,12 @@ function resolveUrl(path) {
   return path;
 }
 
-// Toast
-function showToast(text) {
-  const shelf = document.getElementById("toastShelf");
+function showToast(msg) {
+  const host = document.getElementById("toastHost");
   const el = document.createElement("div");
-  el.className = "toast-msg";
-  el.textContent = text;
-  shelf.appendChild(el);
+  el.className = "toast-pill";
+  el.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>${msg}</span>`;
+  host.appendChild(el);
   setTimeout(() => {
     el.style.opacity = "0";
     el.style.transition = "opacity 200ms ease";
@@ -1081,119 +1234,150 @@ function showToast(text) {
   }, 2200);
 }
 
-// Initialize
-async function init() {
+// App Initialization
+async function initApp() {
   setupTheme();
-  setupEvents();
+  setupEventHandlers();
 
   if (window.LOCOROM_DATA && Object.keys(window.LOCOROM_DATA).length > 0) {
     allRooms = window.LOCOROM_DATA;
-    renderDirectory();
+    onDataReady();
   } else {
     try {
       const res = await fetch("rooms_data.json");
       allRooms = await res.json();
-      renderDirectory();
-    } catch (err) {
-      console.warn("Could not load catalog:", err);
+      onDataReady();
+    } catch (e) {
+      console.warn("Could not load local rooms data:", e);
     }
-  }
-
-  // Handle URL deep link
-  const params = new URLSearchParams(window.location.search);
-  const roomQuery = params.get("room") || window.location.hash.replace("#", "");
-  if (roomQuery && allRooms[roomQuery]) {
-    selectRoom(roomQuery);
   }
 }
 
-// Theme handling
+function onDataReady() {
+  const total = Object.keys(allRooms).length;
+  document.getElementById("destCountDisplay").textContent = `${total} Destinations`;
+  renderDirectoryList();
+
+  // URL Deep link or default selection
+  const params = new URLSearchParams(window.location.search);
+  const targetRoom = params.get("room") || window.location.hash.replace("#", "") || "205";
+  if (allRooms[targetRoom]) {
+    selectRoom(targetRoom, false);
+  } else {
+    const firstKey = Object.keys(allRooms)[0];
+    if (firstKey) selectRoom(firstKey, false);
+  }
+}
+
+// Theme System
 function setupTheme() {
-  const saved = localStorage.getItem("locorom_theme") || "light";
-  applyTheme(saved);
+  const saved = localStorage.getItem("locorom_theme") || "dark";
+  document.documentElement.setAttribute("data-theme", saved);
+  updateThemeIcon(saved);
 
   document.getElementById("themeBtn").addEventListener("click", () => {
-    const current = document.documentElement.getAttribute("data-theme") || "light";
-    const next = current === "light" ? "dark" : "light";
-    applyTheme(next);
+    const current = document.documentElement.getAttribute("data-theme") || "dark";
+    const next = current === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("locorom_theme", next);
+    updateThemeIcon(next);
   });
 }
 
-function applyTheme(theme) {
-  document.documentElement.setAttribute("data-theme", theme);
-  localStorage.setItem("locorom_theme", theme);
-
-  const svg = document.getElementById("themeSvg");
-  if (theme === "dark") {
-    svg.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+function updateThemeIcon(t) {
+  const icon = document.getElementById("themeIcon");
+  if (t === "light") {
+    icon.innerHTML = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
   } else {
-    svg.innerHTML = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+    icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
   }
 }
 
-// Event Bindings
-function setupEvents() {
+// Event Listeners
+function setupEventHandlers() {
   const searchInput = document.getElementById("searchInput");
-  const clearBtn = document.getElementById("clearSearchBtn");
+  const clearBtn = document.getElementById("clearBtn");
 
   searchInput.addEventListener("input", () => {
-    clearBtn.style.display = searchInput.value ? "flex" : "none";
-    renderDirectory();
+    clearBtn.style.display = searchInput.value ? "block" : "none";
+    showDirectoryMode();
+    renderDirectoryList();
   });
 
   clearBtn.addEventListener("click", () => {
     searchInput.value = "";
     clearBtn.style.display = "none";
     searchInput.focus();
-    renderDirectory();
+    renderDirectoryList();
   });
 
-  // Filter Chips
-  document.querySelectorAll(".filter-chip").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".filter-chip").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      activeFloor = btn.getAttribute("data-floor");
-      renderDirectory();
+  // Category filter tabs
+  document.querySelectorAll(".filter-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".filter-tab").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      activeFloor = tab.getAttribute("data-floor");
+      showDirectoryMode();
+      renderDirectoryList();
     });
   });
 
-  // Quick Chips
-  document.querySelectorAll(".quick-chip").forEach(q => {
-    q.addEventListener("click", () => {
-      searchInput.value = q.getAttribute("data-query");
-      clearBtn.style.display = "flex";
-      renderDirectory();
-      searchInput.focus();
-    });
+  // Navigation Paddles & Deck buttons
+  document.getElementById("paddlePrev").addEventListener("click", prevPhoto);
+  document.getElementById("paddleNext").addEventListener("click", nextPhoto);
+  document.getElementById("deckPrev").addEventListener("click", prevPhoto);
+  document.getElementById("deckNext").addEventListener("click", nextPhoto);
+  document.getElementById("deckTourBtn").addEventListener("click", toggleAutoPilot);
+
+  // Fullscreen
+  document.getElementById("hudFsBtn").addEventListener("click", toggleFullscreen);
+
+  // Back / Close Route
+  document.getElementById("routeBackBtn").addEventListener("click", showDirectoryMode);
+  document.getElementById("routeCloseBtn").addEventListener("click", showDirectoryMode);
+  document.getElementById("brandBtn").addEventListener("click", showDirectoryMode);
+
+  // Copy & Share
+  document.getElementById("copyRouteBtn").addEventListener("click", () => {
+    if (!currentRoomKey || !allRooms[currentRoomKey]) return;
+    const r = allRooms[currentRoomKey];
+    const ap = getActiveAp(r);
+    const text = `📍 ${r.name} (${r.floor || "MITM"})\nFrom ${ap.name}: ${ap.info || r.info || "Follow walkthrough photos"}`;
+    navigator.clipboard.writeText(text).then(() => showToast("Route instructions copied"));
   });
 
-  // Global Keybindings
+  document.getElementById("shareRouteBtn").addEventListener("click", () => {
+    if (!currentRoomKey) return;
+    const url = window.location.origin + window.location.pathname + "?room=" + encodeURIComponent(currentRoomKey);
+    navigator.clipboard.writeText(url).then(() => showToast("Shareable link copied"));
+  });
+
+  // Keyboard navigation
   window.addEventListener("keydown", (e) => {
     if (e.key === "/" && document.activeElement !== searchInput) {
       e.preventDefault();
       searchInput.focus();
     } else if (e.key === "Escape") {
-      if (document.getElementById("walkthroughSection").style.display === "block") {
-        exitWalkthrough();
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
       } else {
         searchInput.blur();
       }
-    } else if (document.getElementById("walkthroughSection").style.display === "block") {
+    } else if (document.activeElement.tagName !== "INPUT") {
       if (e.key === "ArrowLeft") prevPhoto();
       else if (e.key === "ArrowRight") nextPhoto();
-      else if (e.key === " " && document.activeElement.tagName !== "INPUT") {
+      else if (e.key === " ") {
         e.preventDefault();
-        toggleTour();
+        toggleAutoPilot();
       } else if (e.key.toLowerCase() === "f") {
         toggleFullscreen();
       }
     }
   });
 
-  // Touch swipe on canvas
+  // Touch Swipe on Canvas
   let touchStartX = 0;
-  const canvas = document.getElementById("canvasViewport");
+  const canvas = document.getElementById("viewportCanvas");
   canvas.addEventListener("touchstart", (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
   canvas.addEventListener("touchend", (e) => {
     const diff = e.changedTouches[0].clientX - touchStartX;
@@ -1203,44 +1387,18 @@ function setupEvents() {
     }
   }, { passive: true });
 
-  // Navigation Buttons
-  document.getElementById("prevBtn").addEventListener("click", prevPhoto);
-  document.getElementById("nextBtn").addEventListener("click", nextPhoto);
-  document.getElementById("tourBtn").addEventListener("click", toggleTour);
-  document.getElementById("fsBtn").addEventListener("click", toggleFullscreen);
-  document.getElementById("backBtn").addEventListener("click", exitWalkthrough);
-  document.getElementById("brandReset").addEventListener("click", exitWalkthrough);
-
-  // Copy & Share
-  document.getElementById("copyBtn").addEventListener("click", () => {
-    if (!currentRoom) return;
-    const info = currentAp ? (currentAp.info || currentRoom.info) : currentRoom.info;
-    const apText = currentAp ? `From ${currentAp.name}: ` : "";
-    const text = `${currentRoom.name} (${currentRoom.floor || "MITM"})\n${apText}${info || "Follow photo sequence."}`;
-    navigator.clipboard.writeText(text).then(() => showToast("Route instructions copied"));
-  });
-
-  document.getElementById("shareBtn").addEventListener("click", () => {
-    if (!currentRoom) return;
-    const url = window.location.origin + window.location.pathname + "?room=" + encodeURIComponent(currentRoom.name);
-    navigator.clipboard.writeText(url).then(() => showToast("Shareable link copied"));
-  });
-
   window.addEventListener("popstate", (e) => {
     if (e.state && e.state.room && allRooms[e.state.room]) {
-      selectRoom(e.state.room);
-    } else {
-      exitWalkthrough();
+      selectRoom(e.state.room, false);
     }
   });
 }
 
-// Render Directory Grid
-function renderDirectory() {
+// Render Directory List
+function renderDirectoryList() {
   const query = document.getElementById("searchInput").value.trim().toLowerCase();
-  const grid = document.getElementById("directoryGrid");
-  const countEl = document.getElementById("resultsCount");
-  grid.innerHTML = "";
+  const dirView = document.getElementById("directoryView");
+  dirView.innerHTML = "";
 
   const keys = Object.keys(allRooms).sort((a, b) => {
     const numA = parseInt(a, 10);
@@ -1261,187 +1419,228 @@ function renderDirectory() {
     return matchQuery && matchFloor;
   });
 
-  countEl.textContent = `Showing ${filtered.length} of ${keys.length} destinations`;
-
   if (filtered.length === 0) {
-    grid.innerHTML = `
-      <div style="grid-column: 1/-1; padding: 48px 0; text-align: center; color: var(--text-muted); font-size: 13px;">
-        No destinations match "${query}". Try searching for another room number or select "All".
-      </div>`;
+    dirView.innerHTML = `<div style="padding: 32px 14px; text-align: center; color: var(--text-muted); font-size: 13px;">No destinations match "${query}".</div>`;
     return;
   }
 
   filtered.forEach(key => {
     const r = allRooms[key];
-    const apCount = (r.accessPoints && r.accessPoints.length > 0) ? r.accessPoints.length : (r.photos && r.photos.length > 0 ? 1 : 0);
-    const photoCount = (r.photos ? r.photos.length : 0) + (r.accessPoints ? r.accessPoints.reduce((acc, ap) => acc + (ap.photos ? ap.photos.length : 0), 0) : 0);
+    const totalPhotos = (r.photos ? r.photos.length : 0) + (r.accessPoints ? r.accessPoints.reduce((acc, ap) => acc + (ap.photos ? ap.photos.length : 0), 0) : 0);
+    const isCurrent = (currentRoomKey === key);
 
-    let snippet = r.info || "";
-    if (!snippet && r.accessPoints && r.accessPoints.length > 0) {
-      snippet = r.accessPoints[0].info || "";
-    }
-    if (!snippet) snippet = "Step-by-step corridor walkthrough available.";
-
-    const card = document.createElement("div");
-    card.className = "item-card";
-    card.innerHTML = `
-      <div>
-        <div class="item-top">
-          <div>
-            <div class="item-name">${r.name}</div>
-            ${r.dept ? `<div class="item-dept">${r.dept}</div>` : ""}
-          </div>
-          <span class="item-badge">${r.floor || "MITM"}</span>
+    const item = document.createElement("div");
+    item.className = "dest-item" + (isCurrent ? " active" : "");
+    item.innerHTML = `
+      <div class="dest-info-left">
+        <div class="dest-icon-box">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
-        <div class="item-snippet">${snippet}</div>
+        <div class="dest-texts">
+          <div class="dest-name">${r.name}</div>
+          <div class="dest-meta">${r.dept || `${totalPhotos} Photos`}</div>
+        </div>
       </div>
-      <div class="item-bottom">
-        <span>${apCount} access point${apCount > 1 ? 's' : ''} • ${photoCount} photos</span>
-        <span class="item-action">
-          View
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-        </span>
-      </div>
+      <span class="dest-floor-badge">${r.floor || "MITM"}</span>
     `;
 
-    card.addEventListener("click", () => selectRoom(key));
-    grid.appendChild(card);
+    item.addEventListener("click", () => selectRoom(key, true));
+    dirView.appendChild(item);
   });
 }
 
-// Select Room & Switch to Walkthrough View
-function selectRoom(roomKey) {
-  const room = allRooms[roomKey];
+// Select Room
+function selectRoom(key, updateUrl = true) {
+  const room = allRooms[key];
   if (!room) return;
 
-  currentRoom = room;
-  window.history.pushState({ room: roomKey }, "", `?room=${encodeURIComponent(roomKey)}`);
+  currentRoomKey = key;
+  currentApIndex = 0;
+  currentPhotoIndex = 0;
+  stopAutoPilot();
 
-  document.getElementById("browseSection").style.display = "none";
-  document.getElementById("walkthroughSection").style.display = "block";
-  window.scrollTo({ top: 0, behavior: "instant" });
-
-  // Sidebar details
-  document.getElementById("railRoomName").textContent = room.name;
-  document.getElementById("railFloor").textContent = room.floor || "MITM";
-  const deptEl = document.getElementById("railDept");
-  if (room.dept) {
-    deptEl.textContent = room.dept;
-    deptEl.style.display = "inline-block";
-  } else {
-    deptEl.style.display = "none";
+  if (updateUrl) {
+    window.history.pushState({ room: key }, "", `?room=${encodeURIComponent(key)}`);
   }
 
-  // Access Points
-  const points = [];
+  // Update HUD
+  document.getElementById("hudRoomName").textContent = room.name;
+
+  // Show Route Panel in Sidebar
+  showRoutePanel(room);
+
+  // Load photos for active AP
+  loadActiveRoutePhotos();
+
+  // Mark active in directory list
+  document.querySelectorAll(".dest-item").forEach(item => {
+    const nameEl = item.querySelector(".dest-name");
+    if (nameEl && nameEl.textContent === key) {
+      item.classList.add("active");
+    } else {
+      item.classList.remove("active");
+    }
+  });
+}
+
+function getActiveAp(room) {
   if (room.accessPoints && room.accessPoints.length > 0) {
-    room.accessPoints.forEach(ap => points.push(ap));
-  } else if (room.photos && room.photos.length > 0) {
-    points.push({
-      name: "Main Access Point",
-      info: room.info || "Follow photo sequence to destination.",
-      thumbnail: room.thumbnail || room.photos[0],
-      photos: room.photos
-    });
+    return room.accessPoints[currentApIndex] || room.accessPoints[0];
   }
+  return {
+    name: "Main Access Point",
+    info: room.info || "Follow corridor walkthrough.",
+    thumbnail: room.thumbnail || "",
+    photos: room.photos || []
+  };
+}
 
-  const apContainer = document.getElementById("apContainer");
-  const apPillsList = document.getElementById("apPillsList");
-  apPillsList.innerHTML = "";
+// Show Route Panel
+function showRoutePanel(room) {
+  document.getElementById("directoryView").style.display = "none";
+  const panel = document.getElementById("routePanel");
+  panel.style.display = "block";
+
+  document.getElementById("panelDestName").textContent = room.name;
+  document.getElementById("panelDestDept").textContent = room.dept || "Campus Destination";
+  document.getElementById("panelDestFloor").textContent = room.floor || "MITM";
+
+  // Starting Point Tabs
+  const points = (room.accessPoints && room.accessPoints.length > 0) ? room.accessPoints : [];
+  const apBlock = document.getElementById("apBlock");
+  const apTabsRow = document.getElementById("apTabsRow");
+  apTabsRow.innerHTML = "";
 
   if (points.length <= 1) {
-    apContainer.style.display = "none";
+    apBlock.style.display = "none";
   } else {
-    apContainer.style.display = "block";
-  }
-
-  points.forEach((ap, idx) => {
-    const pill = document.createElement("button");
-    pill.className = "ap-pill" + (idx === 0 ? " active" : "");
-    pill.textContent = ap.name;
-    pill.addEventListener("click", () => {
-      document.querySelectorAll(".ap-pill").forEach(p => p.classList.remove("active"));
-      pill.classList.add("active");
-      applyAccessPoint(ap);
+    apBlock.style.display = "block";
+    points.forEach((ap, idx) => {
+      const tab = document.createElement("button");
+      tab.className = "ap-seg-tab" + (idx === currentApIndex ? " active" : "");
+      tab.textContent = ap.name;
+      tab.title = ap.name;
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".ap-seg-tab").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        currentApIndex = idx;
+        currentPhotoIndex = 0;
+        loadActiveRoutePhotos();
+      });
+      apTabsRow.appendChild(tab);
     });
-    apPillsList.appendChild(pill);
-  });
-
-  if (points.length > 0) {
-    applyAccessPoint(points[0]);
-  } else {
-    applyAccessPoint({ name: "Information", info: room.info || "No route photos uploaded.", photos: [] });
   }
+
+  updateRouteNotesAndChecklist();
 }
 
-// Apply selected access point
-function applyAccessPoint(ap) {
-  currentAp = ap;
-  stopTour();
+function updateRouteNotesAndChecklist() {
+  const room = allRooms[currentRoomKey];
+  const ap = getActiveAp(room);
 
-  const dirContent = document.getElementById("dirContent");
-  const dirHeader = document.getElementById("dirHeader");
-  dirHeader.textContent = ap.name ? `From ${ap.name}` : "Route Instructions";
-  dirContent.textContent = ap.info || currentRoom.info || "Follow photo sequence to arrive at destination.";
+  document.getElementById("panelDirTitle").innerHTML = `
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+    <span>Route from ${ap.name}</span>
+  `;
+  document.getElementById("panelDirText").textContent = ap.info || room.info || "Follow photo sequence to destination.";
+  document.getElementById("panelPhotosCount").textContent = `${ap.photos ? ap.photos.length : 0} Photos`;
 
+  // Build Waypoint Checklist
+  const checklist = document.getElementById("stepChecklist");
+  checklist.innerHTML = "";
+
+  const photos = ap.photos || [];
+  photos.forEach((_, idx) => {
+    const row = document.createElement("div");
+    row.className = "step-row" + (idx === currentPhotoIndex ? " active" : "");
+    row.innerHTML = `
+      <div class="step-num-circle">${idx + 1}</div>
+      <div style="flex:1;">Waypoint ${idx + 1}</div>
+    `;
+    row.addEventListener("click", () => {
+      currentPhotoIndex = idx;
+      renderActivePhoto();
+    });
+    checklist.appendChild(row);
+  });
+}
+
+function showDirectoryMode() {
+  stopAutoPilot();
+  document.getElementById("routePanel").style.display = "none";
+  document.getElementById("directoryView").style.display = "block";
+}
+
+// Load Active Photos
+function loadActiveRoutePhotos() {
+  const room = allRooms[currentRoomKey];
+  if (!room) return;
+  const ap = getActiveAp(room);
   currentPhotos = ap.photos || [];
-  currentIndex = 0;
-  buildScrubber();
-  renderCurrentPhoto();
+  buildTimelineScrubber();
+  renderActivePhoto();
+  updateRouteNotesAndChecklist();
 }
 
-// Render Current Photo Canvas
-function renderCurrentPhoto() {
-  const container = document.getElementById("mediaContainer");
-  const badge = document.getElementById("stepBadge");
+// Render Active Photo on Canvas
+function renderActivePhoto() {
+  const stage = document.getElementById("mediaStage");
+  const counter = document.getElementById("hudStepCounter");
 
   if (!currentPhotos || currentPhotos.length === 0) {
-    container.innerHTML = `<div style="color:var(--text-muted); font-size:13px;">No walkthrough media available for this route.</div>`;
-    badge.textContent = "No photos";
+    stage.innerHTML = `<div style="color:var(--text-muted); font-size:13px;">No walkthrough media uploaded for this destination.</div>`;
+    counter.textContent = "0 of 0";
     return;
   }
 
-  badge.textContent = `Step ${currentIndex + 1} of ${currentPhotos.length}`;
+  counter.textContent = `Waypoint ${currentPhotoIndex + 1} of ${currentPhotos.length}`;
 
-  const currentPath = currentPhotos[currentIndex];
+  const currentPath = currentPhotos[currentPhotoIndex];
   const url = resolveUrl(currentPath);
   const isVideo = /\.(mp4|webm)$/i.test(currentPath);
 
   if (isVideo) {
-    container.innerHTML = `<video src="${url}" controls playsinline preload="auto" style="max-height:100%; max-width:100%;"></video>`;
+    stage.innerHTML = `<video src="${url}" controls playsinline preload="auto"></video>`;
   } else {
-    container.innerHTML = `<img src="${url}" alt="Step ${currentIndex + 1}" loading="eager" onerror="this.onerror=null; this.src='logo_locorom.png';">`;
+    stage.innerHTML = `<img src="${url}" alt="Waypoint ${currentPhotoIndex + 1}" loading="eager" onerror="this.onerror=null; this.src='logo.svg';">`;
   }
 
-  // Update Scrubber state
-  document.querySelectorAll(".scrubber-dot").forEach((dot, idx) => {
-    dot.classList.toggle("active", idx === currentIndex);
+  // Update Timeline Scrubber
+  document.querySelectorAll(".timeline-segment").forEach((seg, idx) => {
+    seg.classList.toggle("active", idx === currentPhotoIndex);
+    seg.classList.toggle("past", idx < currentPhotoIndex);
   });
 
-  // Preload next and prev images for 0ms lag
-  preloadAdjacentPhotos();
+  // Update Checklist
+  document.querySelectorAll(".step-row").forEach((row, idx) => {
+    row.classList.toggle("active", idx === currentPhotoIndex);
+  });
+
+  // Preload adjacent images
+  preloadAdjacent();
 }
 
-function preloadAdjacentPhotos() {
-  const nextIdx = (currentIndex + 1) % currentPhotos.length;
-  const prevIdx = (currentIndex - 1 + currentPhotos.length) % currentPhotos.length;
+function preloadAdjacent() {
+  if (currentPhotos.length <= 1) return;
+  const next = (currentPhotoIndex + 1) % currentPhotos.length;
+  const prev = (currentPhotoIndex - 1 + currentPhotos.length) % currentPhotos.length;
 
-  [nextIdx, prevIdx].forEach(idx => {
-    const path = currentPhotos[idx];
-    if (path && !/\.(mp4|webm)$/i.test(path)) {
-      const url = resolveUrl(path);
-      if (!preloadedCache.has(url)) {
+  [next, prev].forEach(idx => {
+    const p = currentPhotos[idx];
+    if (p && !/\.(mp4|webm)$/i.test(p)) {
+      const u = resolveUrl(p);
+      if (!preloadedUrls.has(u)) {
         const img = new Image();
-        img.src = url;
-        preloadedCache.add(url);
+        img.src = u;
+        preloadedUrls.add(u);
       }
     }
   });
 }
 
-// Build Scrubber Bar
-function buildScrubber() {
-  const track = document.getElementById("scrubberTrack");
+// Timeline Scrubber
+function buildTimelineScrubber() {
+  const track = document.getElementById("timelineTrack");
   track.innerHTML = "";
 
   if (currentPhotos.length <= 1) {
@@ -1451,62 +1650,62 @@ function buildScrubber() {
   track.style.display = "flex";
 
   currentPhotos.forEach((_, idx) => {
-    const dot = document.createElement("div");
-    dot.className = "scrubber-dot" + (idx === 0 ? " active" : "");
-    dot.title = `Jump to Step ${idx + 1}`;
-    dot.addEventListener("click", () => {
-      currentIndex = idx;
-      renderCurrentPhoto();
+    const seg = document.createElement("div");
+    seg.className = "timeline-segment" + (idx === currentPhotoIndex ? " active" : "");
+    seg.title = `Waypoint ${idx + 1}`;
+    seg.addEventListener("click", () => {
+      currentPhotoIndex = idx;
+      renderActivePhoto();
     });
-    track.appendChild(dot);
+    track.appendChild(seg);
   });
 }
 
 function nextPhoto() {
   if (currentPhotos.length === 0) return;
-  currentIndex = (currentIndex + 1) % currentPhotos.length;
-  renderCurrentPhoto();
+  currentPhotoIndex = (currentPhotoIndex + 1) % currentPhotos.length;
+  renderActivePhoto();
 }
 
 function prevPhoto() {
   if (currentPhotos.length === 0) return;
-  currentIndex = (currentIndex - 1 + currentPhotos.length) % currentPhotos.length;
-  renderCurrentPhoto();
+  currentPhotoIndex = (currentPhotoIndex - 1 + currentPhotos.length) % currentPhotos.length;
+  renderActivePhoto();
 }
 
-// Tour mode
-function toggleTour() {
-  if (isTourActive) stopTour();
-  else startTour();
+// Auto-Pilot Tour
+function toggleAutoPilot() {
+  if (isAutoPilot) stopAutoPilot();
+  else startAutoPilot();
 }
 
-function startTour() {
+function startAutoPilot() {
   if (currentPhotos.length <= 1) return;
-  isTourActive = true;
-  const btn = document.getElementById("tourBtn");
+  isAutoPilot = true;
+  const btn = document.getElementById("deckTourBtn");
   btn.classList.add("playing");
-  document.getElementById("tourBtnLabel").textContent = "Pause tour";
-  showToast("Tour walkthrough started");
+  document.getElementById("deckTourLabel").textContent = "Pause";
+  showToast("Auto-pilot tour started");
 
-  tourTimer = setInterval(() => {
+  autoPilotTimer = setInterval(() => {
     nextPhoto();
   }, 2200);
 }
 
-function stopTour() {
-  isTourActive = false;
-  if (tourTimer) clearInterval(tourTimer);
-  tourTimer = null;
-  const btn = document.getElementById("tourBtn");
+function stopAutoPilot() {
+  isAutoPilot = false;
+  if (autoPilotTimer) clearInterval(autoPilotTimer);
+  autoPilotTimer = null;
+  const btn = document.getElementById("deckTourBtn");
   if (btn) {
     btn.classList.remove("playing");
-    document.getElementById("tourBtnLabel").textContent = "Auto-play tour";
+    document.getElementById("deckTourLabel").textContent = "Auto-Pilot";
   }
 }
 
 // Fullscreen
 function toggleFullscreen() {
-  const viewport = document.getElementById("canvasViewport");
+  const viewport = document.getElementById("viewportCanvas");
   if (!document.fullscreenElement) {
     viewport.requestFullscreen().catch(() => showToast("Fullscreen unavailable"));
   } else {
@@ -1514,19 +1713,7 @@ function toggleFullscreen() {
   }
 }
 
-// Exit Walkthrough -> Back to Directory
-function exitWalkthrough() {
-  stopTour();
-  currentRoom = null;
-  currentAp = null;
-  window.history.pushState({}, "", window.location.pathname);
-
-  document.getElementById("walkthroughSection").style.display = "none";
-  document.getElementById("browseSection").style.display = "block";
-  renderDirectory();
-}
-
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", initApp);
 </script>
 
 </body>
