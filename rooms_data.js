@@ -1,4 +1,4 @@
-﻿window.LOCOROM_DATA = {
+window.LOCOROM_DATA = {
     "114":  {
                 "thumbnail":  "Rooms/114/a.jpg",
                 "name":  "114",

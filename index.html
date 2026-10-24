@@ -2,307 +2,226 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-<title>LOCOROM • Smart Campus Indoor Navigation [MITM]</title>
-<meta name="description" content="Visual step-by-step indoor wayfinding and room locator for MITM campus. Search classrooms, labs, seminar halls, and departments with photo walkthroughs.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Locorom — MITM Indoor Navigation</title>
+<meta name="description" content="Minimal, high-precision indoor navigation and visual corridor walkthroughs for MITM campus.">
 <link rel="icon" type="image/png" href="logo_locorom.png">
 
-<!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+<!-- Inter Font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<!-- Swiper CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
+/* -------------------------------------------------------------
+   Design System: Neutral Minimalist (Claude / OpenAI / Google)
+   ------------------------------------------------------------- */
 :root {
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-display: 'Outfit', sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Theme Tokens - Dark by default for ultra-modern aesthetic */
-  --bg-page: #0b0f19;
-  --bg-surface: #111827;
-  --bg-card: rgba(17, 24, 39, 0.75);
-  --bg-card-hover: rgba(31, 41, 55, 0.85);
-  --bg-glass: rgba(17, 24, 39, 0.65);
-  --bg-input: rgba(15, 23, 42, 0.8);
-  --border: rgba(255, 255, 255, 0.08);
-  --border-focus: #6366f1;
-  --border-subtle: rgba(255, 255, 255, 0.05);
-
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-
-  --accent-primary: #6366f1;
-  --accent-secondary: #06b6d4;
-  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
-  --accent-glow: rgba(99, 102, 241, 0.35);
-  --accent-success: #10b981;
-  --accent-warning: #f59e0b;
-  --accent-danger: #ef4444;
-
-  --badge-bg: rgba(99, 102, 241, 0.12);
-  --badge-border: rgba(99, 102, 241, 0.25);
-  --badge-text: #a5b4fc;
-
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
-  --radius-xl: 24px;
-  --radius-pill: 9999px;
-
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
-  --shadow-glow: 0 0 35px -5px var(--accent-glow);
-  --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-[data-theme="light"] {
-  --bg-page: #f8fafc;
+  /* Light Theme (Default: Clean paper white & neutral zinc) */
+  --bg-app: #ffffff;
+  --bg-subtle: #f8f9fa;
   --bg-surface: #ffffff;
-  --bg-card: rgba(255, 255, 255, 0.85);
-  --bg-card-hover: rgba(241, 245, 249, 0.95);
-  --bg-glass: rgba(255, 255, 255, 0.8);
-  --bg-input: #ffffff;
-  --border: rgba(0, 0, 0, 0.08);
-  --border-focus: #4f46e5;
-  --border-subtle: rgba(0, 0, 0, 0.04);
+  --bg-muted: #f1f3f5;
+  --bg-hover: #f1f3f5;
+  --bg-canvas: #09090b;
 
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
+  --border: #e5e7eb;
+  --border-subtle: #f3f4f6;
+  --border-focus: #18181b;
 
-  --accent-primary: #4f46e5;
-  --accent-secondary: #0284c7;
-  --accent-gradient: linear-gradient(135deg, #4f46e5 0%, #0284c7 100%);
-  --accent-glow: rgba(79, 70, 229, 0.2);
+  --text-main: #09090b;
+  --text-secondary: #52525b;
+  --text-muted: #71717a;
+  --text-inverse: #ffffff;
 
-  --badge-bg: rgba(79, 70, 229, 0.08);
-  --badge-border: rgba(79, 70, 229, 0.2);
-  --badge-text: #4338ca;
+  --accent: #18181b;
+  --accent-subtle: #f4f4f5;
+  --accent-blue: #2563eb;
+  --accent-green: #15803d;
 
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 12px 30px -8px rgba(0, 0, 0, 0.08);
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 32px -4px rgba(0, 0, 0, 0.12);
+
+  --transition-fast: 150ms ease;
 }
 
-* {
+[data-theme="dark"] {
+  --bg-app: #09090b;
+  --bg-subtle: #121215;
+  --bg-surface: #18181b;
+  --bg-muted: #27272a;
+  --bg-hover: #222226;
+  --bg-canvas: #000000;
+
+  --border: #27272a;
+  --border-subtle: #1f1f23;
+  --border-focus: #e4e4e7;
+
+  --text-main: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --text-inverse: #09090b;
+
+  --accent: #fafafa;
+  --accent-subtle: #27272a;
+  --accent-blue: #60a5fa;
+  --accent-green: #22c55e;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px -2px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 16px 40px -4px rgba(0, 0, 0, 0.8);
+}
+
+/* Reset */
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--bg-page);
-  color: var(--text-primary);
+  background-color: var(--bg-app);
+  color: var(--text-main);
   min-height: 100vh;
   line-height: 1.5;
-  overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  position: relative;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
-/* Ambient glow in background */
-.bg-ambient {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;
-  max-width: 1400px;
-  height: 600px;
-  background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.15) 0%, rgba(6, 182, 212, 0.06) 45%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.app-wrapper {
-  position: relative;
-  z-index: 1;
-  max-width: 1200px;
+/* -------------------------------------------------------------
+   Layout Structure
+   ------------------------------------------------------------- */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 1360px;
   margin: 0 auto;
-  padding: 16px 20px 80px 20px;
+  padding: 0 20px;
 }
 
-/* ------------------- HEADER ------------------- */
-header.navbar {
+/* Header */
+header.app-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 20px;
-  background: var(--bg-glass);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-sm);
-  margin-bottom: 28px;
-  position: sticky;
-  top: 12px;
-  z-index: 100;
+  height: 60px;
+  border-bottom: 1px solid var(--border);
+  padding: 0 4px;
 }
 
-.brand-group {
+.brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
 }
 
-.brand-logo-wrap {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.brand-logo-wrap img {
-  width: 32px;
-  height: 32px;
+.brand-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
   object-fit: contain;
 }
 
-.brand-text h1 {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 1.1;
-}
-
-.brand-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 11px;
+.brand-title {
+  font-size: 15px;
   font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.brand-tag .dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--accent-success);
-  box-shadow: 0 0 8px var(--accent-success);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(0.9); opacity: 0.8; }
-  50% { transform: scale(1.3); opacity: 1; }
-  100% { transform: scale(0.9); opacity: 0.8; }
-}
-
-.nav-actions {
+  letter-spacing: -0.01em;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
-.theme-toggle, .nav-btn {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
+.brand-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 1px 6px;
+  border-radius: var(--radius-xs);
+  background: var(--bg-muted);
   color: var(--text-secondary);
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+}
+
+.header-actions {
   display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-button {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: var(--transition);
+  transition: all var(--transition-fast);
 }
 
-.theme-toggle:hover, .nav-btn:hover {
-  color: var(--text-primary);
-  border-color: var(--accent-primary);
-  transform: translateY(-1px);
+.icon-button:hover {
+  background: var(--bg-muted);
+  color: var(--text-main);
+  border-color: var(--border);
 }
 
-/* ------------------- HERO & SEARCH ------------------- */
-.hero-section {
-  text-align: center;
-  padding: 20px 0 32px 0;
-  max-width: 720px;
+/* -------------------------------------------------------------
+   Browse View: Minimal Command Bar & Grid
+   ------------------------------------------------------------- */
+.browse-view {
+  flex: 1;
+  padding: 36px 0 60px 0;
+  max-width: 960px;
+  width: 100%;
   margin: 0 auto;
 }
 
-.hero-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border-radius: var(--radius-pill);
-  background: var(--badge-bg);
-  border: 1px solid var(--badge-border);
-  color: var(--badge-text);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  margin-bottom: 16px;
+.search-container {
+  margin-bottom: 24px;
 }
 
-.hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(28px, 5vw, 42px);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
-  margin-bottom: 12px;
-}
-
-.hero-subtitle {
-  color: var(--text-secondary);
-  font-size: 15px;
-  max-width: 540px;
-  margin: 0 auto 28px auto;
-}
-
-/* Search Box Container */
-.search-wrapper {
-  position: relative;
-  width: 100%;
-  margin-bottom: 18px;
-}
-
-.search-bar {
+.search-box {
   display: flex;
   align-items: center;
   background: var(--bg-surface);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: 6px 16px;
-  box-shadow: var(--shadow-md);
-  transition: var(--transition);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.search-bar:focus-within {
-  border-color: var(--accent-primary);
-  box-shadow: var(--shadow-glow), var(--shadow-md);
-  background: var(--bg-surface);
+.search-box:focus-within {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 1px var(--border-focus), var(--shadow-sm);
 }
 
-.search-icon {
+.search-box svg {
   color: var(--text-muted);
-  display: flex;
-  align-items: center;
+  flex-shrink: 0;
   margin-right: 12px;
 }
 
@@ -312,655 +231,441 @@ header.navbar {
   border: none;
   outline: none;
   font-family: var(--font-sans);
-  font-size: 16px;
-  color: var(--text-primary);
-  padding: 10px 0;
+  font-size: 15px;
+  color: var(--text-main);
 }
 
 .search-input::placeholder {
   color: var(--text-muted);
-  font-weight: 400;
 }
 
-.search-badge {
-  background: var(--border-subtle);
-  border: 1px solid var(--border);
-  color: var(--text-muted);
+.kbd-badge {
+  font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 600;
-  padding: 4px 8px;
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
+  color: var(--text-muted);
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  padding: 2px 6px;
   user-select: none;
 }
 
-.clear-search-btn {
+.clear-search {
   background: none;
   border: none;
   color: var(--text-muted);
   cursor: pointer;
-  padding: 6px;
-  border-radius: 50%;
+  padding: 4px;
   display: none;
   align-items: center;
   justify-content: center;
-  transition: var(--transition);
+  border-radius: var(--radius-xs);
 }
 
-.clear-search-btn:hover {
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.08);
+.clear-search:hover {
+  color: var(--text-main);
 }
 
-/* Popular Quick Chips */
-.quick-tags {
+/* Filter Bar */
+.filter-bar {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  font-size: 13px;
-}
-
-.quick-label {
-  color: var(--text-muted);
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.tag-chip {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  padding: 5px 12px;
-  border-radius: var(--radius-pill);
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.tag-chip:hover {
-  color: var(--accent-primary);
-  border-color: var(--accent-primary);
-  background: var(--badge-bg);
-}
-
-/* Floor Filter Scroll Bar */
-.floor-filter-wrapper {
-  margin: 24px 0 20px 0;
+  gap: 6px;
   overflow-x: auto;
   scrollbar-width: none;
-  -ms-overflow-style: none;
-  padding-bottom: 4px;
-}
-
-.floor-filter-wrapper::-webkit-scrollbar {
-  display: none;
-}
-
-.floor-filters {
-  display: flex;
-  gap: 8px;
-  min-width: max-content;
-  padding: 2px;
-}
-
-.floor-btn {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  padding: 8px 16px;
-  border-radius: var(--radius-pill);
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: var(--transition);
-}
-
-.floor-btn .count {
-  font-size: 11px;
-  opacity: 0.6;
-}
-
-.floor-btn:hover {
-  color: var(--text-primary);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.floor-btn.active {
-  background: var(--accent-gradient);
-  border-color: transparent;
-  color: #ffffff;
-  box-shadow: 0 4px 14px var(--accent-glow);
-}
-
-.floor-btn.active .count {
-  opacity: 0.9;
-  background: rgba(255, 255, 255, 0.25);
-  padding: 1px 6px;
-  border-radius: var(--radius-pill);
-}
-
-/* ------------------- ROOMS CATALOG / RESULTS ------------------- */
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  padding: 0 4px;
-}
-
-.section-title {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.section-count {
-  font-size: 13px;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-
-.rooms-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-  margin-bottom: 36px;
-}
-
-.room-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  cursor: pointer;
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(8px);
-}
-
-.room-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--accent-gradient);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.room-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(99, 102, 241, 0.4);
-  box-shadow: var(--shadow-md), 0 0 20px -5px var(--accent-glow);
-  background: var(--bg-card-hover);
-}
-
-.room-card:hover::before {
-  opacity: 1;
-}
-
-.room-card.selected {
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 0 2px var(--accent-primary), var(--shadow-md);
-  background: var(--bg-card-hover);
-}
-
-.room-card.selected::before {
-  opacity: 1;
-}
-
-.rc-top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 10px;
+  padding: 2px 0 16px 0;
   margin-bottom: 12px;
 }
 
-.rc-title-group h3 {
-  font-family: var(--font-display);
-  font-size: 19px;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.25;
-  margin-bottom: 4px;
+.filter-bar::-webkit-scrollbar {
+  display: none;
 }
 
-.rc-dept {
-  font-size: 12px;
-  color: var(--accent-secondary);
-  font-weight: 500;
-}
-
-.rc-floor-badge {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: var(--radius-pill);
-  background: var(--border-subtle);
+.filter-chip {
+  background: transparent;
   border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.filter-chip:hover {
+  border-color: var(--text-muted);
+  color: var(--text-main);
+  background: var(--bg-muted);
+}
+
+.filter-chip.active {
+  background: var(--accent);
+  color: var(--text-inverse);
+  border-color: var(--accent);
+}
+
+/* Quick destination tags */
+.quick-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 12px;
   color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+.quick-chip {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.quick-chip:hover {
+  border-color: var(--border);
+  color: var(--text-main);
+  background: var(--bg-muted);
+}
+
+/* Directory List / Grid */
+.directory-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  padding: 0 2px;
+}
+
+.directory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+}
+
+.item-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+  position: relative;
+}
+
+.item-card:hover {
+  border-color: var(--text-muted);
+  background: var(--bg-hover);
+}
+
+.item-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.item-name {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+
+.item-dept {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  font-family: var(--font-sans);
+}
+
+.item-badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--bg-muted);
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
   white-space: nowrap;
 }
 
-.rc-info-snippet {
-  font-size: 13px;
+.item-snippet {
+  font-size: 12px;
   color: var(--text-secondary);
-  line-height: 1.4;
-  margin-bottom: 16px;
+  line-height: 1.45;
+  margin-bottom: 12px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  min-height: 36px;
 }
 
-.rc-footer {
+.item-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-  font-size: 12px;
-}
-
-.rc-meta {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--text-muted);
-}
-
-.rc-meta span {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.rc-cta {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--accent-primary);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  transition: var(--transition);
-}
-
-.room-card:hover .rc-cta {
-  transform: translateX(3px);
-  color: var(--accent-secondary);
-}
-
-/* Empty state */
-.no-results {
-  text-align: center;
-  padding: 60px 20px;
-  background: var(--bg-card);
-  border: 1px dashed var(--border);
-  border-radius: var(--radius-xl);
-  color: var(--text-muted);
-}
-
-.no-results svg {
-  margin-bottom: 12px;
-  opacity: 0.5;
-}
-
-/* ------------------- ROOM DETAILS / WALKTHROUGH VIEW ------------------- */
-.room-view-container {
-  display: none;
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Top Back / Action Bar */
-.view-nav-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: var(--radius-pill);
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.back-btn:hover {
-  border-color: var(--accent-primary);
-  background: var(--bg-card-hover);
-  transform: translateX(-2px);
-}
-
-.room-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.action-pill-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  border-radius: var(--radius-pill);
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.action-pill-btn:hover {
-  color: var(--text-primary);
-  border-color: var(--accent-primary);
-}
-
-/* Room Hero Details Card */
-.room-header-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: 24px;
-  margin-bottom: 24px;
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(12px);
-}
-
-.room-header-top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 18px;
-}
-
-.room-main-title {
-  font-family: var(--font-display);
-  font-size: clamp(24px, 4vw, 32px);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.room-badges {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 6px;
-}
-
-.pill-badge {
-  font-size: 12px;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: var(--radius-pill);
-}
-
-.badge-floor {
-  background: var(--badge-bg);
-  border: 1px solid var(--badge-border);
-  color: var(--badge-text);
-}
-
-.badge-dept {
-  background: rgba(6, 182, 212, 0.12);
-  border: 1px solid rgba(6, 182, 212, 0.25);
-  color: #38bdf8;
-}
-
-/* Access Point Tabs */
-.ap-tabs-section {
-  margin-bottom: 20px;
-}
-
-.ap-tabs-title {
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.ap-tabs-list {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.ap-tab {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  background: var(--bg-surface);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-lg);
-  color: var(--text-secondary);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.ap-tab:hover {
-  border-color: rgba(99, 102, 241, 0.5);
-  color: var(--text-primary);
-}
-
-.ap-tab.active {
-  background: var(--badge-bg);
-  border-color: var(--accent-primary);
-  color: var(--text-primary);
-  box-shadow: 0 0 15px var(--accent-glow);
-}
-
-.ap-tab .ap-count {
   font-size: 11px;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 2px 7px;
-  border-radius: var(--radius-pill);
-}
-
-/* Wayfinding Directions Banner */
-.wayfinding-card {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.06), rgba(6, 182, 212, 0.04));
-  border: 1px solid rgba(99, 102, 241, 0.2);
-  border-radius: var(--radius-lg);
-  padding: 18px 20px;
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  margin-top: 16px;
-}
-
-.wayfinding-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-md);
-  background: var(--accent-gradient);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  flex-shrink: 0;
-  box-shadow: 0 4px 12px var(--accent-glow);
-}
-
-.wayfinding-content h4 {
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--accent-secondary);
-  margin-bottom: 4px;
-}
-
-.wayfinding-content p {
-  font-size: 15px;
-  color: var(--text-primary);
-  line-height: 1.5;
-  font-weight: 500;
-}
-
-/* ------------------- CAROUSEL / WALKTHROUGH ------------------- */
-.walkthrough-wrapper {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: 20px;
-  box-shadow: var(--shadow-md);
-  backdrop-filter: blur(12px);
-  margin-bottom: 30px;
-}
-
-.walkthrough-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border);
-}
-
-.wt-title-block h3 {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.wt-title-block p {
-  font-size: 13px;
   color: var(--text-muted);
+  padding-top: 8px;
+  border-top: 1px solid var(--border-subtle);
 }
 
-.wt-controls {
+.item-action {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-main);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
-.wt-btn {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  padding: 6px 12px;
-  border-radius: var(--radius-pill);
-  font-size: 12px;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  transition: var(--transition);
+/* -------------------------------------------------------------
+   Active Room Walkthrough: Dual-Pane Clean Workspace
+   ------------------------------------------------------------- */
+.walkthrough-view {
+  display: none;
+  flex: 1;
+  padding: 20px 0 40px 0;
 }
 
-.wt-btn:hover {
-  color: var(--text-primary);
-  border-color: var(--accent-primary);
+.split-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 24px;
+  align-items: start;
 }
 
-.wt-btn.active {
-  background: var(--accent-primary);
-  color: #ffffff;
-  border-color: transparent;
-}
-
-/* Main Swiper Container */
-.swiper-main-container {
-  position: relative;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: #000000;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-}
-
-.swiper-main {
-  width: 100%;
-  height: 500px;
-}
-
-@media (max-width: 768px) {
-  .swiper-main {
-    height: 380px;
+@media (max-width: 900px) {
+  .split-layout {
+    grid-template-columns: 1fr;
   }
 }
 
-.swiper-main .swiper-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #05070d;
-  overflow: hidden;
+/* Left Sidebar / Info Rail */
+.info-rail {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 76px;
 }
 
-.swiper-main .swiper-slide img,
-.swiper-main .swiper-slide video {
+.rail-back-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  margin-bottom: 16px;
+  transition: color var(--transition-fast);
+}
+
+.rail-back-btn:hover {
+  color: var(--text-main);
+}
+
+.room-title-block {
+  margin-bottom: 16px;
+}
+
+.room-title-h2 {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.room-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.tag-badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 7px;
+  border-radius: var(--radius-xs);
+  background: var(--bg-muted);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+/* Clean Segmented Control for Starting Points */
+.ap-segmented {
+  margin: 16px 0;
+}
+
+.ap-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.ap-pills {
+  display: flex;
+  background: var(--bg-muted);
+  padding: 3px;
+  border-radius: var(--radius-sm);
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+.ap-pill {
+  flex: 1;
+  min-width: 100px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  padding: 6px 10px;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ap-pill:hover {
+  color: var(--text-main);
+}
+
+.ap-pill.active {
+  background: var(--bg-surface);
+  color: var(--text-main);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Wayfinding Text Box */
+.directions-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin: 16px 0;
+}
+
+.directions-header {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.directions-content {
+  font-size: 13.5px;
+  color: var(--text-main);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+/* Rail Action Toolbar */
+.rail-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.btn-secondary {
+  flex: 1;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-muted);
+}
+
+/* Right Pane: Minimalist Visual Canvas */
+.walkthrough-canvas-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.canvas-viewport {
+  position: relative;
+  background: var(--bg-canvas);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 520px;
+  max-height: 680px;
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 640px) {
+  .canvas-viewport {
+    min-height: 380px;
+    max-height: 480px;
+  }
+}
+
+.canvas-viewport img,
+.canvas-viewport video {
   max-width: 100%;
-  max-height: 100%;
+  max-height: 640px;
+  width: auto;
+  height: auto;
   object-fit: contain;
-  border-radius: var(--radius-md);
   user-select: none;
 }
 
-/* Step Bar Overlay */
-.step-bar-overlay {
+/* Top Canvas Bar (Step counter & Fullscreen) */
+.canvas-top-bar {
   position: absolute;
-  top: 16px;
-  left: 16px;
-  right: 16px;
+  top: 14px;
+  left: 14px;
+  right: 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -968,122 +673,141 @@ header.navbar {
   pointer-events: none;
 }
 
-.step-indicator {
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(10px);
+.step-count-badge {
+  pointer-events: auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: #fafafa;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #ffffff;
-  font-size: 13px;
-  font-weight: 700;
-  padding: 6px 14px;
-  border-radius: var(--radius-pill);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-.fullscreen-btn {
+.canvas-fs-btn {
   pointer-events: auto;
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(10px);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #ffffff;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
+  color: #fafafa;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: var(--transition);
+  transition: background var(--transition-fast);
 }
 
-.fullscreen-btn:hover {
-  background: var(--accent-primary);
-  border-color: transparent;
-  transform: scale(1.08);
+.canvas-fs-btn:hover {
+  background: rgba(0, 0, 0, 0.95);
 }
 
-/* Custom Swiper Nav Arrows */
-.swiper-button-prev,
-.swiper-button-next {
-  width: 44px;
-  height: 44px;
-  background: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(10px);
+/* Canvas Navigation Controls */
+.canvas-nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
   color: #ffffff;
-  transition: var(--transition);
-}
-
-.swiper-button-prev:after,
-.swiper-button-next:after {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.swiper-button-prev:hover,
-.swiper-button-next:hover {
-  background: var(--accent-primary);
-  border-color: transparent;
-  transform: scale(1.08);
-}
-
-/* Progress bar along the bottom of the slide */
-.swiper-pagination-progressbar {
-  background: rgba(255, 255, 255, 0.2);
-  height: 4px !important;
-}
-
-.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
-  background: var(--accent-gradient);
-}
-
-/* Thumbnail Strip / Dock */
-.thumbnail-strip-wrapper {
-  margin-top: 14px;
-  padding: 4px 0;
-}
-
-.swiper-thumbs {
-  width: 100%;
-  height: 80px;
-}
-
-.swiper-thumbs .swiper-slide {
-  opacity: 0.45;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  transition: all var(--transition-fast);
+  z-index: 10;
+}
+
+.canvas-nav-arrow:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.canvas-nav-arrow.prev { left: 14px; }
+.canvas-nav-arrow.next { right: 14px; }
+
+/* Bottom Canvas Controls Bar */
+.canvas-bottom-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 4px 2px;
+}
+
+.tour-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
   border-radius: var(--radius-sm);
-  overflow: hidden;
-  border: 2px solid transparent;
-  transition: var(--transition);
-  background: #000000;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
 }
 
-.swiper-thumbs .swiper-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.tour-btn:hover {
+  background: var(--bg-muted);
 }
 
-.swiper-thumbs .swiper-slide:hover {
-  opacity: 0.8;
-  border-color: rgba(99, 102, 241, 0.5);
+.tour-btn.playing {
+  background: var(--accent);
+  color: var(--text-inverse);
+  border-color: var(--accent);
 }
 
-.swiper-thumbs .swiper-slide-thumb-active {
-  opacity: 1;
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 10px var(--accent-glow);
+/* Scrubber / Dots Dock */
+.scrubber-track {
+  flex: 1;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 6px 0;
 }
 
-/* ------------------- TOAST NOTIFICATIONS ------------------- */
-.toast-container {
+.scrubber-track::-webkit-scrollbar {
+  display: none;
+}
+
+.scrubber-dot {
+  flex: 1;
+  height: 4px;
+  min-width: 14px;
+  background: var(--border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.scrubber-dot:hover {
+  background: var(--text-muted);
+}
+
+.scrubber-dot.active {
+  background: var(--accent);
+  transform: scaleY(1.5);
+}
+
+/* -------------------------------------------------------------
+   Toast Notifications
+   ------------------------------------------------------------- */
+.toast-shelf {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 20px;
+  right: 20px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -1091,262 +815,212 @@ header.navbar {
   pointer-events: none;
 }
 
-.toast {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
-  padding: 12px 18px;
-  border-radius: var(--radius-pill);
+.toast-msg {
+  background: var(--accent);
+  color: var(--text-inverse);
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
   display: flex;
   align-items: center;
-  gap: 10px;
-  box-shadow: var(--shadow-md), 0 0 20px -5px var(--accent-glow);
-  transform: translateY(20px);
-  opacity: 0;
-  animation: toastIn 0.3s forwards cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: auto;
+  gap: 8px;
+  animation: toastSlideIn 180ms ease forwards;
 }
 
-@keyframes toastIn {
-  to { transform: translateY(0); opacity: 1; }
+@keyframes toastSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.toast.fade-out {
-  animation: toastOut 0.3s forwards cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes toastOut {
-  to { transform: translateY(20px); opacity: 0; }
-}
-
-/* ------------------- FOOTER ------------------- */
+/* -------------------------------------------------------------
+   Footer
+   ------------------------------------------------------------- */
 footer.app-footer {
-  margin-top: 60px;
-  padding: 24px 0;
+  height: 50px;
   border-top: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px;
+  font-size: 12px;
   color: var(--text-muted);
-  font-size: 13px;
+  padding: 0 4px;
+  margin-top: auto;
 }
 
 footer a {
-  color: var(--text-secondary);
+  color: inherit;
   text-decoration: none;
-  transition: var(--transition);
 }
 
 footer a:hover {
-  color: var(--accent-primary);
+  color: var(--text-main);
 }
 </style>
 </head>
 <body>
 
-<div class="bg-ambient"></div>
+<div class="app-container">
 
-<div class="app-wrapper">
+  <!-- Header -->
+  <header class="app-header">
+    <a class="brand" id="brandReset" href="javascript:void(0)" title="Locorom Home">
+      <img class="brand-logo" src="logo_locorom.png" alt="Locorom Logo" onerror="this.src='https://raw.githubusercontent.com/aryamanm77/mitm-room/main/logo_locorom.png'">
+      <span class="brand-title">
+        Locorom
+        <span class="brand-badge">MITM</span>
+      </span>
+    </a>
 
-  <!-- Top Navigation -->
-  <header class="navbar">
-    <div class="brand-group" id="brandBtn">
-      <div class="brand-logo-wrap">
-        <img src="logo_locorom.png" alt="Locorom Logo" onerror="this.src='https://raw.githubusercontent.com/2005lakshmi/locorom/main/logo_locorom.png'">
-      </div>
-      <div class="brand-text">
-        <h1>LOCOROM</h1>
-        <div class="brand-tag">
-          <span class="dot"></span>
-          <span>MITM Campus Navigation</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="nav-actions">
-      <button class="theme-toggle" id="themeToggleBtn" title="Toggle Theme" aria-label="Toggle Dark/Light Mode">
-        <svg id="themeIconSun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        <svg id="themeIconMoon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <div class="header-actions">
+      <span style="font-size:12px; color:var(--text-muted); margin-right:4px;" id="statusCounter">62 destinations</span>
+      <button class="icon-button" id="themeBtn" title="Toggle Theme (Dark / Light)">
+        <svg id="themeSvg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
       </button>
+      <a class="icon-button" href="https://github.com/aryamanm77/mitm-room" target="_blank" rel="noopener" title="View Source on GitHub">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+        </svg>
+      </a>
     </div>
   </header>
 
-  <!-- Hero & Command Search View -->
-  <section class="hero-section" id="heroSection">
-    <div class="hero-pill">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-      <span>Interactive Wayfinding & Walkthroughs</span>
-    </div>
-
-    <h2 class="hero-title">Find Your Destination Instantly</h2>
-    <p class="hero-subtitle">Visual step-by-step corridor paths from campus access points to classrooms, laboratories, and departments.</p>
-
-    <!-- Search Box -->
-    <div class="search-wrapper">
-      <div class="search-bar">
-        <div class="search-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        </div>
-        <input type="text" id="searchInput" class="search-input" placeholder="Search room number, lab, or department (e.g. 415B, 205, CSBS, DSP)..." autocomplete="off" spellcheck="false">
-        <button class="clear-search-btn" id="clearSearchBtn" title="Clear search">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  <!-- Browse Directory View -->
+  <main class="browse-view" id="browseSection">
+    <!-- Command Search Bar -->
+    <div class="search-container">
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search room number, laboratory, or department (e.g. 205, 415B, CSBS, DSP)..." autocomplete="off" spellcheck="false">
+        <button class="clear-search" id="clearSearchBtn" title="Clear search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
-        <div class="search-badge" id="searchKbdBadge">/</div>
+        <span class="kbd-badge" id="kbdShortcut">/</span>
       </div>
     </div>
 
-    <!-- Quick Tags -->
-    <div class="quick-tags">
-      <span class="quick-label">Popular:</span>
-      <button class="tag-chip" data-search="Auditorium">Auditorium</button>
-      <button class="tag-chip" data-search="CSBS">CSBS Lab</button>
-      <button class="tag-chip" data-search="205">Room 205</button>
-      <button class="tag-chip" data-search="319">319 (Theater)</button>
-      <button class="tag-chip" data-search="DSP">DSP Lab</button>
-      <button class="tag-chip" data-search="Machine">Machine Shop</button>
-      <button class="tag-chip" data-search="B-003">B-003</button>
-    </div>
-  </section>
-
-  <!-- Floor Category Filter Pills -->
-  <div class="floor-filter-wrapper" id="floorFilterWrapper">
-    <div class="floor-filters" id="floorFiltersContainer">
-      <button class="floor-btn active" data-floor="all">All Rooms <span class="count" id="countAll">62</span></button>
-      <button class="floor-btn" data-floor="Basement & Ground">Basement & Ground <span class="count">7</span></button>
-      <button class="floor-btn" data-floor="1st Floor">1st Floor <span class="count">7</span></button>
-      <button class="floor-btn" data-floor="2nd Floor">2nd Floor <span class="count">14</span></button>
-      <button class="floor-btn" data-floor="3rd Floor">3rd Floor <span class="count">13</span></button>
-      <button class="floor-btn" data-floor="4th Floor">4th Floor <span class="count">11</span></button>
-      <button class="floor-btn" data-floor="5th Floor">5th Floor <span class="count">4</span></button>
-      <button class="floor-btn" data-floor="Mechanical Block">Mechanical Block <span class="count">2</span></button>
-      <button class="floor-btn" data-floor="Campus Amenities">Amenities & Labs <span class="count">4</span></button>
-    </div>
-  </div>
-
-  <!-- Rooms Catalog Grid View -->
-  <main id="catalogSection">
-    <div class="section-header">
-      <h3 class="section-title">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        <span>Campus Directory</span>
-      </h3>
-      <span class="section-count" id="resultsCount">Showing 62 rooms</span>
+    <!-- Minimal Category Chips -->
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-chip active" data-floor="all">All</button>
+      <button class="filter-chip" data-floor="Basement & Ground">Basement & Ground</button>
+      <button class="filter-chip" data-floor="1st Floor">1st Floor</button>
+      <button class="filter-chip" data-floor="2nd Floor">2nd Floor</button>
+      <button class="filter-chip" data-floor="3rd Floor">3rd Floor</button>
+      <button class="filter-chip" data-floor="4th Floor">4th Floor</button>
+      <button class="filter-chip" data-floor="5th Floor">5th Floor</button>
+      <button class="filter-chip" data-floor="Mechanical Block">Mechanical</button>
+      <button class="filter-chip" data-floor="Campus Amenities">Amenities & Labs</button>
     </div>
 
-    <div class="rooms-grid" id="roomsGrid">
-      <!-- Dynamic Room Cards rendered here -->
+    <!-- Quick Shortcuts -->
+    <div class="quick-row">
+      <span>Quick jump:</span>
+      <span class="quick-chip" data-query="Auditorium">Auditorium</span>
+      <span class="quick-chip" data-query="CSBS">CSBS Lab</span>
+      <span class="quick-chip" data-query="205">205</span>
+      <span class="quick-chip" data-query="319">319 Theater</span>
+      <span class="quick-chip" data-query="DSP">DSP Lab</span>
+      <span class="quick-chip" data-query="Machine Shop">Machine Shop</span>
+      <span class="quick-chip" data-query="B-003">B-003</span>
+    </div>
+
+    <!-- Directory Counter -->
+    <div class="directory-meta">
+      <span id="resultsCount">Showing 62 destinations</span>
+      <span id="sortIndicator">Sorted numerically</span>
+    </div>
+
+    <!-- Directory Grid -->
+    <div class="directory-grid" id="directoryGrid">
+      <!-- Injected dynamically -->
     </div>
   </main>
 
-  <!-- Room Walkthrough & Details View -->
-  <section class="room-view-container" id="roomViewContainer">
-    <!-- View Navigation Bar -->
-    <div class="view-nav-bar">
-      <button class="back-btn" id="backToCatalogBtn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-        <span>Back to Directory</span>
-      </button>
-
-      <div class="room-actions">
-        <button class="action-pill-btn" id="shareRoomBtn" title="Share room link">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-          <span>Share</span>
+  <!-- Active Walkthrough View (Dual Pane) -->
+  <section class="walkthrough-view" id="walkthroughSection">
+    <div class="split-layout">
+      <!-- Left Info Rail -->
+      <aside class="info-rail">
+        <button class="rail-back-btn" id="backBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          <span>All destinations</span>
         </button>
-        <button class="action-pill-btn" id="copyDirectionsBtn" title="Copy directions">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          <span>Copy Path</span>
-        </button>
-      </div>
-    </div>
 
-    <!-- Room Main Details Card -->
-    <div class="room-header-card">
-      <div class="room-header-top">
-        <div>
-          <h2 class="room-main-title" id="roomTitleDisplay">Room 205</h2>
-          <div class="room-badges">
-            <span class="pill-badge badge-floor" id="roomFloorDisplay">2nd Floor</span>
-            <span class="pill-badge badge-dept" id="roomDeptDisplay" style="display:none;">CSE Dept</span>
+        <div class="room-title-block">
+          <h2 class="room-title-h2" id="railRoomName">Room 205</h2>
+          <div class="room-meta-row">
+            <span class="tag-badge" id="railFloor">2nd Floor</span>
+            <span class="tag-badge" id="railDept" style="display:none;">CSE</span>
           </div>
         </div>
-      </div>
 
-      <!-- Access Point Selector (Tabs) -->
-      <div class="ap-tabs-section" id="apTabsSection">
-        <div class="ap-tabs-title">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span>Select Starting Point:</span>
-        </div>
-        <div class="ap-tabs-list" id="apTabsList">
-          <!-- Dynamic Access Point buttons rendered here -->
-        </div>
-      </div>
-
-      <!-- Wayfinding Instructions -->
-      <div class="wayfinding-card" id="wayfindingCard">
-        <div class="wayfinding-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-        </div>
-        <div class="wayfinding-content">
-          <h4 id="wayfindingTitle">Route Instructions</h4>
-          <p id="wayfindingText">From Point A, take first floor corridor to the right.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Visual Walkthrough Carousel Section -->
-    <div class="walkthrough-wrapper" id="walkthroughWrapper">
-      <div class="walkthrough-header">
-        <div class="wt-title-block">
-          <h3>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            <span>Visual Path Walkthrough</span>
-          </h3>
-          <p>Follow the photo sequence from starting point to the destination room</p>
+        <!-- Starting Point Selector (if multiple) -->
+        <div class="ap-segmented" id="apContainer">
+          <span class="ap-label">Starting Access Point:</span>
+          <div class="ap-pills" id="apPillsList">
+            <!-- Injected dynamically -->
+          </div>
         </div>
 
-        <div class="wt-controls">
-          <button class="wt-btn" id="tourAutoplayBtn" title="Play walkthrough">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            <span id="tourBtnText">Play Tour</span>
+        <!-- Route Notes -->
+        <div class="directions-box">
+          <div class="directions-header" id="dirHeader">Route Instructions</div>
+          <div class="directions-content" id="dirContent">Loading navigation instructions...</div>
+        </div>
+
+        <!-- Rail Actions -->
+        <div class="rail-actions">
+          <button class="btn-secondary" id="copyBtn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy route</span>
+          </button>
+          <button class="btn-secondary" id="shareBtn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            <span>Share link</span>
           </button>
         </div>
-      </div>
+      </aside>
 
-      <!-- Swiper Main Carousel -->
-      <div class="swiper-main-container">
-        <!-- Floating Step Indicator -->
-        <div class="step-bar-overlay">
-          <div class="step-indicator" id="stepIndicator">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
-            <span id="stepText">Step 1 of 10</span>
+      <!-- Right Walkthrough Canvas -->
+      <div class="walkthrough-canvas-pane">
+        <div class="canvas-viewport" id="canvasViewport">
+          <!-- Top info overlay -->
+          <div class="canvas-top-bar">
+            <span class="step-count-badge" id="stepBadge">Step 1 of 12</span>
+            <button class="canvas-fs-btn" id="fsBtn" title="Fullscreen">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+            </button>
           </div>
-          <button class="fullscreen-btn" id="fullscreenToggleBtn" title="Fullscreen">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+
+          <!-- Photo Container -->
+          <div id="mediaContainer" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+            <!-- Injected image/video -->
+          </div>
+
+          <!-- Nav arrows -->
+          <button class="canvas-nav-arrow prev" id="prevBtn" title="Previous photo (←)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="canvas-nav-arrow next" id="nextBtn" title="Next photo (→)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
           </button>
         </div>
 
-        <div class="swiper swiper-main" id="mainSwiper">
-          <div class="swiper-wrapper" id="mainSwiperWrapper">
-            <!-- Dynamic Slides rendered here -->
-          </div>
-          <!-- Swiper Navigation Arrows -->
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-          <!-- Progress Bar -->
-          <div class="swiper-pagination"></div>
-        </div>
-      </div>
+        <!-- Bottom Controls Bar -->
+        <div class="canvas-bottom-controls">
+          <button class="tour-btn" id="tourBtn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span id="tourBtnLabel">Auto-play tour</span>
+          </button>
 
-      <!-- Swiper Thumbnail Dock -->
-      <div class="thumbnail-strip-wrapper">
-        <div class="swiper swiper-thumbs" id="thumbsSwiper">
-          <div class="swiper-wrapper" id="thumbsSwiperWrapper">
-            <!-- Dynamic Thumbnails rendered here -->
+          <!-- Scrubber Track -->
+          <div class="scrubber-track" id="scrubberTrack">
+            <!-- Injected dynamically -->
           </div>
         </div>
       </div>
@@ -1355,366 +1029,302 @@ footer a:hover {
 
   <!-- Footer -->
   <footer class="app-footer">
-    <div>
-      <b>LOCOROM</b> • Maharaja Institute of Technology Mysore (MITM) Indoor Guide
-    </div>
-    <div>
-      <a href="https://github.com/2005lakshmi/locorom" target="_blank" rel="noopener">GitHub Repository</a>
-    </div>
+    <div>Locorom • Maharaja Institute of Technology Mysore</div>
+    <div><a href="https://github.com/aryamanm77/mitm-room" target="_blank" rel="noopener">GitHub</a></div>
   </footer>
 
 </div>
 
-<!-- Toast Container -->
-<div class="toast-container" id="toastContainer"></div>
+<!-- Toast Shelf -->
+<div class="toast-shelf" id="toastShelf"></div>
 
-<!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-<!-- Embedded Precompiled Data / Fallback -->
+<!-- Data -->
 <script src="rooms_data.js"></script>
 
 <script>
 /**
- * LOCOROM Premium Redesign Application Logic
+ * Locorom — High-performance, zero-dependency indoor walkthrough engine
  */
-const GITHUB_REPO = "2005lakshmi/locorom";
-const GITHUB_RAW = "https://raw.githubusercontent.com/2005lakshmi/locorom/main/";
+const GITHUB_RAW = "https://raw.githubusercontent.com/aryamanm77/mitm-room/main/";
 
 // State
 let allRooms = {};
 let currentRoom = null;
-let currentAccessPoint = null;
+let currentAp = null;
+let currentPhotos = [];
+let currentIndex = 0;
 let activeFloor = "all";
-let mainSwiper = null;
-let thumbsSwiper = null;
-let isTourPlaying = false;
-let tourInterval = null;
+let isTourActive = false;
+let tourTimer = null;
+const preloadedCache = new Set();
 
-// Determine asset base URL (handles file://, localhost, and GitHub Pages)
-function resolveAssetUrl(path) {
+function resolveUrl(path) {
   if (!path) return "";
   if (path.startsWith("http://") || path.startsWith("https://")) return path;
-  
-  // If hosted on GitHub Pages or custom domain without local repo
   if (window.location.protocol === "https:" && !window.location.hostname.includes("localhost") && !window.location.hostname.includes("127.0.0.1")) {
     return GITHUB_RAW + path;
   }
-  // Otherwise resolve relative local path
   return path;
 }
 
-// Toast Helper
-function showToast(message, iconSvg) {
-  const container = document.getElementById("toastContainer");
-  const toast = document.createElement("div");
-  toast.className = "toast";
-  toast.innerHTML = (iconSvg || `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`) + `<span>${message}</span>`;
-  container.appendChild(toast);
-
+// Toast
+function showToast(text) {
+  const shelf = document.getElementById("toastShelf");
+  const el = document.createElement("div");
+  el.className = "toast-msg";
+  el.textContent = text;
+  shelf.appendChild(el);
   setTimeout(() => {
-    toast.classList.add("fade-out");
-    setTimeout(() => toast.remove(), 300);
-  }, 2600);
+    el.style.opacity = "0";
+    el.style.transition = "opacity 200ms ease";
+    setTimeout(() => el.remove(), 200);
+  }, 2200);
 }
 
-// Initialize Application
-async function initApp() {
-  initTheme();
-  initSearch();
-  initFloorFilters();
-  initKeyboardShortcuts();
+// Initialize
+async function init() {
+  setupTheme();
+  setupEvents();
 
-  // Load Data
   if (window.LOCOROM_DATA && Object.keys(window.LOCOROM_DATA).length > 0) {
     allRooms = window.LOCOROM_DATA;
-    onDataLoaded();
+    renderDirectory();
   } else {
     try {
-      const resp = await fetch("rooms_data.json");
-      if (resp.ok) {
-        allRooms = await resp.json();
-        onDataLoaded();
-      } else {
-        throw new Error("Local index not found");
-      }
-    } catch (e) {
-      console.warn("Could not load local index, fetching GitHub API tree...", e);
-      await fetchGitHubTreeFallback();
+      const res = await fetch("rooms_data.json");
+      allRooms = await res.json();
+      renderDirectory();
+    } catch (err) {
+      console.warn("Could not load catalog:", err);
     }
   }
 
-  // Handle URL deep-linking (?room=205)
-  const urlParams = new URLSearchParams(window.location.search);
-  const roomParam = urlParams.get("room") || window.location.hash.replace("#", "");
-  if (roomParam && allRooms[roomParam]) {
-    openRoom(roomParam);
+  // Handle URL deep link
+  const params = new URLSearchParams(window.location.search);
+  const roomQuery = params.get("room") || window.location.hash.replace("#", "");
+  if (roomQuery && allRooms[roomQuery]) {
+    selectRoom(roomQuery);
   }
-}
-
-// Fallback GitHub Tree fetcher if local JSON isn't present
-async function fetchGitHubTreeFallback() {
-  try {
-    const res = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/git/trees/main?recursive=1`);
-    if (!res.ok) throw new Error("API status " + res.status);
-    const data = await res.json();
-    if (!data.tree) return;
-
-    const files = data.tree.filter(f => f.type === "blob" && f.path.startsWith("Rooms/")).map(f => f.path);
-    const roomMap = {};
-    files.forEach(p => {
-      const parts = p.slice("Rooms/".length).split("/");
-      const rName = parts[0];
-      if (!roomMap[rName]) {
-        let floor = "Other";
-        if (/^B|Basement|Machine|Foundry|Fluid/i.test(rName)) floor = "Basement & Ground";
-        else if (/^1/.test(rName)) floor = "1st Floor";
-        else if (/^2/.test(rName)) floor = "2nd Floor";
-        else if (/^3/.test(rName)) floor = "3rd Floor";
-        else if (/^4/.test(rName)) floor = "4th Floor";
-        else if (/^5/.test(rName)) floor = "5th Floor";
-
-        roomMap[rName] = {
-          name: rName,
-          floor: floor,
-          dept: "",
-          info: "",
-          thumbnail: "",
-          photos: [],
-          accessPoints: []
-        };
-      }
-      if (parts.length === 2 && /\.(jpg|png|jpeg)$/i.test(parts[1])) {
-        roomMap[rName].photos.push(p);
-      }
-    });
-
-    allRooms = roomMap;
-    onDataLoaded();
-  } catch (err) {
-    showToast("Error loading rooms catalog", "⚠️");
-  }
-}
-
-function onDataLoaded() {
-  renderCatalog();
-  updateFloorCounts();
 }
 
 // Theme handling
-function initTheme() {
-  const saved = localStorage.getItem("locorom_theme") || "dark";
-  document.documentElement.setAttribute("data-theme", saved);
-  updateThemeIcons(saved);
+function setupTheme() {
+  const saved = localStorage.getItem("locorom_theme") || "light";
+  applyTheme(saved);
 
-  document.getElementById("themeToggleBtn").addEventListener("click", () => {
-    const current = document.documentElement.getAttribute("data-theme") || "dark";
-    const next = current === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", next);
-    localStorage.setItem("locorom_theme", next);
-    updateThemeIcons(next);
+  document.getElementById("themeBtn").addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme") || "light";
+    const next = current === "light" ? "dark" : "light";
+    applyTheme(next);
   });
 }
 
-function updateThemeIcons(theme) {
-  const sun = document.getElementById("themeIconSun");
-  const moon = document.getElementById("themeIconMoon");
-  if (theme === "light") {
-    sun.style.display = "none";
-    moon.style.display = "block";
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("locorom_theme", theme);
+
+  const svg = document.getElementById("themeSvg");
+  if (theme === "dark") {
+    svg.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
   } else {
-    sun.style.display = "block";
-    moon.style.display = "none";
+    svg.innerHTML = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
   }
 }
 
-// Floor Filtering
-function initFloorFilters() {
-  document.querySelectorAll(".floor-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".floor-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      activeFloor = btn.getAttribute("data-floor");
-      renderCatalog();
-    });
-  });
-}
-
-function updateFloorCounts() {
-  const counts = { all: 0 };
-  Object.values(allRooms).forEach(r => {
-    counts.all = (counts.all || 0) + 1;
-    const f = r.floor || "Other";
-    counts[f] = (counts[f] || 0) + 1;
-  });
-  document.getElementById("countAll").textContent = counts.all || Object.keys(allRooms).length;
-}
-
-// Search System
-function initSearch() {
-  const input = document.getElementById("searchInput");
+// Event Bindings
+function setupEvents() {
+  const searchInput = document.getElementById("searchInput");
   const clearBtn = document.getElementById("clearSearchBtn");
 
-  input.addEventListener("input", () => {
-    const val = input.value.trim();
-    clearBtn.style.display = val ? "flex" : "none";
-    renderCatalog();
+  searchInput.addEventListener("input", () => {
+    clearBtn.style.display = searchInput.value ? "flex" : "none";
+    renderDirectory();
   });
 
   clearBtn.addEventListener("click", () => {
-    input.value = "";
+    searchInput.value = "";
     clearBtn.style.display = "none";
-    input.focus();
-    renderCatalog();
+    searchInput.focus();
+    renderDirectory();
   });
 
-  // Popular Quick Tags
-  document.querySelectorAll(".tag-chip").forEach(tag => {
-    tag.addEventListener("click", () => {
-      input.value = tag.getAttribute("data-search");
-      clearBtn.style.display = "flex";
-      renderCatalog();
-      input.focus();
+  // Filter Chips
+  document.querySelectorAll(".filter-chip").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".filter-chip").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeFloor = btn.getAttribute("data-floor");
+      renderDirectory();
     });
   });
 
-  // Logo Click -> Reset
-  document.getElementById("brandBtn").addEventListener("click", () => {
-    input.value = "";
-    clearBtn.style.display = "none";
-    activeFloor = "all";
-    document.querySelectorAll(".floor-btn").forEach(b => b.classList.toggle("active", b.getAttribute("data-floor") === "all"));
-    closeRoomView();
+  // Quick Chips
+  document.querySelectorAll(".quick-chip").forEach(q => {
+    q.addEventListener("click", () => {
+      searchInput.value = q.getAttribute("data-query");
+      clearBtn.style.display = "flex";
+      renderDirectory();
+      searchInput.focus();
+    });
   });
-}
 
-// Keyboard shortcuts
-function initKeyboardShortcuts() {
+  // Global Keybindings
   window.addEventListener("keydown", (e) => {
-    if (e.key === "/" && document.activeElement.id !== "searchInput") {
+    if (e.key === "/" && document.activeElement !== searchInput) {
       e.preventDefault();
-      document.getElementById("searchInput").focus();
-    }
-    if (e.key === "Escape") {
-      if (document.getElementById("roomViewContainer").style.display === "block") {
-        closeRoomView();
+      searchInput.focus();
+    } else if (e.key === "Escape") {
+      if (document.getElementById("walkthroughSection").style.display === "block") {
+        exitWalkthrough();
       } else {
-        document.getElementById("searchInput").blur();
+        searchInput.blur();
+      }
+    } else if (document.getElementById("walkthroughSection").style.display === "block") {
+      if (e.key === "ArrowLeft") prevPhoto();
+      else if (e.key === "ArrowRight") nextPhoto();
+      else if (e.key === " " && document.activeElement.tagName !== "INPUT") {
+        e.preventDefault();
+        toggleTour();
+      } else if (e.key.toLowerCase() === "f") {
+        toggleFullscreen();
       }
     }
   });
+
+  // Touch swipe on canvas
+  let touchStartX = 0;
+  const canvas = document.getElementById("canvasViewport");
+  canvas.addEventListener("touchstart", (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  canvas.addEventListener("touchend", (e) => {
+    const diff = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) prevPhoto();
+      else nextPhoto();
+    }
+  }, { passive: true });
+
+  // Navigation Buttons
+  document.getElementById("prevBtn").addEventListener("click", prevPhoto);
+  document.getElementById("nextBtn").addEventListener("click", nextPhoto);
+  document.getElementById("tourBtn").addEventListener("click", toggleTour);
+  document.getElementById("fsBtn").addEventListener("click", toggleFullscreen);
+  document.getElementById("backBtn").addEventListener("click", exitWalkthrough);
+  document.getElementById("brandReset").addEventListener("click", exitWalkthrough);
+
+  // Copy & Share
+  document.getElementById("copyBtn").addEventListener("click", () => {
+    if (!currentRoom) return;
+    const info = currentAp ? (currentAp.info || currentRoom.info) : currentRoom.info;
+    const apText = currentAp ? `From ${currentAp.name}: ` : "";
+    const text = `${currentRoom.name} (${currentRoom.floor || "MITM"})\n${apText}${info || "Follow photo sequence."}`;
+    navigator.clipboard.writeText(text).then(() => showToast("Route instructions copied"));
+  });
+
+  document.getElementById("shareBtn").addEventListener("click", () => {
+    if (!currentRoom) return;
+    const url = window.location.origin + window.location.pathname + "?room=" + encodeURIComponent(currentRoom.name);
+    navigator.clipboard.writeText(url).then(() => showToast("Shareable link copied"));
+  });
+
+  window.addEventListener("popstate", (e) => {
+    if (e.state && e.state.room && allRooms[e.state.room]) {
+      selectRoom(e.state.room);
+    } else {
+      exitWalkthrough();
+    }
+  });
 }
 
-// Render Room Catalog Cards
-function renderCatalog() {
+// Render Directory Grid
+function renderDirectory() {
   const query = document.getElementById("searchInput").value.trim().toLowerCase();
-  const grid = document.getElementById("roomsGrid");
+  const grid = document.getElementById("directoryGrid");
   const countEl = document.getElementById("resultsCount");
   grid.innerHTML = "";
 
-  const roomKeys = Object.keys(allRooms).sort((a, b) => {
-    // Natural number sort if both start with digits
+  const keys = Object.keys(allRooms).sort((a, b) => {
     const numA = parseInt(a, 10);
     const numB = parseInt(b, 10);
     if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
     return a.localeCompare(b);
   });
 
-  const matched = roomKeys.filter(k => {
+  const filtered = keys.filter(k => {
     const r = allRooms[k];
-    // Search query matching
     const matchQuery = !query ||
       k.toLowerCase().includes(query) ||
       (r.info && r.info.toLowerCase().includes(query)) ||
       (r.dept && r.dept.toLowerCase().includes(query)) ||
       (r.accessPoints && r.accessPoints.some(ap => ap.name.toLowerCase().includes(query) || (ap.info && ap.info.toLowerCase().includes(query))));
 
-    // Floor filter matching
     const matchFloor = activeFloor === "all" || r.floor === activeFloor;
-
     return matchQuery && matchFloor;
   });
 
-  countEl.textContent = `Showing ${matched.length} of ${roomKeys.length} rooms`;
+  countEl.textContent = `Showing ${filtered.length} of ${keys.length} destinations`;
 
-  if (matched.length === 0) {
+  if (filtered.length === 0) {
     grid.innerHTML = `
-      <div class="no-results" style="grid-column: 1 / -1;">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <h4 style="font-size:16px;font-weight:700;margin-bottom:6px;">No destinations found</h4>
-        <p style="font-size:14px;">Try searching for a different room number or select "All Rooms".</p>
+      <div style="grid-column: 1/-1; padding: 48px 0; text-align: center; color: var(--text-muted); font-size: 13px;">
+        No destinations match "${query}". Try searching for another room number or select "All".
       </div>`;
     return;
   }
 
-  matched.forEach(key => {
+  filtered.forEach(key => {
     const r = allRooms[key];
-    const totalPhotos = (r.photos ? r.photos.length : 0) + (r.accessPoints ? r.accessPoints.reduce((acc, ap) => acc + (ap.photos ? ap.photos.length : 0), 0) : 0);
     const apCount = (r.accessPoints && r.accessPoints.length > 0) ? r.accessPoints.length : (r.photos && r.photos.length > 0 ? 1 : 0);
+    const photoCount = (r.photos ? r.photos.length : 0) + (r.accessPoints ? r.accessPoints.reduce((acc, ap) => acc + (ap.photos ? ap.photos.length : 0), 0) : 0);
 
-    // Get preview direction text
-    let infoSnippet = r.info || "";
-    if (!infoSnippet && r.accessPoints && r.accessPoints.length > 0) {
-      infoSnippet = r.accessPoints[0].info || "";
+    let snippet = r.info || "";
+    if (!snippet && r.accessPoints && r.accessPoints.length > 0) {
+      snippet = r.accessPoints[0].info || "";
     }
-    if (!infoSnippet) infoSnippet = "Step-by-step corridor path available.";
+    if (!snippet) snippet = "Step-by-step corridor walkthrough available.";
 
     const card = document.createElement("div");
-    card.className = "room-card" + (currentRoom && currentRoom.name === key ? " selected" : "");
+    card.className = "item-card";
     card.innerHTML = `
       <div>
-        <div class="rc-top">
-          <div class="rc-title-group">
-            <h3>${r.name}</h3>
-            ${r.dept ? `<div class="rc-dept">${r.dept}</div>` : ""}
+        <div class="item-top">
+          <div>
+            <div class="item-name">${r.name}</div>
+            ${r.dept ? `<div class="item-dept">${r.dept}</div>` : ""}
           </div>
-          <span class="rc-floor-badge">${r.floor || "Campus"}</span>
+          <span class="item-badge">${r.floor || "MITM"}</span>
         </div>
-        <div class="rc-info-snippet">${infoSnippet}</div>
+        <div class="item-snippet">${snippet}</div>
       </div>
-      <div class="rc-footer">
-        <div class="rc-meta">
-          <span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
-            ${apCount} Point${apCount > 1 ? 's' : ''}
-          </span>
-          ${totalPhotos > 0 ? `<span>• ${totalPhotos} Photos</span>` : ""}
-        </div>
-        <div class="rc-cta">
-          <span>Navigate</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-        </div>
+      <div class="item-bottom">
+        <span>${apCount} access point${apCount > 1 ? 's' : ''} • ${photoCount} photos</span>
+        <span class="item-action">
+          View
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
       </div>
     `;
 
-    card.addEventListener("click", () => openRoom(key));
+    card.addEventListener("click", () => selectRoom(key));
     grid.appendChild(card);
   });
 }
 
-// Open Room Details and Walkthrough
-function openRoom(roomKey) {
+// Select Room & Switch to Walkthrough View
+function selectRoom(roomKey) {
   const room = allRooms[roomKey];
   if (!room) return;
 
   currentRoom = room;
+  window.history.pushState({ room: roomKey }, "", `?room=${encodeURIComponent(roomKey)}`);
 
-  // Update URL without reload
-  const newUrl = window.location.pathname + "?room=" + encodeURIComponent(roomKey);
-  window.history.pushState({ room: roomKey }, "", newUrl);
+  document.getElementById("browseSection").style.display = "none";
+  document.getElementById("walkthroughSection").style.display = "block";
+  window.scrollTo({ top: 0, behavior: "instant" });
 
-  // Switch Views
-  document.getElementById("heroSection").style.display = "none";
-  document.getElementById("floorFilterWrapper").style.display = "none";
-  document.getElementById("catalogSection").style.display = "none";
-  const viewContainer = document.getElementById("roomViewContainer");
-  viewContainer.style.display = "block";
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  // Populate Header
-  document.getElementById("roomTitleDisplay").textContent = room.name;
-  document.getElementById("roomFloorDisplay").textContent = room.floor || "MITM Campus";
-  const deptEl = document.getElementById("roomDeptDisplay");
+  // Sidebar details
+  document.getElementById("railRoomName").textContent = room.name;
+  document.getElementById("railFloor").textContent = room.floor || "MITM";
+  const deptEl = document.getElementById("railDept");
   if (room.dept) {
     deptEl.textContent = room.dept;
     deptEl.style.display = "inline-block";
@@ -1722,275 +1332,201 @@ function openRoom(roomKey) {
     deptEl.style.display = "none";
   }
 
-  // Determine Access Points
-  const apList = document.getElementById("apTabsList");
-  const apSection = document.getElementById("apTabsSection");
-  apList.innerHTML = "";
-
+  // Access Points
   const points = [];
   if (room.accessPoints && room.accessPoints.length > 0) {
     room.accessPoints.forEach(ap => points.push(ap));
   } else if (room.photos && room.photos.length > 0) {
     points.push({
       name: "Main Access Point",
-      info: room.info || "Follow corridor directly to destination.",
+      info: room.info || "Follow photo sequence to destination.",
       thumbnail: room.thumbnail || room.photos[0],
       photos: room.photos
     });
   }
 
+  const apContainer = document.getElementById("apContainer");
+  const apPillsList = document.getElementById("apPillsList");
+  apPillsList.innerHTML = "";
+
   if (points.length <= 1) {
-    apSection.style.display = "none";
+    apContainer.style.display = "none";
   } else {
-    apSection.style.display = "block";
+    apContainer.style.display = "block";
   }
 
   points.forEach((ap, idx) => {
-    const tab = document.createElement("button");
-    tab.className = "ap-tab" + (idx === 0 ? " active" : "");
-    const photoCount = ap.photos ? ap.photos.length : 0;
-    tab.innerHTML = `
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/></svg>
-      <span>${ap.name}</span>
-      ${photoCount > 0 ? `<span class="ap-count">${photoCount}</span>` : ""}
-    `;
-
-    tab.addEventListener("click", () => {
-      document.querySelectorAll(".ap-tab").forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
-      selectAccessPoint(ap);
+    const pill = document.createElement("button");
+    pill.className = "ap-pill" + (idx === 0 ? " active" : "");
+    pill.textContent = ap.name;
+    pill.addEventListener("click", () => {
+      document.querySelectorAll(".ap-pill").forEach(p => p.classList.remove("active"));
+      pill.classList.add("active");
+      applyAccessPoint(ap);
     });
-
-    apList.appendChild(tab);
+    apPillsList.appendChild(pill);
   });
 
-  // Select first access point by default
   if (points.length > 0) {
-    selectAccessPoint(points[0]);
+    applyAccessPoint(points[0]);
   } else {
-    renderEmptyWalkthrough(room.info || "No route media currently uploaded for this destination.");
+    applyAccessPoint({ name: "Information", info: room.info || "No route photos uploaded.", photos: [] });
   }
-
-  // Update card selection state in catalog
-  document.querySelectorAll(".room-card").forEach(c => {
-    c.classList.toggle("selected", c.querySelector("h3").textContent === roomKey);
-  });
 }
 
-// Select an Access Point
-function selectAccessPoint(ap) {
-  currentAccessPoint = ap;
-
-  // Wayfinding text
-  const wayfindingCard = document.getElementById("wayfindingCard");
-  const wayfindingText = document.getElementById("wayfindingText");
-  const wayfindingTitle = document.getElementById("wayfindingTitle");
-
-  const routeInfo = ap.info || currentRoom.info || "Follow visual photo sequence to arrive at destination.";
-  wayfindingTitle.textContent = ap.name ? `Route from ${ap.name}` : "Route Instructions";
-  wayfindingText.textContent = routeInfo;
-  wayfindingCard.style.display = "flex";
-
-  // Build Carousel
-  buildWalkthroughCarousel(ap.photos || []);
-}
-
-// Build Swiper Carousel for Photos
-function buildWalkthroughCarousel(photos) {
-  const mainWrapper = document.getElementById("mainSwiperWrapper");
-  const thumbsWrapper = document.getElementById("thumbsSwiperWrapper");
-  const wtWrapper = document.getElementById("walkthroughWrapper");
-  const stepText = document.getElementById("stepText");
-
-  // Destroy previous swiper instances
-  if (mainSwiper) { mainSwiper.destroy(true, true); mainSwiper = null; }
-  if (thumbsSwiper) { thumbsSwiper.destroy(true, true); thumbsSwiper = null; }
+// Apply selected access point
+function applyAccessPoint(ap) {
+  currentAp = ap;
   stopTour();
 
-  mainWrapper.innerHTML = "";
-  thumbsWrapper.innerHTML = "";
+  const dirContent = document.getElementById("dirContent");
+  const dirHeader = document.getElementById("dirHeader");
+  dirHeader.textContent = ap.name ? `From ${ap.name}` : "Route Instructions";
+  dirContent.textContent = ap.info || currentRoom.info || "Follow photo sequence to arrive at destination.";
 
-  if (!photos || photos.length === 0) {
-    wtWrapper.style.display = "none";
+  currentPhotos = ap.photos || [];
+  currentIndex = 0;
+  buildScrubber();
+  renderCurrentPhoto();
+}
+
+// Render Current Photo Canvas
+function renderCurrentPhoto() {
+  const container = document.getElementById("mediaContainer");
+  const badge = document.getElementById("stepBadge");
+
+  if (!currentPhotos || currentPhotos.length === 0) {
+    container.innerHTML = `<div style="color:var(--text-muted); font-size:13px;">No walkthrough media available for this route.</div>`;
+    badge.textContent = "No photos";
     return;
   }
 
-  wtWrapper.style.display = "block";
-  stepText.textContent = `Step 1 of ${photos.length}`;
+  badge.textContent = `Step ${currentIndex + 1} of ${currentPhotos.length}`;
 
-  photos.forEach((p, idx) => {
-    const isVideo = /\.(mp4|webm)$/i.test(p);
-    const mediaUrl = resolveAssetUrl(p);
+  const currentPath = currentPhotos[currentIndex];
+  const url = resolveUrl(currentPath);
+  const isVideo = /\.(mp4|webm)$/i.test(currentPath);
 
-    // Main Slide
-    const slide = document.createElement("div");
-    slide.className = "swiper-slide";
-    if (isVideo) {
-      slide.innerHTML = `<video controls playsinline preload="metadata"><source src="${mediaUrl}" type="video/mp4"></video>`;
-    } else {
-      slide.innerHTML = `<img src="${mediaUrl}" alt="Step ${idx + 1}" loading="lazy" onerror="this.onerror=null; this.src='logo_locorom.png';">`;
-    }
-    mainWrapper.appendChild(slide);
+  if (isVideo) {
+    container.innerHTML = `<video src="${url}" controls playsinline preload="auto" style="max-height:100%; max-width:100%;"></video>`;
+  } else {
+    container.innerHTML = `<img src="${url}" alt="Step ${currentIndex + 1}" loading="eager" onerror="this.onerror=null; this.src='logo_locorom.png';">`;
+  }
 
-    // Thumbs Slide
-    const thumb = document.createElement("div");
-    thumb.className = "swiper-slide";
-    thumb.innerHTML = `<img src="${mediaUrl}" alt="Thumb ${idx + 1}" loading="lazy" onerror="this.onerror=null; this.src='logo_locorom.png';">`;
-    thumbsWrapper.appendChild(thumb);
+  // Update Scrubber state
+  document.querySelectorAll(".scrubber-dot").forEach((dot, idx) => {
+    dot.classList.toggle("active", idx === currentIndex);
   });
 
-  // Initialize Swiper Thumbs
-  thumbsSwiper = new Swiper("#thumbsSwiper", {
-    spaceBetween: 8,
-    slidesPerView: 4,
-    freeMode: true,
-    watchSlidesProgress: true,
-    breakpoints: {
-      480: { slidesPerView: 5 },
-      768: { slidesPerView: 7 },
-      1024: { slidesPerView: 9 }
-    }
-  });
+  // Preload next and prev images for 0ms lag
+  preloadAdjacentPhotos();
+}
 
-  // Initialize Main Swiper
-  mainSwiper = new Swiper("#mainSwiper", {
-    spaceBetween: 10,
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-    pagination: {
-      el: ".swiper-pagination",
-      type: "progressbar",
-    },
-    thumbs: {
-      swiper: thumbsSwiper,
-    },
-    on: {
-      slideChange: function () {
-        const current = this.realIndex + 1;
-        const total = photos.length;
-        stepText.textContent = `Step ${current} of ${total}`;
+function preloadAdjacentPhotos() {
+  const nextIdx = (currentIndex + 1) % currentPhotos.length;
+  const prevIdx = (currentIndex - 1 + currentPhotos.length) % currentPhotos.length;
+
+  [nextIdx, prevIdx].forEach(idx => {
+    const path = currentPhotos[idx];
+    if (path && !/\.(mp4|webm)$/i.test(path)) {
+      const url = resolveUrl(path);
+      if (!preloadedCache.has(url)) {
+        const img = new Image();
+        img.src = url;
+        preloadedCache.add(url);
       }
     }
   });
 }
 
-function renderEmptyWalkthrough(msg) {
-  document.getElementById("walkthroughWrapper").style.display = "none";
-  document.getElementById("wayfindingText").textContent = msg;
-}
+// Build Scrubber Bar
+function buildScrubber() {
+  const track = document.getElementById("scrubberTrack");
+  track.innerHTML = "";
 
-// Close Room View -> Back to Directory
-function closeRoomView() {
-  currentRoom = null;
-  currentAccessPoint = null;
-  stopTour();
-
-  // Reset URL
-  window.history.pushState({}, "", window.location.pathname);
-
-  document.getElementById("roomViewContainer").style.display = "none";
-  document.getElementById("heroSection").style.display = "block";
-  document.getElementById("floorFilterWrapper").style.display = "block";
-  document.getElementById("catalogSection").style.display = "block";
-
-  renderCatalog();
-}
-
-// Tour Autoplay Mode
-function toggleTour() {
-  if (isTourPlaying) {
-    stopTour();
-  } else {
-    startTour();
+  if (currentPhotos.length <= 1) {
+    track.style.display = "none";
+    return;
   }
+  track.style.display = "flex";
+
+  currentPhotos.forEach((_, idx) => {
+    const dot = document.createElement("div");
+    dot.className = "scrubber-dot" + (idx === 0 ? " active" : "");
+    dot.title = `Jump to Step ${idx + 1}`;
+    dot.addEventListener("click", () => {
+      currentIndex = idx;
+      renderCurrentPhoto();
+    });
+    track.appendChild(dot);
+  });
+}
+
+function nextPhoto() {
+  if (currentPhotos.length === 0) return;
+  currentIndex = (currentIndex + 1) % currentPhotos.length;
+  renderCurrentPhoto();
+}
+
+function prevPhoto() {
+  if (currentPhotos.length === 0) return;
+  currentIndex = (currentIndex - 1 + currentPhotos.length) % currentPhotos.length;
+  renderCurrentPhoto();
+}
+
+// Tour mode
+function toggleTour() {
+  if (isTourActive) stopTour();
+  else startTour();
 }
 
 function startTour() {
-  if (!mainSwiper) return;
-  isTourPlaying = true;
-  const btn = document.getElementById("tourAutoplayBtn");
-  btn.classList.add("active");
-  document.getElementById("tourBtnText").textContent = "Pause Tour";
-  btn.querySelector("svg").innerHTML = `<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>`;
-  showToast("Tour walkthrough started", "▶️");
+  if (currentPhotos.length <= 1) return;
+  isTourActive = true;
+  const btn = document.getElementById("tourBtn");
+  btn.classList.add("playing");
+  document.getElementById("tourBtnLabel").textContent = "Pause tour";
+  showToast("Tour walkthrough started");
 
-  tourInterval = setInterval(() => {
-    if (mainSwiper.isEnd) {
-      mainSwiper.slideTo(0);
-    } else {
-      mainSwiper.slideNext();
-    }
-  }, 2600);
+  tourTimer = setInterval(() => {
+    nextPhoto();
+  }, 2200);
 }
 
 function stopTour() {
-  isTourPlaying = false;
-  if (tourInterval) clearInterval(tourInterval);
-  tourInterval = null;
-  const btn = document.getElementById("tourAutoplayBtn");
+  isTourActive = false;
+  if (tourTimer) clearInterval(tourTimer);
+  tourTimer = null;
+  const btn = document.getElementById("tourBtn");
   if (btn) {
-    btn.classList.remove("active");
-    document.getElementById("tourBtnText").textContent = "Play Tour";
-    btn.querySelector("svg").innerHTML = `<polygon points="5 3 19 12 5 21 5 3"/>`;
+    btn.classList.remove("playing");
+    document.getElementById("tourBtnLabel").textContent = "Auto-play tour";
   }
 }
 
-// Share & Copy Actions
-document.getElementById("backToCatalogBtn").addEventListener("click", closeRoomView);
-
-document.getElementById("tourAutoplayBtn").addEventListener("click", toggleTour);
-
-document.getElementById("fullscreenToggleBtn").addEventListener("click", () => {
-  const container = document.querySelector(".swiper-main-container");
+// Fullscreen
+function toggleFullscreen() {
+  const viewport = document.getElementById("canvasViewport");
   if (!document.fullscreenElement) {
-    container.requestFullscreen().catch(err => {
-      showToast("Fullscreen not supported by browser", "⚠️");
-    });
+    viewport.requestFullscreen().catch(() => showToast("Fullscreen unavailable"));
   } else {
     document.exitFullscreen();
   }
-});
+}
 
-document.getElementById("shareRoomBtn").addEventListener("click", () => {
-  if (!currentRoom) return;
-  const url = window.location.origin + window.location.pathname + "?room=" + encodeURIComponent(currentRoom.name);
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(url).then(() => {
-      showToast("Room link copied to clipboard!");
-    });
-  } else {
-    prompt("Copy room link:", url);
-  }
-});
+// Exit Walkthrough -> Back to Directory
+function exitWalkthrough() {
+  stopTour();
+  currentRoom = null;
+  currentAp = null;
+  window.history.pushState({}, "", window.location.pathname);
 
-document.getElementById("copyDirectionsBtn").addEventListener("click", () => {
-  if (!currentRoom) return;
-  const apName = currentAccessPoint ? currentAccessPoint.name : "Starting Point";
-  const info = currentAccessPoint ? currentAccessPoint.info : currentRoom.info;
-  const text = `📍 Destination: ${currentRoom.name} (${currentRoom.floor || "MITM Campus"})\n🧭 From ${apName}: ${info || "Follow photo path"}`;
-  
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(text).then(() => {
-      showToast("Directions copied to clipboard!");
-    });
-  } else {
-    prompt("Copy directions:", text);
-  }
-});
+  document.getElementById("walkthroughSection").style.display = "none";
+  document.getElementById("browseSection").style.display = "block";
+  renderDirectory();
+}
 
-// History popstate navigation
-window.addEventListener("popstate", (e) => {
-  if (e.state && e.state.room && allRooms[e.state.room]) {
-    openRoom(e.state.room);
-  } else {
-    closeRoomView();
-  }
-});
-
-// Launch on DOM ready
-document.addEventListener("DOMContentLoaded", initApp);
+document.addEventListener("DOMContentLoaded", init);
 </script>
 
 </body>
