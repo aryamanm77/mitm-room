@@ -1,1720 +1,1361 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=no">
-<title>LOCOROM • Campus Indoor Navigation</title>
-<meta name="description" content="Enterprise indoor visual wayfinding and corridor walkthrough system for MITM campus.">
-<link rel="icon" type="image/svg+xml" href="logo.svg">
-
-<!-- Inter & JetBrains Mono Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-<style>
-/* --------------------------------------------------------------------------
-   MNC ENTERPRISE DESIGN SYSTEM (Google / Apple / Linear / Uber Inspired)
-   -------------------------------------------------------------------------- */
-:root {
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-
-  /* Dark Theme Tokens (Default) */
-  --bg-app: #090a0f;
-  --bg-sidebar: #0f1118;
-  --bg-surface: #141722;
-  --bg-elevated: #1a1e2d;
-  --bg-input: #121520;
-  --bg-hover: #1f2436;
-  --bg-active: #252b40;
-  --bg-canvas: #020408;
-
-  --border-subtle: rgba(255, 255, 255, 0.05);
-  --border: rgba(255, 255, 255, 0.09);
-  --border-focus: #3b82f6;
-
-  --text-main: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --text-inverse: #090a0f;
-
-  --accent-blue: #3b82f6;
-  --accent-cyan: #06b6d4;
-  --accent-indigo: #6366f1;
-  --accent-emerald: #10b981;
-  --accent-amber: #f59e0b;
-
-  --sidebar-width: 400px;
-  --header-height: 52px;
-
-  --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-pill: 9999px;
-
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.7);
-
-  --transition: 160ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-[data-theme="light"] {
-  --bg-app: #f8fafc;
-  --bg-sidebar: #ffffff;
-  --bg-surface: #ffffff;
-  --bg-elevated: #f1f5f9;
-  --bg-input: #f1f5f9;
-  --bg-hover: #e2e8f0;
-  --bg-active: #cbd5e1;
-  --bg-canvas: #0f172a;
-
-  --border-subtle: rgba(0, 0, 0, 0.04);
-  --border: rgba(0, 0, 0, 0.09);
-  --border-focus: #2563eb;
-
-  --text-main: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-  --text-inverse: #ffffff;
-
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.08);
-}
-
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: antialiased;
-}
-
-html, body {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  font-family: var(--font-sans);
-  background-color: var(--bg-app);
-  color: var(--text-main);
-  line-height: 1.45;
-  user-select: none;
-}
-
-/* --------------------------------------------------------------------------
-   App Shell Layout (Full Viewport)
-   -------------------------------------------------------------------------- */
-.app-shell {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-}
-
-/* Top App Bar */
-header.app-bar {
-  height: var(--header-height);
-  background: var(--bg-sidebar);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-  z-index: 100;
-  flex-shrink: 0;
-}
-
-.brand-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-}
-
-.brand-icon {
-  width: 30px;
-  height: 30px;
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.brand-title {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--text-main);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.brand-tag {
-  font-family: var(--font-sans);
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-muted);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  padding: 2px 7px;
-  border-radius: var(--radius-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.app-bar-center {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  padding: 3px 10px;
-  border-radius: var(--radius-pill);
-}
-
-.radar-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent-emerald);
-  box-shadow: 0 0 6px var(--accent-emerald);
-}
-
-.app-bar-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.tool-btn {
-  background: transparent;
-  border: 1px solid transparent;
-  color: var(--text-secondary);
-  height: 32px;
-  width: 32px;
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.tool-btn:hover {
-  background: var(--bg-hover);
-  color: var(--text-main);
-  border-color: var(--border);
-}
-
-/* Main Workspace */
-.workspace {
-  flex: 1;
-  display: flex;
-  height: calc(100vh - var(--header-height));
-  width: 100vw;
-  overflow: hidden;
-  position: relative;
-}
-
-/* --------------------------------------------------------------------------
-   Left Command & Route Sidebar
-   -------------------------------------------------------------------------- */
-aside.sidebar {
-  width: var(--sidebar-width);
-  background: var(--bg-sidebar);
-  border-right: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  flex-shrink: 0;
-  z-index: 50;
-  overflow: hidden;
-  transition: transform var(--transition);
-}
-
-/* Search Header */
-.sidebar-search-header {
-  padding: 12px 14px;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg-sidebar);
-}
-
-.command-input-wrap {
-  display: flex;
-  align-items: center;
-  background: var(--bg-input);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 8px 12px;
-  transition: all var(--transition);
-}
-
-.command-input-wrap:focus-within {
-  border-color: var(--border-focus);
-  background: var(--bg-surface);
-  box-shadow: 0 0 0 1px var(--border-focus);
-}
-
-.command-input-wrap svg {
-  color: var(--text-muted);
-  flex-shrink: 0;
-  margin-right: 10px;
-}
-
-.command-input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-family: var(--font-sans);
-  font-size: 13.5px;
-  color: var(--text-main);
-}
-
-.command-input::placeholder {
-  color: var(--text-muted);
-}
-
-.kbd-shortcut {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-muted);
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  padding: 1px 5px;
-  border-radius: var(--radius-xs);
-}
-
-.clear-btn {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  cursor: pointer;
-  display: none;
-  padding: 2px;
-}
-
-.clear-btn:hover {
-  color: var(--text-main);
-}
-
-/* Filter Strip */
-.filter-strip {
-  display: flex;
-  gap: 5px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  padding: 10px 14px 6px 14px;
-  border-bottom: 1px solid var(--border-subtle);
-  flex-shrink: 0;
-}
-
-.filter-strip::-webkit-scrollbar {
-  display: none;
-}
-
-.filter-tab {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  font-family: var(--font-sans);
-  font-size: 12px;
-  font-weight: 500;
-  padding: 4px 10px;
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all var(--transition);
-}
-
-.filter-tab:hover {
-  background: var(--bg-hover);
-  color: var(--text-main);
-}
-
-.filter-tab.active {
-  background: var(--text-main);
-  color: var(--text-inverse);
-  border-color: var(--text-main);
-  font-weight: 600;
-}
-
-/* Sidebar Scrollable Body */
-.sidebar-body {
-  flex: 1;
-  overflow-y: auto;
-  position: relative;
-}
-
-/* Mode 1: Directory List View */
-.directory-view {
-  padding: 8px 10px;
-}
-
-.dest-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 12px;
-  border-radius: var(--radius-sm);
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: all var(--transition);
-  margin-bottom: 2px;
-}
-
-.dest-item:hover {
-  background: var(--bg-hover);
-  border-color: var(--border-subtle);
-}
-
-.dest-item.active {
-  background: var(--bg-active);
-  border-color: var(--border-focus);
-}
-
-.dest-info-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  overflow: hidden;
-}
-
-.dest-icon-box {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-xs);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent-blue);
-  flex-shrink: 0;
-}
-
-.dest-texts {
-  overflow: hidden;
-}
-
-.dest-name {
-  font-family: var(--font-mono);
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--text-main);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.dest-meta {
-  font-size: 11.5px;
-  color: var(--text-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.dest-floor-badge {
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--text-muted);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-subtle);
-  padding: 2px 7px;
-  border-radius: var(--radius-xs);
-  flex-shrink: 0;
-}
-
-/* Mode 2: Route Detail Panel (Slide-in) */
-.route-panel {
-  display: none;
-  padding: 14px;
-}
-
-.route-top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.back-link:hover {
-  color: var(--text-main);
-}
-
-.close-route-btn {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  cursor: pointer;
-}
-
-.close-route-btn:hover {
-  color: var(--text-main);
-}
-
-.route-dest-header {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 14px;
-  margin-bottom: 14px;
-}
-
-.route-dest-title {
-  font-family: var(--font-mono);
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--text-main);
-}
-
-.route-dest-dept {
-  font-size: 12px;
-  color: var(--accent-cyan);
-  margin-top: 2px;
-}
-
-.route-tags {
-  display: flex;
-  gap: 6px;
-  margin-top: 8px;
-}
-
-.mini-badge {
-  font-size: 11px;
-  font-weight: 500;
-  padding: 2px 7px;
-  border-radius: var(--radius-xs);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-}
-
-/* Starting Point Segmented Tab Switcher */
-.ap-block {
-  margin-bottom: 14px;
-}
-
-.ap-header-label {
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-  margin-bottom: 6px;
-}
-
-.ap-segmented-tabs {
-  display: flex;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  padding: 3px;
-  border-radius: var(--radius-sm);
-  gap: 3px;
-}
-
-.ap-seg-tab {
-  flex: 1;
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  font-size: 12px;
-  font-weight: 500;
-  padding: 6px 8px;
-  border-radius: var(--radius-xs);
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: center;
-  transition: all var(--transition);
-}
-
-.ap-seg-tab:hover {
-  color: var(--text-main);
-}
-
-.ap-seg-tab.active {
-  background: var(--bg-surface);
-  color: var(--text-main);
-  font-weight: 600;
-  box-shadow: var(--shadow-sm);
-}
-
-/* Turn-by-Turn Directions Card */
-.route-nav-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 12px 14px;
-  margin-bottom: 14px;
-}
-
-.nav-card-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--accent-blue);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin-bottom: 4px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.nav-card-text {
-  font-size: 13px;
-  color: var(--text-main);
-  line-height: 1.5;
-  white-space: pre-wrap;
-}
-
-/* Waypoint Step Timeline Checklist */
-.step-checklist-title {
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-  margin: 14px 0 8px 0;
-}
-
-.step-checklist {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.step-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-  border-radius: var(--radius-xs);
-  cursor: pointer;
-  font-size: 12.5px;
-  color: var(--text-secondary);
-  transition: all var(--transition);
-  border: 1px solid transparent;
-}
-
-.step-row:hover {
-  background: var(--bg-hover);
-  color: var(--text-main);
-}
-
-.step-row.active {
-  background: var(--bg-active);
-  color: var(--text-main);
-  border-color: var(--border-focus);
-}
-
-.step-num-circle {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.step-row.active .step-num-circle {
-  background: var(--accent-blue);
-  border-color: var(--accent-blue);
-  color: #ffffff;
-}
-
-/* Route Action Buttons */
-.route-actions-row {
-  display: flex;
-  gap: 8px;
-  margin-top: 14px;
-}
-
-.btn-route {
-  flex: 1;
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  color: var(--text-main);
-  font-size: 12px;
-  font-weight: 500;
-  padding: 7px 10px;
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.btn-route:hover {
-  background: var(--bg-hover);
-}
-
-/* --------------------------------------------------------------------------
-   Right Main Viewport Canvas (Visual Corridor Stage)
-   -------------------------------------------------------------------------- */
-main.viewport-canvas {
-  flex: 1;
-  background: var(--bg-canvas);
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Image Display Layer */
-.media-stage {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.media-stage img,
-.media-stage video {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  user-select: none;
-  pointer-events: none;
-}
-
-/* Floating Top HUD Capsule */
-.hud-top-capsule {
-  position: absolute;
-  top: 16px;
-  left: 20px;
-  right: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  pointer-events: none;
-  z-index: 40;
-}
-
-.hud-location-badge {
-  pointer-events: auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(15, 17, 24, 0.85);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
-  padding: 6px 14px;
-  border-radius: var(--radius-pill);
-  box-shadow: var(--shadow-md);
-}
-
-.hud-room {
-  font-family: var(--font-mono);
-  font-size: 13.5px;
-  font-weight: 700;
-  color: #ffffff;
-}
-
-.hud-divider {
-  width: 1px;
-  height: 12px;
-  background: var(--border);
-}
-
-.hud-step-counter {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--accent-cyan);
-}
-
-.hud-right-actions {
-  pointer-events: auto;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.hud-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-full);
-  background: rgba(15, 17, 24, 0.85);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all var(--transition);
-  box-shadow: var(--shadow-md);
-}
-
-.hud-btn:hover {
-  background: rgba(30, 35, 50, 0.95);
-  transform: scale(1.05);
-}
-
-/* Large Center Left/Right Arrow Paddles */
-.nav-paddle {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-full);
-  background: rgba(15, 17, 24, 0.7);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--border);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all var(--transition);
-  z-index: 40;
-}
-
-.nav-paddle:hover {
-  background: rgba(59, 130, 246, 0.9);
-  border-color: transparent;
-  transform: translateY(-50%) scale(1.08);
-}
-
-.nav-paddle.left { left: 20px; }
-.nav-paddle.right { right: 20px; }
-
-/* Floating Bottom Navigation Deck (Tesla / Apple Maps Deck) */
-.hud-deck {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 680px;
-  background: rgba(15, 17, 24, 0.88);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 12px 16px;
-  box-shadow: var(--shadow-lg);
-  z-index: 40;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.deck-controls-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-}
-
-.deck-btn-prev, .deck-btn-next {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  color: #ffffff;
-  font-size: 12.5px;
-  font-weight: 600;
-  padding: 7px 16px;
-  border-radius: var(--radius-sm);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.deck-btn-prev:hover, .deck-btn-next:hover {
-  background: var(--bg-hover);
-  border-color: var(--accent-blue);
-}
-
-.deck-btn-tour {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  font-size: 12px;
-  font-weight: 500;
-  padding: 6px 12px;
-  border-radius: var(--radius-sm);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.deck-btn-tour:hover {
-  color: #ffffff;
-  border-color: var(--text-muted);
-}
-
-.deck-btn-tour.playing {
-  background: var(--accent-blue);
-  color: #ffffff;
-  border-color: transparent;
-}
-
-/* Timeline Step Scrubber Bar */
-.deck-timeline-track {
-  display: flex;
-  gap: 4px;
-  width: 100%;
-  padding-top: 2px;
-}
-
-.timeline-segment {
-  flex: 1;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.timeline-segment:hover {
-  background: rgba(255, 255, 255, 0.4);
-}
-
-.timeline-segment.active {
-  background: var(--accent-cyan);
-  box-shadow: 0 0 8px var(--accent-cyan);
-}
-
-.timeline-segment.past {
-  background: var(--accent-blue);
-}
-
-/* Toast Floating Shelf */
-.toast-host {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 9999;
-  pointer-events: none;
-}
-
-.toast-pill {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  color: var(--text-main);
-  font-size: 12.5px;
-  font-weight: 500;
-  padding: 9px 16px;
-  border-radius: var(--radius-pill);
-  box-shadow: var(--shadow-lg);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  pointer-events: auto;
-  animation: slideUp 180ms ease forwards;
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 840px) {
-  .workspace {
-    flex-direction: column-reverse;
-  }
-  aside.sidebar {
-    width: 100vw;
-    height: 48vh;
-    border-right: none;
-    border-top: 1px solid var(--border);
-  }
-  main.viewport-canvas {
-    height: 52vh;
-    width: 100vw;
-  }
-  .hud-deck {
-    bottom: 10px;
-    width: 95%;
-    padding: 8px 12px;
-  }
-  .nav-paddle {
-    display: none;
-  }
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Locorom Campus Wayfinder</title>
+  <meta name="description" content="Indoor visual wayfinding, spatial floor schematic, and natural-language route planner for the MITM campus." />
+  <meta property="og:title" content="Locorom Campus Wayfinder" />
+  <meta property="og:description" content="Indoor visual wayfinding, spatial floor schematic, and natural-language route planner for the MITM campus." />
+  <link rel="icon" type="image/svg+xml" href="logo.svg" />
+
+  <!-- 2+1 Font Pairing: Outfit (Display), Plus Jakarta Sans (Body), JetBrains Mono (Tabular Numerals) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@600;700&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Three.js r165 ES Module Import Map -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+      /* Dark Mode (Default) */
+      --bg-canvas: #0b0e14;
+      --bg-surface: #121721;
+      --bg-elevated: #19202e;
+      --bg-stage: #070a10;
+
+      --border-hairline: rgba(255, 255, 255, 0.09);
+      --border-strong: rgba(255, 255, 255, 0.18);
+
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+
+      --accent: #3b82f6;
+      --accent-soft: rgba(59, 130, 246, 0.14);
+      --whatsapp-green: #16a34a;
+
+      --ease: 160ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="light"] {
+      --bg-canvas: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-elevated: #f1f5f9;
+      --bg-stage: #070a10;
+
+      --border-hairline: rgba(15, 23, 42, 0.09);
+      --border-strong: rgba(15, 23, 42, 0.18);
+
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.1);
+      --whatsapp-green: #15803d;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html, body {
+      min-height: 100%;
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .tabular-nums {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    button, input, a {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    button:focus-visible, input:focus-visible, a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .icon-svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      stroke: currentColor;
+      stroke-width: 1.85;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    /* ==========================================================================
+       TOP NAVIGATION BAR (Strict 3-Zone Contract: Brand | Floor Links | Theme Action)
+       ========================================================================== */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      padding: 0 28px;
+      background-color: var(--bg-surface);
+      border-bottom: 1px solid var(--border-hairline);
+      z-index: 50;
+    }
+
+    .brand-wordmark {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark-svg {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+
+    .floor-nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .floor-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .floor-nav-link {
+      background: none;
+      border: none;
+      padding: 6px 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      border-bottom: 2px solid transparent;
+      transition: color var(--ease), border-color var(--ease);
+    }
+
+    .floor-nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    .floor-nav-link.active {
+      color: var(--text-primary);
+      border-bottom-color: var(--accent);
+    }
+
+    .theme-btn {
+      background-color: var(--bg-elevated);
+      border: 1px solid var(--border-hairline);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .theme-btn:hover {
+      border-color: var(--border-strong);
+    }
+
+    /* ==========================================================================
+       SCREEN 1: HOME / ROOM FINDER
+       ========================================================================== */
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 36px 24px 64px 24px;
+    }
+
+    .search-hero {
+      max-width: 700px;
+      margin: 0 auto 32px auto;
+      text-align: center;
+    }
+
+    .search-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      text-wrap: balance;
+    }
+
+    .search-hero p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .search-bar-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      height: 52px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      padding: 0 7px 0 16px;
+      transition: border-color var(--ease), background-color var(--ease);
+    }
+
+    .search-bar-box:focus-within {
+      border-color: var(--accent);
+    }
+
+    .search-bar-box.listening {
+      border-color: var(--accent);
+      background-color: var(--accent-soft);
+    }
+
+    .search-lead-icon {
+      width: 18px;
+      height: 18px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      display: block;
+    }
+
+    .search-input {
+      flex: 1 1 auto;
+      min-width: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-size: 15.5px;
+      color: var(--text-primary);
+    }
+
+    .search-input:focus,
+    .search-input:focus-visible {
+      outline: none;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+      text-overflow: ellipsis;
+    }
+
+    .search-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .clear-search-btn {
+      display: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: color var(--ease), background-color var(--ease);
+    }
+
+    .clear-search-btn:hover {
+      color: var(--text-primary);
+      background-color: var(--bg-elevated);
+    }
+
+    .voice-mic-btn {
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      background-color: var(--bg-elevated);
+      border: 1px solid var(--border-hairline);
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background-color var(--ease), border-color var(--ease), color var(--ease), transform var(--ease);
+    }
+
+    .voice-mic-btn svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+      stroke: currentColor;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .voice-mic-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+
+    .voice-mic-btn.listening {
+      background-color: #dc2626;
+      border-color: #dc2626;
+      color: #ffffff;
+    }
+
+    .voice-status-banner {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 10px;
+      padding: 10px 16px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--accent);
+      border-radius: 10px;
+      font-size: 13.5px;
+      color: var(--text-primary);
+      text-align: left;
+    }
+
+    .voice-status-banner.active {
+      display: flex;
+    }
+
+    .voice-status-text {
+      color: var(--text-secondary);
+    }
+
+    .voice-status-text strong {
+      color: var(--text-primary);
+    }
+
+    .voice-stop-link {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .quick-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+    }
+
+    .quick-label {
+      color: var(--text-muted);
+    }
+
+    .quick-link {
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .quick-link:hover {
+      color: var(--accent);
+    }
+
+    .dot-sep {
+      color: var(--text-muted);
+    }
+
+    /* Section Header Bar with 2D Grid / 3D Campus Twin Toggle */
+    .section-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .section-bar-left {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .section-bar h2 {
+      font-family: var(--font-display);
+      font-size: 19px;
+      font-weight: 700;
+    }
+
+    .results-count {
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    .mode-segmented {
+      display: inline-flex;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: 9px;
+      padding: 4px;
+      gap: 4px;
+    }
+
+    .mode-seg-btn {
+      background: transparent;
+      border: none;
+      border-radius: 6px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+      transition: background-color var(--ease), color var(--ease);
+    }
+
+    .mode-seg-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .mode-seg-btn.active {
+      background-color: var(--accent);
+      color: #ffffff;
+    }
+
+    /* Clean Room Cards Grid */
+    .rooms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+      gap: 18px;
+    }
+
+    .room-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--ease), border-color var(--ease);
+    }
+
+    .room-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+
+    .room-card-thumb {
+      height: 152px;
+      width: 100%;
+      background-color: var(--bg-stage);
+      overflow: hidden;
+    }
+
+    .room-card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .thumb-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 15px;
+      color: #94a3b8;
+    }
+
+    .room-card-content {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      flex: 1;
+    }
+
+    .room-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    .room-card-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .room-card-title {
+      font-family: var(--font-display);
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .card-wa-share {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      border: 1px solid var(--border-hairline);
+      background-color: var(--bg-elevated);
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: color var(--ease), border-color var(--ease);
+    }
+
+    .card-wa-share:hover {
+      color: #22c55e;
+      border-color: #22c55e;
+    }
+
+    .room-card-hint {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-top: 2px;
+    }
+
+    .empty-box {
+      grid-column: 1 / -1;
+      padding: 48px 24px;
+      text-align: center;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* ==========================================================================
+       SCREEN 2: STEP-BY-STEP WALKTHROUGH + 3D SPATIAL TWIN + WHATSAPP SHARE
+       ========================================================================== */
+    .walkthrough-wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 24px 20px 64px 20px;
+    }
+
+    .wt-top-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .wt-share-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      padding: 9px 15px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+    }
+
+    .btn-whatsapp {
+      background-color: var(--whatsapp-green);
+      border: 1px solid var(--whatsapp-green);
+      color: #ffffff;
+      border-radius: 8px;
+      padding: 9px 16px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: opacity var(--ease);
+    }
+
+    .btn-whatsapp:hover {
+      opacity: 0.92;
+    }
+
+    .wt-header {
+      margin-bottom: 18px;
+    }
+
+    .wt-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .wt-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    /* Starting Staircase Switcher */
+    .stair-switcher-row {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .stair-switcher-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .stair-buttons {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      background-color: var(--bg-surface);
+      padding: 5px;
+      border-radius: 10px;
+      border: 1px solid var(--border-hairline);
+    }
+
+    .stair-tab-btn {
+      flex: 1;
+      min-width: 160px;
+      background: transparent;
+      border: none;
+      border-radius: 7px;
+      padding: 9px 14px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .stair-tab-btn.active {
+      background-color: var(--accent);
+      color: #ffffff;
+    }
+
+    /* Plain-English Directions Box */
+    .directions-box {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+
+    .directions-from {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .directions-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* Unified Walkthrough Viewer Card (Supports Both Corridor Photos & 3D Spatial Twin) */
+    .viewer-box {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .viewer-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .step-counter {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .viewer-top-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .auto-play-btn {
+      background-color: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      border-radius: 7px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .auto-play-btn.playing {
+      background-color: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .progress-bar-track {
+      width: 100%;
+      height: 4px;
+      background-color: var(--bg-elevated);
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--accent);
+      transition: width 160ms ease;
+    }
+
+    .photo-stage-wrap {
+      position: relative;
+      height: 500px;
+      background-color: var(--bg-stage);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .photo-stage {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wt-main-media {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      user-select: none;
+    }
+
+    .stage-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background-color: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 15;
+    }
+
+    .stage-arrow:hover {
+      background-color: var(--accent);
+    }
+
+    .stage-arrow.left { left: 14px; }
+    .stage-arrow.right { right: 14px; }
+
+    /* ==========================================================================
+       THREE.JS 3D SPATIAL CAMPUS VIEWPORT & COLLAPSIBLE BOTTOM DOCK
+       (Zero backdrop-filter over WebGL per performance directive)
+       ========================================================================== */
+    .spatial-3d-wrapper {
+      position: relative;
+      width: 100%;
+      height: 520px;
+      background-color: #070a10;
+      border-radius: 12px;
+      border: 1px solid var(--border-hairline);
+      overflow: hidden;
+    }
+
+    .spatial-3d-wrapper.in-viewer {
+      border: none;
+      border-radius: 0;
+      height: 500px;
+    }
+
+    .three-canvas-mount {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .three-top-spec {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      background-color: rgba(11, 14, 20, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+      padding: 8px 14px;
+      color: #f8fafc;
+      font-size: 12.5px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Unified Collapsible Bottom Control Dock (Zero Viewport Occlusion) */
+    .three-bottom-dock-wrap {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(760px, 94%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 12;
+      transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .three-bottom-dock-wrap.collapsed {
+      transform: translateX(-50%) translateY(calc(100% - 30px));
+    }
+
+    .dock-collapse-tab {
+      background-color: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      padding: 4px 14px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #cbd5e1;
+      cursor: pointer;
+    }
+
+    .three-bottom-dock {
+      width: 100%;
+      background-color: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 10px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: #f8fafc;
+    }
+
+    .dock-control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+    }
+
+    .dock-control-group label {
+      color: #94a3b8;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .dock-slider {
+      width: 110px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .dock-cam-btn {
+      background-color: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #e2e8f0;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .dock-cam-btn:hover {
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .viewer-bottom-controls {
+      padding: 16px 18px;
+      border-top: 1px solid var(--border-hairline);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .big-step-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .step-nav-btn {
+      background-color: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .step-nav-btn.primary {
+      background-color: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .step-nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .thumbs-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .step-thumb-btn {
+      width: 64px;
+      height: 46px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border-strong);
+      background-color: var(--bg-stage);
+      position: relative;
+      flex-shrink: 0;
+      cursor: pointer;
+      opacity: 0.5;
+    }
+
+    .step-thumb-btn.active {
+      opacity: 1;
+      border: 2px solid var(--accent);
+    }
+
+    .step-thumb-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .step-thumb-num {
+      position: absolute;
+      bottom: 2px;
+      right: 4px;
+      font-size: 10px;
+      background-color: rgba(0, 0, 0, 0.75);
+      color: #ffffff;
+      padding: 0 4px;
+      border-radius: 3px;
+    }
+
+    .no-photo-msg {
+      color: #94a3b8;
+      padding: 24px;
+      text-align: center;
+    }
+
+    /* Toast */
+    .toast-host {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+    }
+
+    .toast-msg {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-strong);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: opacity var(--ease);
+    }
+
+    @media (max-width: 680px) {
+      .top-bar {
+        padding: 0 16px;
+        gap: 14px;
+      }
+      .photo-stage-wrap, .spatial-3d-wrapper.in-viewer {
+        height: 360px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<div class="app-shell">
+  <!-- ==========================================================================
+       TOP NAVIGATION BAR (Strict 3-Zone Contract: Brand | Floor Links | Theme Action)
+       ========================================================================== -->
+  <header class="top-bar">
+    <a href="/" class="brand-wordmark" id="brandHomeLink">
+      <svg class="brand-mark-svg" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#0B0F17"/>
+        <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="13.25" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.5"/>
+        <path d="M32 12L50 22.5L32 33L14 22.5L32 12Z" fill="#1E293B" stroke="#64748B" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M23 35.25L14 40.5L32 51L50 40.5L41 35.25" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M22 41.5L32 47L42 41.25V22.5L32 28" stroke="#3B82F6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="22" cy="41.5" r="3" fill="#0B0F17" stroke="#94A3B8" stroke-width="2"/>
+        <circle cx="32" cy="22.5" r="4.5" fill="#3B82F6"/>
+        <circle cx="32" cy="22.5" r="2" fill="#FFFFFF"/>
+      </svg>
+      <span>Locorom</span>
+    </a>
 
-  <!-- Top Enterprise App Bar -->
-  <header class="app-bar">
-    <div class="brand-wrapper" id="brandBtn">
-      <div class="brand-icon">
-        <svg viewBox="0 0 512 512" width="30" height="30">
-          <defs>
-            <linearGradient id="pGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#3b82f6"/>
-              <stop offset="100%" stop-color="#06b6d4"/>
-            </linearGradient>
-          </defs>
-          <rect width="512" height="512" rx="110" fill="#090d16"/>
-          <circle cx="256" cy="220" r="130" fill="none" stroke="url(#pGrad)" stroke-width="6" opacity="0.25"/>
-          <path d="M140 370 L210 300 L300 300 L370 220" fill="none" stroke="url(#pGrad)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="140" cy="370" r="26" fill="#090d16" stroke="#3b82f6" stroke-width="12"/>
-          <circle cx="370" cy="220" r="34" fill="url(#pGrad)"/>
-          <circle cx="370" cy="220" r="16" fill="#ffffff"/>
-        </svg>
-      </div>
-      <div class="brand-title">
-        LOCOROM
-        <span class="brand-tag">MITM Campus</span>
-      </div>
-    </div>
+    <nav class="floor-nav" aria-label="Floor Filter">
+      <button type="button" class="floor-nav-link active" data-floor-filter="all">All Rooms</button>
+      <button type="button" class="floor-nav-link" data-floor-filter="ground">Ground &amp; Labs</button>
+      <button type="button" class="floor-nav-link" data-floor-filter="1st Floor">1st Floor</button>
+      <button type="button" class="floor-nav-link" data-floor-filter="2nd Floor">2nd Floor</button>
+      <button type="button" class="floor-nav-link" data-floor-filter="3rd Floor">3rd Floor</button>
+      <button type="button" class="floor-nav-link" data-floor-filter="4-5">4th &amp; 5th Floor</button>
+    </nav>
 
-    <div class="app-bar-center">
-      <div class="status-pill">
-        <span class="radar-dot"></span>
-        <span id="destCountDisplay">62 Destinations</span>
-      </div>
-    </div>
-
-    <div class="app-bar-actions">
-      <button class="tool-btn" id="themeBtn" title="Toggle Dark / Light Mode">
-        <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-      </button>
-      <a class="tool-btn" href="https://github.com/aryamanm77/mitm-room" target="_blank" rel="noopener" title="GitHub Repository">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-        </svg>
-      </a>
-    </div>
+    <button type="button" class="theme-btn" id="themeToggleBtn">
+      <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+      </svg>
+      <span id="themeToggleLabel">Light Mode</span>
+    </button>
   </header>
 
-  <!-- Workspace: Split View (Sidebar + Full Canvas) -->
-  <div class="workspace">
+  <!-- ==========================================================================
+       SCREEN 1: HOME / ROOM FINDER
+       ========================================================================== -->
+  <main id="homeScreen" class="container">
+    <section class="search-hero">
+      <h1>Where are you heading on campus?</h1>
+      <p>Search by room number, speak with your microphone, or explore the 3D campus digital twin.</p>
 
-    <!-- Left Command & Route Explorer Sidebar -->
-    <aside class="sidebar" id="sidebarEl">
-      <!-- Search Box -->
-      <div class="sidebar-search-header">
-        <div class="command-input-wrap">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      <div class="search-bar-box" id="searchBarBox">
+        <svg class="icon-svg search-lead-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="7.5"></circle>
+          <line x1="20" y1="20" x2="16.35" y2="16.35"></line>
+        </svg>
+        <input
+          type="text"
+          id="mainSearchInput"
+          class="search-input"
+          placeholder="Search or speak a room (e.g. 205, 313, DSP Lab, 114)..."
+          autocomplete="off"
+        />
+        <div class="search-actions">
+          <button type="button" class="clear-search-btn" id="clearSearchBtn" aria-label="Clear search" title="Clear search">
+            <svg class="icon-svg" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+          <button type="button" class="voice-mic-btn" id="voiceSearchBtn" title="Hands-free voice search" aria-label="Start voice search">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="9" y="3" width="6" height="11" rx="3"></rect>
+              <path d="M18 11a6 6 0 0 1-12 0"></path>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+              <line x1="9" y1="21" x2="15" y2="21"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="voice-status-banner" id="voiceStatusBanner" role="status" aria-live="polite">
+        <span class="voice-status-text" id="voiceStatusText"><strong>Listening…</strong> Say a room number or lab name (e.g. "Room 205" or "DSP Lab")</span>
+        <button type="button" class="voice-stop-link" id="voiceStopBannerBtn">Cancel</button>
+      </div>
+
+      <div class="quick-row" id="quickChipsRow"></div>
+    </section>
+
+    <section>
+      <div class="section-bar">
+        <div class="section-bar-left">
+          <h2>Campus Destinations</h2>
+          <span class="results-count tabular-nums" id="resultsCountLabel">60 rooms available</span>
+        </div>
+
+        <div class="mode-segmented" role="tablist" aria-label="Home View Mode">
+          <button type="button" class="mode-seg-btn active" id="homeModeGridBtn">
+            <svg class="icon-svg" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+            <span>Room Grid</span>
+          </button>
+          <button type="button" class="mode-seg-btn" id="homeMode3DBtn">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 3L2 8l10 5 10-5-10-5Z"/><path d="M2 13l10 5 10-5"/><path d="M2 18l10 5 10-5"/></svg>
+            <span>3D Campus Twin</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="rooms-grid" id="roomsGrid"></div>
+
+      <!-- Shared 3D Campus Twin Container when toggled on Home -->
+      <div id="home3DHost" style="display: none;"></div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       SCREEN 2: STEP-BY-STEP WALKTHROUGH + 3D SPATIAL ROUTE + WHATSAPP SHARE
+       ========================================================================== -->
+  <section id="walkthroughScreen" class="walkthrough-wrap" style="display: none;">
+    <div class="wt-top-actions">
+      <button type="button" class="btn-secondary" id="wtBackBtn">
+        <svg class="icon-svg" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        <span>All Rooms</span>
+      </button>
+
+      <div class="wt-share-group">
+        <a
+          id="wtWhatsappLink"
+          href="https://wa.me/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-whatsapp"
+          title="Share exact room route directly on WhatsApp"
+        >
+          <svg class="icon-svg" viewBox="0 0 24 24">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
           </svg>
-          <input type="text" id="searchInput" class="command-input" placeholder="Search room, lab, or department..." autocomplete="off" spellcheck="false">
-          <button class="clear-btn" id="clearBtn">✕</button>
-          <span class="kbd-shortcut">/</span>
-        </div>
+          <span>Share on WhatsApp</span>
+        </a>
+
+        <button type="button" class="btn-secondary" id="wtShareBtn">
+          <svg class="icon-svg" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span>Copy Link</span>
+        </button>
       </div>
+    </div>
 
-      <!-- Category Filter Strip -->
-      <div class="filter-strip" id="filterStrip">
-        <button class="filter-tab active" data-floor="all">All</button>
-        <button class="filter-tab" data-floor="Basement & Ground">Basement</button>
-        <button class="filter-tab" data-floor="1st Floor">1st Fl</button>
-        <button class="filter-tab" data-floor="2nd Floor">2nd Fl</button>
-        <button class="filter-tab" data-floor="3rd Floor">3rd Fl</button>
-        <button class="filter-tab" data-floor="4th Floor">4th Fl</button>
-        <button class="filter-tab" data-floor="5th Floor">5th Fl</button>
-        <button class="filter-tab" data-floor="Mechanical Block">Mech</button>
-        <button class="filter-tab" data-floor="Campus Amenities">Labs & Hall</button>
+    <div class="wt-header">
+      <div class="wt-meta" id="wtRoomMeta"></div>
+      <h1 class="wt-title" id="wtRoomTitle">Room 205</h1>
+    </div>
+
+    <!-- Starting Staircase Selector -->
+    <div class="stair-switcher-row" id="wtStairSwitcherWrap">
+      <span class="stair-switcher-label">Choose your starting staircase:</span>
+      <div class="stair-buttons" id="wtStairButtons"></div>
+    </div>
+
+    <!-- Plain-English Directions Box -->
+    <div class="directions-box">
+      <div class="directions-from">
+        <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+        <span id="wtDirectionFrom">How to walk:</span>
       </div>
+      <div class="directions-text" id="wtDirectionText"></div>
+    </div>
 
-      <!-- Scrollable Body -->
-      <div class="sidebar-body">
-        <!-- 1. Destination Directory List -->
-        <div class="directory-view" id="directoryView">
-          <!-- Injected dynamically -->
-        </div>
+    <!-- Unified Viewer Card: Toggle Between Real Corridor Photos & 3D Spatial Route -->
+    <div class="viewer-box">
+      <div class="viewer-top-bar">
+        <span class="step-counter tabular-nums" id="wtStepCounter">Step 1 of 9</span>
 
-        <!-- 2. Turn-by-Turn Route Details Panel -->
-        <div class="route-panel" id="routePanel">
-          <div class="route-top-bar">
-            <button class="back-link" id="routeBackBtn">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-              <span>Back to search</span>
+        <div class="viewer-top-right">
+          <div class="mode-segmented">
+            <button type="button" class="mode-seg-btn active" id="wtModePhotosBtn">
+              <svg class="icon-svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <span>Corridor Photos</span>
             </button>
-            <button class="close-route-btn" id="routeCloseBtn" title="Close Route">✕</button>
-          </div>
-
-          <div class="route-dest-header">
-            <div class="route-dest-title" id="panelDestName">Room 205</div>
-            <div class="route-dest-dept" id="panelDestDept">CSE Department</div>
-            <div class="route-tags">
-              <span class="mini-badge" id="panelDestFloor">2nd Floor</span>
-              <span class="mini-badge" id="panelPhotosCount">12 Photos</span>
-            </div>
-          </div>
-
-          <!-- Starting Point Tabs -->
-          <div class="ap-block" id="apBlock">
-            <div class="ap-header-label">Starting Access Point</div>
-            <div class="ap-segmented-tabs" id="apTabsRow">
-              <!-- Injected dynamically -->
-            </div>
-          </div>
-
-          <!-- Directions Card -->
-          <div class="route-nav-card">
-            <div class="nav-card-label" id="panelDirTitle">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-              <span>Route Wayfinding</span>
-            </div>
-            <div class="nav-card-text" id="panelDirText">Directions will appear here.</div>
-          </div>
-
-          <!-- Step-by-Step Waypoint Checklist -->
-          <div class="step-checklist-title">Corridor Waypoints</div>
-          <div class="step-checklist" id="stepChecklist">
-            <!-- Injected dynamically -->
-          </div>
-
-          <!-- Actions -->
-          <div class="route-actions-row">
-            <button class="btn-route" id="copyRouteBtn">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              <span>Copy</span>
-            </button>
-            <button class="btn-route" id="shareRouteBtn">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-              <span>Share</span>
+            <button type="button" class="mode-seg-btn" id="wtMode3DBtn">
+              <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 3L2 8l10 5 10-5-10-5Z"/><path d="M2 13l10 5 10-5"/><path d="M2 18l10 5 10-5"/></svg>
+              <span>3D Spatial Route</span>
             </button>
           </div>
-        </div>
-      </div>
-    </aside>
 
-    <!-- Right Main Viewport Stage -->
-    <main class="viewport-canvas" id="viewportCanvas">
-      <!-- Media Stage -->
-      <div class="media-stage" id="mediaStage">
-        <!-- Photo/video injected here -->
-      </div>
-
-      <!-- Floating Top HUD Capsule -->
-      <div class="hud-top-capsule">
-        <div class="hud-location-badge">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span class="hud-room" id="hudRoomName">Room 205</span>
-          <div class="hud-divider"></div>
-          <span class="hud-step-counter" id="hudStepCounter">Step 1 of 12</span>
-        </div>
-
-        <div class="hud-right-actions">
-          <button class="hud-btn" id="hudFsBtn" title="Toggle Fullscreen">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+          <button type="button" class="auto-play-btn" id="wtAutoPlayBtn">
+            <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span id="wtAutoPlayLabel">Auto-Walk</span>
           </button>
         </div>
       </div>
 
-      <!-- Center Left/Right Arrow Paddles -->
-      <button class="nav-paddle left" id="paddlePrev" title="Previous photo (←)">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <button class="nav-paddle right" id="paddleNext" title="Next photo (→)">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="wtProgressBarFill"></div>
+      </div>
 
-      <!-- Floating Bottom Navigation Deck -->
-      <div class="hud-deck">
-        <div class="deck-controls-row">
-          <button class="deck-btn-prev" id="deckPrev">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-            <span>Previous</span>
+      <!-- Photo Stage -->
+      <div class="photo-stage-wrap" id="wtPhotoStageWrap">
+        <div class="photo-stage" id="wtPhotoStage"></div>
+        <button type="button" class="stage-arrow left" id="wtStagePrev" aria-label="Previous photo">
+          <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button type="button" class="stage-arrow right" id="wtStageNext" aria-label="Next photo">
+          <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <!-- 3D Spatial Viewport Stage (Shared Mount) -->
+      <div id="wt3DHost" style="display: none;"></div>
+
+      <div class="viewer-bottom-controls">
+        <div class="big-step-buttons">
+          <button type="button" class="step-nav-btn" id="wtPrevBtn">
+            <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>Previous Step</span>
           </button>
-
-          <button class="deck-btn-tour" id="deckTourBtn">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            <span id="deckTourLabel">Auto-Pilot</span>
-          </button>
-
-          <button class="deck-btn-next" id="deckNext">
-            <span>Next</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          <button type="button" class="step-nav-btn primary" id="wtNextBtn">
+            <span>Next Step</span>
+            <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
           </button>
         </div>
 
-        <!-- Timeline Progress Scrubber Track -->
-        <div class="deck-timeline-track" id="timelineTrack">
-          <!-- Injected dynamically -->
+        <div class="thumbs-row" id="wtThumbsRow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reusable Three.js 3D Spatial Viewport DOM Structure (Moved between Home 3D & Walkthrough 3D) -->
+  <div id="sharedSpatial3DStage" class="spatial-3d-wrapper" style="display: none;">
+    <div class="three-top-spec" id="threeTopSpecLabel">
+      MITM 3D Digital Twin · Click any room block to open walkthrough
+    </div>
+
+    <div class="three-canvas-mount" id="threeCanvasMount"></div>
+
+    <!-- Collapsible Bottom Control Dock (Zero Viewport Occlusion) -->
+    <div class="three-bottom-dock-wrap" id="threeBottomDockWrap">
+      <button type="button" class="dock-collapse-tab" id="threeDockToggleBtn">▾ Hide 3D Controls</button>
+      <div class="three-bottom-dock">
+        <div class="dock-control-group">
+          <label for="threeExplodeSlider">Floor Separation</label>
+          <input type="range" id="threeExplodeSlider" class="dock-slider" min="0" max="100" value="25" />
+        </div>
+
+        <div class="dock-control-group">
+          <button type="button" class="dock-cam-btn" data-cam-preset="isometric">Isometric View</button>
+          <button type="button" class="dock-cam-btn" data-cam-preset="focus">Focus Room</button>
+          <button type="button" class="dock-cam-btn" data-cam-preset="top">Top Blueprint</button>
         </div>
       </div>
-    </main>
-
+    </div>
   </div>
 
-</div>
+  <div class="toast-host" id="toastHost"></div>
 
-<!-- Floating Toast Host -->
-<div class="toast-host" id="toastHost"></div>
-
-<!-- Indexed Data -->
-<script src="rooms_data.js"></script>
-
-<script>
-/**
- * LOCOROM Enterprise Navigation Engine
- */
-const GITHUB_RAW = "https://raw.githubusercontent.com/aryamanm77/mitm-room/main/";
-
-// State
-let allRooms = {};
-let currentRoomKey = null;
-let currentApIndex = 0;
-let currentPhotos = [];
-let currentPhotoIndex = 0;
-let activeFloor = "all";
-let isAutoPilot = false;
-let autoPilotTimer = null;
-const preloadedUrls = new Set();
-
-function resolveUrl(path) {
-  if (!path) return "";
-  if (path.startsWith("http://") || path.startsWith("https://")) return path;
-  if (window.location.protocol === "https:" && !window.location.hostname.includes("localhost") && !window.location.hostname.includes("127.0.0.1")) {
-    return GITHUB_RAW + path;
-  }
-  return path;
-}
-
-function showToast(msg) {
-  const host = document.getElementById("toastHost");
-  const el = document.createElement("div");
-  el.className = "toast-pill";
-  el.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>${msg}</span>`;
-  host.appendChild(el);
-  setTimeout(() => {
-    el.style.opacity = "0";
-    el.style.transition = "opacity 200ms ease";
-    setTimeout(() => el.remove(), 200);
-  }, 2200);
-}
-
-// App Initialization
-async function initApp() {
-  setupTheme();
-  setupEventHandlers();
-
-  if (window.LOCOROM_DATA && Object.keys(window.LOCOROM_DATA).length > 0) {
-    allRooms = window.LOCOROM_DATA;
-    onDataReady();
-  } else {
-    try {
-      const res = await fetch("rooms_data.json");
-      allRooms = await res.json();
-      onDataReady();
-    } catch (e) {
-      console.warn("Could not load local rooms data:", e);
-    }
-  }
-}
-
-function onDataReady() {
-  const total = Object.keys(allRooms).length;
-  document.getElementById("destCountDisplay").textContent = `${total} Destinations`;
-  renderDirectoryList();
-
-  // URL Deep link or default selection
-  const params = new URLSearchParams(window.location.search);
-  const targetRoom = params.get("room") || window.location.hash.replace("#", "") || "205";
-  if (allRooms[targetRoom]) {
-    selectRoom(targetRoom, false);
-  } else {
-    const firstKey = Object.keys(allRooms)[0];
-    if (firstKey) selectRoom(firstKey, false);
-  }
-}
-
-// Theme System
-function setupTheme() {
-  const saved = localStorage.getItem("locorom_theme") || "dark";
-  document.documentElement.setAttribute("data-theme", saved);
-  updateThemeIcon(saved);
-
-  document.getElementById("themeBtn").addEventListener("click", () => {
-    const current = document.documentElement.getAttribute("data-theme") || "dark";
-    const next = current === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", next);
-    localStorage.setItem("locorom_theme", next);
-    updateThemeIcon(next);
-  });
-}
-
-function updateThemeIcon(t) {
-  const icon = document.getElementById("themeIcon");
-  if (t === "light") {
-    icon.innerHTML = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
-  } else {
-    icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
-  }
-}
-
-// Event Listeners
-function setupEventHandlers() {
-  const searchInput = document.getElementById("searchInput");
-  const clearBtn = document.getElementById("clearBtn");
-
-  searchInput.addEventListener("input", () => {
-    clearBtn.style.display = searchInput.value ? "block" : "none";
-    showDirectoryMode();
-    renderDirectoryList();
-  });
-
-  clearBtn.addEventListener("click", () => {
-    searchInput.value = "";
-    clearBtn.style.display = "none";
-    searchInput.focus();
-    renderDirectoryList();
-  });
-
-  // Category filter tabs
-  document.querySelectorAll(".filter-tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      document.querySelectorAll(".filter-tab").forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
-      activeFloor = tab.getAttribute("data-floor");
-      showDirectoryMode();
-      renderDirectoryList();
-    });
-  });
-
-  // Navigation Paddles & Deck buttons
-  document.getElementById("paddlePrev").addEventListener("click", prevPhoto);
-  document.getElementById("paddleNext").addEventListener("click", nextPhoto);
-  document.getElementById("deckPrev").addEventListener("click", prevPhoto);
-  document.getElementById("deckNext").addEventListener("click", nextPhoto);
-  document.getElementById("deckTourBtn").addEventListener("click", toggleAutoPilot);
-
-  // Fullscreen
-  document.getElementById("hudFsBtn").addEventListener("click", toggleFullscreen);
-
-  // Back / Close Route
-  document.getElementById("routeBackBtn").addEventListener("click", showDirectoryMode);
-  document.getElementById("routeCloseBtn").addEventListener("click", showDirectoryMode);
-  document.getElementById("brandBtn").addEventListener("click", showDirectoryMode);
-
-  // Copy & Share
-  document.getElementById("copyRouteBtn").addEventListener("click", () => {
-    if (!currentRoomKey || !allRooms[currentRoomKey]) return;
-    const r = allRooms[currentRoomKey];
-    const ap = getActiveAp(r);
-    const text = `📍 ${r.name} (${r.floor || "MITM"})\nFrom ${ap.name}: ${ap.info || r.info || "Follow walkthrough photos"}`;
-    navigator.clipboard.writeText(text).then(() => showToast("Route instructions copied"));
-  });
-
-  document.getElementById("shareRouteBtn").addEventListener("click", () => {
-    if (!currentRoomKey) return;
-    const url = window.location.origin + window.location.pathname + "?room=" + encodeURIComponent(currentRoomKey);
-    navigator.clipboard.writeText(url).then(() => showToast("Shareable link copied"));
-  });
-
-  // Keyboard navigation
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "/" && document.activeElement !== searchInput) {
-      e.preventDefault();
-      searchInput.focus();
-    } else if (e.key === "Escape") {
-      if (document.fullscreenElement) {
-        document.exitFullscreen();
-      } else {
-        searchInput.blur();
-      }
-    } else if (document.activeElement.tagName !== "INPUT") {
-      if (e.key === "ArrowLeft") prevPhoto();
-      else if (e.key === "ArrowRight") nextPhoto();
-      else if (e.key === " ") {
-        e.preventDefault();
-        toggleAutoPilot();
-      } else if (e.key.toLowerCase() === "f") {
-        toggleFullscreen();
-      }
-    }
-  });
-
-  // Touch Swipe on Canvas
-  let touchStartX = 0;
-  const canvas = document.getElementById("viewportCanvas");
-  canvas.addEventListener("touchstart", (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  canvas.addEventListener("touchend", (e) => {
-    const diff = e.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) prevPhoto();
-      else nextPhoto();
-    }
-  }, { passive: true });
-
-  window.addEventListener("popstate", (e) => {
-    if (e.state && e.state.room && allRooms[e.state.room]) {
-      selectRoom(e.state.room, false);
-    }
-  });
-}
-
-// Render Directory List
-function renderDirectoryList() {
-  const query = document.getElementById("searchInput").value.trim().toLowerCase();
-  const dirView = document.getElementById("directoryView");
-  dirView.innerHTML = "";
-
-  const keys = Object.keys(allRooms).sort((a, b) => {
-    const numA = parseInt(a, 10);
-    const numB = parseInt(b, 10);
-    if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
-    return a.localeCompare(b);
-  });
-
-  const filtered = keys.filter(k => {
-    const r = allRooms[k];
-    const matchQuery = !query ||
-      k.toLowerCase().includes(query) ||
-      (r.info && r.info.toLowerCase().includes(query)) ||
-      (r.dept && r.dept.toLowerCase().includes(query)) ||
-      (r.accessPoints && r.accessPoints.some(ap => ap.name.toLowerCase().includes(query) || (ap.info && ap.info.toLowerCase().includes(query))));
-
-    const matchFloor = activeFloor === "all" || r.floor === activeFloor;
-    return matchQuery && matchFloor;
-  });
-
-  if (filtered.length === 0) {
-    dirView.innerHTML = `<div style="padding: 32px 14px; text-align: center; color: var(--text-muted); font-size: 13px;">No destinations match "${query}".</div>`;
-    return;
-  }
-
-  filtered.forEach(key => {
-    const r = allRooms[key];
-    const totalPhotos = (r.photos ? r.photos.length : 0) + (r.accessPoints ? r.accessPoints.reduce((acc, ap) => acc + (ap.photos ? ap.photos.length : 0), 0) : 0);
-    const isCurrent = (currentRoomKey === key);
-
-    const item = document.createElement("div");
-    item.className = "dest-item" + (isCurrent ? " active" : "");
-    item.innerHTML = `
-      <div class="dest-info-left">
-        <div class="dest-icon-box">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <div class="dest-texts">
-          <div class="dest-name">${r.name}</div>
-          <div class="dest-meta">${r.dept || `${totalPhotos} Photos`}</div>
-        </div>
-      </div>
-      <span class="dest-floor-badge">${r.floor || "MITM"}</span>
-    `;
-
-    item.addEventListener("click", () => selectRoom(key, true));
-    dirView.appendChild(item);
-  });
-}
-
-// Select Room
-function selectRoom(key, updateUrl = true) {
-  const room = allRooms[key];
-  if (!room) return;
-
-  currentRoomKey = key;
-  currentApIndex = 0;
-  currentPhotoIndex = 0;
-  stopAutoPilot();
-
-  if (updateUrl) {
-    window.history.pushState({ room: key }, "", `?room=${encodeURIComponent(key)}`);
-  }
-
-  // Update HUD
-  document.getElementById("hudRoomName").textContent = room.name;
-
-  // Show Route Panel in Sidebar
-  showRoutePanel(room);
-
-  // Load photos for active AP
-  loadActiveRoutePhotos();
-
-  // Mark active in directory list
-  document.querySelectorAll(".dest-item").forEach(item => {
-    const nameEl = item.querySelector(".dest-name");
-    if (nameEl && nameEl.textContent === key) {
-      item.classList.add("active");
-    } else {
-      item.classList.remove("active");
-    }
-  });
-}
-
-function getActiveAp(room) {
-  if (room.accessPoints && room.accessPoints.length > 0) {
-    return room.accessPoints[currentApIndex] || room.accessPoints[0];
-  }
-  return {
-    name: "Main Access Point",
-    info: room.info || "Follow corridor walkthrough.",
-    thumbnail: room.thumbnail || "",
-    photos: room.photos || []
-  };
-}
-
-// Show Route Panel
-function showRoutePanel(room) {
-  document.getElementById("directoryView").style.display = "none";
-  const panel = document.getElementById("routePanel");
-  panel.style.display = "block";
-
-  document.getElementById("panelDestName").textContent = room.name;
-  document.getElementById("panelDestDept").textContent = room.dept || "Campus Destination";
-  document.getElementById("panelDestFloor").textContent = room.floor || "MITM";
-
-  // Starting Point Tabs
-  const points = (room.accessPoints && room.accessPoints.length > 0) ? room.accessPoints : [];
-  const apBlock = document.getElementById("apBlock");
-  const apTabsRow = document.getElementById("apTabsRow");
-  apTabsRow.innerHTML = "";
-
-  if (points.length <= 1) {
-    apBlock.style.display = "none";
-  } else {
-    apBlock.style.display = "block";
-    points.forEach((ap, idx) => {
-      const tab = document.createElement("button");
-      tab.className = "ap-seg-tab" + (idx === currentApIndex ? " active" : "");
-      tab.textContent = ap.name;
-      tab.title = ap.name;
-      tab.addEventListener("click", () => {
-        document.querySelectorAll(".ap-seg-tab").forEach(t => t.classList.remove("active"));
-        tab.classList.add("active");
-        currentApIndex = idx;
-        currentPhotoIndex = 0;
-        loadActiveRoutePhotos();
-      });
-      apTabsRow.appendChild(tab);
-    });
-  }
-
-  updateRouteNotesAndChecklist();
-}
-
-function updateRouteNotesAndChecklist() {
-  const room = allRooms[currentRoomKey];
-  const ap = getActiveAp(room);
-
-  document.getElementById("panelDirTitle").innerHTML = `
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-    <span>Route from ${ap.name}</span>
-  `;
-  document.getElementById("panelDirText").textContent = ap.info || room.info || "Follow photo sequence to destination.";
-  document.getElementById("panelPhotosCount").textContent = `${ap.photos ? ap.photos.length : 0} Photos`;
-
-  // Build Waypoint Checklist
-  const checklist = document.getElementById("stepChecklist");
-  checklist.innerHTML = "";
-
-  const photos = ap.photos || [];
-  photos.forEach((_, idx) => {
-    const row = document.createElement("div");
-    row.className = "step-row" + (idx === currentPhotoIndex ? " active" : "");
-    row.innerHTML = `
-      <div class="step-num-circle">${idx + 1}</div>
-      <div style="flex:1;">Waypoint ${idx + 1}</div>
-    `;
-    row.addEventListener("click", () => {
-      currentPhotoIndex = idx;
-      renderActivePhoto();
-    });
-    checklist.appendChild(row);
-  });
-}
-
-function showDirectoryMode() {
-  stopAutoPilot();
-  document.getElementById("routePanel").style.display = "none";
-  document.getElementById("directoryView").style.display = "block";
-}
-
-// Load Active Photos
-function loadActiveRoutePhotos() {
-  const room = allRooms[currentRoomKey];
-  if (!room) return;
-  const ap = getActiveAp(room);
-  currentPhotos = ap.photos || [];
-  buildTimelineScrubber();
-  renderActivePhoto();
-  updateRouteNotesAndChecklist();
-}
-
-// Render Active Photo on Canvas
-function renderActivePhoto() {
-  const stage = document.getElementById("mediaStage");
-  const counter = document.getElementById("hudStepCounter");
-
-  if (!currentPhotos || currentPhotos.length === 0) {
-    stage.innerHTML = `<div style="color:var(--text-muted); font-size:13px;">No walkthrough media uploaded for this destination.</div>`;
-    counter.textContent = "0 of 0";
-    return;
-  }
-
-  counter.textContent = `Waypoint ${currentPhotoIndex + 1} of ${currentPhotos.length}`;
-
-  const currentPath = currentPhotos[currentPhotoIndex];
-  const url = resolveUrl(currentPath);
-  const isVideo = /\.(mp4|webm)$/i.test(currentPath);
-
-  if (isVideo) {
-    stage.innerHTML = `<video src="${url}" controls playsinline preload="auto"></video>`;
-  } else {
-    stage.innerHTML = `<img src="${url}" alt="Waypoint ${currentPhotoIndex + 1}" loading="eager" onerror="this.onerror=null; this.src='logo.svg';">`;
-  }
-
-  // Update Timeline Scrubber
-  document.querySelectorAll(".timeline-segment").forEach((seg, idx) => {
-    seg.classList.toggle("active", idx === currentPhotoIndex);
-    seg.classList.toggle("past", idx < currentPhotoIndex);
-  });
-
-  // Update Checklist
-  document.querySelectorAll(".step-row").forEach((row, idx) => {
-    row.classList.toggle("active", idx === currentPhotoIndex);
-  });
-
-  // Preload adjacent images
-  preloadAdjacent();
-}
-
-function preloadAdjacent() {
-  if (currentPhotos.length <= 1) return;
-  const next = (currentPhotoIndex + 1) % currentPhotos.length;
-  const prev = (currentPhotoIndex - 1 + currentPhotos.length) % currentPhotos.length;
-
-  [next, prev].forEach(idx => {
-    const p = currentPhotos[idx];
-    if (p && !/\.(mp4|webm)$/i.test(p)) {
-      const u = resolveUrl(p);
-      if (!preloadedUrls.has(u)) {
-        const img = new Image();
-        img.src = u;
-        preloadedUrls.add(u);
-      }
-    }
-  });
-}
-
-// Timeline Scrubber
-function buildTimelineScrubber() {
-  const track = document.getElementById("timelineTrack");
-  track.innerHTML = "";
-
-  if (currentPhotos.length <= 1) {
-    track.style.display = "none";
-    return;
-  }
-  track.style.display = "flex";
-
-  currentPhotos.forEach((_, idx) => {
-    const seg = document.createElement("div");
-    seg.className = "timeline-segment" + (idx === currentPhotoIndex ? " active" : "");
-    seg.title = `Waypoint ${idx + 1}`;
-    seg.addEventListener("click", () => {
-      currentPhotoIndex = idx;
-      renderActivePhoto();
-    });
-    track.appendChild(seg);
-  });
-}
-
-function nextPhoto() {
-  if (currentPhotos.length === 0) return;
-  currentPhotoIndex = (currentPhotoIndex + 1) % currentPhotos.length;
-  renderActivePhoto();
-}
-
-function prevPhoto() {
-  if (currentPhotos.length === 0) return;
-  currentPhotoIndex = (currentPhotoIndex - 1 + currentPhotos.length) % currentPhotos.length;
-  renderActivePhoto();
-}
-
-// Auto-Pilot Tour
-function toggleAutoPilot() {
-  if (isAutoPilot) stopAutoPilot();
-  else startAutoPilot();
-}
-
-function startAutoPilot() {
-  if (currentPhotos.length <= 1) return;
-  isAutoPilot = true;
-  const btn = document.getElementById("deckTourBtn");
-  btn.classList.add("playing");
-  document.getElementById("deckTourLabel").textContent = "Pause";
-  showToast("Auto-pilot tour started");
-
-  autoPilotTimer = setInterval(() => {
-    nextPhoto();
-  }, 2200);
-}
-
-function stopAutoPilot() {
-  isAutoPilot = false;
-  if (autoPilotTimer) clearInterval(autoPilotTimer);
-  autoPilotTimer = null;
-  const btn = document.getElementById("deckTourBtn");
-  if (btn) {
-    btn.classList.remove("playing");
-    document.getElementById("deckTourLabel").textContent = "Auto-Pilot";
-  }
-}
-
-// Fullscreen
-function toggleFullscreen() {
-  const viewport = document.getElementById("viewportCanvas");
-  if (!document.fullscreenElement) {
-    viewport.requestFullscreen().catch(() => showToast("Fullscreen unavailable"));
-  } else {
-    document.exitFullscreen();
-  }
-}
-
-document.addEventListener("DOMContentLoaded", initApp);
-</script>
-
+  <script src="rooms_data.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>

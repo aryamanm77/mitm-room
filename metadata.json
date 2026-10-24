@@ -1,0 +1,7 @@
+{
+  "name": "Locorom Campus Wayfinder",
+  "description": "Indoor visual wayfinding, spatial floor schematic, and natural-language route planner for the MITM campus.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
