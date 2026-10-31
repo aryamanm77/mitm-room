@@ -44,7 +44,8 @@ window.LOCOROM_DATA = {
     "photos": [
       "Rooms/103/a.jpg",
       "Rooms/103/b.jpg",
-      "Rooms/103/c.jpg"
+      "Rooms/103/c.jpg",
+      "Rooms/103/d.jpg"
     ],
     "accessPoints": [
       {
@@ -54,7 +55,8 @@ window.LOCOROM_DATA = {
         "photos": [
           "Rooms/103/a.jpg",
           "Rooms/103/b.jpg",
-          "Rooms/103/c.jpg"
+          "Rooms/103/c.jpg",
+          "Rooms/103/d.jpg"
         ]
       }
     ]
