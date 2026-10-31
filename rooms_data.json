@@ -1843,7 +1843,8 @@
     "thumbnail": "Rooms/Belaku/a.jpg",
     "photos": [
       "Rooms/Belaku/a.jpg",
-      "Rooms/Belaku/b.jpg"
+      "Rooms/Belaku/b.jpg",
+      "Rooms/Belaku/c.jpg"
     ],
     "accessPoints": [
       {
@@ -1852,7 +1853,8 @@
         "thumbnail": "Rooms/Belaku/a.jpg",
         "photos": [
           "Rooms/Belaku/a.jpg",
-          "Rooms/Belaku/b.jpg"
+          "Rooms/Belaku/b.jpg",
+          "Rooms/Belaku/c.jpg"
         ]
       }
     ]
