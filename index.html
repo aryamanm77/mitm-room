@@ -421,6 +421,87 @@
       color: var(--text-muted);
     }
 
+    
+    /* Campus / College Segmented Navigation */
+    .college-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 6px 0 14px 0;
+      margin-top: 14px;
+    }
+
+    .college-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .college-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 15px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: 9999px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all var(--ease);
+    }
+
+    .college-chip:hover {
+      background-color: var(--bg-elevated);
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+      transform: translateY(-1px);
+    }
+
+    .college-chip.active {
+      background-color: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+    }
+
+    .college-chip .chip-icon {
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .college-chip .chip-count {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .room-college-badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(59, 130, 246, 0.12);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.25);
+    }
+
+    [data-theme="light"] .room-college-badge {
+      background: rgba(37, 99, 235, 0.08);
+      color: #1d4ed8;
+      border-color: rgba(37, 99, 235, 0.2);
+    }
+
     /* Section Header Bar with 2D Grid / 3D Campus Twin Toggle */
     .section-bar {
       display: flex;
@@ -1186,6 +1267,35 @@
         <span class="voice-status-text" id="voiceStatusText"><strong>Listening…</strong> Say a room number or lab name (e.g. "Room 205" or "DSP Lab")</span>
         <button type="button" class="voice-stop-link" id="voiceStopBannerBtn">Cancel</button>
       </div>
+
+      
+      <!-- Campus / College Segmented Bar: Engineering, MBA, BCA, MCA, Pharmacy -->
+      <nav class="college-nav" role="tablist" aria-label="Campus College Filter">
+        <button type="button" class="college-chip active" data-college-filter="all">
+          <span class="chip-icon">🏛️</span>
+          <span>All Campuses</span>
+        </button>
+        <button type="button" class="college-chip" data-college-filter="engineering">
+          <span class="chip-icon">⚙️</span>
+          <span>Engineering</span>
+        </button>
+        <button type="button" class="college-chip" data-college-filter="mba">
+          <span class="chip-icon">💼</span>
+          <span>MBA</span>
+        </button>
+        <button type="button" class="college-chip" data-college-filter="bca">
+          <span class="chip-icon">💻</span>
+          <span>BCA</span>
+        </button>
+        <button type="button" class="college-chip" data-college-filter="mca">
+          <span class="chip-icon">🖥️</span>
+          <span>MCA</span>
+        </button>
+        <button type="button" class="college-chip" data-college-filter="pharmacy">
+          <span class="chip-icon">💊</span>
+          <span>Pharmacy</span>
+        </button>
+      </nav>
 
       <div class="quick-row" id="quickChipsRow"></div>
     </section>

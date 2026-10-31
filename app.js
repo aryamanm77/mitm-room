@@ -10,6 +10,7 @@ const state = {
   rooms: {},
   roomKeys: [],
   activeFloor: "all",
+  activeCollege: "all", // "all" | "engineering" | "mba" | "bca" | "mca" | "pharmacy"
   searchQuery: "",
   homeDisplayMode: "grid", // 'grid' | '3d'
   wtDisplayMode: "photos", // 'photos' | '3d'
@@ -286,7 +287,30 @@ function renderRoomsGrid() {
       }
     }
 
-    if (!q) return floorMatch;
+    // College / Department Filtering (Engineering, MBA, BCA, MCA, Pharmacy)
+    let collegeMatch = true;
+    if (state.activeCollege !== "all") {
+      const roomCollege = (r.college || "Engineering").toLowerCase();
+      const roomDept = (r.dept || "").toLowerCase();
+      const roomCategory = (r.category || "").toLowerCase();
+      const roomName = (r.name || "").toLowerCase();
+      const combined = `${roomCollege} ${roomDept} ${roomCategory} ${roomName}`;
+
+      if (state.activeCollege === "engineering") {
+        collegeMatch = roomCollege.includes("engineering") || 
+          (!roomCollege.includes("mba") && !roomCollege.includes("mca") && !roomCollege.includes("bca") && !roomCollege.includes("pharmacy"));
+      } else if (state.activeCollege === "mba") {
+        collegeMatch = combined.includes("mba");
+      } else if (state.activeCollege === "bca") {
+        collegeMatch = combined.includes("bca");
+      } else if (state.activeCollege === "mca") {
+        collegeMatch = combined.includes("mca");
+      } else if (state.activeCollege === "pharmacy") {
+        collegeMatch = combined.includes("pharmacy") || combined.includes("pharma");
+      }
+    }
+
+    if (!q) return floorMatch && collegeMatch;
     const textBlob = [
       r.name,
       r.floor,
@@ -297,7 +321,7 @@ function renderRoomsGrid() {
       ...(r.accessPoints || []).map(a => `${a.name} ${a.info}`)
     ].join(" ").toLowerCase();
 
-    return floorMatch && textBlob.includes(q);
+    return floorMatch && collegeMatch && textBlob.includes(q);
   });
 
   if (countLabel) {
@@ -307,14 +331,16 @@ function renderRoomsGrid() {
   if (filtered.length === 0) {
     grid.innerHTML = `
       <div class="empty-box">
-        <h3>No rooms found for "${escapeHtml(state.searchQuery)}"</h3>
-        <p>Try searching by room number (like 205, 313, 114) or lab name (like DSP, PE, Machine Shop).</p>
-        <button type="button" class="btn-secondary" id="clearSearchResetBtn">Show All Rooms</button>
+        <h3>${state.searchQuery ? `No rooms found for "${escapeHtml(state.searchQuery)}"` : `No rooms listed yet for ${state.activeCollege.toUpperCase()}`}</h3>
+        <p>${state.searchQuery ? "Try searching by room number (like 205, Belaku, 114) or lab name (like DSP, PE, Machine Shop)." : `Ready to receive ${state.activeCollege.toUpperCase()} rooms! Provide room names, photos, or floors to populate this section.`}</p>
+        <button type="button" class="btn-secondary" id="clearSearchResetBtn">Show All Campuses</button>
       </div>
     `;
     document.getElementById("clearSearchResetBtn")?.addEventListener("click", () => {
       state.searchQuery = "";
       state.activeFloor = "all";
+      state.activeCollege = "all";
+      syncCollegeNavButtons();
       const inp = document.getElementById("mainSearchInput");
       if (inp) inp.value = "";
       syncFloorNavButtons();
@@ -345,6 +371,8 @@ function renderRoomsGrid() {
         </div>
         <div class="room-card-content">
           <div class="room-card-meta">
+            <span class="room-college-badge">${escapeHtml(r.college || "Engineering")}</span>
+            <span aria-hidden="true">·</span>
             <span>${escapeHtml(r.floor)}</span>
             <span aria-hidden="true">·</span>
             <span class="tabular-nums">${stepCount} ${stepCount === 1 ? "photo" : "photos"}</span>
@@ -645,7 +673,23 @@ function stopAutoPlay() {
   if (playLabel) playLabel.textContent = "Auto-Walk";
 }
 
+
+function syncCollegeNavButtons() {
+  document.querySelectorAll("[data-college-filter]").forEach(btn => {
+    btn.classList.toggle("active", btn.getAttribute("data-college-filter") === state.activeCollege);
+  });
+}
+
 function syncFloorNavButtons() {
+  
+  document.querySelectorAll("[data-college-filter]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      state.activeCollege = btn.getAttribute("data-college-filter");
+      syncCollegeNavButtons();
+      showHomeView(true);
+    });
+  });
+
   document.querySelectorAll("[data-floor-filter]").forEach(btn => {
     btn.classList.toggle("active", btn.getAttribute("data-floor-filter") === state.activeFloor);
   });
