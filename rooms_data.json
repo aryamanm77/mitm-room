@@ -1835,26 +1835,28 @@
   "Belaku": {
     "name": "Belaku",
     "college": "MBA & MCA Block",
-    "floor": "Ground Floor",
+    "floor": "1st Floor",
     "dept": "Department of MBA & MCA",
-    "category": "Conference / Seminar Hall",
-    "landmark": "MBA & MCA Block Entrance (Near Flight Model)",
-    "info": "Department of MBA & MCA block entrance. Take the front entrance steps towards Belaku room.",
-    "thumbnail": "Rooms/Belaku/a.jpg",
+    "category": "Seminar / Event Hall",
+    "landmark": "MBA & MCA Block 1st Landing · Beside Lift",
+    "info": "Enter through the MBA & MCA block front entrance. Head up the staircase to the 1st landing; Belaku (ಬೆಳಕು) is located right beside the lift.",
+    "thumbnail": "Rooms/Belaku/d.jpg",
     "photos": [
       "Rooms/Belaku/a.jpg",
       "Rooms/Belaku/b.jpg",
-      "Rooms/Belaku/c.jpg"
+      "Rooms/Belaku/c.jpg",
+      "Rooms/Belaku/d.jpg"
     ],
     "accessPoints": [
       {
         "name": "MBA & MCA Main Entrance",
-        "info": "Enter through the main front steps of the MBA & MCA building.",
+        "info": "Enter through the MBA & MCA block front entrance. Head up the staircase to the 1st landing; Belaku (ಬೆಳಕು) is located right beside the lift.",
         "thumbnail": "Rooms/Belaku/a.jpg",
         "photos": [
           "Rooms/Belaku/a.jpg",
           "Rooms/Belaku/b.jpg",
-          "Rooms/Belaku/c.jpg"
+          "Rooms/Belaku/c.jpg",
+          "Rooms/Belaku/d.jpg"
         ]
       }
     ]
