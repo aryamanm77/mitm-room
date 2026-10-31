@@ -141,7 +141,8 @@
     "info": "Enter through the Department of MBA & MCA block front entrance. Follow the corridor route to reach Room 105.",
     "thumbnail": "Rooms/105/a.jpg",
     "photos": [
-      "Rooms/105/a.jpg"
+      "Rooms/105/a.jpg",
+      "Rooms/105/b.jpg"
     ],
     "accessPoints": [
       {
@@ -149,7 +150,8 @@
         "info": "Enter through the Department of MBA & MCA block front entrance.",
         "thumbnail": "Rooms/105/a.jpg",
         "photos": [
-          "Rooms/105/a.jpg"
+          "Rooms/105/a.jpg",
+          "Rooms/105/b.jpg"
         ]
       }
     ]
