@@ -32,6 +32,29 @@ window.LOCOROM_DATA = {
       }
     ]
   },
+  "103": {
+    "name": "103",
+    "college": "MBA & MCA Block",
+    "floor": "1st Floor",
+    "dept": "Department of MBA",
+    "category": "Classroom / Lecture Hall",
+    "landmark": "Department of MBA & MCA Block • 1st Floor",
+    "info": "Enter through the Department of MBA & MCA block front entrance. Follow the corridor route to reach Room 103.",
+    "thumbnail": "Rooms/103/a.jpg",
+    "photos": [
+      "Rooms/103/a.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "MBA Main Entrance",
+        "info": "Enter through the Department of MBA & MCA block front entrance.",
+        "thumbnail": "Rooms/103/a.jpg",
+        "photos": [
+          "Rooms/103/a.jpg"
+        ]
+      }
+    ]
+  },
   "114": {
     "name": "114",
     "floor": "1st Floor",
