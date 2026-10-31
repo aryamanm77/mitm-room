@@ -748,6 +748,50 @@ function syncFloorNavButtons() {
 // EVENT LISTENERS & USER INTERACTIONS
 // ============================================================================
 function bindEvents() {
+
+  // Google Maps Embed View Switcher (Satellite, Road Map, Schematic)
+  const mapFrame = document.getElementById("gmapsEmbedFrame");
+  const schemaView = document.getElementById("gmapsSchemaView");
+  const satBtn = document.getElementById("mapModeSatelliteBtn");
+  const roadBtn = document.getElementById("mapModeRoadBtn");
+  const schemaBtn = document.getElementById("mapModeSchemaBtn");
+
+  function setMapMode(mode) {
+    [satBtn, roadBtn, schemaBtn].forEach(b => b?.classList.remove("active"));
+
+    if (mode === "satellite") {
+      satBtn?.classList.add("active");
+      if (schemaView) schemaView.style.display = "none";
+      if (mapFrame) {
+        mapFrame.style.display = "block";
+        mapFrame.src = "https://maps.google.com/maps?q=Maharaja+Institute+of+Technology+Mysore&t=k&z=18&ie=UTF8&iwloc=&output=embed";
+      }
+    } else if (mode === "road") {
+      roadBtn?.classList.add("active");
+      if (schemaView) schemaView.style.display = "none";
+      if (mapFrame) {
+        mapFrame.style.display = "block";
+        mapFrame.src = "https://maps.google.com/maps?q=Maharaja+Institute+of+Technology+Mysore&t=m&z=17&ie=UTF8&iwloc=&output=embed";
+      }
+    } else if (mode === "schema") {
+      schemaBtn?.classList.add("active");
+      if (mapFrame) mapFrame.style.display = "none";
+      if (schemaView) schemaView.style.display = "block";
+    }
+  }
+
+  satBtn?.addEventListener("click", () => setMapMode("satellite"));
+  roadBtn?.addEventListener("click", () => setMapMode("road"));
+  schemaBtn?.addEventListener("click", () => setMapMode("schema"));
+
+  // Interactive Building Jump Chips below map
+  document.querySelectorAll("[data-jump-college]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const col = btn.getAttribute("data-jump-college");
+      enterCollege(col);
+    });
+  });
+
   // Google Maps Portal Search Input
   const portalSearch = document.getElementById("portalSearchInput");
   if (portalSearch) {

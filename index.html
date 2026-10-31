@@ -1689,6 +1689,114 @@
     .legend-dot.bca { background-color: #34a853; }
     .legend-dot.pharmacy { background-color: #fbbc04; }
 
+
+    .gm-map-mode-pills {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .gm-map-pill {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg);
+      padding: 4px 10px;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+      transition: all var(--ease);
+    }
+    .gm-map-pill:hover {
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+    .gm-map-pill.active {
+      background-color: #e8f0fe;
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+      font-weight: 500;
+    }
+    [data-theme="dark"] .gm-map-pill.active {
+      background-color: rgba(138, 180, 248, 0.16);
+      color: #8ab4f8;
+      border-color: #8ab4f8;
+    }
+    .gm-map-pill.external-link {
+      color: var(--color-primary);
+      border-color: rgba(11, 87, 208, 0.3);
+    }
+    [data-theme="dark"] .gm-map-pill.external-link {
+      color: #8ab4f8;
+      border-color: rgba(138, 180, 248, 0.3);
+    }
+
+    .gm-live-iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 440px;
+      border: none;
+      display: block;
+    }
+
+    .gm-map-building-jump {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 10px 14px;
+      border-top: 1px solid var(--border-hairline);
+      background-color: var(--bg-surface);
+    }
+
+    .jump-label {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .jump-chip {
+      background-color: var(--bg-elevated);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg);
+      padding: 4px 10px;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all var(--ease);
+    }
+    .jump-chip:hover {
+      color: var(--text-primary);
+      border-color: var(--color-primary);
+      background-color: #e8f0fe;
+    }
+    [data-theme="dark"] .jump-chip:hover {
+      background-color: rgba(138, 180, 248, 0.16);
+      color: #8ab4f8;
+      border-color: #8ab4f8;
+    }
+
+    .jump-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .jump-dot.eng { background-color: #1a73e8; }
+    .jump-dot.mba { background-color: #ea4335; }
+    .jump-dot.mca { background-color: #9c27b0; }
+    .jump-dot.bca { background-color: #34a853; }
+    .jump-dot.pharmacy { background-color: #fbbc04; }
+
     /* ==========================================================================
        COLLEGE ACTIVE BAR (Inside Home Screen)
        ========================================================================== */
@@ -2117,121 +2225,166 @@
         </article>
       </div>
 
-      <!-- Google Maps Interactive Campus Vector Map -->
+      <!-- Google Maps Live Interactive Campus Map -->
       <aside class="gm-map-column">
         <div class="gm-map-card">
           <div class="gm-map-topbar">
             <div class="gm-map-title">
               <svg viewBox="0 0 24 24" class="icon-svg" style="width:16px;height:16px;color:var(--color-primary);"><path fill="currentColor" d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>
-              <span>Campus Interactive Map</span>
+              <span>MIT Mysore Google Map</span>
             </div>
-            <span class="gm-map-badge">Interactive Map</span>
+
+            <div class="gm-map-mode-pills" role="tablist" aria-label="Map Views">
+              <button type="button" class="gm-map-pill active" id="mapModeSatelliteBtn" title="Satellite 450m View">Satellite</button>
+              <button type="button" class="gm-map-pill" id="mapModeRoadBtn" title="Road Map View">Road Map</button>
+              <button type="button" class="gm-map-pill" id="mapModeSchemaBtn" title="Building Footprint Schematic">Schematic</button>
+              <a
+                href="https://www.google.com/maps/place/Maharaja+Institute+of+Technology+Mysore/@12.3664692,76.6869629,450m/data=!3m1!1e3!4m6!3m5!1s0x3baf71273625ff79:0xe21bc942801a6077!8m2!3d12.3663906!4d76.6887613!16s%2Fg%2F11gh4cvl_2?entry=ttu"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="gm-map-pill external-link"
+                title="Open exact location in Google Maps App"
+              >
+                <span>Open in Google Maps</span>
+                <svg viewBox="0 0 24 24" style="width:12px;height:12px;"><path fill="currentColor" d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+              </a>
+            </div>
           </div>
 
-          <div class="gm-map-canvas-wrap">
-            <svg viewBox="0 0 540 400" class="gm-svg-campus-map" aria-label="MIT Mysore Campus Layout Map">
-              <!-- Background / Ground -->
-              <rect width="540" height="400" fill="#f1f3f4" class="map-ground" />
+          <div class="gm-map-canvas-wrap" id="campusMapCanvasWrap">
+            <!-- Live Google Maps Interactive Satellite / Hybrid Embed -->
+            <iframe
+              id="gmapsEmbedFrame"
+              class="gm-live-iframe"
+              src="https://maps.google.com/maps?q=Maharaja+Institute+of+Technology+Mysore&amp;t=k&amp;z=18&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+              loading="lazy"
+              allowfullscreen=""
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Maharaja Institute of Technology Mysore - Google Maps Live Satellite"
+            ></iframe>
 
-              <!-- Main Approach Road (Belagola - KRS Road) -->
-              <path d="M 0 350 L 540 350" stroke="#ffffff" stroke-width="26" />
-              <path d="M 0 350 L 540 350" stroke="#dadce0" stroke-width="2" stroke-dasharray="8 8" />
-              <text x="180" y="378" font-family="'Google Sans', sans-serif" font-size="11" fill="#70757a" font-weight="500">KRS - Belagola Approach Road</text>
+            <!-- Vector Schematic View (shown when Schematic view is chosen) -->
+            <div id="gmapsSchemaView" style="display: none; width: 100%; height: 100%;">
+              <svg viewBox="0 0 540 400" class="gm-svg-campus-map" aria-label="MIT Mysore Campus Layout Map">
+                <!-- Background / Ground -->
+                <rect width="540" height="400" fill="#f1f3f4" class="map-ground" />
 
-              <!-- Campus Main Gate & Entry Avenue -->
-              <path d="M 170 350 L 170 240 L 360 240" stroke="#ffffff" stroke-width="20" fill="none" />
-              <path d="M 170 350 L 170 240 L 360 240" stroke="#dadce0" stroke-width="1.5" fill="none" />
-              <text x="110" y="310" font-family="'Google Sans', sans-serif" font-size="10" fill="#5f6368">Main Entrance Gate</text>
+                <!-- Main Approach Road (Belagola - KRS Road) -->
+                <path d="M 0 350 L 540 350" stroke="#ffffff" stroke-width="26" />
+                <path d="M 0 350 L 540 350" stroke="#dadce0" stroke-width="2" stroke-dasharray="8 8" />
+                <text x="180" y="378" font-family="'Google Sans', sans-serif" font-size="11" fill="#70757a" font-weight="500">KRS - Belagola Approach Road</text>
 
-              <!-- Central Quadrangle / Green Lawn -->
-              <rect x="195" y="115" width="130" height="105" rx="8" fill="#ceead6" stroke="#a8dab5" stroke-width="1.5" />
-              <circle cx="260" cy="167" r="14" fill="#ffffff" stroke="#a8dab5" stroke-width="1.5" />
-              <text x="225" y="171" font-family="'Google Sans', sans-serif" font-size="10.5" fill="#137333" font-weight="500">Central Quad</text>
+                <!-- Campus Main Gate & Entry Avenue -->
+                <path d="M 170 350 L 170 240 L 360 240" stroke="#ffffff" stroke-width="20" fill="none" />
+                <path d="M 170 350 L 170 240 L 360 240" stroke="#dadce0" stroke-width="1.5" fill="none" />
+                <text x="110" y="310" font-family="'Google Sans', sans-serif" font-size="10" fill="#5f6368">Main Entrance Gate</text>
 
-              <!-- Building A: Main Engineering Academic Block (U/L Shaped) -->
-              <path
-                d="M 60 40 L 380 40 L 380 95 L 340 95 L 340 190 L 290 190 L 290 95 L 60 95 Z"
-                fill="#ffffff"
-                stroke="#1a73e8"
-                stroke-width="2"
-                class="map-building"
-                data-map-college="engineering"
-                id="mapBuilding-engineering"
-              />
-              <text x="110" y="65" font-family="'Google Sans', sans-serif" font-size="12" fill="#1a73e8" font-weight="600">Block A • Engineering Campus</text>
-              <text x="110" y="80" font-family="'Google Sans', sans-serif" font-size="9.5" fill="#5f6368">CSE • ISE • ECE • Mech • Civil (60 Rooms)</text>
+                <!-- Central Quadrangle / Green Lawn -->
+                <rect x="195" y="115" width="130" height="105" rx="8" fill="#ceead6" stroke="#a8dab5" stroke-width="1.5" />
+                <circle cx="260" cy="167" r="14" fill="#ffffff" stroke="#a8dab5" stroke-width="1.5" />
+                <text x="225" y="171" font-family="'Google Sans', sans-serif" font-size="10.5" fill="#137333" font-weight="500">Central Quad</text>
 
-              <!-- Building B: Department of MBA & MCA Block -->
-              <rect
-                x="355"
-                y="130"
-                width="145"
-                height="95"
-                rx="6"
-                fill="#ffffff"
-                stroke="#ea4335"
-                stroke-width="2"
-                class="map-building"
-                data-map-college="mba"
-                id="mapBuilding-mba"
-              />
-              <text x="367" y="160" font-family="'Google Sans', sans-serif" font-size="11.5" fill="#ea4335" font-weight="600">Block B • MBA &amp; MCA</text>
-              <text x="367" y="176" font-family="'Google Sans', sans-serif" font-size="9.5" fill="#5f6368">Belaku (ಬೆಳಕು) • Seminar Suites</text>
+                <!-- Building A: Main Engineering Academic Block -->
+                <path
+                  d="M 60 40 L 380 40 L 380 95 L 340 95 L 340 190 L 290 190 L 290 95 L 60 95 Z"
+                  fill="#ffffff"
+                  stroke="#1a73e8"
+                  stroke-width="2"
+                  class="map-building"
+                  data-map-college="engineering"
+                  id="mapBuilding-engineering"
+                />
+                <text x="110" y="65" font-family="'Google Sans', sans-serif" font-size="12" fill="#1a73e8" font-weight="600">Block A • Engineering Campus</text>
+                <text x="110" y="80" font-family="'Google Sans', sans-serif" font-size="9.5" fill="#5f6368">CSE • ISE • ECE • Mech • Civil (60 Rooms)</text>
 
-              <!-- Building C: BCA IT Wing -->
-              <rect
-                x="60"
-                y="135"
-                width="115"
-                height="75"
-                rx="6"
-                fill="#ffffff"
-                stroke="#34a853"
-                stroke-width="2"
-                class="map-building"
-                data-map-college="bca"
-                id="mapBuilding-bca"
-              />
-              <text x="75" y="165" font-family="'Google Sans', sans-serif" font-size="11" fill="#137333" font-weight="600">Block C • BCA</text>
-              <text x="75" y="180" font-family="'Google Sans', sans-serif" font-size="9.5" fill="#5f6368">Computer Labs</text>
+                <!-- Building B: Department of MBA & MCA Block -->
+                <rect
+                  x="355"
+                  y="130"
+                  width="145"
+                  height="95"
+                  rx="6"
+                  fill="#ffffff"
+                  stroke="#ea4335"
+                  stroke-width="2"
+                  class="map-building"
+                  data-map-college="mba"
+                  id="mapBuilding-mba"
+                />
+                <text x="367" y="160" font-family="'Google Sans', sans-serif" font-size="11.5" fill="#ea4335" font-weight="600">Block B • MBA &amp; MCA</text>
+                <text x="367" y="176" font-family="'Google Sans', sans-serif" font-size="9.5" fill="#5f6368">Room 102 • Belaku (ಬೆಳಕು)</text>
 
-              <!-- Building D: Faculty of Pharmaceutical Sciences -->
-              <rect
-                x="355"
-                y="245"
-                width="145"
-                height="70"
-                rx="6"
-                fill="#ffffff"
-                stroke="#fbbc04"
-                stroke-width="2"
-                class="map-building"
-                data-map-college="pharmacy"
-                id="mapBuilding-pharmacy"
-              />
-              <text x="368" y="275" font-family="'Google Sans', sans-serif" font-size="11" fill="#b06000" font-weight="600">Block D • Pharmacy</text>
-              <text x="368" y="290" font-family="'Google Sans', sans-serif" font-size="9.5" fill="#5f6368">Pharmaceutical Labs</text>
+                <!-- Building C: BCA IT Wing -->
+                <rect
+                  x="60"
+                  y="135"
+                  width="115"
+                  height="75"
+                  rx="6"
+                  fill="#ffffff"
+                  stroke="#34a853"
+                  stroke-width="2"
+                  class="map-building"
+                  data-map-college="bca"
+                  id="mapBuilding-bca"
+                />
+                <text x="75" y="165" font-family="'Google Sans', sans-serif" font-size="11" fill="#137333" font-weight="600">Block C • BCA</text>
+                <text x="75" y="180" font-family="'Google Sans', sans-serif" font-size="9.5" fill="#5f6368">Computer Labs</text>
 
-              <!-- Interactive Google Maps Pins -->
-              <!-- Engineering Pin -->
-              <g class="map-pin" data-map-college="engineering" transform="translate(200, 32)">
-                <circle cx="12" cy="12" r="10" fill="#1a73e8" />
-                <path fill="#ffffff" d="M12 6L6 10l6 3.5L18 10l-6-4zm4 6.5l-4 2.5-4-2.5v2l4 2.5 4-2.5v-2z" />
-              </g>
+                <!-- Building D: Faculty of Pharmaceutical Sciences -->
+                <rect
+                  x="355"
+                  y="245"
+                  width="145"
+                  height="70"
+                  rx="6"
+                  fill="#ffffff"
+                  stroke="#fbbc04"
+                  stroke-width="2"
+                  class="map-building"
+                  data-map-college="pharmacy"
+                  id="mapBuilding-pharmacy"
+                />
+                <text x="368" y="275" font-family="'Google Sans', sans-serif" font-size="11" fill="#b06000" font-weight="600">Block D • Pharmacy</text>
+                <text x="368" y="290" font-family="'Google Sans', sans-serif" font-size="9.5" fill="#5f6368">Pharmaceutical Labs</text>
 
-              <!-- MBA Belaku Pin -->
-              <g class="map-pin" data-map-college="mba" transform="translate(415, 122)">
-                <circle cx="12" cy="12" r="10" fill="#ea4335" />
-                <path fill="#ffffff" d="M10 7v1H7v7h10V8h-3V7c0-.55-.45-1-1-1h-2c-.55 0-1 .45-1 1zm4 1v-1h-4v1h4z" />
-              </g>
-            </svg>
+                <!-- Interactive Google Maps Pins -->
+                <g class="map-pin" data-map-college="engineering" transform="translate(200, 32)">
+                  <circle cx="12" cy="12" r="10" fill="#1a73e8" />
+                  <path fill="#ffffff" d="M12 6L6 10l6 3.5L18 10l-6-4zm4 6.5l-4 2.5-4-2.5v2l4 2.5 4-2.5v-2z" />
+                </g>
+
+                <g class="map-pin" data-map-college="mba" transform="translate(415, 122)">
+                  <circle cx="12" cy="12" r="10" fill="#ea4335" />
+                  <path fill="#ffffff" d="M10 7v1H7v7h10V8h-3V7c0-.55-.45-1-1-1h-2c-.55 0-1 .45-1 1zm4 1v-1h-4v1h4z" />
+                </g>
+              </svg>
+            </div>
           </div>
 
-          <div class="gm-map-legend">
-            <span class="legend-item"><span class="legend-dot eng"></span> Engineering</span>
-            <span class="legend-item"><span class="legend-dot mba"></span> MBA &amp; MCA (Belaku)</span>
-            <span class="legend-item"><span class="legend-dot bca"></span> BCA Wing</span>
-            <span class="legend-item"><span class="legend-dot pharmacy"></span> Pharmacy</span>
+          <!-- Interactive Building Jump Bar -->
+          <div class="gm-map-building-jump">
+            <span class="jump-label">Explore building:</span>
+            <button type="button" class="jump-chip" data-jump-college="engineering">
+              <span class="jump-dot eng"></span>
+              <span>Engineering (60)</span>
+            </button>
+            <button type="button" class="jump-chip" data-jump-college="mba">
+              <span class="jump-dot mba"></span>
+              <span>MBA (102 &amp; Belaku)</span>
+            </button>
+            <button type="button" class="jump-chip" data-jump-college="mca">
+              <span class="jump-dot mca"></span>
+              <span>MCA</span>
+            </button>
+            <button type="button" class="jump-chip" data-jump-college="bca">
+              <span class="jump-dot bca"></span>
+              <span>BCA</span>
+            </button>
+            <button type="button" class="jump-chip" data-jump-college="pharmacy">
+              <span class="jump-dot pharmacy"></span>
+              <span>Pharmacy</span>
+            </button>
           </div>
         </div>
       </aside>
