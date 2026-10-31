@@ -3,59 +3,80 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Locorom Campus Wayfinder</title>
-  <meta name="description" content="Indoor visual wayfinding and photo walkthrough planner for the MITM campus." />
-  <meta property="og:title" content="Locorom Campus Wayfinder" />
-  <meta property="og:description" content="Indoor visual wayfinding and photo walkthrough planner for the MITM campus." />
-  <link rel="icon" type="image/svg+xml" href="logo.svg" />
+  <title>MIT Mysore Campus Navigator — Maharaja Institute of Technology Mysore</title>
+  <meta name="description" content="Official indoor visual wayfinding and step-by-step corridor photo walkthroughs for Maharaja Institute of Technology Mysore (Engineering, MBA, MCA, BCA, Pharmacy)." />
+  <meta property="og:title" content="MIT Mysore Campus Navigator" />
+  <meta property="og:description" content="Indoor visual wayfinding and photo walkthrough planner for Maharaja Institute of Technology Mysore." />
+  <link rel="icon" type="image/png" href="logo.png" />
 
   <!-- 2+1 Font Pairing: Outfit (Display), Plus Jakarta Sans (Body), JetBrains Mono (Tabular Numerals) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@600;700&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      /* Google Maps Design System Typography */
+      --font-display: 'Google Sans', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-sans: 'Google Sans', 'Plus Jakarta Sans', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 
-      /* Dark Mode (Default) */
-      --bg-canvas: #0b0e14;
-      --bg-surface: #121721;
-      --bg-elevated: #19202e;
-      --bg-stage: #070a10;
+      /* Design Tokens */
+      --color-primary: #0b57d0;
+      --color-primary-hover: #0947a8;
+      --color-primary-active: #083b8a;
 
-      --border-hairline: rgba(255, 255, 255, 0.09);
-      --border-strong: rgba(255, 255, 255, 0.18);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-pill: 28px;
 
-      --text-primary: #f8fafc;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
+      --elevation-card: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+      --elevation-button-hover: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.3);
+      --elevation-button-active: 0 1px 3px 0 rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.3);
 
-      --accent: #3b82f6;
-      --accent-soft: rgba(59, 130, 246, 0.14);
-      --whatsapp-green: #16a34a;
-
-      --ease: 160ms cubic-bezier(0.16, 1, 0.3, 1);
+      --whatsapp-green: #15803d;
+      --ease: 120ms cubic-bezier(0, 0, 0.2, 1);
     }
 
+    /* Light Theme (Default Google Maps Aesthetic) */
     [data-theme="light"] {
-      --bg-canvas: #f8fafc;
+      --bg-canvas: #ffffff;
       --bg-surface: #ffffff;
-      --bg-elevated: #f1f5f9;
-      --bg-stage: #070a10;
+      --bg-elevated: #f8fafd;
+      --bg-stage: #0a0e17;
 
-      --border-hairline: rgba(15, 23, 42, 0.09);
-      --border-strong: rgba(15, 23, 42, 0.18);
+      --border-hairline: rgba(60, 64, 67, 0.14);
+      --border-strong: #747775;
 
-      --text-primary: #0f172a;
-      --text-secondary: #475569;
-      --text-muted: #64748b;
+      --text-primary: #000000;
+      --text-secondary: #1f1f1f;
+      --text-muted: #444746;
 
-      --accent: #2563eb;
-      --accent-soft: rgba(37, 99, 235, 0.1);
-      --whatsapp-green: #15803d;
+      --accent: #0b57d0;
+      --accent-soft: rgba(11, 87, 208, 0.08);
+      --card-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+      --card-hover-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.3);
+    }
+
+    /* Dark Theme */
+    [data-theme="dark"] {
+      --bg-canvas: #121212;
+      --bg-surface: #1e1e1e;
+      --bg-elevated: #28292a;
+      --bg-stage: #05070a;
+
+      --border-hairline: rgba(255, 255, 255, 0.12);
+      --border-strong: rgba(255, 255, 255, 0.28);
+
+      --text-primary: #ffffff;
+      --text-secondary: #bdc1c6;
+      --text-muted: #9aa0a6;
+
+      --accent: #8ab4f8;
+      --accent-soft: rgba(138, 180, 248, 0.15);
+      --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5), 0 2px 6px 2px rgba(0, 0, 0, 0.25);
+      --card-hover-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.6), 0 4px 12px 2px rgba(0, 0, 0, 0.35);
     }
 
     *, *::before, *::after {
@@ -1058,6 +1079,436 @@
         height: 360px;
       }
     }
+
+    /* ==========================================================================
+       GOOGLE MAPS BUTTONS & PILL CONTROLS
+       ========================================================================== */
+    .button-primary-filled {
+      background-color: var(--color-primary, #0b57d0);
+      color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 10px 22px;
+      border: none;
+      border-radius: var(--radius-lg, 20px);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: var(--elevation-card);
+      transition: background-color var(--ease), box-shadow var(--ease);
+      text-decoration: none;
+    }
+    .button-primary-filled:hover {
+      background-color: var(--color-primary-hover, #0947a8);
+      box-shadow: var(--elevation-button-hover);
+    }
+    .button-primary-filled:active {
+      box-shadow: var(--elevation-button-active);
+    }
+
+    .button-outlined {
+      background-color: var(--bg-surface);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 8px 18px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg, 20px);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background-color 75ms linear, box-shadow var(--ease);
+      text-decoration: none;
+    }
+    .button-outlined:hover {
+      background-color: var(--bg-elevated);
+      box-shadow: var(--elevation-button-hover);
+    }
+
+    /* Brand Logo & Wordmark */
+    .brand-logo-img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      flex-shrink: 0;
+    }
+    .brand-text-col {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+    .brand-primary-name {
+      font-family: var(--font-display);
+      font-size: 16.5px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+    .brand-tagline {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .top-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .top-portal-btn {
+      background-color: var(--bg-elevated);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg);
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all var(--ease);
+    }
+    .top-portal-btn:hover {
+      border-color: var(--border-strong);
+      color: var(--accent);
+    }
+
+    /* ==========================================================================
+       SCREEN 0: COLLEGE SELECTION PORTAL
+       ========================================================================== */
+    .college-portal-wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 36px 20px 80px 20px;
+    }
+
+    .portal-hero {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 36px auto;
+    }
+
+    .portal-logo-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      box-shadow: 0 2px 10px rgba(60, 64, 67, 0.25);
+      margin-bottom: 18px;
+      padding: 4px;
+      border: 2px solid var(--border-hairline);
+    }
+
+    .portal-main-logo {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .portal-institution-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .portal-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.8vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      line-height: 1.22;
+    }
+
+    .portal-subheading {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .college-portal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 22px;
+      margin-bottom: 44px;
+    }
+
+    .college-portal-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      padding: 26px 24px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--elevation-card);
+      transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease);
+      cursor: pointer;
+      position: relative;
+    }
+    .college-portal-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--elevation-button-hover);
+      border-color: var(--accent);
+    }
+
+    .college-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .college-card-icon {
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    .college-card-badge {
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 4px 10px;
+      border-radius: var(--radius-lg);
+      background-color: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .college-card-title {
+      font-family: var(--font-display);
+      font-size: 23px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .college-card-subtitle {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .college-card-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin-bottom: 18px;
+      flex-grow: 1;
+    }
+
+    .college-card-stats {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .stat-pill {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background-color: var(--bg-elevated);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-hairline);
+    }
+
+    .college-enter-btn {
+      width: 100%;
+      background-color: var(--color-primary, #0b57d0);
+      color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 12px 20px;
+      border: none;
+      border-radius: var(--radius-lg, 20px);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: var(--elevation-card);
+      transition: background-color var(--ease), box-shadow var(--ease);
+    }
+    .college-portal-card:hover .college-enter-btn {
+      background-color: var(--color-primary-hover, #0947a8);
+      box-shadow: var(--elevation-button-hover);
+    }
+
+    .portal-features-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-hairline);
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 16px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      box-shadow: var(--elevation-card);
+    }
+
+    .feature-icon {
+      font-size: 26px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .feature-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .feature-text strong {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .feature-text span {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    /* ==========================================================================
+       COLLEGE ACTIVE BAR (Inside Home Screen)
+       ========================================================================== */
+    .college-active-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 12px 18px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
+      box-shadow: var(--elevation-card);
+    }
+
+    .college-active-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-change-college {
+      background-color: var(--bg-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background-color var(--ease), box-shadow var(--ease);
+    }
+    .btn-change-college:hover {
+      background-color: var(--bg-canvas);
+      box-shadow: var(--elevation-button-hover);
+    }
+
+    .college-active-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .active-college-name {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .active-college-badge {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 3px 10px;
+      border-radius: var(--radius-lg);
+    }
+
+    .college-quick-switch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .switch-hint {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-right: 4px;
+    }
+
+    .mini-college-chip {
+      background-color: var(--bg-elevated);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg);
+      padding: 5px 12px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--ease);
+    }
+    .mini-college-chip:hover {
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+    .mini-college-chip.active {
+      background-color: var(--color-primary, #0b57d0);
+      color: #ffffff;
+      border-color: var(--color-primary, #0b57d0);
+      box-shadow: var(--elevation-card);
+    }
+
+    .empty-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
   </style>
 </head>
 <body>
@@ -1066,21 +1517,16 @@
        TOP NAVIGATION BAR (Strict 3-Zone Contract: Brand | Floor Links | Theme Action)
        ========================================================================== -->
   <header class="top-bar">
-    <a href="/" class="brand-wordmark" id="brandHomeLink">
-      <svg class="brand-mark-svg" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-        <rect width="64" height="64" rx="14" fill="#0B0F17"/>
-        <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="13.25" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.5"/>
-        <path d="M32 12L50 22.5L32 33L14 22.5L32 12Z" fill="#1E293B" stroke="#64748B" stroke-width="1.5" stroke-linejoin="round"/>
-        <path d="M23 35.25L14 40.5L32 51L50 40.5L41 35.25" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M22 41.5L32 47L42 41.25V22.5L32 28" stroke="#3B82F6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="22" cy="41.5" r="3" fill="#0B0F17" stroke="#94A3B8" stroke-width="2"/>
-        <circle cx="32" cy="22.5" r="4.5" fill="#3B82F6"/>
-        <circle cx="32" cy="22.5" r="2" fill="#FFFFFF"/>
-      </svg>
-      <span>Locorom</span>
+    <a href="#" class="brand-wordmark" id="brandHomeLink" title="Maharaja Institute of Technology Mysore">
+      <img src="logo.png" alt="MIT Mysore Seal" class="brand-logo-img" />
+      <div class="brand-text-col">
+        <span class="brand-primary-name">MIT Mysore</span>
+        <span class="brand-tagline">Campus Navigator</span>
+      </div>
     </a>
 
-    <nav class="floor-nav" aria-label="Floor Filter">
+    <!-- Top Floor Links (Active in College Room Finder) -->
+    <nav class="floor-nav" id="topFloorNav" aria-label="Floor Filter" style="display: none;">
       <button type="button" class="floor-nav-link active" data-floor-filter="all">All Rooms</button>
       <button type="button" class="floor-nav-link" data-floor-filter="ground">Ground &amp; Labs</button>
       <button type="button" class="floor-nav-link" data-floor-filter="1st Floor">1st Floor</button>
@@ -1089,19 +1535,197 @@
       <button type="button" class="floor-nav-link" data-floor-filter="4-5">4th &amp; 5th Floor</button>
     </nav>
 
-    <button type="button" class="theme-btn" id="themeToggleBtn">
-      <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="12" cy="12" r="4"></circle>
-        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
-      </svg>
-      <span id="themeToggleLabel">Light Mode</span>
-    </button>
+    <div class="top-bar-right">
+      <button type="button" class="top-portal-btn" id="topPortalBtn" title="Switch College / Institutional Portal">
+        <svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Colleges</span>
+      </button>
+
+      <button type="button" class="theme-btn" id="themeToggleBtn" title="Toggle Light / Dark Theme">
+        <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+        </svg>
+        <span id="themeToggleLabel">Light</span>
+      </button>
+    </div>
   </header>
 
   <!-- ==========================================================================
-       SCREEN 1: HOME / ROOM FINDER
+       SCREEN 0: COLLEGE SELECTION PORTAL (Maharaja Institute of Technology Mysore)
        ========================================================================== -->
-  <main id="homeScreen" class="container">
+  <section id="collegePortalScreen" class="college-portal-wrap">
+    <div class="portal-hero">
+      <div class="portal-logo-badge">
+        <img src="logo.png" alt="Maharaja Institute of Technology Mysore Official Seal" class="portal-main-logo" />
+      </div>
+      <div class="portal-institution-title">Maharaja Institute of Technology Mysore</div>
+      <h1 class="portal-headline">Select Your College to Navigate</h1>
+      <p class="portal-subheading">
+        Choose an academic block or division to explore classrooms, departmental laboratories, and turn-by-turn corridor walkthroughs.
+      </p>
+    </div>
+
+    <div class="college-portal-grid">
+      <!-- Engineering -->
+      <div class="college-portal-card" data-select-college="engineering">
+        <div class="college-card-header">
+          <span class="college-card-icon">🏛️</span>
+          <span class="college-card-badge">Main Campus Block</span>
+        </div>
+        <h2 class="college-card-title">Engineering</h2>
+        <div class="college-card-subtitle">BE / B.Tech Departments &amp; Research Labs</div>
+        <p class="college-card-desc">
+          Navigate 60+ classrooms and specialized laboratories across 5 floors, including CSE, ISE, ECE, Mechanical, Civil, and AI/ML.
+        </p>
+        <div class="college-card-stats">
+          <span class="stat-pill">📍 60 Rooms &amp; Labs</span>
+          <span class="stat-pill">🏢 Ground – 5th Floor</span>
+        </div>
+        <button type="button" class="college-enter-btn">
+          <span>Enter Engineering Campus</span>
+          <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <!-- MBA -->
+      <div class="college-portal-card" data-select-college="mba">
+        <div class="college-card-header">
+          <span class="college-card-icon">💼</span>
+          <span class="college-card-badge">Management Block</span>
+        </div>
+        <h2 class="college-card-title">MBA</h2>
+        <div class="college-card-subtitle">Master of Business Administration</div>
+        <p class="college-card-desc">
+          Department of MBA &amp; MCA facility featuring Belaku (ಬೆಳಕು), executive seminar halls, lecture suites, and faculty chambers.
+        </p>
+        <div class="college-card-stats">
+          <span class="stat-pill">📍 Belaku (ಬೆಳಕು)</span>
+          <span class="stat-pill">🏢 Ground &amp; 1st Floor</span>
+        </div>
+        <button type="button" class="college-enter-btn">
+          <span>Enter MBA Block</span>
+          <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <!-- MCA -->
+      <div class="college-portal-card" data-select-college="mca">
+        <div class="college-card-header">
+          <span class="college-card-icon">🖥️</span>
+          <span class="college-card-badge">Postgraduate IT Block</span>
+        </div>
+        <h2 class="college-card-title">MCA</h2>
+        <div class="college-card-subtitle">Master of Computer Applications</div>
+        <p class="college-card-desc">
+          Postgraduate computer science laboratories, Belaku conference suite, software project studios, and faculty rooms.
+        </p>
+        <div class="college-card-stats">
+          <span class="stat-pill">📍 Belaku &amp; PG Labs</span>
+          <span class="stat-pill">🏢 Ground &amp; 1st Floor</span>
+        </div>
+        <button type="button" class="college-enter-btn">
+          <span>Enter MCA Block</span>
+          <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <!-- BCA -->
+      <div class="college-portal-card" data-select-college="bca">
+        <div class="college-card-header">
+          <span class="college-card-icon">💻</span>
+          <span class="college-card-badge">Undergraduate IT Block</span>
+        </div>
+        <h2 class="college-card-title">BCA</h2>
+        <div class="college-card-subtitle">Bachelor of Computer Applications</div>
+        <p class="college-card-desc">
+          Undergraduate computer application suites, coding laboratories, multimedia classrooms, and faculty offices.
+        </p>
+        <div class="college-card-stats">
+          <span class="stat-pill">📍 Programming Labs</span>
+          <span class="stat-pill">🏢 IT Wing</span>
+        </div>
+        <button type="button" class="college-enter-btn">
+          <span>Enter BCA Block</span>
+          <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <!-- Pharmacy -->
+      <div class="college-portal-card" data-select-college="pharmacy">
+        <div class="college-card-header">
+          <span class="college-card-icon">💊</span>
+          <span class="college-card-badge">Health Sciences Block</span>
+        </div>
+        <h2 class="college-card-title">Pharmacy</h2>
+        <div class="college-card-subtitle">Faculty of Pharmaceutical Sciences</div>
+        <p class="college-card-desc">
+          Pharmaceutics laboratories, pharmaceutical chemistry chambers, pharmacognosy research, and lecture halls.
+        </p>
+        <div class="college-card-stats">
+          <span class="stat-pill">📍 Pharma &amp; Chem Labs</span>
+          <span class="stat-pill">🏢 Science Block</span>
+        </div>
+        <button type="button" class="college-enter-btn">
+          <span>Enter Pharmacy College</span>
+          <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="portal-features-row">
+      <div class="feature-item">
+        <span class="feature-icon">🚶‍♂️</span>
+        <div class="feature-text">
+          <strong>Turn-by-Turn Corridor Walkthroughs</strong>
+          <span>Real photographs showing every staircase and turn leading directly to your room.</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🎙️</span>
+        <div class="feature-text">
+          <strong>Hands-Free Voice Search</strong>
+          <span>Speak any room or lab name clearly into your microphone to jump straight there.</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">💬</span>
+        <div class="feature-text">
+          <strong>WhatsApp Direct Route Sharing</strong>
+          <span>Share exact room directions and walkthrough links with students or visitors in 1 click.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SCREEN 1: HOME / ROOM FINDER (Entered for a Selected College Only)
+       ========================================================================== -->
+  <main id="homeScreen" class="container" style="display: none;">
+
+    <!-- Dedicated College Navigation & Switcher Bar -->
+    <div class="college-active-bar" id="collegeActiveBar">
+      <div class="college-active-left">
+        <button type="button" class="btn-change-college" id="changeCollegeBtn" title="Return to College Selection">
+          <svg class="icon-svg" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          <span>Change College</span>
+        </button>
+        <div class="college-active-meta">
+          <span class="active-college-name" id="activeCollegeName">Engineering Campus</span>
+          <span class="active-college-badge" id="activeCollegeBadge">60 Rooms &amp; Labs</span>
+        </div>
+      </div>
+
+      <div class="college-quick-switch" role="tablist" aria-label="Switch College">
+        <span class="switch-hint">Switch:</span>
+        <button type="button" class="mini-college-chip" data-switch-college="engineering">Engineering</button>
+        <button type="button" class="mini-college-chip" data-switch-college="mba">MBA</button>
+        <button type="button" class="mini-college-chip" data-switch-college="mca">MCA</button>
+        <button type="button" class="mini-college-chip" data-switch-college="bca">BCA</button>
+        <button type="button" class="mini-college-chip" data-switch-college="pharmacy">Pharmacy</button>
+      </div>
+    </div>
+
     <section class="search-hero">
       <h1>Where are you heading on campus?</h1>
       <p>Search by room number, speak with your microphone, or choose a campus section below.</p>
@@ -1139,34 +1763,6 @@
       </div>
 
       
-      <!-- Campus / College Segmented Bar: Engineering, MBA, BCA, MCA, Pharmacy -->
-      <nav class="college-nav" role="tablist" aria-label="Campus College Filter">
-        <button type="button" class="college-chip active" data-college-filter="all">
-          <span class="chip-icon">🏛️</span>
-          <span>All Campuses</span>
-        </button>
-        <button type="button" class="college-chip" data-college-filter="engineering">
-          <span class="chip-icon">⚙️</span>
-          <span>Engineering</span>
-        </button>
-        <button type="button" class="college-chip" data-college-filter="mba">
-          <span class="chip-icon">💼</span>
-          <span>MBA</span>
-        </button>
-        <button type="button" class="college-chip" data-college-filter="bca">
-          <span class="chip-icon">💻</span>
-          <span>BCA</span>
-        </button>
-        <button type="button" class="college-chip" data-college-filter="mca">
-          <span class="chip-icon">🖥️</span>
-          <span>MCA</span>
-        </button>
-        <button type="button" class="college-chip" data-college-filter="pharmacy">
-          <span class="chip-icon">💊</span>
-          <span>Pharmacy</span>
-        </button>
-      </nav>
-
       <div class="quick-row" id="quickChipsRow"></div>
     </section>
 
@@ -1281,9 +1877,6 @@
       </div>
     </div>
   </section>
-
-  
-  </div>
 
   <div class="toast-host" id="toastHost"></div>
 

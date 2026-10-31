@@ -1,7 +1,8 @@
 /**
- * LOCOROM — Campus Room Finder, Voice Search, WhatsApp Direct Share & Step-by-Step Photo Walkthroughs
+ * MIT Mysore Campus Navigator
+ * Official Indoor Wayfinding, Voice Search, WhatsApp Direct Share & Corridor Photo Walkthroughs
+ * Maharaja Institute of Technology Mysore (Engineering, MBA, MCA, BCA, Pharmacy)
  */
-
 
 const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/aryamanm77/mitm-room/main/";
 
@@ -9,16 +10,19 @@ const state = {
   rooms: {},
   roomKeys: [],
   activeFloor: "all",
-  activeCollege: "all", // "all" | "engineering" | "mba" | "bca" | "mca" | "pharmacy"
+  activeCollege: null, // null (Portal Screen) | "engineering" | "mba" | "mca" | "bca" | "pharmacy"
   searchQuery: "",
   selectedRoomKey: null,
   activeApIndex: 0,
   activePhotoIndex: 0,
   isPlaying: false,
   playTimer: null,
-  recentRooms: ["114", "205", "213 DSP lab", "305"],
-  };
+  recentRooms: ["114", "205", "213 DSP lab", "305", "Belaku"],
+};
 
+// ============================================================================
+// URL & MEDIA HELPERS
+// ============================================================================
 function resolveMediaUrl(path) {
   if (!path) return "";
   if (path.startsWith("http://") || path.startsWith("https://")) return path;
@@ -69,6 +73,70 @@ function getRoutesForRoom(room) {
   ];
 }
 
+// ============================================================================
+// COLLEGE & INSTITUTIONAL HELPERS
+// ============================================================================
+function getCollegeKeysForRoom(r) {
+  if (!r) return ["engineering"];
+  const college = (r.college || "Engineering").toLowerCase();
+  const dept = (r.dept || "").toLowerCase();
+  const combined = `${college} ${dept}`;
+
+  if (combined.includes("mba") && combined.includes("mca")) return ["mba", "mca"];
+  if (combined.includes("mba")) return ["mba"];
+  if (combined.includes("mca")) return ["mca"];
+  if (combined.includes("bca")) return ["bca"];
+  if (combined.includes("pharmacy") || combined.includes("pharma")) return ["pharmacy"];
+  return ["engineering"];
+}
+
+function roomMatchesCollege(r, collegeKey) {
+  if (!collegeKey || collegeKey === "all") return true;
+  const keys = getCollegeKeysForRoom(r);
+  return keys.includes(collegeKey.toLowerCase());
+}
+
+function getCollegeMeta(collegeKey) {
+  switch (collegeKey) {
+    case "mba":
+      return {
+        name: "Department of MBA",
+        badge: "Management Block • Belaku",
+        heroQuery: "Search MBA classrooms & seminar halls (e.g. Belaku)...",
+        icon: "💼"
+      };
+    case "mca":
+      return {
+        name: "Department of MCA",
+        badge: "Postgraduate IT Block • Belaku",
+        heroQuery: "Search MCA labs & halls (e.g. Belaku, PG Labs)...",
+        icon: "🖥️"
+      };
+    case "bca":
+      return {
+        name: "Department of BCA",
+        badge: "Undergraduate IT Wing",
+        heroQuery: "Search BCA programming rooms & classrooms...",
+        icon: "💻"
+      };
+    case "pharmacy":
+      return {
+        name: "Faculty of Pharmaceutical Sciences",
+        badge: "Health Sciences Block",
+        heroQuery: "Search Pharmacy & Chemistry laboratories...",
+        icon: "💊"
+      };
+    case "engineering":
+    default:
+      return {
+        name: "Engineering Campus",
+        badge: "Main Academic Block • 60+ Classrooms & Labs",
+        heroQuery: "Search engineering rooms (e.g. 205, 313, DSP Lab, 114)...",
+        icon: "🏛️"
+      };
+  }
+}
+
 // Build Direct WhatsApp Share URL (wa.me) for an exact room and starting route
 function buildWhatsAppShareUrl(roomKey, apIndex = 0) {
   const room = state.rooms[roomKey];
@@ -78,6 +146,7 @@ function buildWhatsAppShareUrl(roomKey, apIndex = 0) {
   const titleLabel = room.name.length <= 5 ? `Room ${room.name}` : room.name;
 
   const deepLinkUrl = new URL(window.location.origin + window.location.pathname);
+  if (state.activeCollege) deepLinkUrl.searchParams.set("college", state.activeCollege);
   deepLinkUrl.searchParams.set("room", roomKey);
   if (apIndex > 0) {
     deepLinkUrl.searchParams.set("ap", String(apIndex));
@@ -85,7 +154,8 @@ function buildWhatsAppShareUrl(roomKey, apIndex = 0) {
 
   const directionsSentence = route?.info || room.info || room.landmark || "Follow walkthrough photos.";
   const message = [
-    `*Locorom Campus Navigation — ${titleLabel}*`,
+    `*MIT Mysore Campus Navigator — ${titleLabel}*`,
+    `College: ${room.college || "Maharaja Institute of Technology Mysore"}`,
     `Floor: ${room.floor}${room.dept ? " · " + room.dept : ""}`,
     `Route (${route ? route.label : "Main Route"}): ${directionsSentence}`,
     `Open exact room walkthrough: ${deepLinkUrl.toString()}`
@@ -94,10 +164,11 @@ function buildWhatsAppShareUrl(roomKey, apIndex = 0) {
   return `https://wa.me/?text=${encodeURIComponent(message)}`;
 }
 
-
-// Initialize App
+// ============================================================================
+// APP INITIALIZATION
+// ============================================================================
 async function initApp() {
-  const savedTheme = localStorage.getItem("locorom_theme") || "dark";
+  const savedTheme = localStorage.getItem("locorom_theme") || "light";
   document.documentElement.setAttribute("data-theme", savedTheme);
   updateThemeButtonLabel();
 
@@ -128,18 +199,28 @@ async function initApp() {
 
   bindEvents();
 
+  // URL Deep-Linking & Initial View Routing
   const params = new URLSearchParams(window.location.search);
   const urlRoom = params.get("room");
+  const urlCollege = params.get("college");
   const urlAp = parseInt(params.get("ap") || "0", 10);
+
   if (urlRoom && state.rooms[urlRoom]) {
+    const room = state.rooms[urlRoom];
+    const collegeKeys = getCollegeKeysForRoom(room);
+    state.activeCollege = (urlCollege && collegeKeys.includes(urlCollege.toLowerCase()))
+      ? urlCollege.toLowerCase()
+      : collegeKeys[0];
     openRoom(urlRoom, false, isNaN(urlAp) ? 0 : urlAp);
+  } else if (urlCollege && ["engineering", "mba", "mca", "bca", "pharmacy"].includes(urlCollege.toLowerCase())) {
+    enterCollege(urlCollege.toLowerCase(), false);
   } else {
-    showHomeView(false);
+    showPortalView(false);
   }
 }
 
 function updateThemeButtonLabel() {
-  const theme = document.documentElement.getAttribute("data-theme") || "dark";
+  const theme = document.documentElement.getAttribute("data-theme") || "light";
   const label = document.getElementById("themeToggleLabel");
   if (label) {
     label.textContent = theme === "dark" ? "Light Mode" : "Dark Mode";
@@ -160,36 +241,107 @@ function showToast(msg) {
 }
 
 // ============================================================================
-// HOME VIEW (Simple Search + Room Grid)
+// SCREEN 0: COLLEGE SELECTION PORTAL
 // ============================================================================
-function showHomeView(pushHistory = true) {
+function showPortalView(pushHistory = true) {
   stopAutoPlay();
   state.selectedRoomKey = null;
+  state.activeCollege = null;
 
-  document.getElementById("homeScreen").style.display = "block";
-  document.getElementById("walkthroughScreen").style.display = "none";
+  const portalScreen = document.getElementById("collegePortalScreen");
+  const homeScreen = document.getElementById("homeScreen");
+  const walkthroughScreen = document.getElementById("walkthroughScreen");
+  const topFloorNav = document.getElementById("topFloorNav");
+
+  if (portalScreen) portalScreen.style.display = "block";
+  if (homeScreen) homeScreen.style.display = "none";
+  if (walkthroughScreen) walkthroughScreen.style.display = "none";
+  if (topFloorNav) topFloorNav.style.display = "none";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
   if (pushHistory) {
     const url = new URL(window.location.href);
+    url.searchParams.delete("college");
     url.searchParams.delete("room");
     url.searchParams.delete("ap");
     window.history.pushState({}, "", url.pathname);
   }
-
-  renderQuickRecents();
-  renderHomeContent();
 }
 
-function renderHomeContent() {
-  const gridEl = document.getElementById("roomsGrid");
-  if (gridEl) gridEl.style.display = "grid";
+// ============================================================================
+// SCREEN 1: DEDICATED COLLEGE ROOM FINDER
+// ============================================================================
+function enterCollege(collegeKey, pushHistory = true) {
+  stopAutoPlay();
+  state.selectedRoomKey = null;
+  state.activeCollege = collegeKey || "engineering";
+  state.searchQuery = "";
+  state.activeFloor = "all";
+
+  const portalScreen = document.getElementById("collegePortalScreen");
+  const homeScreen = document.getElementById("homeScreen");
+  const walkthroughScreen = document.getElementById("walkthroughScreen");
+  const topFloorNav = document.getElementById("topFloorNav");
+
+  if (portalScreen) portalScreen.style.display = "none";
+  if (homeScreen) homeScreen.style.display = "block";
+  if (walkthroughScreen) walkthroughScreen.style.display = "none";
+  if (topFloorNav) topFloorNav.style.display = "flex";
+
+  // Update Active College Banner UI
+  const meta = getCollegeMeta(state.activeCollege);
+  const collegeNameEl = document.getElementById("activeCollegeName");
+  const collegeBadgeEl = document.getElementById("activeCollegeBadge");
+  const searchInput = document.getElementById("mainSearchInput");
+  const clearSearchBtn = document.getElementById("clearSearchBtn");
+
+  if (collegeNameEl) collegeNameEl.textContent = meta.name;
+  if (collegeBadgeEl) collegeBadgeEl.textContent = meta.badge;
+  if (searchInput) {
+    searchInput.value = "";
+    searchInput.placeholder = meta.heroQuery;
+  }
+  if (clearSearchBtn) clearSearchBtn.style.display = "none";
+
+  // Sync quick switcher chips
+  document.querySelectorAll("[data-switch-college]").forEach(chip => {
+    chip.classList.toggle("active", chip.getAttribute("data-switch-college") === state.activeCollege);
+  });
+
+  syncFloorNavButtons();
+  renderQuickRecents();
   renderRoomsGrid();
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  if (pushHistory) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("college", state.activeCollege);
+    url.searchParams.delete("room");
+    url.searchParams.delete("ap");
+    window.history.pushState({}, "", url.toString());
+  }
+}
+
+function showHomeView(pushHistory = true) {
+  if (state.activeCollege) {
+    enterCollege(state.activeCollege, pushHistory);
+  } else {
+    showPortalView(pushHistory);
+  }
 }
 
 function renderQuickRecents() {
   const wrap = document.getElementById("quickChipsRow");
   if (!wrap) return;
-  const valid = state.recentRooms.filter(k => state.rooms[k]).slice(0, 6);
+
+  // Filter recents to rooms belonging to current college
+  const currentCollege = state.activeCollege || "engineering";
+  const valid = state.recentRooms
+    .filter(k => state.rooms[k] && roomMatchesCollege(state.rooms[k], currentCollege))
+    .slice(0, 6);
+
   if (valid.length === 0) {
     wrap.style.display = "none";
     return;
@@ -209,45 +361,28 @@ function renderRoomsGrid() {
   if (!grid) return;
 
   const q = state.searchQuery.trim().toLowerCase();
+  const floor = state.activeFloor;
+  const currentCollege = state.activeCollege || "engineering";
 
   const filtered = state.roomKeys.filter(key => {
     const r = state.rooms[key];
+    if (!r) return false;
+
+    // Strict College Match: Only show rooms belonging to current college
+    if (!roomMatchesCollege(r, currentCollege)) {
+      return false;
+    }
 
     let floorMatch = true;
-    if (state.activeFloor !== "all") {
-      if (state.activeFloor === "ground") {
-        floorMatch = r.floor === "Basement & Ground" || r.floor === "Mechanical Block" || r.floor === "Campus Amenities";
-      } else if (state.activeFloor === "4-5") {
-        floorMatch = r.floor === "4th Floor" || r.floor === "5th Floor";
-      } else {
-        floorMatch = r.floor === state.activeFloor;
-      }
+    if (floor === "ground") {
+      floorMatch = r.floor.toLowerCase().includes("ground") || r.floor.toLowerCase().includes("lab");
+    } else if (floor === "4-5") {
+      floorMatch = r.floor.includes("4") || r.floor.includes("5");
+    } else if (floor !== "all") {
+      floorMatch = r.floor.toLowerCase().includes(floor.toLowerCase());
     }
 
-    // College / Department Filtering (Engineering, MBA, BCA, MCA, Pharmacy)
-    let collegeMatch = true;
-    if (state.activeCollege !== "all") {
-      const roomCollege = (r.college || "Engineering").toLowerCase();
-      const roomDept = (r.dept || "").toLowerCase();
-      const roomCategory = (r.category || "").toLowerCase();
-      const roomName = (r.name || "").toLowerCase();
-      const combined = `${roomCollege} ${roomDept} ${roomCategory} ${roomName}`;
-
-      if (state.activeCollege === "engineering") {
-        collegeMatch = roomCollege.includes("engineering") || 
-          (!roomCollege.includes("mba") && !roomCollege.includes("mca") && !roomCollege.includes("bca") && !roomCollege.includes("pharmacy"));
-      } else if (state.activeCollege === "mba") {
-        collegeMatch = combined.includes("mba");
-      } else if (state.activeCollege === "bca") {
-        collegeMatch = combined.includes("bca");
-      } else if (state.activeCollege === "mca") {
-        collegeMatch = combined.includes("mca");
-      } else if (state.activeCollege === "pharmacy") {
-        collegeMatch = combined.includes("pharmacy") || combined.includes("pharma");
-      }
-    }
-
-    if (!q) return floorMatch && collegeMatch;
+    if (!q) return floorMatch;
     const textBlob = [
       r.name,
       r.floor,
@@ -258,31 +393,28 @@ function renderRoomsGrid() {
       ...(r.accessPoints || []).map(a => `${a.name} ${a.info}`)
     ].join(" ").toLowerCase();
 
-    return floorMatch && collegeMatch && textBlob.includes(q);
+    return floorMatch && textBlob.includes(q);
   });
 
   if (countLabel) {
-    countLabel.textContent = `${filtered.length} ${filtered.length === 1 ? "room" : "rooms"} available`;
+    countLabel.textContent = `${filtered.length} ${filtered.length === 1 ? "destination" : "destinations"} in ${getCollegeMeta(currentCollege).name}`;
   }
 
   if (filtered.length === 0) {
+    const meta = getCollegeMeta(currentCollege);
     grid.innerHTML = `
       <div class="empty-box">
-        <h3>${state.searchQuery ? `No rooms found for "${escapeHtml(state.searchQuery)}"` : `No rooms listed yet for ${state.activeCollege.toUpperCase()}`}</h3>
-        <p>${state.searchQuery ? "Try searching by room number (like 205, Belaku, 114) or lab name (like DSP, PE, Machine Shop)." : `Ready to receive ${state.activeCollege.toUpperCase()} rooms! Provide room names, photos, or floors to populate this section.`}</p>
-        <button type="button" class="btn-secondary" id="clearSearchResetBtn">Show All Campuses</button>
+        <div style="font-size: 38px; margin-bottom: 12px;">${meta.icon}</div>
+        <h3>${state.searchQuery ? `No rooms matching "${escapeHtml(state.searchQuery)}"` : `${meta.name} Directory Ready`}</h3>
+        <p>${state.searchQuery ? "Try searching by room number (e.g. 205, 114, Belaku) or check your spelling." : `This academic block is active and ready for room coordinates and corridor photo paths. You can explore other college blocks or contribute new rooms anytime.`}</p>
+        <div class="empty-actions">
+          <button type="button" class="button-primary-filled" id="emptyChangeCollegeBtn">← Switch College</button>
+          ${currentCollege !== "engineering" ? '<button type="button" class="button-outlined" id="emptyExploreEngBtn">Explore Engineering (60 Rooms)</button>' : ''}
+        </div>
       </div>
     `;
-    document.getElementById("clearSearchResetBtn")?.addEventListener("click", () => {
-      state.searchQuery = "";
-      state.activeFloor = "all";
-      state.activeCollege = "all";
-      syncCollegeNavButtons();
-      const inp = document.getElementById("mainSearchInput");
-      if (inp) inp.value = "";
-      syncFloorNavButtons();
-      renderRoomsGrid();
-    });
+    document.getElementById("emptyChangeCollegeBtn")?.addEventListener("click", () => showPortalView());
+    document.getElementById("emptyExploreEngBtn")?.addEventListener("click", () => enterCollege("engineering"));
     return;
   }
 
@@ -350,28 +482,40 @@ function renderRoomsGrid() {
 }
 
 // ============================================================================
-// WALKTHROUGH VIEW (Simple Directions + Corridor Photos + WhatsApp)
+// SCREEN 2: WALKTHROUGH VIEW
 // ============================================================================
 function openRoom(roomKey, pushHistory = true, initialApIdx = 0) {
   const room = state.rooms[roomKey];
   if (!room) return;
+
+  // Sync active college with room if not set or incompatible
+  const roomColleges = getCollegeKeysForRoom(room);
+  if (!state.activeCollege || !roomColleges.includes(state.activeCollege)) {
+    state.activeCollege = roomColleges[0];
+  }
 
   stopAutoPlay();
   state.selectedRoomKey = roomKey;
   state.activeApIndex = initialApIdx;
   state.activePhotoIndex = 0;
 
-  state.recentRooms = [roomKey, ...state.recentRooms.filter(k => k !== roomKey)].slice(0, 6);
-  try {
-    localStorage.setItem("locorom_recent_rooms", JSON.stringify(state.recentRooms));
-  } catch (e) {}
+  recordRecentRoom(roomKey);
 
-  document.getElementById("homeScreen").style.display = "none";
-  document.getElementById("walkthroughScreen").style.display = "block";
+  const portalScreen = document.getElementById("collegePortalScreen");
+  const homeScreen = document.getElementById("homeScreen");
+  const walkthroughScreen = document.getElementById("walkthroughScreen");
+  const topFloorNav = document.getElementById("topFloorNav");
+
+  if (portalScreen) portalScreen.style.display = "none";
+  if (homeScreen) homeScreen.style.display = "none";
+  if (walkthroughScreen) walkthroughScreen.style.display = "block";
+  if (topFloorNav) topFloorNav.style.display = "none";
+
   window.scrollTo(0, 0);
 
   if (pushHistory) {
     const url = new URL(window.location.href);
+    if (state.activeCollege) url.searchParams.set("college", state.activeCollege);
     url.searchParams.set("room", roomKey);
     if (initialApIdx > 0) url.searchParams.set("ap", String(initialApIdx));
     else url.searchParams.delete("ap");
@@ -379,6 +523,13 @@ function openRoom(roomKey, pushHistory = true, initialApIdx = 0) {
   }
 
   renderWalkthroughView();
+}
+
+function recordRecentRoom(roomKey) {
+  state.recentRooms = [roomKey, ...state.recentRooms.filter(k => k !== roomKey)].slice(0, 6);
+  try {
+    localStorage.setItem("locorom_recent_rooms", JSON.stringify(state.recentRooms));
+  } catch (e) {}
 }
 
 function renderWalkthroughView() {
@@ -395,9 +546,11 @@ function renderWalkthroughView() {
     room.name.length <= 5 ? `Room ${room.name}` : room.name;
 
   document.getElementById("wtRoomMeta").innerHTML = `
+    <span class="room-college-badge">${escapeHtml(room.college || "Engineering Campus")}</span>
+    <span aria-hidden="true">·</span>
     <span>${escapeHtml(room.floor)}</span>
     <span aria-hidden="true">·</span>
-    <span>${escapeHtml(room.dept || "Campus Space")}</span>
+    <span>${escapeHtml(room.dept || "Campus Destination")}</span>
     <span aria-hidden="true">·</span>
     <span class="tabular-nums">${photos.length} walkthrough steps</span>
   `;
@@ -425,6 +578,7 @@ function renderWalkthroughView() {
         state.activeApIndex = parseInt(btn.getAttribute("data-ap-idx"), 10);
         state.activePhotoIndex = 0;
         const url = new URL(window.location.href);
+        if (state.activeCollege) url.searchParams.set("college", state.activeCollege);
         url.searchParams.set("room", state.selectedRoomKey);
         if (state.activeApIndex > 0) url.searchParams.set("ap", String(state.activeApIndex));
         else url.searchParams.delete("ap");
@@ -440,7 +594,6 @@ function renderWalkthroughView() {
   document.getElementById("wtDirectionFrom").textContent = `How to walk from ${currentRoute.label}:`;
   document.getElementById("wtDirectionText").textContent =
     currentRoute.info || room.info || room.landmark || `Follow the photos step-by-step to reach Room ${room.name}.`;
-
 
   renderActiveStepPhoto();
 }
@@ -462,7 +615,7 @@ function renderActiveStepPhoto() {
   if (photos.length === 0) {
     stepCounter.textContent = "Directions available";
     progressFill.style.width = "100%";
-    stage.innerHTML = `<div class="no-photo-msg">Written directions are shown above. Follow the signs to reach Room ${room.name}.</div>`;
+    stage.innerHTML = `<div class="no-photo-msg">Written directions are shown above. Follow the signs to reach Room ${escapeHtml(room.name)}.</div>`;
     thumbsRow.innerHTML = "";
     return;
   }
@@ -585,54 +738,65 @@ function stopAutoPlay() {
   if (playLabel) playLabel.textContent = "Auto-Walk";
 }
 
-
-function syncCollegeNavButtons() {
-  document.querySelectorAll("[data-college-filter]").forEach(btn => {
-    btn.classList.toggle("active", btn.getAttribute("data-college-filter") === state.activeCollege);
-  });
-}
-
 function syncFloorNavButtons() {
-  
-  document.querySelectorAll("[data-college-filter]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      state.activeCollege = btn.getAttribute("data-college-filter");
-      syncCollegeNavButtons();
-      showHomeView(true);
-    });
-  });
-
   document.querySelectorAll("[data-floor-filter]").forEach(btn => {
     btn.classList.toggle("active", btn.getAttribute("data-floor-filter") === state.activeFloor);
   });
 }
 
 // ============================================================================
-// EVENT LISTENERS
+// EVENT LISTENERS & USER INTERACTIONS
 // ============================================================================
 function bindEvents() {
-  document.getElementById("brandHomeLink")?.addEventListener("click", (e) => {
-    e.preventDefault();
-    showHomeView(true);
+  // 1. College Selection Portal Cards -> Enter College Only
+  document.querySelectorAll("[data-select-college]").forEach(card => {
+    card.addEventListener("click", () => {
+      const college = card.getAttribute("data-select-college");
+      enterCollege(college);
+    });
   });
 
+  // 2. Change College Buttons -> Return to Portal
+  document.getElementById("changeCollegeBtn")?.addEventListener("click", () => {
+    showPortalView();
+  });
+
+  document.getElementById("topPortalBtn")?.addEventListener("click", () => {
+    showPortalView();
+  });
+
+  document.getElementById("brandHomeLink")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    showPortalView();
+  });
+
+  // 3. Quick Switch College Chips in Active College Bar
+  document.querySelectorAll("[data-switch-college]").forEach(chip => {
+    chip.addEventListener("click", () => {
+      const college = chip.getAttribute("data-switch-college");
+      enterCollege(college);
+    });
+  });
+
+  // 4. Floor Filter Nav Buttons
   document.querySelectorAll("[data-floor-filter]").forEach(btn => {
     btn.addEventListener("click", () => {
       state.activeFloor = btn.getAttribute("data-floor-filter");
       syncFloorNavButtons();
-      showHomeView(true);
+      renderRoomsGrid();
     });
   });
 
+  // 5. Theme Toggle Button
   document.getElementById("themeToggleBtn")?.addEventListener("click", () => {
-    const cur = document.documentElement.getAttribute("data-theme") || "dark";
+    const cur = document.documentElement.getAttribute("data-theme") || "light";
     const next = cur === "dark" ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", next);
     localStorage.setItem("locorom_theme", next);
     updateThemeButtonLabel();
   });
 
-  // Search Input
+  // 6. Search Input & Clear
   const searchInput = document.getElementById("mainSearchInput");
   const clearSearchBtn = document.getElementById("clearSearchBtn");
   if (searchInput) {
@@ -641,10 +805,7 @@ function bindEvents() {
       if (clearSearchBtn) {
         clearSearchBtn.style.display = searchInput.value ? "inline-flex" : "none";
       }
-      if (state.homeDisplayMode !== "grid") {
-        state.homeDisplayMode = "grid";
-      }
-      renderHomeContent();
+      renderRoomsGrid();
     });
 
     searchInput.addEventListener("keydown", (e) => {
@@ -670,11 +831,18 @@ function bindEvents() {
     });
   }
 
-  // Voice-to-Text Search (Device Microphone via Web Speech API)
+  // 7. Voice Search (Microphone Speech Recognition)
   setupVoiceSearch(searchInput, clearSearchBtn);
 
-  // Walkthrough Controls
-  document.getElementById("wtBackBtn")?.addEventListener("click", () => showHomeView(true));
+  // 8. Walkthrough Screen Controls
+  document.getElementById("wtBackBtn")?.addEventListener("click", () => {
+    if (state.activeCollege) {
+      enterCollege(state.activeCollege);
+    } else {
+      showPortalView();
+    }
+  });
+
   document.getElementById("wtPrevBtn")?.addEventListener("click", () => stepPhoto(-1));
   document.getElementById("wtNextBtn")?.addEventListener("click", () => stepPhoto(1));
   document.getElementById("wtStagePrev")?.addEventListener("click", () => stepPhoto(-1));
@@ -684,6 +852,7 @@ function bindEvents() {
   document.getElementById("wtShareBtn")?.addEventListener("click", () => {
     if (!state.selectedRoomKey) return;
     const shareUrl = new URL(window.location.origin + window.location.pathname);
+    if (state.activeCollege) shareUrl.searchParams.set("college", state.activeCollege);
     shareUrl.searchParams.set("room", state.selectedRoomKey);
     if (state.activeApIndex > 0) {
       shareUrl.searchParams.set("ap", String(state.activeApIndex));
@@ -691,8 +860,8 @@ function bindEvents() {
     navigator.clipboard.writeText(shareUrl.toString()).then(() => showToast("Exact room link copied!"));
   });
 
-  // Swipe support on photo stage
-  const stage = document.getElementById("wtPhotoStage");
+  // 9. Mobile Touch Swipe for Walkthrough Stage
+  const stage = document.getElementById("wtPhotoStageWrap");
   if (stage) {
     let startX = 0;
     stage.addEventListener("touchstart", (e) => {
@@ -706,7 +875,7 @@ function bindEvents() {
     }, { passive: true });
   }
 
-  // Keyboard support
+  // 10. Global Keyboard Shortcuts
   window.addEventListener("keydown", (e) => {
     if (document.activeElement && document.activeElement.tagName === "INPUT") {
       if (e.key === "Escape") document.activeElement.blur();
@@ -728,25 +897,36 @@ function bindEvents() {
         e.preventDefault();
         toggleAutoPlay();
       } else if (e.key === "Escape") {
-        showHomeView(true);
+        if (state.activeCollege) enterCollege(state.activeCollege);
+        else showPortalView();
       }
     }
   });
 
+  // 11. Browser Back / Forward (popstate)
   window.addEventListener("popstate", () => {
     const params = new URLSearchParams(window.location.search);
     const r = params.get("room");
+    const col = params.get("college");
     const apIdx = parseInt(params.get("ap") || "0", 10);
+
     if (r && state.rooms[r]) {
+      const room = state.rooms[r];
+      const collegeKeys = getCollegeKeysForRoom(room);
+      state.activeCollege = (col && collegeKeys.includes(col.toLowerCase()))
+        ? col.toLowerCase()
+        : collegeKeys[0];
       openRoom(r, false, isNaN(apIdx) ? 0 : apIdx);
+    } else if (col && ["engineering", "mba", "mca", "bca", "pharmacy"].includes(col.toLowerCase())) {
+      enterCollege(col.toLowerCase(), false);
     } else {
-      showHomeView(false);
+      showPortalView(false);
     }
   });
 }
 
 // ============================================================================
-// VOICE-TO-TEXT INPUT MODE (Web Speech API)
+// VOICE-TO-TEXT SEARCH (Web Speech API)
 // ============================================================================
 function normalizeSpokenQuery(rawTranscript) {
   if (!rawTranscript) return "";
@@ -769,141 +949,149 @@ function normalizeSpokenQuery(rawTranscript) {
   return cleaned;
 }
 
-function setupVoiceSearch(searchInput, clearSearchBtn) {
-  const voiceBtn = document.getElementById("voiceSearchBtn");
-  const voiceBtnLabel = document.getElementById("voiceBtnLabel");
-  const searchBarBox = document.getElementById("searchBarBox");
-  const statusBanner = document.getElementById("voiceStatusBanner");
-  const statusText = document.getElementById("voiceStatusText");
-  const stopBannerBtn = document.getElementById("voiceStopBannerBtn");
-
-  if (!voiceBtn) return;
+function setupVoiceSearch(searchInput, clearBtn) {
+  const micBtn = document.getElementById("voiceSearchBtn");
+  const banner = document.getElementById("voiceStatusBanner");
+  const bannerText = document.getElementById("voiceStatusText");
+  const bannerCancel = document.getElementById("voiceStopBannerBtn");
+  const searchBox = document.getElementById("searchBarBox");
 
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
   if (!SpeechRecognition) {
-    voiceBtn.addEventListener("click", () => {
-      showToast("Voice input is not supported in this browser. Try Chrome or Edge.");
-    });
+    if (micBtn) {
+      micBtn.title = "Voice search not supported on this browser";
+      micBtn.style.opacity = "0.45";
+      micBtn.style.cursor = "not-allowed";
+    }
     return;
   }
 
-  const recognition = new SpeechRecognition();
-  recognition.lang = "en-US";
-  recognition.interimResults = true;
-  recognition.maxAlternatives = 1;
-  recognition.continuous = false;
-
+  let recognition = null;
   let isListening = false;
 
-  function setListeningUI(active, messageHtml) {
-    isListening = active;
-    voiceBtn.classList.toggle("listening", active);
-    voiceBtn.setAttribute("aria-label", active ? "Stop voice search" : "Start voice search");
-    voiceBtn.setAttribute("title", active ? "Listening… Click to stop" : "Hands-free voice search");
-    searchBarBox?.classList.toggle("listening", active);
-    statusBanner?.classList.toggle("active", active);
-    if (voiceBtnLabel) {
-      voiceBtnLabel.textContent = active ? "Listening…" : "Voice";
+  function stopListening() {
+    if (recognition && isListening) {
+      try { recognition.stop(); } catch (e) {}
     }
-    if (messageHtml && statusText) {
-      statusText.innerHTML = messageHtml;
-    }
+    isListening = false;
+    micBtn?.classList.remove("active");
+    searchBox?.classList.remove("listening");
+    if (banner) banner.style.display = "none";
   }
 
   function startListening() {
-    if (state.selectedRoomKey) {
-      showHomeView(true);
-    }
-    try {
-      recognition.start();
-    } catch (e) {}
-  }
-
-  function stopListening() {
-    try {
-      recognition.stop();
-    } catch (e) {}
-    setListeningUI(false);
-  }
-
-  recognition.onstart = () => {
-    setListeningUI(
-      true,
-      `<strong>Listening…</strong> Speak a room number or lab name (e.g. "205", "313", "DSP Lab")`
-    );
-  };
-
-  recognition.onresult = (event) => {
-    let transcript = "";
-    let isFinal = false;
-
-    for (let i = event.resultIndex; i < event.results.length; i++) {
-      transcript += event.results[i][0].transcript;
-      if (event.results[i].isFinal) {
-        isFinal = true;
-      }
-    }
-
-    const normalized = normalizeSpokenQuery(transcript);
-    if (searchInput) {
-      searchInput.value = normalized;
-    }
-    if (clearSearchBtn) {
-      clearSearchBtn.style.display = normalized ? "inline-flex" : "none";
-    }
-
-    state.searchQuery = normalized;
-    state.activeFloor = "all";
-    state.homeDisplayMode = "grid";
-    syncFloorNavButtons();
-    renderHomeContent();
-
-    if (statusText) {
-      statusText.innerHTML = `Heard: <strong>"${escapeHtml(normalized)}"</strong>`;
-    }
-
-    if (isFinal && normalized) {
-      const exactKey = state.roomKeys.find(k => k.toLowerCase() === normalized.toLowerCase());
-      const visibleCards = document.querySelectorAll("#roomsGrid [data-room-key]");
-      if (exactKey) {
-        showToast(`Voice matched Room ${exactKey}`);
-        setTimeout(() => openRoom(exactKey), 350);
-      } else if (visibleCards.length === 1) {
-        const matchedKey = visibleCards[0].getAttribute("data-room-key");
-        if (matchedKey) {
-          showToast(`Voice matched ${matchedKey}`);
-          setTimeout(() => openRoom(matchedKey), 350);
-        }
-      } else {
-        showToast(`Showing rooms matching "${normalized}"`);
-      }
-    }
-  };
-
-  recognition.onerror = (event) => {
-    setListeningUI(false);
-    if (event.error === "not-allowed" || event.error === "service-not-allowed") {
-      showToast("Microphone access denied. Please allow microphone permission.");
-    } else if (event.error === "no-speech") {
-      showToast("No speech detected. Tap Voice to try again.");
-    } else if (event.error !== "aborted") {
-      showToast("Could not capture voice input. Try again.");
-    }
-  };
-
-  recognition.onend = () => {
-    setListeningUI(false);
-  };
-
-  voiceBtn.addEventListener("click", () => {
     if (isListening) {
       stopListening();
-    } else {
-      startListening();
+      return;
     }
-  });
 
-  stopBannerBtn?.addEventListener("click", stopListening);
+    try {
+      recognition = new SpeechRecognition();
+      recognition.lang = "en-IN";
+      recognition.interimResults = true;
+      recognition.maxAlternatives = 1;
+
+      recognition.onstart = () => {
+        isListening = true;
+        micBtn?.classList.add("active");
+        searchBox?.classList.add("listening");
+        if (banner) banner.style.display = "flex";
+        if (bannerText) bannerText.innerHTML = "<strong>Listening…</strong> Say a room number or lab name (e.g. \"Room 205\" or \"Belaku\")";
+      };
+
+      recognition.onresult = (event) => {
+        let transcript = "";
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        const cleaned = normalizeSpokenQuery(transcript);
+        if (searchInput) searchInput.value = cleaned;
+        state.searchQuery = cleaned;
+        if (clearBtn) clearBtn.style.display = cleaned ? "inline-flex" : "none";
+
+        if (bannerText) bannerText.innerHTML = `Heard: "<strong>${escapeHtml(transcript)}</strong>"`;
+        renderRoomsGrid();
+
+        if (event.results[0].isFinal) {
+          const exactKey = findExactOrBestMatch(cleaned);
+          if (exactKey) {
+            showToast(`Found ${state.rooms[exactKey].name}! Opening walkthrough…`);
+            setTimeout(() => {
+              stopListening();
+              openRoom(exactKey);
+            }, 600);
+          } else {
+            stopListening();
+          }
+        }
+      };
+
+      recognition.onerror = (e) => {
+        console.warn("Speech recognition error:", e.error);
+        if (bannerText) {
+          bannerText.innerHTML = e.error === "not-allowed"
+            ? "Microphone access blocked. Enable permissions in browser."
+            : `Voice search error (${e.error}). Try again.`;
+        }
+        setTimeout(stopListening, 2400);
+      };
+
+      recognition.onend = () => {
+        isListening = false;
+        micBtn?.classList.remove("active");
+        searchBox?.classList.remove("listening");
+        if (banner) banner.style.display = "none";
+      };
+
+      recognition.start();
+    } catch (err) {
+      console.error("Failed to start speech recognition:", err);
+      stopListening();
+    }
+  }
+
+  micBtn?.addEventListener("click", startListening);
+  bannerCancel?.addEventListener("click", stopListening);
 }
 
-document.addEventListener("DOMContentLoaded", initApp);
+function findExactOrBestMatch(query) {
+  if (!query) return null;
+  const q = query.trim().toLowerCase();
+  const currentCollege = state.activeCollege || "engineering";
+
+  // Check current college first
+  const collegeKeys = state.roomKeys.filter(k => roomMatchesCollege(state.rooms[k], currentCollege));
+
+  // 1. Exact key match in current college
+  for (const k of collegeKeys) {
+    if (k.toLowerCase() === q) return k;
+  }
+  // 2. Exact name match in current college
+  for (const k of collegeKeys) {
+    if ((state.rooms[k].name || "").toLowerCase() === q) return k;
+  }
+  // 3. Name contains query in current college
+  for (const k of collegeKeys) {
+    if ((state.rooms[k].name || "").toLowerCase().includes(q)) return k;
+  }
+
+  // 4. Fallback search across all rooms (e.g. if user is in Engineering and says "Belaku")
+  for (const k of state.roomKeys) {
+    if (k.toLowerCase() === q || (state.rooms[k].name || "").toLowerCase() === q) {
+      // Auto-switch to the target room's college!
+      const targetColleges = getCollegeKeysForRoom(state.rooms[k]);
+      state.activeCollege = targetColleges[0];
+      return k;
+    }
+  }
+
+  return null;
+}
+
+// Start application when DOM is ready
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initApp);
+} else {
+  initApp();
+}

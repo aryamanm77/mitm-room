@@ -1,6 +1,6 @@
 {
-  "name": "Locorom Campus Wayfinder",
-  "description": "Indoor visual wayfinding, spatial floor schematic, and natural-language route planner for the MITM campus.",
+  "name": "MIT Mysore Campus Navigator",
+  "description": "Official indoor visual wayfinding and step-by-step corridor photo walkthroughs for Maharaja Institute of Technology Mysore (Engineering, MBA, MCA, BCA, Pharmacy).",
   "requestFramePermissions": [
     "microphone"
   ]
