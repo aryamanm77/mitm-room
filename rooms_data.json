@@ -43,7 +43,8 @@
     "thumbnail": "Rooms/103/a.jpg",
     "photos": [
       "Rooms/103/a.jpg",
-      "Rooms/103/b.jpg"
+      "Rooms/103/b.jpg",
+      "Rooms/103/c.jpg"
     ],
     "accessPoints": [
       {
@@ -52,7 +53,8 @@
         "thumbnail": "Rooms/103/a.jpg",
         "photos": [
           "Rooms/103/a.jpg",
-          "Rooms/103/b.jpg"
+          "Rooms/103/b.jpg",
+          "Rooms/103/c.jpg"
         ]
       }
     ]
