@@ -32,6 +32,29 @@
       }
     ]
   },
+  "2": {
+    "name": "2",
+    "college": "MBA & MCA Block",
+    "floor": "1st Floor",
+    "dept": "Department of MBA",
+    "category": "Department Facility",
+    "landmark": "Department of MBA & MCA Block • 1st Floor",
+    "info": "Enter through the Department of MBA & MCA block front entrance. Follow the route to reach Room 2.",
+    "thumbnail": "Rooms/2/a.jpg",
+    "photos": [
+      "Rooms/2/a.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "MBA Main Entrance",
+        "info": "Enter through the Department of MBA & MCA block front entrance.",
+        "thumbnail": "Rooms/2/a.jpg",
+        "photos": [
+          "Rooms/2/a.jpg"
+        ]
+      }
+    ]
+  },
   "102": {
     "name": "102",
     "college": "MBA & MCA Block",
