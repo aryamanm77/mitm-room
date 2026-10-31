@@ -9,7 +9,8 @@ window.LOCOROM_DATA = {
     "info": "Enter through the Department of MBA & MCA block front entrance. Follow the corridor route to reach Room 102.",
     "thumbnail": "Rooms/102/a.jpg",
     "photos": [
-      "Rooms/102/a.jpg"
+      "Rooms/102/a.jpg",
+      "Rooms/102/b.jpg"
     ],
     "accessPoints": [
       {
@@ -17,7 +18,8 @@ window.LOCOROM_DATA = {
         "info": "Enter through the Department of MBA & MCA block front entrance.",
         "thumbnail": "Rooms/102/a.jpg",
         "photos": [
-          "Rooms/102/a.jpg"
+          "Rooms/102/a.jpg",
+          "Rooms/102/b.jpg"
         ]
       }
     ]
