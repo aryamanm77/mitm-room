@@ -1,8 +1,7 @@
 /**
- * LOCOROM — Campus Room Finder, Voice Search, WhatsApp Direct Share & Three.js 3D Spatial Twin
+ * LOCOROM — Campus Room Finder, Voice Search, WhatsApp Direct Share & Step-by-Step Photo Walkthroughs
  */
 
-import { CampusSpatial3DEngine } from "./spatial3d.js";
 
 const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/aryamanm77/mitm-room/main/";
 
@@ -12,17 +11,13 @@ const state = {
   activeFloor: "all",
   activeCollege: "all", // "all" | "engineering" | "mba" | "bca" | "mca" | "pharmacy"
   searchQuery: "",
-  homeDisplayMode: "grid", // 'grid' | '3d'
-  wtDisplayMode: "photos", // 'photos' | '3d'
   selectedRoomKey: null,
   activeApIndex: 0,
   activePhotoIndex: 0,
   isPlaying: false,
   playTimer: null,
   recentRooms: ["114", "205", "213 DSP lab", "305"],
-  spatialEngine: null,
-  dockCollapsed: false
-};
+  };
 
 function resolveMediaUrl(path) {
   if (!path) return "";
@@ -99,48 +94,6 @@ function buildWhatsAppShareUrl(roomKey, apIndex = 0) {
   return `https://wa.me/?text=${encodeURIComponent(message)}`;
 }
 
-// Ensure Three.js 3D Engine is initialized and attached to the requested host container
-function attachSpatial3DToHost(hostEl, isInsideWalkthrough = false) {
-  const stageWrapper = document.getElementById("sharedSpatial3DStage");
-  const mountEl = document.getElementById("threeCanvasMount");
-  const specLabel = document.getElementById("threeTopSpecLabel");
-  if (!stageWrapper || !mountEl || !hostEl) return;
-
-  stageWrapper.style.display = "block";
-  stageWrapper.classList.toggle("in-viewer", isInsideWalkthrough);
-  if (stageWrapper.parentElement !== hostEl) {
-    hostEl.appendChild(stageWrapper);
-  }
-
-  if (!state.spatialEngine) {
-    state.spatialEngine = new CampusSpatial3DEngine(mountEl, {
-      onRoomSelect: (clickedRoomKey) => {
-        if (state.rooms[clickedRoomKey]) {
-          showToast(`Selected Room ${clickedRoomKey} in 3D Twin`);
-          openRoom(clickedRoomKey, true);
-        }
-      }
-    });
-    state.spatialEngine.init(state.rooms);
-  } else {
-    state.spatialEngine.handleResize();
-  }
-
-  const targetRoom = state.selectedRoomKey || state.recentRooms[0] || "205";
-  const room = state.rooms[targetRoom];
-  const routes = getRoutesForRoom(room);
-  const currentRoute = routes[state.activeApIndex] || routes[0];
-  const photos = currentRoute?.photos || [];
-  const ratio = photos.length > 1 ? state.activePhotoIndex / (photos.length - 1) : 0;
-
-  state.spatialEngine.selectRoomAndRoute(targetRoom, currentRoute?.name || "Point A", ratio);
-
-  if (specLabel && room) {
-    specLabel.textContent = isInsideWalkthrough
-      ? `3D Route · Room ${room.name} (${room.floor}) via ${currentRoute?.label || "Main Route"}`
-      : `MITM 3D Campus Digital Twin · Click any 3D room block to open walkthrough`;
-  }
-}
 
 // Initialize App
 async function initApp() {
@@ -207,7 +160,7 @@ function showToast(msg) {
 }
 
 // ============================================================================
-// HOME VIEW (Simple Search + Room Grid / 3D Campus Twin)
+// HOME VIEW (Simple Search + Room Grid)
 // ============================================================================
 function showHomeView(pushHistory = true) {
   stopAutoPlay();
@@ -229,24 +182,8 @@ function showHomeView(pushHistory = true) {
 
 function renderHomeContent() {
   const gridEl = document.getElementById("roomsGrid");
-  const home3DHost = document.getElementById("home3DHost");
-  const gridBtn = document.getElementById("homeModeGridBtn");
-  const threeBtn = document.getElementById("homeMode3DBtn");
-
-  gridBtn?.classList.toggle("active", state.homeDisplayMode === "grid");
-  threeBtn?.classList.toggle("active", state.homeDisplayMode === "3d");
-
-  if (state.homeDisplayMode === "3d") {
-    if (gridEl) gridEl.style.display = "none";
-    if (home3DHost) {
-      home3DHost.style.display = "block";
-      attachSpatial3DToHost(home3DHost, false);
-    }
-  } else {
-    if (home3DHost) home3DHost.style.display = "none";
-    if (gridEl) gridEl.style.display = "grid";
-    renderRoomsGrid();
-  }
+  if (gridEl) gridEl.style.display = "grid";
+  renderRoomsGrid();
 }
 
 function renderQuickRecents() {
@@ -413,7 +350,7 @@ function renderRoomsGrid() {
 }
 
 // ============================================================================
-// WALKTHROUGH VIEW (Simple Directions + Corridor Photos / 3D Spatial Route + WhatsApp)
+// WALKTHROUGH VIEW (Simple Directions + Corridor Photos + WhatsApp)
 // ============================================================================
 function openRoom(roomKey, pushHistory = true, initialApIdx = 0) {
   const room = state.rooms[roomKey];
@@ -504,25 +441,6 @@ function renderWalkthroughView() {
   document.getElementById("wtDirectionText").textContent =
     currentRoute.info || room.info || room.landmark || `Follow the photos step-by-step to reach Room ${room.name}.`;
 
-  // Sync Viewer Mode Toggle (Corridor Photos vs 3D Spatial Route)
-  const photoWrap = document.getElementById("wtPhotoStageWrap");
-  const wt3DHost = document.getElementById("wt3DHost");
-  const modePhotosBtn = document.getElementById("wtModePhotosBtn");
-  const mode3DBtn = document.getElementById("wtMode3DBtn");
-
-  modePhotosBtn?.classList.toggle("active", state.wtDisplayMode === "photos");
-  mode3DBtn?.classList.toggle("active", state.wtDisplayMode === "3d");
-
-  if (state.wtDisplayMode === "3d") {
-    if (photoWrap) photoWrap.style.display = "none";
-    if (wt3DHost) {
-      wt3DHost.style.display = "block";
-      attachSpatial3DToHost(wt3DHost, true);
-    }
-  } else {
-    if (wt3DHost) wt3DHost.style.display = "none";
-    if (photoWrap) photoWrap.style.display = "flex";
-  }
 
   renderActiveStepPhoto();
 }
@@ -542,9 +460,9 @@ function renderActiveStepPhoto() {
   const nextBtn = document.getElementById("wtNextBtn");
 
   if (photos.length === 0) {
-    stepCounter.textContent = "Spatial node indexed";
+    stepCounter.textContent = "Directions available";
     progressFill.style.width = "100%";
-    stage.innerHTML = `<div class="no-photo-msg">Written directions are shown above. Switch to "3D Spatial Route" to inspect the 3D building path.</div>`;
+    stage.innerHTML = `<div class="no-photo-msg">Written directions are shown above. Follow the signs to reach Room ${room.name}.</div>`;
     thumbsRow.innerHTML = "";
     return;
   }
@@ -562,12 +480,6 @@ function renderActiveStepPhoto() {
   const stepTag = idx === 0 ? "Start" : idx === total - 1 ? "Destination Reached" : `Corridor Step`;
   stepCounter.textContent = `Step ${idx + 1} of ${total} · ${stepTag}`;
   progressFill.style.width = `${((idx + 1) / total) * 100}%`;
-
-  // Sync 3D Guide Beacon position with active photo step
-  if (state.spatialEngine && state.spatialEngine.isInitialized) {
-    const ratio = total > 1 ? idx / (total - 1) : 1;
-    state.spatialEngine.setStepProgress(ratio);
-  }
 
   if (prevBtn) prevBtn.disabled = total <= 1;
   if (nextBtn) nextBtn.disabled = total <= 1;
@@ -719,53 +631,6 @@ function bindEvents() {
     localStorage.setItem("locorom_theme", next);
     updateThemeButtonLabel();
   });
-
-  // Home Mode Switcher (Room Grid vs 3D Campus Twin)
-  document.getElementById("homeModeGridBtn")?.addEventListener("click", () => {
-    state.homeDisplayMode = "grid";
-    renderHomeContent();
-  });
-
-  document.getElementById("homeMode3DBtn")?.addEventListener("click", () => {
-    state.homeDisplayMode = "3d";
-    renderHomeContent();
-  });
-
-  // Walkthrough Mode Switcher (Corridor Photos vs 3D Spatial Route)
-  document.getElementById("wtModePhotosBtn")?.addEventListener("click", () => {
-    state.wtDisplayMode = "photos";
-    renderWalkthroughView();
-  });
-
-  document.getElementById("wtMode3DBtn")?.addEventListener("click", () => {
-    state.wtDisplayMode = "3d";
-    renderWalkthroughView();
-  });
-
-  // 3D Bottom Dock Controls (Explode Slider, Camera Presets, Collapsible Toggle)
-  const explodeSlider = document.getElementById("threeExplodeSlider");
-  if (explodeSlider) {
-    explodeSlider.addEventListener("input", () => {
-      const val = parseInt(explodeSlider.value, 10) / 100;
-      state.spatialEngine?.setExplodeFactor(val);
-    });
-  }
-
-  document.querySelectorAll("[data-cam-preset]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      state.spatialEngine?.setCameraPreset(btn.getAttribute("data-cam-preset"));
-    });
-  });
-
-  const dockToggleBtn = document.getElementById("threeDockToggleBtn");
-  const dockWrap = document.getElementById("threeBottomDockWrap");
-  if (dockToggleBtn && dockWrap) {
-    dockToggleBtn.addEventListener("click", () => {
-      state.dockCollapsed = !state.dockCollapsed;
-      dockWrap.classList.toggle("collapsed", state.dockCollapsed);
-      dockToggleBtn.textContent = state.dockCollapsed ? "▴ Show 3D Controls" : "▾ Hide 3D Controls";
-    });
-  }
 
   // Search Input
   const searchInput = document.getElementById("mainSearchInput");
