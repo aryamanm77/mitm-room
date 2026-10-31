@@ -748,6 +748,99 @@ function syncFloorNavButtons() {
 // EVENT LISTENERS & USER INTERACTIONS
 // ============================================================================
 function bindEvents() {
+  // Google Maps Portal Search Input
+  const portalSearch = document.getElementById("portalSearchInput");
+  if (portalSearch) {
+    portalSearch.addEventListener("input", () => {
+      const q = portalSearch.value.trim().toLowerCase();
+      document.querySelectorAll(".gm-place-card").forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = (!q || text.includes(q)) ? "flex" : "none";
+      });
+    });
+
+    portalSearch.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const q = portalSearch.value.trim();
+        // Check for direct room match first
+        const matched = findExactOrBestMatch(q);
+        if (matched) {
+          openRoom(matched);
+        } else {
+          // Open first visible college card
+          const firstVisible = document.querySelector('.gm-place-card[style*="flex"], .gm-place-card:not([style*="display: none"])');
+          if (firstVisible) {
+            enterCollege(firstVisible.getAttribute("data-select-college"));
+          }
+        }
+      }
+    });
+  }
+
+  // Google Maps Portal Category Filter Chips
+  document.querySelectorAll("[data-portal-filter]").forEach(chip => {
+    chip.addEventListener("click", () => {
+      const filter = chip.getAttribute("data-portal-filter");
+      document.querySelectorAll("[data-portal-filter]").forEach(c => c.classList.toggle("active", c === chip));
+
+      document.querySelectorAll(".gm-place-card").forEach(card => {
+        const cardCol = card.getAttribute("data-select-college");
+        const show = (filter === "all" || cardCol === filter);
+        card.style.display = show ? "flex" : "none";
+      });
+    });
+  });
+
+  // Google Maps Interactive SVG Map Building Clicks & Hovers
+  document.querySelectorAll("[data-map-college]").forEach(el => {
+    const col = el.getAttribute("data-map-college");
+    el.addEventListener("click", () => {
+      enterCollege(col);
+    });
+
+    el.addEventListener("mouseenter", () => {
+      document.getElementById("placeCard-" + col)?.classList.add("highlighted");
+      document.getElementById("mapBuilding-" + col)?.classList.add("active");
+    });
+
+    el.addEventListener("mouseleave", () => {
+      document.getElementById("placeCard-" + col)?.classList.remove("highlighted");
+      document.getElementById("mapBuilding-" + col)?.classList.remove("active");
+    });
+  });
+
+  // Place Cards Hover Highlights Map
+  document.querySelectorAll(".gm-place-card").forEach(card => {
+    const col = card.getAttribute("data-select-college");
+    card.addEventListener("mouseenter", () => {
+      document.getElementById("mapBuilding-" + col)?.classList.add("active");
+    });
+    card.addEventListener("mouseleave", () => {
+      document.getElementById("mapBuilding-" + col)?.classList.remove("active");
+    });
+  });
+
+  // Google Maps Portal Card Action Buttons
+  document.querySelectorAll("[data-btn-college]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const col = btn.getAttribute("data-btn-college");
+      enterCollege(col);
+    });
+  });
+
+  // Voice Search on Portal
+  const portalVoiceBtn = document.getElementById("portalVoiceSearchBtn");
+  if (portalVoiceBtn) {
+    portalVoiceBtn.addEventListener("click", () => {
+      const mainSearch = document.getElementById("mainSearchInput");
+      const micBtn = document.getElementById("voiceSearchBtn");
+      // Trigger voice search
+      micBtn?.click();
+    });
+  }
+
   // 1. College Selection Portal Cards -> Enter College Only
   document.querySelectorAll("[data-select-college]").forEach(card => {
     card.addEventListener("click", () => {

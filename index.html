@@ -1182,221 +1182,512 @@
     }
 
     /* ==========================================================================
-       SCREEN 0: COLLEGE SELECTION PORTAL
+       GOOGLE MAPS CAMPUS PORTAL (Authentic Google Maps Places Design System)
        ========================================================================== */
-    .college-portal-wrap {
-      max-width: 1140px;
+    .gm-portal-wrap {
+      max-width: 1260px;
       margin: 0 auto;
-      padding: 36px 20px 80px 20px;
+      padding: 24px 20px 80px 20px;
     }
 
-    .portal-hero {
-      text-align: center;
+    /* Header Strip with Floating Search Box & Filter Chips */
+    .gm-header-strip {
+      margin-bottom: 24px;
+    }
+
+    .gm-search-card {
       max-width: 760px;
-      margin: 0 auto 36px auto;
+      margin: 0 auto 16px auto;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-pill);
+      box-shadow: 0 2px 6px 0 rgba(60, 64, 67, 0.15), 0 1px 2px 0 rgba(60, 64, 67, 0.1);
+      padding: 4px 6px 4px 14px;
+      transition: box-shadow var(--ease), border-color var(--ease);
+    }
+    .gm-search-card:focus-within {
+      box-shadow: 0 2px 8px 2px rgba(60, 64, 67, 0.25);
+      border-color: var(--color-primary);
     }
 
-    .portal-logo-badge {
+    .gm-search-inner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      height: 48px;
+    }
+
+    .gm-search-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid var(--border-hairline);
+    }
+
+    .gm-search-input {
+      flex-grow: 1;
+      border: none;
+      background: transparent;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--text-primary);
+      outline: none;
+    }
+    .gm-search-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .gm-search-btn {
+      background: none;
+      border: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      color: var(--text-muted);
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 96px;
-      height: 96px;
+      transition: background-color var(--ease), color var(--ease);
+    }
+    .gm-search-btn:hover {
+      background-color: rgba(60, 64, 67, 0.08);
+      color: var(--color-primary);
+    }
+    .gm-search-btn.active {
+      color: #ea4335;
+      background-color: rgba(234, 67, 53, 0.1);
+    }
+
+    .gm-search-action-btn {
+      background: var(--color-primary);
+      border: none;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      background: var(--bg-surface);
-      box-shadow: 0 2px 10px rgba(60, 64, 67, 0.25);
-      margin-bottom: 18px;
-      padding: 4px;
-      border: 2px solid var(--border-hairline);
-    }
-
-    .portal-main-logo {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    .portal-institution-title {
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-
-    .portal-headline {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 3.8vw, 2.75rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
-      margin-bottom: 12px;
-      line-height: 1.22;
-    }
-
-    .portal-subheading {
-      font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    .college-portal-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 22px;
-      margin-bottom: 44px;
-    }
-
-    .college-portal-card {
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-hairline);
-      border-radius: var(--radius-md);
-      padding: 26px 24px;
-      display: flex;
-      flex-direction: column;
-      box-shadow: var(--elevation-card);
-      transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease);
+      color: #ffffff;
       cursor: pointer;
-      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3);
+      transition: background-color var(--ease);
     }
-    .college-portal-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--elevation-button-hover);
-      border-color: var(--accent);
+    .gm-search-action-btn:hover {
+      background-color: var(--color-primary-hover);
     }
 
-    .college-card-header {
+    /* Horizontal Filter Chips */
+    .gm-chips-scroll {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 14px;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 2px 0 6px 0;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .gm-chips-scroll::-webkit-scrollbar {
+      display: none;
     }
 
-    .college-card-icon {
-      font-size: 32px;
-      line-height: 1;
-    }
-
-    .college-card-badge {
-      font-size: 11.5px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      padding: 4px 10px;
-      border-radius: var(--radius-lg);
-      background-color: var(--accent-soft);
-      color: var(--accent);
-    }
-
-    .college-card-title {
-      font-family: var(--font-display);
-      font-size: 23px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      color: var(--text-primary);
-      margin-bottom: 4px;
-    }
-
-    .college-card-subtitle {
-      font-size: 13.5px;
-      font-weight: 500;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-    }
-
-    .college-card-desc {
-      font-size: 14px;
+    .gm-filter-chip {
+      background-color: var(--bg-surface);
       color: var(--text-secondary);
-      line-height: 1.55;
-      margin-bottom: 18px;
-      flex-grow: 1;
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg);
+      padding: 7px 16px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(60, 64, 67, 0.08);
+      transition: all var(--ease);
+    }
+    .gm-filter-chip:hover {
+      background-color: var(--bg-elevated);
+      border-color: var(--border-strong);
+      color: var(--text-primary);
+    }
+    .gm-filter-chip.active {
+      background-color: #e8f0fe;
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+      font-weight: 500;
+    }
+    [data-theme="dark"] .gm-filter-chip.active {
+      background-color: rgba(138, 180, 248, 0.16);
+      color: #8ab4f8;
+      border-color: #8ab4f8;
     }
 
-    .college-card-stats {
+    /* Breadcrumbs & Overview Header */
+    .gm-overview-header {
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .gm-breadcrumbs {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .gm-sep {
+      color: var(--border-strong);
+    }
+
+    .gm-main-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .gm-meta-row {
       display: flex;
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-
-    .stat-pill {
-      font-size: 12px;
-      font-weight: 500;
-      padding: 4px 10px;
-      border-radius: 6px;
-      background-color: var(--bg-elevated);
+      font-size: 13.5px;
       color: var(--text-secondary);
-      border: 1px solid var(--border-hairline);
     }
 
-    .college-enter-btn {
-      width: 100%;
-      background-color: var(--color-primary, #0b57d0);
-      color: #ffffff;
-      font-family: var(--font-sans);
-      font-size: 14px;
+    .gm-rating-score {
+      font-weight: 600;
+      color: #e37400;
+    }
+    [data-theme="dark"] .gm-rating-score {
+      color: #fbbc04;
+    }
+
+    .gm-stars-gold {
+      color: #fbbc04;
+      letter-spacing: 1px;
+    }
+
+    .gm-status-open {
+      color: #137333;
       font-weight: 500;
-      padding: 12px 20px;
-      border: none;
-      border-radius: var(--radius-lg, 20px);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      box-shadow: var(--elevation-card);
-      transition: background-color var(--ease), box-shadow var(--ease);
     }
-    .college-portal-card:hover .college-enter-btn {
-      background-color: var(--color-primary-hover, #0947a8);
-      box-shadow: var(--elevation-button-hover);
+    [data-theme="dark"] .gm-status-open {
+      color: #81c995;
     }
 
-    .portal-features-row {
+    /* Split Layout: Places Column (60%) + Map Column (40%) */
+    .gm-main-layout {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 18px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border-hairline);
+      grid-template-columns: 1.25fr 0.95fr;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 960px) {
+      .gm-main-layout {
+        grid-template-columns: 1fr;
+      }
     }
 
-    .feature-item {
+    /* Google Maps Place Card */
+    .gm-places-list {
       display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 14px 16px;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .gm-place-card {
       background-color: var(--bg-surface);
       border: 1px solid var(--border-hairline);
       border-radius: var(--radius-md);
       box-shadow: var(--elevation-card);
-    }
-
-    .feature-icon {
-      font-size: 26px;
-      line-height: 1;
-      flex-shrink: 0;
-    }
-
-    .feature-text {
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease);
+      cursor: pointer;
+    }
+    .gm-place-card:hover {
+      box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
+      border-color: var(--color-primary);
+    }
+    .gm-place-card.highlighted {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 2px var(--color-primary);
     }
 
-    .feature-text strong {
-      font-size: 14px;
+    .gm-card-photo-wrap {
+      position: relative;
+      width: 100%;
+      height: 190px;
+      background-color: var(--bg-elevated);
+      overflow: hidden;
+    }
+
+    .gm-card-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 300ms ease;
+    }
+    .gm-place-card:hover .gm-card-photo {
+      transform: scale(1.02);
+    }
+
+    .gm-photo-overlay-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background-color: rgba(32, 33, 36, 0.88);
+      color: #ffffff;
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(4px);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .gm-card-body {
+      padding: 18px 20px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .gm-card-header-line {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .gm-card-category {
+      font-size: 11.5px;
       font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-primary);
+    }
+    [data-theme="dark"] .gm-card-category {
+      color: #8ab4f8;
+    }
+
+    .gm-card-title {
+      font-family: var(--font-display);
+      font-size: 18.5px;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.35;
+    }
+
+    .gm-card-rating-line {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .gm-card-desc {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin: 4px 0 2px 0;
+    }
+
+    .gm-info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.45;
+      margin: 4px 0 8px 0;
+    }
+
+    .gm-info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .gm-info-row svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--text-muted);
+    }
+
+    .gm-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-hairline);
+      margin-top: 4px;
+    }
+
+    .gm-btn-directions {
+      background-color: var(--color-primary);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-lg);
+      padding: 9px 20px;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3);
+      transition: background-color var(--ease), box-shadow var(--ease);
+    }
+    .gm-btn-directions:hover {
+      background-color: var(--color-primary-hover);
+      box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.3);
+    }
+
+    .gm-btn-secondary {
+      background-color: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 8px 18px;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background-color var(--ease);
+    }
+    .gm-btn-secondary:hover {
+      background-color: var(--bg-elevated);
+    }
+
+    /* Google Maps Campus Interactive Vector Map */
+    .gm-map-column {
+      position: sticky;
+      top: 84px;
+    }
+
+    .gm-map-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      box-shadow: var(--elevation-card);
+      overflow: hidden;
+    }
+
+    .gm-map-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-hairline);
+      font-size: 13.5px;
+      font-weight: 500;
       color: var(--text-primary);
     }
 
-    .feature-text span {
-      font-size: 12.5px;
-      color: var(--text-secondary);
-      line-height: 1.45;
+    .gm-map-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
+
+    .gm-map-badge {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--color-primary);
+      background-color: #e8f0fe;
+      padding: 3px 8px;
+      border-radius: var(--radius-lg);
+    }
+    [data-theme="dark"] .gm-map-badge {
+      background-color: rgba(138, 180, 248, 0.16);
+      color: #8ab4f8;
+    }
+
+    .gm-map-canvas-wrap {
+      width: 100%;
+      height: 420px;
+      background-color: #e5e3df;
+      position: relative;
+      overflow: hidden;
+    }
+    [data-theme="dark"] .gm-map-canvas-wrap {
+      background-color: #242f3e;
+    }
+
+    .gm-svg-campus-map {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .map-building {
+      cursor: pointer;
+      transition: fill 150ms ease, stroke 150ms ease;
+    }
+    .map-building:hover, .map-building.active {
+      fill: #d2e3fc !important;
+      stroke: #1a73e8 !important;
+      stroke-width: 2.5px;
+    }
+    [data-theme="dark"] .map-building:hover, [data-theme="dark"] .map-building.active {
+      fill: #3c4043 !important;
+      stroke: #8ab4f8 !important;
+    }
+
+    .map-pin {
+      cursor: pointer;
+      transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .map-pin:hover {
+      transform: translateY(-4px);
+    }
+
+    .gm-map-legend {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 10px 16px;
+      border-top: 1px solid var(--border-hairline);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .legend-dot.eng { background-color: #1a73e8; }
+    .legend-dot.mba { background-color: #ea4335; }
+    .legend-dot.bca { background-color: #34a853; }
+    .legend-dot.pharmacy { background-color: #fbbc04; }
 
     /* ==========================================================================
        COLLEGE ACTIVE BAR (Inside Home Screen)
@@ -1552,149 +1843,401 @@
   </header>
 
   <!-- ==========================================================================
-       SCREEN 0: COLLEGE SELECTION PORTAL (Maharaja Institute of Technology Mysore)
+       SCREEN 0: COLLEGE SELECTION PORTAL (Google Maps Quality Campus Directory)
        ========================================================================== -->
-  <section id="collegePortalScreen" class="college-portal-wrap">
-    <div class="portal-hero">
-      <div class="portal-logo-badge">
-        <img src="logo.png" alt="Maharaja Institute of Technology Mysore Official Seal" class="portal-main-logo" />
-      </div>
-      <div class="portal-institution-title">Maharaja Institute of Technology Mysore</div>
-      <h1 class="portal-headline">Select Your College to Navigate</h1>
-      <p class="portal-subheading">
-        Choose an academic block or division to explore classrooms, departmental laboratories, and turn-by-turn corridor walkthroughs.
-      </p>
-    </div>
-
-    <div class="college-portal-grid">
-      <!-- Engineering -->
-      <div class="college-portal-card" data-select-college="engineering">
-        <div class="college-card-header">
-          <span class="college-card-icon">🏛️</span>
-          <span class="college-card-badge">Main Campus Block</span>
+  <section id="collegePortalScreen" class="gm-portal-wrap">
+    <!-- Google Maps Search & Filter Header -->
+    <div class="gm-header-strip">
+      <div class="gm-search-card">
+        <div class="gm-search-inner">
+          <img src="logo.png" alt="MIT Mysore Seal" class="gm-search-logo" />
+          <input
+            type="text"
+            id="portalSearchInput"
+            class="gm-search-input"
+            placeholder="Search campus buildings, departments, or rooms (e.g. Engineering, Belaku, 205)..."
+            autocomplete="off"
+          />
+          <button type="button" class="gm-search-btn" id="portalVoiceSearchBtn" title="Speak to Search (Hands-free)">
+            <svg viewBox="0 0 24 24" class="icon-svg"><path fill="currentColor" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5-3c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+          </button>
+          <button type="button" class="gm-search-action-btn" id="portalSearchSubmitBtn" aria-label="Search Directory">
+            <svg viewBox="0 0 24 24" class="icon-svg"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          </button>
         </div>
-        <h2 class="college-card-title">Engineering</h2>
-        <div class="college-card-subtitle">BE / B.Tech Departments &amp; Research Labs</div>
-        <p class="college-card-desc">
-          Navigate 60+ classrooms and specialized laboratories across 5 floors, including CSE, ISE, ECE, Mechanical, Civil, and AI/ML.
-        </p>
-        <div class="college-card-stats">
-          <span class="stat-pill">📍 60 Rooms &amp; Labs</span>
-          <span class="stat-pill">🏢 Ground – 5th Floor</span>
-        </div>
-        <button type="button" class="college-enter-btn">
-          <span>Enter Engineering Campus</span>
-          <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
       </div>
 
-      <!-- MBA -->
-      <div class="college-portal-card" data-select-college="mba">
-        <div class="college-card-header">
-          <span class="college-card-icon">💼</span>
-          <span class="college-card-badge">Management Block</span>
-        </div>
-        <h2 class="college-card-title">MBA</h2>
-        <div class="college-card-subtitle">Master of Business Administration</div>
-        <p class="college-card-desc">
-          Department of MBA &amp; MCA facility featuring Belaku (ಬೆಳಕು), executive seminar halls, lecture suites, and faculty chambers.
-        </p>
-        <div class="college-card-stats">
-          <span class="stat-pill">📍 Belaku (ಬೆಳಕು)</span>
-          <span class="stat-pill">🏢 Ground &amp; 1st Floor</span>
-        </div>
-        <button type="button" class="college-enter-btn">
-          <span>Enter MBA Block</span>
-          <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
-
-      <!-- MCA -->
-      <div class="college-portal-card" data-select-college="mca">
-        <div class="college-card-header">
-          <span class="college-card-icon">🖥️</span>
-          <span class="college-card-badge">Postgraduate IT Block</span>
-        </div>
-        <h2 class="college-card-title">MCA</h2>
-        <div class="college-card-subtitle">Master of Computer Applications</div>
-        <p class="college-card-desc">
-          Postgraduate computer science laboratories, Belaku conference suite, software project studios, and faculty rooms.
-        </p>
-        <div class="college-card-stats">
-          <span class="stat-pill">📍 Belaku &amp; PG Labs</span>
-          <span class="stat-pill">🏢 Ground &amp; 1st Floor</span>
-        </div>
-        <button type="button" class="college-enter-btn">
-          <span>Enter MCA Block</span>
-          <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
-
-      <!-- BCA -->
-      <div class="college-portal-card" data-select-college="bca">
-        <div class="college-card-header">
-          <span class="college-card-icon">💻</span>
-          <span class="college-card-badge">Undergraduate IT Block</span>
-        </div>
-        <h2 class="college-card-title">BCA</h2>
-        <div class="college-card-subtitle">Bachelor of Computer Applications</div>
-        <p class="college-card-desc">
-          Undergraduate computer application suites, coding laboratories, multimedia classrooms, and faculty offices.
-        </p>
-        <div class="college-card-stats">
-          <span class="stat-pill">📍 Programming Labs</span>
-          <span class="stat-pill">🏢 IT Wing</span>
-        </div>
-        <button type="button" class="college-enter-btn">
-          <span>Enter BCA Block</span>
-          <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
-
-      <!-- Pharmacy -->
-      <div class="college-portal-card" data-select-college="pharmacy">
-        <div class="college-card-header">
-          <span class="college-card-icon">💊</span>
-          <span class="college-card-badge">Health Sciences Block</span>
-        </div>
-        <h2 class="college-card-title">Pharmacy</h2>
-        <div class="college-card-subtitle">Faculty of Pharmaceutical Sciences</div>
-        <p class="college-card-desc">
-          Pharmaceutics laboratories, pharmaceutical chemistry chambers, pharmacognosy research, and lecture halls.
-        </p>
-        <div class="college-card-stats">
-          <span class="stat-pill">📍 Pharma &amp; Chem Labs</span>
-          <span class="stat-pill">🏢 Science Block</span>
-        </div>
-        <button type="button" class="college-enter-btn">
-          <span>Enter Pharmacy College</span>
-          <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
+      <!-- Google Maps Horizontal Category Filter Chips -->
+      <div class="gm-chips-scroll" role="tablist" aria-label="Campus Building Categories">
+        <button type="button" class="gm-filter-chip active" data-portal-filter="all">All Campus Blocks</button>
+        <button type="button" class="gm-filter-chip" data-portal-filter="engineering">Engineering (60 Rooms)</button>
+        <button type="button" class="gm-filter-chip" data-portal-filter="mba">MBA &amp; Management</button>
+        <button type="button" class="gm-filter-chip" data-portal-filter="mca">MCA Postgraduate</button>
+        <button type="button" class="gm-filter-chip" data-portal-filter="bca">BCA Computer Wing</button>
+        <button type="button" class="gm-filter-chip" data-portal-filter="pharmacy">Pharmacy Sciences</button>
       </div>
     </div>
 
-    <div class="portal-features-row">
-      <div class="feature-item">
-        <span class="feature-icon">🚶‍♂️</span>
-        <div class="feature-text">
-          <strong>Turn-by-Turn Corridor Walkthroughs</strong>
-          <span>Real photographs showing every staircase and turn leading directly to your room.</span>
-        </div>
+    <!-- Google Maps Overview Header -->
+    <div class="gm-overview-header">
+      <div class="gm-breadcrumbs">
+        <span>Karnataka</span>
+        <span class="gm-sep">›</span>
+        <span>Mysore</span>
+        <span class="gm-sep">›</span>
+        <span>Belagola</span>
+        <span class="gm-sep">›</span>
+        <span>Maharaja Institute of Technology Mysore</span>
       </div>
-      <div class="feature-item">
-        <span class="feature-icon">🎙️</span>
-        <div class="feature-text">
-          <strong>Hands-Free Voice Search</strong>
-          <span>Speak any room or lab name clearly into your microphone to jump straight there.</span>
-        </div>
+      <h1 class="gm-main-title">Maharaja Institute of Technology Mysore</h1>
+      <div class="gm-meta-row">
+        <span class="gm-rating-score">4.8</span>
+        <span class="gm-stars-gold">★★★★★</span>
+        <span class="gm-rating-count">(Campus Directory)</span>
+        <span class="gm-sep">·</span>
+        <span class="gm-status-open">Open Campus</span>
+        <span class="gm-sep">·</span>
+        <span>Verified Indoor Walkthroughs &amp; Floor Directories Available</span>
       </div>
-      <div class="feature-item">
-        <span class="feature-icon">💬</span>
-        <div class="feature-text">
-          <strong>WhatsApp Direct Route Sharing</strong>
-          <span>Share exact room directions and walkthrough links with students or visitors in 1 click.</span>
-        </div>
+    </div>
+
+    <!-- Main Google Maps Split Layout: Places Directory on Left + Vector Campus Map on Right -->
+    <div class="gm-main-layout">
+      <!-- Places List Column -->
+      <div class="gm-places-list" id="gmPlacesList">
+        <!-- 1. Engineering Academic Block -->
+        <article class="gm-place-card" data-select-college="engineering" id="placeCard-engineering">
+          <div class="gm-card-photo-wrap">
+            <img src="Rooms/114/a.jpg" alt="Engineering Academic Block" class="gm-card-photo" loading="lazy" />
+            <div class="gm-photo-overlay-badge">
+              <svg viewBox="0 0 24 24" class="icon-svg" style="width:14px;height:14px;"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+              <span>Main Academic Block • Floors 1–5</span>
+            </div>
+          </div>
+          <div class="gm-card-body">
+            <div class="gm-card-header-line">
+              <span class="gm-card-category">College Building • Undergraduate &amp; Labs</span>
+              <span class="tabular-nums" style="font-size:12px;color:var(--text-muted);">60 Rooms Indexed</span>
+            </div>
+            <h2 class="gm-card-title">Engineering Block (BE / B.Tech)</h2>
+            <div class="gm-card-rating-line">
+              <span class="gm-rating-score">4.8</span>
+              <span class="gm-stars-gold">★★★★★</span>
+              <span>(60 Classrooms &amp; Labs)</span>
+              <span class="gm-sep">·</span>
+              <span class="gm-status-open">Active Wayfinding</span>
+            </div>
+            <p class="gm-card-desc">
+              Houses Department of Computer Science (CSE), Information Science (ISE), Electronics (ECE), Mechanical, Civil, and AI &amp; Data Science with specialized research labs.
+            </p>
+            <div class="gm-info-list">
+              <div class="gm-info-row">
+                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                <span>Main Campus Quadrangle • Ground, 1st, 2nd, 3rd, 4th &amp; 5th Floor</span>
+              </div>
+              <div class="gm-info-row">
+                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M11.99 18.54l-7.37-5.73L3 14.07l9 7 9-7-1.63-1.27-7.38 5.74zM12 16l7.36-5.73L21 9.07l-9-7-9 7 1.63 1.2L12 16z"/></svg>
+                <span>Point A (Admission), Point B (Central), and Point C (Mech Dept) staircases</span>
+              </div>
+            </div>
+            <div class="gm-card-actions">
+              <button type="button" class="gm-btn-directions" data-btn-college="engineering">
+                <svg viewBox="0 0 24 24" style="width:16px;height:16px;"><path fill="currentColor" d="M21.71 11.29l-9-9a1 1 0 0 0-1.42 0l-9 9a1 1 0 0 0 0 1.42l9 9a1 1 0 0 0 1.42 0l9-9a1 1 0 0 0 0-1.42zM14 14.5V12h-4v3H8v-4a1 1 0 0 1 1-1h5V7.5l3.5 3.5-3.5 3.5z"/></svg>
+                <span>Enter Engineering Campus</span>
+              </button>
+              <button type="button" class="gm-btn-secondary" data-btn-college="engineering">
+                <span>View 60 Rooms</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Department of MBA -->
+        <article class="gm-place-card" data-select-college="mba" id="placeCard-mba">
+          <div class="gm-card-photo-wrap">
+            <img src="Rooms/Belaku/a.jpg" alt="Department of MBA and MCA Building Front Facade" class="gm-card-photo" loading="lazy" />
+            <div class="gm-photo-overlay-badge">
+              <svg viewBox="0 0 24 24" class="icon-svg" style="width:14px;height:14px;"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+              <span>Department of MBA &amp; MCA Block</span>
+            </div>
+          </div>
+          <div class="gm-card-body">
+            <div class="gm-card-header-line">
+              <span class="gm-card-category">Standalone Facility • Management Studies</span>
+              <span class="tabular-nums" style="font-size:12px;color:var(--text-muted);">Belaku (ಬೆಳಕು)</span>
+            </div>
+            <h2 class="gm-card-title">Department of MBA (Master of Business Administration)</h2>
+            <div class="gm-card-rating-line">
+              <span class="gm-rating-score">4.9</span>
+              <span class="gm-stars-gold">★★★★★</span>
+              <span>(Belaku &amp; Seminar Halls)</span>
+              <span class="gm-sep">·</span>
+              <span class="gm-status-open">Active Wayfinding</span>
+            </div>
+            <p class="gm-card-desc">
+              Standalone academic facility featuring Belaku (ಬೆಳಕು) auditorium, executive seminar halls, smart management lecture suites, and faculty chambers.
+            </p>
+            <div class="gm-info-list">
+              <div class="gm-info-row">
+                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                <span>South Campus Quadrangle • Ground &amp; 1st Floor (Beside Lift)</span>
+              </div>
+              <div class="gm-info-row">
+                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M11.99 18.54l-7.37-5.73L3 14.07l9 7 9-7-1.63-1.27-7.38 5.74zM12 16l7.36-5.73L21 9.07l-9-7-9 7 1.63 1.2L12 16z"/></svg>
+                <span>Direct walk from Main Entrance up staircase to 1st Landing</span>
+              </div>
+            </div>
+            <div class="gm-card-actions">
+              <button type="button" class="gm-btn-directions" data-btn-college="mba">
+                <svg viewBox="0 0 24 24" style="width:16px;height:16px;"><path fill="currentColor" d="M21.71 11.29l-9-9a1 1 0 0 0-1.42 0l-9 9a1 1 0 0 0 0 1.42l9 9a1 1 0 0 0 1.42 0l9-9a1 1 0 0 0 0-1.42zM14 14.5V12h-4v3H8v-4a1 1 0 0 1 1-1h5V7.5l3.5 3.5-3.5 3.5z"/></svg>
+                <span>Enter MBA Block</span>
+              </button>
+              <button type="button" class="gm-btn-secondary" data-btn-college="mba">
+                <span>View Belaku (ಬೆಳಕು)</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. Department of MCA -->
+        <article class="gm-place-card" data-select-college="mca" id="placeCard-mca">
+          <div class="gm-card-photo-wrap">
+            <img src="Rooms/Belaku/d.jpg" alt="Department of MCA and Belaku Entrance" class="gm-card-photo" loading="lazy" />
+            <div class="gm-photo-overlay-badge">
+              <svg viewBox="0 0 24 24" class="icon-svg" style="width:14px;height:14px;"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+              <span>Postgraduate IT Division</span>
+            </div>
+          </div>
+          <div class="gm-card-body">
+            <div class="gm-card-header-line">
+              <span class="gm-card-category">Postgraduate Computer Applications</span>
+              <span class="tabular-nums" style="font-size:12px;color:var(--text-muted);">PG Labs</span>
+            </div>
+            <h2 class="gm-card-title">Department of MCA (Master of Computer Applications)</h2>
+            <div class="gm-card-rating-line">
+              <span class="gm-rating-score">4.8</span>
+              <span class="gm-stars-gold">★★★★★</span>
+              <span>(Computing &amp; Research Labs)</span>
+              <span class="gm-sep">·</span>
+              <span class="gm-status-open">Active Wayfinding</span>
+            </div>
+            <p class="gm-card-desc">
+              Postgraduate computer science laboratories, software engineering studios, Belaku conference chamber, and faculty project research rooms.
+            </p>
+            <div class="gm-info-list">
+              <div class="gm-info-row">
+                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                <span>Department of MBA &amp; MCA Building • Ground &amp; 1st Floor</span>
+              </div>
+            </div>
+            <div class="gm-card-actions">
+              <button type="button" class="gm-btn-directions" data-btn-college="mca">
+                <svg viewBox="0 0 24 24" style="width:16px;height:16px;"><path fill="currentColor" d="M21.71 11.29l-9-9a1 1 0 0 0-1.42 0l-9 9a1 1 0 0 0 0 1.42l9 9a1 1 0 0 0 1.42 0l9-9a1 1 0 0 0 0-1.42zM14 14.5V12h-4v3H8v-4a1 1 0 0 1 1-1h5V7.5l3.5 3.5-3.5 3.5z"/></svg>
+                <span>Enter MCA Block</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. Department of BCA -->
+        <article class="gm-place-card" data-select-college="bca" id="placeCard-bca">
+          <div class="gm-card-photo-wrap">
+            <img src="Rooms/117/1.jpg" alt="Department of BCA Computing Suites" class="gm-card-photo" loading="lazy" />
+            <div class="gm-photo-overlay-badge">
+              <svg viewBox="0 0 24 24" class="icon-svg" style="width:14px;height:14px;"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+              <span>Undergraduate IT Division</span>
+            </div>
+          </div>
+          <div class="gm-card-body">
+            <div class="gm-card-header-line">
+              <span class="gm-card-category">Computer Applications &amp; Coding Labs</span>
+              <span class="tabular-nums" style="font-size:12px;color:var(--text-muted);">IT Wing</span>
+            </div>
+            <h2 class="gm-card-title">Department of BCA (Bachelor of Computer Applications)</h2>
+            <div class="gm-card-rating-line">
+              <span class="gm-rating-score">4.7</span>
+              <span class="gm-stars-gold">★★★★★</span>
+              <span>(Programming Laboratories)</span>
+              <span class="gm-sep">·</span>
+              <span class="gm-status-open">Directory Ready</span>
+            </div>
+            <p class="gm-card-desc">
+              Undergraduate computing suites, web technology studios, software engineering laboratories, and lecture theaters.
+            </p>
+            <div class="gm-info-list">
+              <div class="gm-info-row">
+                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                <span>IT Academic Wing, MIT Mysore</span>
+              </div>
+            </div>
+            <div class="gm-card-actions">
+              <button type="button" class="gm-btn-directions" data-btn-college="bca">
+                <svg viewBox="0 0 24 24" style="width:16px;height:16px;"><path fill="currentColor" d="M21.71 11.29l-9-9a1 1 0 0 0-1.42 0l-9 9a1 1 0 0 0 0 1.42l9 9a1 1 0 0 0 1.42 0l9-9a1 1 0 0 0 0-1.42zM14 14.5V12h-4v3H8v-4a1 1 0 0 1 1-1h5V7.5l3.5 3.5-3.5 3.5z"/></svg>
+                <span>Enter BCA Block</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5. Faculty of Pharmaceutical Sciences -->
+        <article class="gm-place-card" data-select-college="pharmacy" id="placeCard-pharmacy">
+          <div class="gm-card-photo-wrap">
+            <img src="Rooms/118/1.jpg" alt="Faculty of Pharmaceutical Sciences" class="gm-card-photo" loading="lazy" />
+            <div class="gm-photo-overlay-badge">
+              <svg viewBox="0 0 24 24" class="icon-svg" style="width:14px;height:14px;"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+              <span>Health Sciences Division</span>
+            </div>
+          </div>
+          <div class="gm-card-body">
+            <div class="gm-card-header-line">
+              <span class="gm-card-category">Pharmaceutical Sciences &amp; Chemistry</span>
+              <span class="tabular-nums" style="font-size:12px;color:var(--text-muted);">Research Suites</span>
+            </div>
+            <h2 class="gm-card-title">Faculty of Pharmaceutical Sciences</h2>
+            <div class="gm-card-rating-line">
+              <span class="gm-rating-score">4.8</span>
+              <span class="gm-stars-gold">★★★★★</span>
+              <span>(Pharmaceutics &amp; Chem Labs)</span>
+              <span class="gm-sep">·</span>
+              <span class="gm-status-open">Directory Ready</span>
+            </div>
+            <p class="gm-card-desc">
+              Pharmaceutics formulation suites, pharmaceutical chemistry chambers, pharmacognosy research laboratories, and specialized lecture rooms.
+            </p>
+            <div class="gm-info-list">
+              <div class="gm-info-row">
+                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                <span>Healthcare &amp; Science Block, MIT Mysore</span>
+              </div>
+            </div>
+            <div class="gm-card-actions">
+              <button type="button" class="gm-btn-directions" data-btn-college="pharmacy">
+                <svg viewBox="0 0 24 24" style="width:16px;height:16px;"><path fill="currentColor" d="M21.71 11.29l-9-9a1 1 0 0 0-1.42 0l-9 9a1 1 0 0 0 0 1.42l9 9a1 1 0 0 0 1.42 0l9-9a1 1 0 0 0 0-1.42zM14 14.5V12h-4v3H8v-4a1 1 0 0 1 1-1h5V7.5l3.5 3.5-3.5 3.5z"/></svg>
+                <span>Enter Pharmacy College</span>
+              </button>
+            </div>
+          </div>
+        </article>
       </div>
+
+      <!-- Google Maps Interactive Campus Vector Map -->
+      <aside class="gm-map-column">
+        <div class="gm-map-card">
+          <div class="gm-map-topbar">
+            <div class="gm-map-title">
+              <svg viewBox="0 0 24 24" class="icon-svg" style="width:16px;height:16px;color:var(--color-primary);"><path fill="currentColor" d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>
+              <span>Campus Interactive Map</span>
+            </div>
+            <span class="gm-map-badge">Interactive Map</span>
+          </div>
+
+          <div class="gm-map-canvas-wrap">
+            <svg viewBox="0 0 540 400" class="gm-svg-campus-map" aria-label="MIT Mysore Campus Layout Map">
+              <!-- Background / Ground -->
+              <rect width="540" height="400" fill="#f1f3f4" class="map-ground" />
+
+              <!-- Main Approach Road (Belagola - KRS Road) -->
+              <path d="M 0 350 L 540 350" stroke="#ffffff" stroke-width="26" />
+              <path d="M 0 350 L 540 350" stroke="#dadce0" stroke-width="2" stroke-dasharray="8 8" />
+              <text x="180" y="378" font-family="'Google Sans', sans-serif" font-size="11" fill="#70757a" font-weight="500">KRS - Belagola Approach Road</text>
+
+              <!-- Campus Main Gate & Entry Avenue -->
+              <path d="M 170 350 L 170 240 L 360 240" stroke="#ffffff" stroke-width="20" fill="none" />
+              <path d="M 170 350 L 170 240 L 360 240" stroke="#dadce0" stroke-width="1.5" fill="none" />
+              <text x="110" y="310" font-family="'Google Sans', sans-serif" font-size="10" fill="#5f6368">Main Entrance Gate</text>
+
+              <!-- Central Quadrangle / Green Lawn -->
+              <rect x="195" y="115" width="130" height="105" rx="8" fill="#ceead6" stroke="#a8dab5" stroke-width="1.5" />
+              <circle cx="260" cy="167" r="14" fill="#ffffff" stroke="#a8dab5" stroke-width="1.5" />
+              <text x="225" y="171" font-family="'Google Sans', sans-serif" font-size="10.5" fill="#137333" font-weight="500">Central Quad</text>
+
+              <!-- Building A: Main Engineering Academic Block (U/L Shaped) -->
+              <path
+                d="M 60 40 L 380 40 L 380 95 L 340 95 L 340 190 L 290 190 L 290 95 L 60 95 Z"
+                fill="#ffffff"
+                stroke="#1a73e8"
+                stroke-width="2"
+                class="map-building"
+                data-map-college="engineering"
+                id="mapBuilding-engineering"
+              />
+              <text x="110" y="65" font-family="'Google Sans', sans-serif" font-size="12" fill="#1a73e8" font-weight="600">Block A • Engineering Campus</text>
+              <text x="110" y="80" font-family="'Google Sans', sans-serif" font-size="9.5" fill="#5f6368">CSE • ISE • ECE • Mech • Civil (60 Rooms)</text>
+
+              <!-- Building B: Department of MBA & MCA Block -->
+              <rect
+                x="355"
+                y="130"
+                width="145"
+                height="95"
+                rx="6"
+                fill="#ffffff"
+                stroke="#ea4335"
+                stroke-width="2"
+                class="map-building"
+                data-map-college="mba"
+                id="mapBuilding-mba"
+              />
+              <text x="367" y="160" font-family="'Google Sans', sans-serif" font-size="11.5" fill="#ea4335" font-weight="600">Block B • MBA &amp; MCA</text>
+              <text x="367" y="176" font-family="'Google Sans', sans-serif" font-size="9.5" fill="#5f6368">Belaku (ಬೆಳಕು) • Seminar Suites</text>
+
+              <!-- Building C: BCA IT Wing -->
+              <rect
+                x="60"
+                y="135"
+                width="115"
+                height="75"
+                rx="6"
+                fill="#ffffff"
+                stroke="#34a853"
+                stroke-width="2"
+                class="map-building"
+                data-map-college="bca"
+                id="mapBuilding-bca"
+              />
+              <text x="75" y="165" font-family="'Google Sans', sans-serif" font-size="11" fill="#137333" font-weight="600">Block C • BCA</text>
+              <text x="75" y="180" font-family="'Google Sans', sans-serif" font-size="9.5" fill="#5f6368">Computer Labs</text>
+
+              <!-- Building D: Faculty of Pharmaceutical Sciences -->
+              <rect
+                x="355"
+                y="245"
+                width="145"
+                height="70"
+                rx="6"
+                fill="#ffffff"
+                stroke="#fbbc04"
+                stroke-width="2"
+                class="map-building"
+                data-map-college="pharmacy"
+                id="mapBuilding-pharmacy"
+              />
+              <text x="368" y="275" font-family="'Google Sans', sans-serif" font-size="11" fill="#b06000" font-weight="600">Block D • Pharmacy</text>
+              <text x="368" y="290" font-family="'Google Sans', sans-serif" font-size="9.5" fill="#5f6368">Pharmaceutical Labs</text>
+
+              <!-- Interactive Google Maps Pins -->
+              <!-- Engineering Pin -->
+              <g class="map-pin" data-map-college="engineering" transform="translate(200, 32)">
+                <circle cx="12" cy="12" r="10" fill="#1a73e8" />
+                <path fill="#ffffff" d="M12 6L6 10l6 3.5L18 10l-6-4zm4 6.5l-4 2.5-4-2.5v2l4 2.5 4-2.5v-2z" />
+              </g>
+
+              <!-- MBA Belaku Pin -->
+              <g class="map-pin" data-map-college="mba" transform="translate(415, 122)">
+                <circle cx="12" cy="12" r="10" fill="#ea4335" />
+                <path fill="#ffffff" d="M10 7v1H7v7h10V8h-3V7c0-.55-.45-1-1-1h-2c-.55 0-1 .45-1 1zm4 1v-1h-4v1h4z" />
+              </g>
+            </svg>
+          </div>
+
+          <div class="gm-map-legend">
+            <span class="legend-item"><span class="legend-dot eng"></span> Engineering</span>
+            <span class="legend-item"><span class="legend-dot mba"></span> MBA &amp; MCA (Belaku)</span>
+            <span class="legend-item"><span class="legend-dot bca"></span> BCA Wing</span>
+            <span class="legend-item"><span class="legend-dot pharmacy"></span> Pharmacy</span>
+          </div>
+        </div>
+      </aside>
     </div>
   </section>
 
