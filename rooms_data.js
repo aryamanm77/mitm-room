@@ -169,28 +169,30 @@ window.LOCOROM_DATA = {
     "college": "MBA & MCA Block",
     "floor": "1st Floor",
     "dept": "Department of MBA",
-    "category": "Classroom / Lecture Hall",
-    "landmark": "Department of MBA & MCA Block • 1st Floor",
-    "info": "Enter through the Department of MBA & MCA block front entrance. Follow the corridor route to reach Room 106.",
-    "thumbnail": "Rooms/106/a.jpg",
+    "category": "Classroom (1st Year A Section)",
+    "landmark": "MBA Wing Corridor • 1st Floor • Capacity: 60",
+    "info": "Enter through the Department of MBA & MCA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 106 on your right (1st Year A Section, Seating Capacity: 60).",
+    "thumbnail": "Rooms/106/f.jpg",
     "photos": [
       "Rooms/106/a.jpg",
       "Rooms/106/b.jpg",
       "Rooms/106/c.jpg",
       "Rooms/106/d.jpg",
-      "Rooms/106/e.jpg"
+      "Rooms/106/e.jpg",
+      "Rooms/106/f.jpg"
     ],
     "accessPoints": [
       {
         "name": "MBA Main Entrance",
-        "info": "Enter through the Department of MBA & MCA block front entrance.",
+        "info": "Enter through the Department of MBA & MCA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 106 on your right.",
         "thumbnail": "Rooms/106/a.jpg",
         "photos": [
           "Rooms/106/a.jpg",
           "Rooms/106/b.jpg",
           "Rooms/106/c.jpg",
           "Rooms/106/d.jpg",
-          "Rooms/106/e.jpg"
+          "Rooms/106/e.jpg",
+          "Rooms/106/f.jpg"
         ]
       }
     ]
