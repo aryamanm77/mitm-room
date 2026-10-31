@@ -37,20 +37,30 @@ window.LOCOROM_DATA = {
     "college": "MBA & MCA Block",
     "floor": "1st Floor",
     "dept": "Department of MBA",
-    "category": "Department Facility",
-    "landmark": "Department of MBA & MCA Block • 1st Floor",
-    "info": "Enter through the Department of MBA & MCA block front entrance. Follow the route to reach Room 2.",
-    "thumbnail": "Rooms/2/a.jpg",
+    "category": "Board Room / Staff Room",
+    "landmark": "MBA Wing Corridor • 1st Floor • Total Area: 9.2 Sq.Mtr",
+    "info": "Enter through the Department of MBA & MCA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 2 on your left (Board Room / Faculty Staff Room, Total Area: 9.2 Sq.Mtr).",
+    "thumbnail": "Rooms/2/f.jpg",
     "photos": [
-      "Rooms/2/a.jpg"
+      "Rooms/2/a.jpg",
+      "Rooms/2/b.jpg",
+      "Rooms/2/c.jpg",
+      "Rooms/2/d.jpg",
+      "Rooms/2/e.jpg",
+      "Rooms/2/f.jpg"
     ],
     "accessPoints": [
       {
         "name": "MBA Main Entrance",
-        "info": "Enter through the Department of MBA & MCA block front entrance.",
+        "info": "Enter through the Department of MBA & MCA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 2 on your left.",
         "thumbnail": "Rooms/2/a.jpg",
         "photos": [
-          "Rooms/2/a.jpg"
+          "Rooms/2/a.jpg",
+          "Rooms/2/b.jpg",
+          "Rooms/2/c.jpg",
+          "Rooms/2/d.jpg",
+          "Rooms/2/e.jpg",
+          "Rooms/2/f.jpg"
         ]
       }
     ]
