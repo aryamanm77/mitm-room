@@ -1,4 +1,4 @@
-﻿$rooms = [ordered]@{}
+$rooms = [ordered]@{}
 $mediaExt = @(".jpg", ".jpeg", ".png", ".gif", ".mp4", ".webm")
 
 function Sort-Natural {
@@ -123,8 +123,14 @@ Get-ChildItem -Directory "Rooms" | Sort-Object Name | ForEach-Object {
         $dept = "CSBS Dept"
     }
 
+    $college = "Engineering"
+    if ($rName -match "MBA" -or $rInfo -match "MBA" -or $rPath -match "MBA") {
+        $college = "MBA"
+    }
+
     $rooms[$rName] = @{
         name = $rName
+        college = $college
         floor = $floor
         dept = $dept
         info = $rInfo

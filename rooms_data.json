@@ -4,7 +4,7 @@
     "floor": "1st Floor",
     "dept": "Administration & Admissions",
     "category": "Administrative Office",
-    "landmark": "West Wing \u00b7 Near Admission & Scholarship Section",
+    "landmark": "West Wing · Near Admission & Scholarship Section",
     "info": "(*admission section*) corridor (next to kings washroom) or next to (scholarship section)",
     "thumbnail": "Rooms/114/a.jpg",
     "photos": [
@@ -16,14 +16,15 @@
       "Rooms/114/f.jpg",
       "Rooms/114/g.jpg"
     ],
-    "accessPoints": []
+    "accessPoints": [],
+    "college": "Engineering"
   },
   "117": {
     "name": "117",
     "floor": "1st Floor",
     "dept": "General Administration",
     "category": "Classroom / Hall",
-    "landmark": "Ground Level \u00b7 Main Corridor",
+    "landmark": "Ground Level · Main Corridor",
     "info": "",
     "thumbnail": "Rooms/117/1.jpg",
     "photos": [
@@ -38,14 +39,15 @@
       "Rooms/117/90.jpg",
       "Rooms/117/91.jpg"
     ],
-    "accessPoints": []
+    "accessPoints": [],
+    "college": "Engineering"
   },
   "118": {
     "name": "118",
     "floor": "1st Floor",
     "dept": "General Administration",
     "category": "Classroom / Hall",
-    "landmark": "Ground Level \u00b7 Main Corridor",
+    "landmark": "Ground Level · Main Corridor",
     "info": "",
     "thumbnail": "Rooms/118/1.jpg",
     "photos": [
@@ -61,14 +63,15 @@
       "Rooms/118/90.jpg",
       "Rooms/118/91.jpg"
     ],
-    "accessPoints": []
+    "accessPoints": [],
+    "college": "Engineering"
   },
   "119": {
     "name": "119",
     "floor": "1st Floor",
     "dept": "General Administration",
     "category": "Classroom / Hall",
-    "landmark": "Ground Level \u00b7 Main Corridor",
+    "landmark": "Ground Level · Main Corridor",
     "info": "",
     "thumbnail": "Rooms/119/1.jpg",
     "photos": [
@@ -84,34 +87,15 @@
       "Rooms/119/90.jpg",
       "Rooms/119/91.jpg"
     ],
-    "accessPoints": []
-  },
-  "123 (Design Laboratory, Heat and Mass Transfer Laboratory)": {
-    "name": "123 (Design Laboratory, Heat and Mass Transfer Laboratory)",
-    "floor": "1st Floor",
-    "dept": "Mechanical Engineering",
-    "category": "Engineering Laboratory",
-    "landmark": "East Wing \u00b7 Beside Mechanical HOD Cabin",
-    "info": "",
-    "thumbnail": "Rooms/123 (Design Laboratory, Heat and Mass Transfer Laboratory)/Point C [stair case near Mech Dept]/thumbnail.jpg",
-    "photos": [],
-    "accessPoints": [
-      {
-        "name": "Point C [stair case near Mech Dept]",
-        "info": "beside Mechanical HOD cabin",
-        "thumbnail": "Rooms/123 (Design Laboratory, Heat and Mass Transfer Laboratory)/Point C [stair case near Mech Dept]/thumbnail.jpg",
-        "photos": [
-          "Rooms/123 (Design Laboratory, Heat and Mass Transfer Laboratory)/Point C [stair case near Mech Dept]/thumbnail.jpg"
-        ]
-      }
-    ]
+    "accessPoints": [],
+    "college": "Engineering"
   },
   "126": {
     "name": "126",
     "floor": "1st Floor",
     "dept": "Mechanical Engineering",
     "category": "Academic Classroom",
-    "landmark": "East Wing \u00b7 Beside Mechanical HOD Cabin",
+    "landmark": "East Wing · Beside Mechanical HOD Cabin",
     "info": "",
     "thumbnail": "Rooms/126/Point C [stair case near Mech Dept]/thumbnail.jpg",
     "photos": [],
@@ -130,14 +114,15 @@
           "Rooms/126/Point C [stair case near Mech Dept]/g.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
   },
   "127": {
     "name": "127",
     "floor": "1st Floor",
     "dept": "Mechanical Engineering",
     "category": "Academic Classroom",
-    "landmark": "East Wing \u00b7 Beside Mechanical HOD Cabin",
+    "landmark": "East Wing · Beside Mechanical HOD Cabin",
     "info": "",
     "thumbnail": "Rooms/127/Point C [stair case near Mech Dept]/thumbnail.jpg",
     "photos": [],
@@ -156,14 +141,15 @@
           "Rooms/127/Point C [stair case near Mech Dept]/h.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
   },
   "205": {
     "name": "205",
     "floor": "2nd Floor",
     "dept": "Electronics & Communication",
     "category": "Academic Classroom",
-    "landmark": "West Wing \u00b7 Point A Left / Point B Right",
+    "landmark": "West Wing · Point A Left / Point B Right",
     "info": "",
     "thumbnail": "Rooms/205/Point A/thumbnail.jpg",
     "photos": [],
@@ -201,14 +187,15 @@
           "Rooms/205/Point B/j.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
   },
   "206": {
     "name": "206",
     "floor": "2nd Floor",
     "dept": "Electronics & Communication",
     "category": "Academic Classroom",
-    "landmark": "West Wing \u00b7 Next to Theater Classroom 208",
+    "landmark": "West Wing · Next to Theater Classroom 208",
     "info": "",
     "thumbnail": "Rooms/206/Point A/thumbnail.jpg",
     "photos": [],
@@ -245,14 +232,15 @@
           "Rooms/206/Point B/j.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
   },
   "208": {
     "name": "208",
     "floor": "2nd Floor",
     "dept": "Electronics & Communication",
     "category": "Theater Classroom",
-    "landmark": "West Wing \u00b7 Adjacent to EC HOD Chamber",
+    "landmark": "West Wing · Adjacent to EC HOD Chamber",
     "info": "",
     "thumbnail": "Rooms/208/Point A/thumbnail.jpg",
     "photos": [],
@@ -288,42 +276,15 @@
           "Rooms/208/Point B/i.jpg"
         ]
       }
-    ]
-  },
-  "211 PE lab": {
-    "name": "211 PE lab",
-    "floor": "2nd Floor",
-    "dept": "Electronics & Power Eng.",
-    "category": "Engineering Laboratory",
-    "landmark": "West Wing \u00b7 Adjacent to Staff Room",
-    "info": "",
-    "thumbnail": "Rooms/211 PE lab/Point A/thumbnail.jpg",
-    "photos": [],
-    "accessPoints": [
-      {
-        "name": "Point A",
-        "info": "Point A first floor, take right adjacent too staff room",
-        "thumbnail": "Rooms/211 PE lab/Point A/thumbnail.jpg",
-        "photos": [
-          "Rooms/211 PE lab/Point A/a.jpg",
-          "Rooms/211 PE lab/Point A/b.jpg",
-          "Rooms/211 PE lab/Point A/c.jpg",
-          "Rooms/211 PE lab/Point A/d.jpg",
-          "Rooms/211 PE lab/Point A/e.jpg",
-          "Rooms/211 PE lab/Point A/f.jpg",
-          "Rooms/211 PE lab/Point A/g.jpg",
-          "Rooms/211 PE lab/Point A/h.jpg",
-          "Rooms/211 PE lab/Point A/i.jpg"
-        ]
-      }
-    ]
+    ],
+    "college": "Engineering"
   },
   "212": {
     "name": "212",
     "floor": "2nd Floor",
     "dept": "Electronics & Communication",
     "category": "Academic Classroom",
-    "landmark": "West-Central Corridor \u00b7 Past DSP & PE Labs",
+    "landmark": "West-Central Corridor · Past DSP & PE Labs",
     "info": "",
     "thumbnail": "Rooms/212/Point A/thumbnail.jpg",
     "photos": [],
@@ -345,43 +306,15 @@
           "Rooms/212/Point A/j.jpg"
         ]
       }
-    ]
-  },
-  "213 DSP lab": {
-    "name": "213 DSP lab",
-    "floor": "2nd Floor",
-    "dept": "Electronics & Signal Processing",
-    "category": "Engineering Laboratory",
-    "landmark": "West Wing \u00b7 Adjacent to Staff Room",
-    "info": "",
-    "thumbnail": "Rooms/213 DSP lab/Point A/thumbnail.jpg",
-    "photos": [],
-    "accessPoints": [
-      {
-        "name": "Point A",
-        "info": "Point A, First Floor take right adjacent to staff room",
-        "thumbnail": "Rooms/213 DSP lab/Point A/thumbnail.jpg",
-        "photos": [
-          "Rooms/213 DSP lab/Point A/a.jpg",
-          "Rooms/213 DSP lab/Point A/b.jpg",
-          "Rooms/213 DSP lab/Point A/c.jpg",
-          "Rooms/213 DSP lab/Point A/d.jpg",
-          "Rooms/213 DSP lab/Point A/e.jpg",
-          "Rooms/213 DSP lab/Point A/f.jpg",
-          "Rooms/213 DSP lab/Point A/g.jpg",
-          "Rooms/213 DSP lab/Point A/h.jpg",
-          "Rooms/213 DSP lab/Point A/i.jpg",
-          "Rooms/213 DSP lab/Point A/j.jpg"
-        ]
-      }
-    ]
+    ],
+    "college": "Engineering"
   },
   "216": {
     "name": "216",
     "floor": "2nd Floor",
     "dept": "Computer Science & Business Systems",
     "category": "Theater Classroom",
-    "landmark": "Corner Junction \u00b7 Near CSBS HOD Chamber",
+    "landmark": "Corner Junction · Near CSBS HOD Chamber",
     "info": "",
     "thumbnail": "Rooms/216/Point A/thumbnail.jpg",
     "photos": [],
@@ -420,14 +353,15 @@
           "Rooms/216/Point C/j.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
   },
   "219": {
     "name": "219",
     "floor": "2nd Floor",
     "dept": "Computer Science & Business Systems",
     "category": "Academic Classroom",
-    "landmark": "East-Central Corridor \u00b7 Past CSBS HOD Chamber",
+    "landmark": "East-Central Corridor · Past CSBS HOD Chamber",
     "info": "",
     "thumbnail": "Rooms/219/Point C/thumbnail.jpg",
     "photos": [],
@@ -447,14 +381,15 @@
           "Rooms/219/Point C/h.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
   },
   "223": {
     "name": "223",
     "floor": "2nd Floor",
     "dept": "Information Science & Eng.",
     "category": "Academic Classroom",
-    "landmark": "East Wing \u00b7 Next to Theater Room 224",
+    "landmark": "East Wing · Next to Theater Room 224",
     "info": "",
     "thumbnail": "Rooms/223/Point C/thumbnail.jpg",
     "photos": [],
@@ -473,14 +408,15 @@
           "Rooms/223/Point C/g.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
   },
   "224": {
     "name": "224",
     "floor": "2nd Floor",
     "dept": "Information Science & Eng.",
     "category": "Theater Classroom",
-    "landmark": "East Wing \u00b7 Left of Point C Staircase",
+    "landmark": "East Wing · Left of Point C Staircase",
     "info": "",
     "thumbnail": "Rooms/224/Point C/thumbnail.jpg",
     "photos": [],
@@ -500,14 +436,15 @@
           "Rooms/224/Point C/h.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
   },
   "225": {
     "name": "225",
     "floor": "2nd Floor",
     "dept": "Mechanical / Interdisciplinary",
     "category": "Academic Classroom",
-    "landmark": "East Wing \u00b7 Directly Opposite Point C Staircase",
+    "landmark": "East Wing · Directly Opposite Point C Staircase",
     "info": "",
     "thumbnail": "Rooms/225/Point C/thumbnail.jpg",
     "photos": [],
@@ -525,14 +462,15 @@
           "Rooms/225/Point C/f.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
   },
   "229": {
     "name": "229",
     "floor": "2nd Floor",
     "dept": "Information Science & Eng.",
     "category": "Academic Classroom",
-    "landmark": "Central Wing \u00b7 Right of IS HOD Chamber",
+    "landmark": "Central Wing · Right of IS HOD Chamber",
     "info": "",
     "thumbnail": "Rooms/229/Point B/thumbnail.jpg",
     "photos": [],
@@ -566,14 +504,15 @@
           "Rooms/229/Point C/i.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
   },
   "230": {
     "name": "230",
     "floor": "2nd Floor",
     "dept": "Information Science & Eng.",
     "category": "Theater Classroom",
-    "landmark": "Central Wing \u00b7 Right of IS HOD Chamber",
+    "landmark": "Central Wing · Right of IS HOD Chamber",
     "info": "",
     "thumbnail": "Rooms/230/Point B/thumbnail.jpg",
     "photos": [],
@@ -607,14 +546,15 @@
           "Rooms/230/Point C/h.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
   },
   "232": {
     "name": "232",
     "floor": "2nd Floor",
     "dept": "Information Science & Eng.",
     "category": "Academic Classroom",
-    "landmark": "Central Wing \u00b7 Front/Left of IS HOD Chamber",
+    "landmark": "Central Wing · Front/Left of IS HOD Chamber",
     "info": "",
     "thumbnail": "Rooms/232/Point B/thumbnail.jpg",
     "photos": [],
@@ -650,7 +590,8 @@
           "Rooms/232/Point C/h.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
   },
   "252": {
     "name": "252",
@@ -670,7 +611,8 @@
       "Rooms/252/g.jpg",
       "Rooms/252/h.jpg"
     ],
-    "accessPoints": []
+    "accessPoints": [],
+    "college": "Engineering"
   },
   "253": {
     "name": "253",
@@ -690,14 +632,15 @@
       "Rooms/253/g.jpg",
       "Rooms/253/h.jpg"
     ],
-    "accessPoints": []
+    "accessPoints": [],
+    "college": "Engineering"
   },
   "305": {
     "name": "305",
     "floor": "3rd Floor",
     "dept": "Computer Science & Eng.",
     "category": "Theater Classroom",
-    "landmark": "West Wing \u00b7 Adjacent to CS HOD Chamber",
+    "landmark": "West Wing · Adjacent to CS HOD Chamber",
     "info": "",
     "thumbnail": "Rooms/305/Point A/thumbnail.jpg",
     "photos": [],
@@ -719,14 +662,15 @@
           "Rooms/305/Point A/j.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
   },
   "309": {
     "name": "309",
     "floor": "3rd Floor",
     "dept": "Computer Science & Eng.",
     "category": "Academic Classroom",
-    "landmark": "West Wing \u00b7 Past Staff Room",
+    "landmark": "West Wing · Past Staff Room",
     "info": "",
     "thumbnail": "Rooms/309/Point A/thumbnail.jpg",
     "photos": [],
@@ -753,14 +697,15 @@
           "Rooms/309/Point A/o.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
   },
   "313": {
     "name": "313",
     "floor": "3rd Floor",
     "dept": "Computer Science & Civil Eng.",
     "category": "Theater Classroom",
-    "landmark": "Corner Junction \u00b7 West-East Corridor",
+    "landmark": "Corner Junction · West-East Corridor",
     "info": "",
     "thumbnail": "Rooms/313/Point A/thumbnail.jpg",
     "photos": [],
@@ -805,14 +750,15 @@
           "Rooms/313/Point C/l.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
   },
   "315": {
     "name": "315",
     "floor": "3rd Floor",
     "dept": "Civil Engineering",
     "category": "Academic Classroom",
-    "landmark": "East-Central Corridor \u00b7 Adjacent to Civil Staff & HOD",
+    "landmark": "East-Central Corridor · Adjacent to Civil Staff & HOD",
     "info": "",
     "thumbnail": "Rooms/315/Point A/thumbnail.jpg",
     "photos": [],
@@ -858,14 +804,15 @@
           "Rooms/315/Point C/k.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
   },
   "319": {
     "name": "319",
     "floor": "3rd Floor",
     "dept": "Civil Engineering",
     "category": "Theater Classroom",
-    "landmark": "East Wing \u00b7 Past Civil HOD Chamber",
+    "landmark": "East Wing · Past Civil HOD Chamber",
     "info": "",
     "thumbnail": "Rooms/319/Point A/thumbnail.jpg",
     "photos": [],
@@ -908,14 +855,15 @@
           "Rooms/319/Point C/g.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
   },
   "320": {
     "name": "320",
     "floor": "3rd Floor",
     "dept": "Civil Engineering",
     "category": "Academic Classroom",
-    "landmark": "East Wing \u00b7 Directly Opposite Point C Staircase",
+    "landmark": "East Wing · Directly Opposite Point C Staircase",
     "info": "",
     "thumbnail": "Rooms/320/Point B/thumbnail.jpg",
     "photos": [],
@@ -952,14 +900,15 @@
           "Rooms/320/Point C/g.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
   },
   "321": {
     "name": "321",
     "floor": "3rd Floor",
     "dept": "Civil / Computer Science",
     "category": "Academic Classroom",
-    "landmark": "Central-East Corridor \u00b7 Next to Staff Room",
+    "landmark": "Central-East Corridor · Next to Staff Room",
     "info": "",
     "thumbnail": "Rooms/321/Point B/thumbnail.jpg",
     "photos": [],
@@ -999,14 +948,568 @@
           "Rooms/321/Point C/i.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
+  },
+  "324": {
+    "name": "324",
+    "floor": "3rd Floor",
+    "dept": "Computer Science & Eng.",
+    "category": "Academic Classroom",
+    "landmark": "Central Wing · First Class at Point B",
+    "info": "",
+    "thumbnail": "Rooms/324/Point B/thumbnail.jpg",
+    "photos": [],
+    "accessPoints": [
+      {
+        "name": "Point B",
+        "info": "Point B staircase 2nd floor the first class is 324",
+        "thumbnail": "Rooms/324/Point B/thumbnail.jpg",
+        "photos": [
+          "Rooms/324/Point B/a.jpg",
+          "Rooms/324/Point B/b.jpg",
+          "Rooms/324/Point B/c.jpg",
+          "Rooms/324/Point B/d.jpg",
+          "Rooms/324/Point B/e.jpg",
+          "Rooms/324/Point B/f.jpg",
+          "Rooms/324/Point B/fa.jpg",
+          "Rooms/324/Point B/fb.jpg",
+          "Rooms/324/Point B/g.jpg"
+        ]
+      },
+      {
+        "name": "Point C",
+        "info": "Point C, 2nd floor, towards right keep on going , after staff rooms you will get 324",
+        "thumbnail": "Rooms/324/Point C/thumbnail.jpg",
+        "photos": [
+          "Rooms/324/Point C/a.jpg",
+          "Rooms/324/Point C/b.jpg",
+          "Rooms/324/Point C/c.jpg",
+          "Rooms/324/Point C/d.jpg",
+          "Rooms/324/Point C/e.jpg",
+          "Rooms/324/Point C/f.jpg",
+          "Rooms/324/Point C/g.jpg",
+          "Rooms/324/Point C/h.jpg",
+          "Rooms/324/Point C/i.jpg",
+          "Rooms/324/Point C/j.jpg",
+          "Rooms/324/Point C/k.jpg"
+        ]
+      }
+    ],
+    "college": "Engineering"
+  },
+  "325": {
+    "name": "325",
+    "floor": "3rd Floor",
+    "dept": "Computer Science & Eng.",
+    "category": "Theater Classroom",
+    "landmark": "Central-East Wing · Right of Point B",
+    "info": "",
+    "thumbnail": "Rooms/325/Point B/thumbnail.jpg",
+    "photos": [],
+    "accessPoints": [
+      {
+        "name": "Point B",
+        "info": "Point B, 2nd floor towards right theater class(325)",
+        "thumbnail": "Rooms/325/Point B/thumbnail.jpg",
+        "photos": [
+          "Rooms/325/Point B/a.jpg",
+          "Rooms/325/Point B/b.jpg",
+          "Rooms/325/Point B/c.jpg",
+          "Rooms/325/Point B/ca.jpg",
+          "Rooms/325/Point B/d.jpg",
+          "Rooms/325/Point B/db.jpg",
+          "Rooms/325/Point B/e.jpg",
+          "Rooms/325/Point B/h.jpg",
+          "Rooms/325/Point B/i.jpg"
+        ]
+      },
+      {
+        "name": "Point C",
+        "info": "Point C 2nd floor take right, at corner you get 315(theater room)",
+        "thumbnail": "Rooms/325/Point C/thumbnail.jpg",
+        "photos": [
+          "Rooms/325/Point C/a.jpg",
+          "Rooms/325/Point C/b.jpg",
+          "Rooms/325/Point C/c.jpg",
+          "Rooms/325/Point C/d.jpg",
+          "Rooms/325/Point C/e.jpg",
+          "Rooms/325/Point C/f.jpg",
+          "Rooms/325/Point C/g.jpg",
+          "Rooms/325/Point C/h.jpg",
+          "Rooms/325/Point C/i.jpg",
+          "Rooms/325/Point C/j.jpg",
+          "Rooms/325/Point C/k.jpg"
+        ]
+      }
+    ],
+    "college": "Engineering"
+  },
+  "334": {
+    "name": "334",
+    "floor": "3rd Floor",
+    "dept": "Computer Science & Eng.",
+    "category": "Video Walkthrough Suite",
+    "landmark": "3rd Floor Corridor",
+    "info": "",
+    "thumbnail": "Rooms/334/Aa.mp4",
+    "photos": [
+      "Rooms/334/Aa.mp4"
+    ],
+    "accessPoints": [],
+    "college": "Engineering"
+  },
+  "352": {
+    "name": "352",
+    "floor": "3rd Floor",
+    "dept": "Computer Science & Eng.",
+    "category": "Academic Classroom",
+    "landmark": "3rd Floor Annex Corridor",
+    "info": "",
+    "thumbnail": "Rooms/352/a.jpg",
+    "photos": [
+      "Rooms/352/a.jpg",
+      "Rooms/352/b.jpg",
+      "Rooms/352/c.jpg",
+      "Rooms/352/d.jpg",
+      "Rooms/352/e.jpg",
+      "Rooms/352/f.jpg",
+      "Rooms/352/g.jpg",
+      "Rooms/352/h.jpg",
+      "Rooms/352/i.jpg",
+      "Rooms/352/j.jpg",
+      "Rooms/352/k.jpg"
+    ],
+    "accessPoints": [],
+    "college": "Engineering"
+  },
+  "353": {
+    "name": "353",
+    "floor": "3rd Floor",
+    "dept": "Computer Science & Eng.",
+    "category": "Academic Classroom",
+    "landmark": "3rd Floor Annex Corridor",
+    "info": "",
+    "thumbnail": "Rooms/353/a.jpg",
+    "photos": [
+      "Rooms/353/a.jpg",
+      "Rooms/353/b.jpg",
+      "Rooms/353/c.jpg",
+      "Rooms/353/d.jpg",
+      "Rooms/353/e.jpg",
+      "Rooms/353/f.jpg",
+      "Rooms/353/g.jpg",
+      "Rooms/353/h.jpg",
+      "Rooms/353/i.jpg",
+      "Rooms/353/j.jpg",
+      "Rooms/353/k.jpg"
+    ],
+    "accessPoints": [],
+    "college": "Engineering"
+  },
+  "401": {
+    "name": "401",
+    "floor": "4th Floor",
+    "dept": "AI & Machine Learning / CSE",
+    "category": "Academic Classroom",
+    "landmark": "West Wing · Beside 3rd Floor Staff Room",
+    "info": "",
+    "thumbnail": "Rooms/401/Point A/thumbnail.jpg",
+    "photos": [],
+    "accessPoints": [
+      {
+        "name": "Point A",
+        "info": "Point A staircase 3rd floor beside staff room",
+        "thumbnail": "Rooms/401/Point A/thumbnail.jpg",
+        "photos": [
+          "Rooms/401/Point A/thumbnail.jpg"
+        ]
+      }
+    ],
+    "college": "Engineering"
+  },
+  "414": {
+    "name": "414",
+    "floor": "4th Floor",
+    "dept": "Computer Science & Design",
+    "category": "Academic Classroom",
+    "landmark": "Corner Junction · Left from Point B",
+    "info": "",
+    "thumbnail": "Rooms/414/Point B/thumbnail.jpg",
+    "photos": [],
+    "accessPoints": [
+      {
+        "name": "Point B",
+        "info": "Point B , 3rd floor go left side till corner and you will find 414",
+        "thumbnail": "Rooms/414/Point B/thumbnail.jpg",
+        "photos": [
+          "Rooms/414/Point B/a.jpg",
+          "Rooms/414/Point B/b.jpg",
+          "Rooms/414/Point B/c.jpg",
+          "Rooms/414/Point B/d.jpg",
+          "Rooms/414/Point B/e.jpg",
+          "Rooms/414/Point B/f.jpg",
+          "Rooms/414/Point B/g.jpg",
+          "Rooms/414/Point B/h.jpg",
+          "Rooms/414/Point B/i.jpg",
+          "Rooms/414/Point B/j.jpg",
+          "Rooms/414/Point B/k.jpg",
+          "Rooms/414/Point B/l.jpg"
+        ]
+      }
+    ],
+    "college": "Engineering"
+  },
+  "415": {
+    "name": "415",
+    "floor": "4th Floor",
+    "dept": "Computer Science & Design",
+    "category": "Academic Classroom",
+    "landmark": "East-Central Corridor · Left from Staircase",
+    "info": "",
+    "thumbnail": "Rooms/415/Point C/thumbnail.jpg",
+    "photos": [],
+    "accessPoints": [
+      {
+        "name": "Point C",
+        "info": "Point B , 3rd floor go left side and you will find 415",
+        "thumbnail": "Rooms/415/Point C/thumbnail.jpg",
+        "photos": [
+          "Rooms/415/Point C/a.jpg",
+          "Rooms/415/Point C/b.jpg",
+          "Rooms/415/Point C/c.jpg",
+          "Rooms/415/Point C/d.jpg",
+          "Rooms/415/Point C/e.jpg",
+          "Rooms/415/Point C/f.jpg",
+          "Rooms/415/Point C/g.jpg",
+          "Rooms/415/Point C/gb.jpg",
+          "Rooms/415/Point C/gc.jpg",
+          "Rooms/415/Point C/h.jpg",
+          "Rooms/415/Point C/i.jpg"
+        ]
+      }
+    ],
+    "college": "Engineering"
+  },
+  "419": {
+    "name": "419",
+    "floor": "4th Floor",
+    "dept": "Computer Science & Eng.",
+    "category": "Academic Classroom",
+    "landmark": "Central Wing · Directly Opposite Point B",
+    "info": "",
+    "thumbnail": "Rooms/419/Point B/thumbnail.jpg",
+    "photos": [],
+    "accessPoints": [
+      {
+        "name": "Point B",
+        "info": "Point B , 3rd floor and its front of you",
+        "thumbnail": "Rooms/419/Point B/thumbnail.jpg",
+        "photos": [
+          "Rooms/419/Point B/a.jpg",
+          "Rooms/419/Point B/b.jpg",
+          "Rooms/419/Point B/c.jpg",
+          "Rooms/419/Point B/d.jpg",
+          "Rooms/419/Point B/e.jpg",
+          "Rooms/419/Point B/f.jpg",
+          "Rooms/419/Point B/h.jpg",
+          "Rooms/419/Point B/i.jpg",
+          "Rooms/419/Point B/j.jpg"
+        ]
+      }
+    ],
+    "college": "Engineering"
+  },
+  "420": {
+    "name": "420",
+    "floor": "4th Floor",
+    "dept": "Computer Science & Eng.",
+    "category": "Theater Classroom",
+    "landmark": "Central Wing · Opposite Point B Staircase",
+    "info": "",
+    "thumbnail": "Rooms/420/Point B/thumbnail.jpg",
+    "photos": [],
+    "accessPoints": [
+      {
+        "name": "Point B",
+        "info": "Point B , 3rd floor, and the class is front of you (theater class (420) )",
+        "thumbnail": "Rooms/420/Point B/thumbnail.jpg",
+        "photos": [
+          "Rooms/420/Point B/a.jpg",
+          "Rooms/420/Point B/b.jpg",
+          "Rooms/420/Point B/c.jpg",
+          "Rooms/420/Point B/d.jpg",
+          "Rooms/420/Point B/e.jpg",
+          "Rooms/420/Point B/f.jpg",
+          "Rooms/420/Point B/g.jpg",
+          "Rooms/420/Point B/h.jpg"
+        ]
+      }
+    ],
+    "college": "Engineering"
+  },
+  "452": {
+    "name": "452",
+    "floor": "4th Floor",
+    "dept": "Fifth-Year / PG Wing",
+    "category": "Academic Classroom",
+    "landmark": "4th Floor Annex Corridor",
+    "info": "",
+    "thumbnail": "Rooms/452/a.jpg",
+    "photos": [
+      "Rooms/452/a.jpg",
+      "Rooms/452/b.jpg",
+      "Rooms/452/c.jpg",
+      "Rooms/452/d.jpg",
+      "Rooms/452/e.jpg",
+      "Rooms/452/f.jpg",
+      "Rooms/452/g.jpg",
+      "Rooms/452/h.jpg",
+      "Rooms/452/i.jpg",
+      "Rooms/452/j.jpg",
+      "Rooms/452/k.jpg",
+      "Rooms/452/l.jpg",
+      "Rooms/452/m.jpg",
+      "Rooms/452/n.jpg"
+    ],
+    "accessPoints": [],
+    "college": "Engineering"
+  },
+  "453": {
+    "name": "453",
+    "floor": "4th Floor",
+    "dept": "Fifth-Year / PG Wing",
+    "category": "Academic Classroom",
+    "landmark": "4th Floor Annex Corridor",
+    "info": "",
+    "thumbnail": "Rooms/453/a.jpg",
+    "photos": [
+      "Rooms/453/a.jpg",
+      "Rooms/453/b.jpg",
+      "Rooms/453/c.jpg",
+      "Rooms/453/d.jpg",
+      "Rooms/453/e.jpg",
+      "Rooms/453/f.jpg",
+      "Rooms/453/g.jpg",
+      "Rooms/453/h.jpg",
+      "Rooms/453/i.jpg",
+      "Rooms/453/j.jpg",
+      "Rooms/453/k.jpg",
+      "Rooms/453/l.jpg",
+      "Rooms/453/m.jpg",
+      "Rooms/453/n.jpg"
+    ],
+    "accessPoints": [],
+    "college": "Engineering"
+  },
+  "551": {
+    "name": "551",
+    "floor": "5th Floor",
+    "dept": "Top Floor Academic Block",
+    "category": "Academic Hall",
+    "landmark": "5th Floor Main Corridor",
+    "info": "",
+    "thumbnail": "Rooms/551/a.jpg",
+    "photos": [
+      "Rooms/551/a.jpg",
+      "Rooms/551/b.jpg",
+      "Rooms/551/c.jpg",
+      "Rooms/551/d.jpg",
+      "Rooms/551/e.jpg",
+      "Rooms/551/f.jpg",
+      "Rooms/551/g.jpg",
+      "Rooms/551/h.jpg",
+      "Rooms/551/i.jpg",
+      "Rooms/551/j.jpg",
+      "Rooms/551/k.jpg",
+      "Rooms/551/l.jpg",
+      "Rooms/551/m.jpg",
+      "Rooms/551/n.jpg",
+      "Rooms/551/o.jpg",
+      "Rooms/551/p.jpg",
+      "Rooms/551/q.jpg",
+      "Rooms/551/r.jpg"
+    ],
+    "accessPoints": [],
+    "college": "Engineering"
+  },
+  "552": {
+    "name": "552",
+    "floor": "5th Floor",
+    "dept": "Top Floor Academic Block",
+    "category": "Academic Hall",
+    "landmark": "5th Floor Main Corridor",
+    "info": "",
+    "thumbnail": "Rooms/552/a.jpg",
+    "photos": [
+      "Rooms/552/a.jpg",
+      "Rooms/552/b.jpg",
+      "Rooms/552/c.jpg",
+      "Rooms/552/d.jpg",
+      "Rooms/552/e.jpg",
+      "Rooms/552/f.jpg",
+      "Rooms/552/g.jpg",
+      "Rooms/552/h.jpg",
+      "Rooms/552/i.jpg",
+      "Rooms/552/j.jpg",
+      "Rooms/552/k.jpg",
+      "Rooms/552/l.jpg",
+      "Rooms/552/m.jpg",
+      "Rooms/552/n.jpg",
+      "Rooms/552/o.jpg",
+      "Rooms/552/p.jpg",
+      "Rooms/552/q.jpg",
+      "Rooms/552/r.jpg"
+    ],
+    "accessPoints": [],
+    "college": "Engineering"
+  },
+  "556": {
+    "name": "556",
+    "floor": "5th Floor",
+    "dept": "Top Floor Academic Block",
+    "category": "Academic Hall",
+    "landmark": "5th Floor East Corridor",
+    "info": "",
+    "thumbnail": "Rooms/556/a.jpg",
+    "photos": [
+      "Rooms/556/a.jpg",
+      "Rooms/556/b.jpg",
+      "Rooms/556/c.jpg",
+      "Rooms/556/d.jpg",
+      "Rooms/556/e.jpg",
+      "Rooms/556/f.jpg",
+      "Rooms/556/g.jpg",
+      "Rooms/556/h.jpg",
+      "Rooms/556/i.jpg",
+      "Rooms/556/j.jpg",
+      "Rooms/556/k.jpg",
+      "Rooms/556/l.jpg",
+      "Rooms/556/m.jpg",
+      "Rooms/556/n.jpg",
+      "Rooms/556/o.jpg",
+      "Rooms/556/p.jpg",
+      "Rooms/556/q.jpg"
+    ],
+    "accessPoints": [],
+    "college": "Engineering"
+  },
+  "557": {
+    "name": "557",
+    "floor": "5th Floor",
+    "dept": "Top Floor Academic Block",
+    "category": "Academic Hall",
+    "landmark": "5th Floor East Corridor",
+    "info": "",
+    "thumbnail": "Rooms/557/a.jpg",
+    "photos": [
+      "Rooms/557/a.jpg",
+      "Rooms/557/b.jpg",
+      "Rooms/557/c.jpg",
+      "Rooms/557/d.jpg",
+      "Rooms/557/e.jpg",
+      "Rooms/557/f.jpg",
+      "Rooms/557/g.jpg",
+      "Rooms/557/h.jpg",
+      "Rooms/557/i.jpg",
+      "Rooms/557/j.jpg",
+      "Rooms/557/k.jpg",
+      "Rooms/557/l.jpg",
+      "Rooms/557/m.jpg",
+      "Rooms/557/n.jpg",
+      "Rooms/557/o.jpg",
+      "Rooms/557/p.jpg",
+      "Rooms/557/q.jpg"
+    ],
+    "accessPoints": [],
+    "college": "Engineering"
+  },
+  "123 (Design Laboratory, Heat and Mass Transfer Laboratory)": {
+    "name": "123 (Design Laboratory, Heat and Mass Transfer Laboratory)",
+    "floor": "1st Floor",
+    "dept": "Mechanical Engineering",
+    "category": "Engineering Laboratory",
+    "landmark": "East Wing · Beside Mechanical HOD Cabin",
+    "info": "",
+    "thumbnail": "Rooms/123 (Design Laboratory, Heat and Mass Transfer Laboratory)/Point C [stair case near Mech Dept]/thumbnail.jpg",
+    "photos": [],
+    "accessPoints": [
+      {
+        "name": "Point C [stair case near Mech Dept]",
+        "info": "beside Mechanical HOD cabin",
+        "thumbnail": "Rooms/123 (Design Laboratory, Heat and Mass Transfer Laboratory)/Point C [stair case near Mech Dept]/thumbnail.jpg",
+        "photos": [
+          "Rooms/123 (Design Laboratory, Heat and Mass Transfer Laboratory)/Point C [stair case near Mech Dept]/thumbnail.jpg"
+        ]
+      }
+    ],
+    "college": "Engineering"
+  },
+  "211 PE lab": {
+    "name": "211 PE lab",
+    "floor": "2nd Floor",
+    "dept": "Electronics & Power Eng.",
+    "category": "Engineering Laboratory",
+    "landmark": "West Wing · Adjacent to Staff Room",
+    "info": "",
+    "thumbnail": "Rooms/211 PE lab/Point A/thumbnail.jpg",
+    "photos": [],
+    "accessPoints": [
+      {
+        "name": "Point A",
+        "info": "Point A first floor, take right adjacent too staff room",
+        "thumbnail": "Rooms/211 PE lab/Point A/thumbnail.jpg",
+        "photos": [
+          "Rooms/211 PE lab/Point A/a.jpg",
+          "Rooms/211 PE lab/Point A/b.jpg",
+          "Rooms/211 PE lab/Point A/c.jpg",
+          "Rooms/211 PE lab/Point A/d.jpg",
+          "Rooms/211 PE lab/Point A/e.jpg",
+          "Rooms/211 PE lab/Point A/f.jpg",
+          "Rooms/211 PE lab/Point A/g.jpg",
+          "Rooms/211 PE lab/Point A/h.jpg",
+          "Rooms/211 PE lab/Point A/i.jpg"
+        ]
+      }
+    ],
+    "college": "Engineering"
+  },
+  "213 DSP lab": {
+    "name": "213 DSP lab",
+    "floor": "2nd Floor",
+    "dept": "Electronics & Signal Processing",
+    "category": "Engineering Laboratory",
+    "landmark": "West Wing · Adjacent to Staff Room",
+    "info": "",
+    "thumbnail": "Rooms/213 DSP lab/Point A/thumbnail.jpg",
+    "photos": [],
+    "accessPoints": [
+      {
+        "name": "Point A",
+        "info": "Point A, First Floor take right adjacent to staff room",
+        "thumbnail": "Rooms/213 DSP lab/Point A/thumbnail.jpg",
+        "photos": [
+          "Rooms/213 DSP lab/Point A/a.jpg",
+          "Rooms/213 DSP lab/Point A/b.jpg",
+          "Rooms/213 DSP lab/Point A/c.jpg",
+          "Rooms/213 DSP lab/Point A/d.jpg",
+          "Rooms/213 DSP lab/Point A/e.jpg",
+          "Rooms/213 DSP lab/Point A/f.jpg",
+          "Rooms/213 DSP lab/Point A/g.jpg",
+          "Rooms/213 DSP lab/Point A/h.jpg",
+          "Rooms/213 DSP lab/Point A/i.jpg",
+          "Rooms/213 DSP lab/Point A/j.jpg"
+        ]
+      }
+    ],
+    "college": "Engineering"
   },
   "321B": {
     "name": "321B",
     "floor": "3rd Floor",
     "dept": "Civil / Computer Science",
     "category": "Academic Classroom",
-    "landmark": "East Wing \u00b7 First Right from Point C",
+    "landmark": "East Wing · First Right from Point C",
     "info": "",
     "thumbnail": "Rooms/321B/Point B/thumbnail.jpg",
     "photos": [],
@@ -1046,185 +1549,15 @@
           "Rooms/321B/Point C/i.jpg"
         ]
       }
-    ]
-  },
-  "324": {
-    "name": "324",
-    "floor": "3rd Floor",
-    "dept": "Computer Science & Eng.",
-    "category": "Academic Classroom",
-    "landmark": "Central Wing \u00b7 First Class at Point B",
-    "info": "",
-    "thumbnail": "Rooms/324/Point B/thumbnail.jpg",
-    "photos": [],
-    "accessPoints": [
-      {
-        "name": "Point B",
-        "info": "Point B staircase 2nd floor the first class is 324",
-        "thumbnail": "Rooms/324/Point B/thumbnail.jpg",
-        "photos": [
-          "Rooms/324/Point B/a.jpg",
-          "Rooms/324/Point B/b.jpg",
-          "Rooms/324/Point B/c.jpg",
-          "Rooms/324/Point B/d.jpg",
-          "Rooms/324/Point B/e.jpg",
-          "Rooms/324/Point B/f.jpg",
-          "Rooms/324/Point B/fa.jpg",
-          "Rooms/324/Point B/fb.jpg",
-          "Rooms/324/Point B/g.jpg"
-        ]
-      },
-      {
-        "name": "Point C",
-        "info": "Point C, 2nd floor, towards right keep on going , after staff rooms you will get 324",
-        "thumbnail": "Rooms/324/Point C/thumbnail.jpg",
-        "photos": [
-          "Rooms/324/Point C/a.jpg",
-          "Rooms/324/Point C/b.jpg",
-          "Rooms/324/Point C/c.jpg",
-          "Rooms/324/Point C/d.jpg",
-          "Rooms/324/Point C/e.jpg",
-          "Rooms/324/Point C/f.jpg",
-          "Rooms/324/Point C/g.jpg",
-          "Rooms/324/Point C/h.jpg",
-          "Rooms/324/Point C/i.jpg",
-          "Rooms/324/Point C/j.jpg",
-          "Rooms/324/Point C/k.jpg"
-        ]
-      }
-    ]
-  },
-  "325": {
-    "name": "325",
-    "floor": "3rd Floor",
-    "dept": "Computer Science & Eng.",
-    "category": "Theater Classroom",
-    "landmark": "Central-East Wing \u00b7 Right of Point B",
-    "info": "",
-    "thumbnail": "Rooms/325/Point B/thumbnail.jpg",
-    "photos": [],
-    "accessPoints": [
-      {
-        "name": "Point B",
-        "info": "Point B, 2nd floor towards right theater class(325)",
-        "thumbnail": "Rooms/325/Point B/thumbnail.jpg",
-        "photos": [
-          "Rooms/325/Point B/a.jpg",
-          "Rooms/325/Point B/b.jpg",
-          "Rooms/325/Point B/c.jpg",
-          "Rooms/325/Point B/ca.jpg",
-          "Rooms/325/Point B/d.jpg",
-          "Rooms/325/Point B/db.jpg",
-          "Rooms/325/Point B/e.jpg",
-          "Rooms/325/Point B/h.jpg",
-          "Rooms/325/Point B/i.jpg"
-        ]
-      },
-      {
-        "name": "Point C",
-        "info": "Point C 2nd floor take right, at corner you get 315(theater room)",
-        "thumbnail": "Rooms/325/Point C/thumbnail.jpg",
-        "photos": [
-          "Rooms/325/Point C/a.jpg",
-          "Rooms/325/Point C/b.jpg",
-          "Rooms/325/Point C/c.jpg",
-          "Rooms/325/Point C/d.jpg",
-          "Rooms/325/Point C/e.jpg",
-          "Rooms/325/Point C/f.jpg",
-          "Rooms/325/Point C/g.jpg",
-          "Rooms/325/Point C/h.jpg",
-          "Rooms/325/Point C/i.jpg",
-          "Rooms/325/Point C/j.jpg",
-          "Rooms/325/Point C/k.jpg"
-        ]
-      }
-    ]
-  },
-  "334": {
-    "name": "334",
-    "floor": "3rd Floor",
-    "dept": "Computer Science & Eng.",
-    "category": "Video Walkthrough Suite",
-    "landmark": "3rd Floor Corridor",
-    "info": "",
-    "thumbnail": "Rooms/334/Aa.mp4",
-    "photos": [
-      "Rooms/334/Aa.mp4"
     ],
-    "accessPoints": []
-  },
-  "352": {
-    "name": "352",
-    "floor": "3rd Floor",
-    "dept": "Computer Science & Eng.",
-    "category": "Academic Classroom",
-    "landmark": "3rd Floor Annex Corridor",
-    "info": "",
-    "thumbnail": "Rooms/352/a.jpg",
-    "photos": [
-      "Rooms/352/a.jpg",
-      "Rooms/352/b.jpg",
-      "Rooms/352/c.jpg",
-      "Rooms/352/d.jpg",
-      "Rooms/352/e.jpg",
-      "Rooms/352/f.jpg",
-      "Rooms/352/g.jpg",
-      "Rooms/352/h.jpg",
-      "Rooms/352/i.jpg",
-      "Rooms/352/j.jpg",
-      "Rooms/352/k.jpg"
-    ],
-    "accessPoints": []
-  },
-  "353": {
-    "name": "353",
-    "floor": "3rd Floor",
-    "dept": "Computer Science & Eng.",
-    "category": "Academic Classroom",
-    "landmark": "3rd Floor Annex Corridor",
-    "info": "",
-    "thumbnail": "Rooms/353/a.jpg",
-    "photos": [
-      "Rooms/353/a.jpg",
-      "Rooms/353/b.jpg",
-      "Rooms/353/c.jpg",
-      "Rooms/353/d.jpg",
-      "Rooms/353/e.jpg",
-      "Rooms/353/f.jpg",
-      "Rooms/353/g.jpg",
-      "Rooms/353/h.jpg",
-      "Rooms/353/i.jpg",
-      "Rooms/353/j.jpg",
-      "Rooms/353/k.jpg"
-    ],
-    "accessPoints": []
-  },
-  "401": {
-    "name": "401",
-    "floor": "4th Floor",
-    "dept": "AI & Machine Learning / CSE",
-    "category": "Academic Classroom",
-    "landmark": "West Wing \u00b7 Beside 3rd Floor Staff Room",
-    "info": "",
-    "thumbnail": "Rooms/401/Point A/thumbnail.jpg",
-    "photos": [],
-    "accessPoints": [
-      {
-        "name": "Point A",
-        "info": "Point A staircase 3rd floor beside staff room",
-        "thumbnail": "Rooms/401/Point A/thumbnail.jpg",
-        "photos": [
-          "Rooms/401/Point A/thumbnail.jpg"
-        ]
-      }
-    ]
+    "college": "Engineering"
   },
   "405,406,410": {
     "name": "405,406,410",
     "floor": "4th Floor",
     "dept": "AI & Machine Learning / CSE",
     "category": "Classroom Cluster",
-    "landmark": "West Wing \u00b7 Right of Point A Staircase",
+    "landmark": "West Wing · Right of Point A Staircase",
     "info": "",
     "thumbnail": "Rooms/405,406,410/Point A/thumbnail.jpg",
     "photos": [],
@@ -1237,75 +1570,15 @@
           "Rooms/405,406,410/Point A/thumbnail.jpg"
         ]
       }
-    ]
-  },
-  "414": {
-    "name": "414",
-    "floor": "4th Floor",
-    "dept": "Computer Science & Design",
-    "category": "Academic Classroom",
-    "landmark": "Corner Junction \u00b7 Left from Point B",
-    "info": "",
-    "thumbnail": "Rooms/414/Point B/thumbnail.jpg",
-    "photos": [],
-    "accessPoints": [
-      {
-        "name": "Point B",
-        "info": "Point B , 3rd floor go left side till corner and you will find 414",
-        "thumbnail": "Rooms/414/Point B/thumbnail.jpg",
-        "photos": [
-          "Rooms/414/Point B/a.jpg",
-          "Rooms/414/Point B/b.jpg",
-          "Rooms/414/Point B/c.jpg",
-          "Rooms/414/Point B/d.jpg",
-          "Rooms/414/Point B/e.jpg",
-          "Rooms/414/Point B/f.jpg",
-          "Rooms/414/Point B/g.jpg",
-          "Rooms/414/Point B/h.jpg",
-          "Rooms/414/Point B/i.jpg",
-          "Rooms/414/Point B/j.jpg",
-          "Rooms/414/Point B/k.jpg",
-          "Rooms/414/Point B/l.jpg"
-        ]
-      }
-    ]
-  },
-  "415": {
-    "name": "415",
-    "floor": "4th Floor",
-    "dept": "Computer Science & Design",
-    "category": "Academic Classroom",
-    "landmark": "East-Central Corridor \u00b7 Left from Staircase",
-    "info": "",
-    "thumbnail": "Rooms/415/Point C/thumbnail.jpg",
-    "photos": [],
-    "accessPoints": [
-      {
-        "name": "Point C",
-        "info": "Point B , 3rd floor go left side and you will find 415",
-        "thumbnail": "Rooms/415/Point C/thumbnail.jpg",
-        "photos": [
-          "Rooms/415/Point C/a.jpg",
-          "Rooms/415/Point C/b.jpg",
-          "Rooms/415/Point C/c.jpg",
-          "Rooms/415/Point C/d.jpg",
-          "Rooms/415/Point C/e.jpg",
-          "Rooms/415/Point C/f.jpg",
-          "Rooms/415/Point C/g.jpg",
-          "Rooms/415/Point C/gb.jpg",
-          "Rooms/415/Point C/gc.jpg",
-          "Rooms/415/Point C/h.jpg",
-          "Rooms/415/Point C/i.jpg"
-        ]
-      }
-    ]
+    ],
+    "college": "Engineering"
   },
   "416a": {
     "name": "416a",
     "floor": "4th Floor",
     "dept": "Computer Science & Design",
     "category": "Academic Seminar Room",
-    "landmark": "East-Central Corridor \u00b7 Left from Staircase",
+    "landmark": "East-Central Corridor · Left from Staircase",
     "info": "",
     "thumbnail": "Rooms/416a/Point C/thumbnail.jpg",
     "photos": [],
@@ -1329,14 +1602,15 @@
           "Rooms/416a/Point C/l.jpg"
         ]
       }
-    ]
+    ],
+    "college": "Engineering"
   },
   "416b": {
     "name": "416b",
     "floor": "4th Floor",
     "dept": "Computer Science & Design",
     "category": "Academic Seminar Room",
-    "landmark": "Central Wing \u00b7 Next to Staff Room",
+    "landmark": "Central Wing · Next to Staff Room",
     "info": "",
     "thumbnail": "Rooms/416b/Point B/thumbnail.jpg",
     "photos": [],
@@ -1361,69 +1635,15 @@
           "Rooms/416b/Point B/m.jpg"
         ]
       }
-    ]
-  },
-  "419": {
-    "name": "419",
-    "floor": "4th Floor",
-    "dept": "Computer Science & Eng.",
-    "category": "Academic Classroom",
-    "landmark": "Central Wing \u00b7 Directly Opposite Point B",
-    "info": "",
-    "thumbnail": "Rooms/419/Point B/thumbnail.jpg",
-    "photos": [],
-    "accessPoints": [
-      {
-        "name": "Point B",
-        "info": "Point B , 3rd floor and its front of you",
-        "thumbnail": "Rooms/419/Point B/thumbnail.jpg",
-        "photos": [
-          "Rooms/419/Point B/a.jpg",
-          "Rooms/419/Point B/b.jpg",
-          "Rooms/419/Point B/c.jpg",
-          "Rooms/419/Point B/d.jpg",
-          "Rooms/419/Point B/e.jpg",
-          "Rooms/419/Point B/f.jpg",
-          "Rooms/419/Point B/h.jpg",
-          "Rooms/419/Point B/i.jpg",
-          "Rooms/419/Point B/j.jpg"
-        ]
-      }
-    ]
-  },
-  "420": {
-    "name": "420",
-    "floor": "4th Floor",
-    "dept": "Computer Science & Eng.",
-    "category": "Theater Classroom",
-    "landmark": "Central Wing \u00b7 Opposite Point B Staircase",
-    "info": "",
-    "thumbnail": "Rooms/420/Point B/thumbnail.jpg",
-    "photos": [],
-    "accessPoints": [
-      {
-        "name": "Point B",
-        "info": "Point B , 3rd floor, and the class is front of you (theater class (420) )",
-        "thumbnail": "Rooms/420/Point B/thumbnail.jpg",
-        "photos": [
-          "Rooms/420/Point B/a.jpg",
-          "Rooms/420/Point B/b.jpg",
-          "Rooms/420/Point B/c.jpg",
-          "Rooms/420/Point B/d.jpg",
-          "Rooms/420/Point B/e.jpg",
-          "Rooms/420/Point B/f.jpg",
-          "Rooms/420/Point B/g.jpg",
-          "Rooms/420/Point B/h.jpg"
-        ]
-      }
-    ]
+    ],
+    "college": "Engineering"
   },
   "422,423,424,425,426,427": {
     "name": "422,423,424,425,426,427",
     "floor": "4th Floor",
     "dept": "Engineering Cluster",
     "category": "Classroom Block",
-    "landmark": "West-Central Wing \u00b7 Between Point A & Point B",
+    "landmark": "West-Central Wing · Between Point A & Point B",
     "info": "",
     "thumbnail": "Rooms/422,423,424,425,426,427/Point A/thumbnail.jpg",
     "photos": [],
@@ -1444,177 +1664,8 @@
           "Rooms/422,423,424,425,426,427/Point B/thumbnail.jpg"
         ]
       }
-    ]
-  },
-  "452": {
-    "name": "452",
-    "floor": "4th Floor",
-    "dept": "Fifth-Year / PG Wing",
-    "category": "Academic Classroom",
-    "landmark": "4th Floor Annex Corridor",
-    "info": "",
-    "thumbnail": "Rooms/452/a.jpg",
-    "photos": [
-      "Rooms/452/a.jpg",
-      "Rooms/452/b.jpg",
-      "Rooms/452/c.jpg",
-      "Rooms/452/d.jpg",
-      "Rooms/452/e.jpg",
-      "Rooms/452/f.jpg",
-      "Rooms/452/g.jpg",
-      "Rooms/452/h.jpg",
-      "Rooms/452/i.jpg",
-      "Rooms/452/j.jpg",
-      "Rooms/452/k.jpg",
-      "Rooms/452/l.jpg",
-      "Rooms/452/m.jpg",
-      "Rooms/452/n.jpg"
     ],
-    "accessPoints": []
-  },
-  "453": {
-    "name": "453",
-    "floor": "4th Floor",
-    "dept": "Fifth-Year / PG Wing",
-    "category": "Academic Classroom",
-    "landmark": "4th Floor Annex Corridor",
-    "info": "",
-    "thumbnail": "Rooms/453/a.jpg",
-    "photos": [
-      "Rooms/453/a.jpg",
-      "Rooms/453/b.jpg",
-      "Rooms/453/c.jpg",
-      "Rooms/453/d.jpg",
-      "Rooms/453/e.jpg",
-      "Rooms/453/f.jpg",
-      "Rooms/453/g.jpg",
-      "Rooms/453/h.jpg",
-      "Rooms/453/i.jpg",
-      "Rooms/453/j.jpg",
-      "Rooms/453/k.jpg",
-      "Rooms/453/l.jpg",
-      "Rooms/453/m.jpg",
-      "Rooms/453/n.jpg"
-    ],
-    "accessPoints": []
-  },
-  "551": {
-    "name": "551",
-    "floor": "5th Floor",
-    "dept": "Top Floor Academic Block",
-    "category": "Academic Hall",
-    "landmark": "5th Floor Main Corridor",
-    "info": "",
-    "thumbnail": "Rooms/551/a.jpg",
-    "photos": [
-      "Rooms/551/a.jpg",
-      "Rooms/551/b.jpg",
-      "Rooms/551/c.jpg",
-      "Rooms/551/d.jpg",
-      "Rooms/551/e.jpg",
-      "Rooms/551/f.jpg",
-      "Rooms/551/g.jpg",
-      "Rooms/551/h.jpg",
-      "Rooms/551/i.jpg",
-      "Rooms/551/j.jpg",
-      "Rooms/551/k.jpg",
-      "Rooms/551/l.jpg",
-      "Rooms/551/m.jpg",
-      "Rooms/551/n.jpg",
-      "Rooms/551/o.jpg",
-      "Rooms/551/p.jpg",
-      "Rooms/551/q.jpg",
-      "Rooms/551/r.jpg"
-    ],
-    "accessPoints": []
-  },
-  "552": {
-    "name": "552",
-    "floor": "5th Floor",
-    "dept": "Top Floor Academic Block",
-    "category": "Academic Hall",
-    "landmark": "5th Floor Main Corridor",
-    "info": "",
-    "thumbnail": "Rooms/552/a.jpg",
-    "photos": [
-      "Rooms/552/a.jpg",
-      "Rooms/552/b.jpg",
-      "Rooms/552/c.jpg",
-      "Rooms/552/d.jpg",
-      "Rooms/552/e.jpg",
-      "Rooms/552/f.jpg",
-      "Rooms/552/g.jpg",
-      "Rooms/552/h.jpg",
-      "Rooms/552/i.jpg",
-      "Rooms/552/j.jpg",
-      "Rooms/552/k.jpg",
-      "Rooms/552/l.jpg",
-      "Rooms/552/m.jpg",
-      "Rooms/552/n.jpg",
-      "Rooms/552/o.jpg",
-      "Rooms/552/p.jpg",
-      "Rooms/552/q.jpg",
-      "Rooms/552/r.jpg"
-    ],
-    "accessPoints": []
-  },
-  "556": {
-    "name": "556",
-    "floor": "5th Floor",
-    "dept": "Top Floor Academic Block",
-    "category": "Academic Hall",
-    "landmark": "5th Floor East Corridor",
-    "info": "",
-    "thumbnail": "Rooms/556/a.jpg",
-    "photos": [
-      "Rooms/556/a.jpg",
-      "Rooms/556/b.jpg",
-      "Rooms/556/c.jpg",
-      "Rooms/556/d.jpg",
-      "Rooms/556/e.jpg",
-      "Rooms/556/f.jpg",
-      "Rooms/556/g.jpg",
-      "Rooms/556/h.jpg",
-      "Rooms/556/i.jpg",
-      "Rooms/556/j.jpg",
-      "Rooms/556/k.jpg",
-      "Rooms/556/l.jpg",
-      "Rooms/556/m.jpg",
-      "Rooms/556/n.jpg",
-      "Rooms/556/o.jpg",
-      "Rooms/556/p.jpg",
-      "Rooms/556/q.jpg"
-    ],
-    "accessPoints": []
-  },
-  "557": {
-    "name": "557",
-    "floor": "5th Floor",
-    "dept": "Top Floor Academic Block",
-    "category": "Academic Hall",
-    "landmark": "5th Floor East Corridor",
-    "info": "",
-    "thumbnail": "Rooms/557/a.jpg",
-    "photos": [
-      "Rooms/557/a.jpg",
-      "Rooms/557/b.jpg",
-      "Rooms/557/c.jpg",
-      "Rooms/557/d.jpg",
-      "Rooms/557/e.jpg",
-      "Rooms/557/f.jpg",
-      "Rooms/557/g.jpg",
-      "Rooms/557/h.jpg",
-      "Rooms/557/i.jpg",
-      "Rooms/557/j.jpg",
-      "Rooms/557/k.jpg",
-      "Rooms/557/l.jpg",
-      "Rooms/557/m.jpg",
-      "Rooms/557/n.jpg",
-      "Rooms/557/o.jpg",
-      "Rooms/557/p.jpg",
-      "Rooms/557/q.jpg"
-    ],
-    "accessPoints": []
+    "college": "Engineering"
   },
   "Auditorium": {
     "name": "Auditorium",
@@ -1625,7 +1676,8 @@
     "info": "",
     "thumbnail": "",
     "photos": [],
-    "accessPoints": []
+    "accessPoints": [],
+    "college": "Engineering"
   },
   "B002": {
     "name": "B002",
@@ -1636,7 +1688,8 @@
     "info": "",
     "thumbnail": "",
     "photos": [],
-    "accessPoints": []
+    "accessPoints": [],
+    "college": "Engineering"
   },
   "B-003": {
     "name": "B-003",
@@ -1659,7 +1712,8 @@
       "Rooms/B-003/91.jpg",
       "Rooms/B-003/92.jpg"
     ],
-    "accessPoints": []
+    "accessPoints": [],
+    "college": "Engineering"
   },
   "CSBS lab class room": {
     "name": "CSBS lab class room",
@@ -1680,7 +1734,8 @@
       "Rooms/CSBS lab class room/h.jpg",
       "Rooms/CSBS lab class room/i.jpg"
     ],
-    "accessPoints": []
+    "accessPoints": [],
+    "college": "Engineering"
   },
   "Fluid Mechanics and Machines Laboratory": {
     "name": "Fluid Mechanics and Machines Laboratory",
@@ -1696,7 +1751,8 @@
       "Rooms/Fluid Mechanics and Machines Laboratory/6.jpg",
       "Rooms/Fluid Mechanics and Machines Laboratory/7.jpg"
     ],
-    "accessPoints": []
+    "accessPoints": [],
+    "college": "Engineering"
   },
   "Foundry and Forging Laboratory": {
     "name": "Foundry and Forging Laboratory",
@@ -1713,7 +1769,8 @@
       "Rooms/Foundry and Forging Laboratory/4.jpg",
       "Rooms/Foundry and Forging Laboratory/5.jpg"
     ],
-    "accessPoints": []
+    "accessPoints": [],
+    "college": "Engineering"
   },
   "M-003": {
     "name": "M-003",
@@ -1734,7 +1791,8 @@
       "Rooms/M-003/h.jpg",
       "Rooms/M-003/i.jpg"
     ],
-    "accessPoints": []
+    "accessPoints": [],
+    "college": "Engineering"
   },
   "M-005": {
     "name": "M-005",
@@ -1754,7 +1812,8 @@
       "Rooms/M-005/g.jpg",
       "Rooms/M-005/h.jpg"
     ],
-    "accessPoints": []
+    "accessPoints": [],
+    "college": "Engineering"
   },
   "Machine Shop": {
     "name": "Machine Shop",
@@ -1770,6 +1829,30 @@
       "Rooms/Machine Shop/3.jpg",
       "Rooms/Machine Shop/4.jpg"
     ],
-    "accessPoints": []
+    "accessPoints": [],
+    "college": "Engineering"
+  },
+  "Belaku": {
+    "name": "Belaku",
+    "college": "MBA & MCA Block",
+    "floor": "Ground Floor",
+    "dept": "Department of MBA & MCA",
+    "category": "Conference / Seminar Hall",
+    "landmark": "MBA & MCA Block Entrance (Near Flight Model)",
+    "info": "Department of MBA & MCA block entrance. Take the front entrance steps towards Belaku room.",
+    "thumbnail": "Rooms/Belaku/a.jpg",
+    "photos": [
+      "Rooms/Belaku/a.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "MBA & MCA Main Entrance",
+        "info": "Enter through the main front steps of the MBA & MCA building.",
+        "thumbnail": "Rooms/Belaku/a.jpg",
+        "photos": [
+          "Rooms/Belaku/a.jpg"
+        ]
+      }
+    ]
   }
 }
