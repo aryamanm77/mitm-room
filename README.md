@@ -1,9 +1,9 @@
-# MIT Mysore Campus Navigator • Smart Indoor Wayfinding
+# MIT Maps • Indoor Campus Navigation
 **Maharaja Institute of Technology Mysore**
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://locorom.streamlit.app/)
 
-**MIT Mysore Campus Navigator** is the official indoor visual wayfinding and destination locator built for **Maharaja Institute of Technology Mysore (MIT Mysore)**. It provides step-by-step corridor walkthroughs and photos guiding students, staff, and visitors from campus access points directly to classrooms, laboratories, seminar halls, and departments.
+**MIT Maps** is the official indoor visual wayfinding and destination locator built for **Maharaja Institute of Technology Mysore (MIT Mysore)**. It provides step-by-step corridor walkthroughs and photos guiding students, staff, and visitors from campus access points directly to classrooms, laboratories, seminar halls, and departments.
 
 ---
 

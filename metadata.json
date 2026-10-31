@@ -1,5 +1,5 @@
 {
-  "name": "MIT Mysore Campus Navigator",
+  "name": "MIT Maps",
   "description": "Official indoor visual wayfinding and step-by-step corridor photo walkthroughs for Maharaja Institute of Technology Mysore (Engineering, MBA, MCA, BCA, Pharmacy).",
   "requestFramePermissions": [
     "microphone"

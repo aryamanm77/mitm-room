@@ -1,5 +1,5 @@
 /**
- * MIT Mysore Campus Navigator
+ * MIT Maps — Indoor Campus Navigation
  * Official Indoor Wayfinding, Voice Search, WhatsApp Direct Share & Corridor Photo Walkthroughs
  * Maharaja Institute of Technology Mysore (Engineering, MBA, MCA, BCA, Pharmacy)
  */
@@ -17,7 +17,7 @@ const state = {
   activePhotoIndex: 0,
   isPlaying: false,
   playTimer: null,
-  recentRooms: ["114", "205", "213 DSP lab", "305", "Belaku"],
+  recentRooms: ["102", "Belaku", "205", "114", "213 DSP lab"],
 };
 
 // ============================================================================
@@ -154,7 +154,7 @@ function buildWhatsAppShareUrl(roomKey, apIndex = 0) {
 
   const directionsSentence = route?.info || room.info || room.landmark || "Follow walkthrough photos.";
   const message = [
-    `*MIT Mysore Campus Navigator — ${titleLabel}*`,
+    `*MIT Maps — ${titleLabel}*`,
     `College: ${room.college || "Maharaja Institute of Technology Mysore"}`,
     `Floor: ${room.floor}${room.dept ? " · " + room.dept : ""}`,
     `Route (${route ? route.label : "Main Route"}): ${directionsSentence}`,
