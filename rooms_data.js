@@ -142,7 +142,8 @@ window.LOCOROM_DATA = {
     "thumbnail": "Rooms/105/a.jpg",
     "photos": [
       "Rooms/105/a.jpg",
-      "Rooms/105/b.jpg"
+      "Rooms/105/b.jpg",
+      "Rooms/105/c.jpg"
     ],
     "accessPoints": [
       {
@@ -151,7 +152,8 @@ window.LOCOROM_DATA = {
         "thumbnail": "Rooms/105/a.jpg",
         "photos": [
           "Rooms/105/a.jpg",
-          "Rooms/105/b.jpg"
+          "Rooms/105/b.jpg",
+          "Rooms/105/c.jpg"
         ]
       }
     ]
