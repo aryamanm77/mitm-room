@@ -1842,7 +1842,8 @@ window.LOCOROM_DATA = {
     "info": "Department of MBA & MCA block entrance. Take the front entrance steps towards Belaku room.",
     "thumbnail": "Rooms/Belaku/a.jpg",
     "photos": [
-      "Rooms/Belaku/a.jpg"
+      "Rooms/Belaku/a.jpg",
+      "Rooms/Belaku/b.jpg"
     ],
     "accessPoints": [
       {
@@ -1850,7 +1851,8 @@ window.LOCOROM_DATA = {
         "info": "Enter through the main front steps of the MBA & MCA building.",
         "thumbnail": "Rooms/Belaku/a.jpg",
         "photos": [
-          "Rooms/Belaku/a.jpg"
+          "Rooms/Belaku/a.jpg",
+          "Rooms/Belaku/b.jpg"
         ]
       }
     ]
