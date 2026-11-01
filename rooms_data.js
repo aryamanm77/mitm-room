@@ -1,12 +1,12 @@
 window.LOCOROM_DATA = {
   "1": {
     "name": "1",
-    "college": "MBA & MCA Block",
+    "college": "Department of MBA",
     "floor": "1st Floor",
     "dept": "Department of MBA",
     "category": "Faculty Staff Room",
     "landmark": "MBA Wing Corridor • 1st Floor • Total Area: 107.25 Sq.Mtr",
-    "info": "Enter through the Department of MBA & MCA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 1 on your left (MBA Faculty Staff Room, Total Area: 107.25 Sq.Mtr).",
+    "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 1 on your left (MBA Faculty Staff Room, Total Area: 107.25 Sq.Mtr).",
     "thumbnail": "Rooms/1/f.jpg",
     "photos": [
       "Rooms/1/a.jpg",
@@ -19,7 +19,7 @@ window.LOCOROM_DATA = {
     "accessPoints": [
       {
         "name": "MBA Main Entrance",
-        "info": "Enter through the Department of MBA & MCA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 1 on your left.",
+        "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 1 on your left.",
         "thumbnail": "Rooms/1/a.jpg",
         "photos": [
           "Rooms/1/a.jpg",
@@ -34,12 +34,12 @@ window.LOCOROM_DATA = {
   },
   "2": {
     "name": "2",
-    "college": "MBA & MCA Block",
+    "college": "Department of MBA",
     "floor": "1st Floor",
     "dept": "Department of MBA",
     "category": "Board Room / Staff Room",
     "landmark": "MBA Wing Corridor • 1st Floor • Total Area: 9.2 Sq.Mtr",
-    "info": "Enter through the Department of MBA & MCA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 2 on your left (Board Room / Faculty Staff Room, Total Area: 9.2 Sq.Mtr).",
+    "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 2 on your left (Board Room / Faculty Staff Room, Total Area: 9.2 Sq.Mtr).",
     "thumbnail": "Rooms/2/f.jpg",
     "photos": [
       "Rooms/2/a.jpg",
@@ -52,7 +52,7 @@ window.LOCOROM_DATA = {
     "accessPoints": [
       {
         "name": "MBA Main Entrance",
-        "info": "Enter through the Department of MBA & MCA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 2 on your left.",
+        "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 2 on your left.",
         "thumbnail": "Rooms/2/a.jpg",
         "photos": [
           "Rooms/2/a.jpg",
@@ -67,12 +67,12 @@ window.LOCOROM_DATA = {
   },
   "102": {
     "name": "102",
-    "college": "MBA & MCA Block",
+    "college": "Department of MBA",
     "floor": "1st Floor",
     "dept": "Department of MBA",
     "category": "Classroom (2nd Year FM-HR)",
     "landmark": "MBA Wing Corridor • 1st Floor • Capacity: 60",
-    "info": "Enter through the Department of MBA & MCA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 102 on your right (2nd Year FM-HR, Seating Capacity: 60).",
+    "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 102 on your right (2nd Year FM-HR, Seating Capacity: 60).",
     "thumbnail": "Rooms/102/f.jpg",
     "photos": [
       "Rooms/102/a.jpg",
@@ -85,7 +85,7 @@ window.LOCOROM_DATA = {
     "accessPoints": [
       {
         "name": "MBA Main Entrance",
-        "info": "Enter through the Department of MBA & MCA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 102 on your right.",
+        "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 102 on your right.",
         "thumbnail": "Rooms/102/a.jpg",
         "photos": [
           "Rooms/102/a.jpg",
@@ -100,12 +100,12 @@ window.LOCOROM_DATA = {
   },
   "103": {
     "name": "103",
-    "college": "MBA & MCA Block",
+    "college": "Department of MBA",
     "floor": "1st Floor",
     "dept": "Department of MBA",
     "category": "Classroom (1st Year B Section)",
     "landmark": "MBA Wing Corridor • 1st Floor • Capacity: 60",
-    "info": "Enter through the Department of MBA & MCA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 103 on your right (1st Year B Section, Seating Capacity: 60).",
+    "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 103 on your right (1st Year B Section, Seating Capacity: 60).",
     "thumbnail": "Rooms/103/f.jpg",
     "photos": [
       "Rooms/103/a.jpg",
@@ -118,7 +118,7 @@ window.LOCOROM_DATA = {
     "accessPoints": [
       {
         "name": "MBA Main Entrance",
-        "info": "Enter through the Department of MBA & MCA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 103 on your right.",
+        "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 103 on your right.",
         "thumbnail": "Rooms/103/a.jpg",
         "photos": [
           "Rooms/103/a.jpg",
@@ -133,12 +133,12 @@ window.LOCOROM_DATA = {
   },
   "104": {
     "name": "104",
-    "college": "MBA & MCA Block",
+    "college": "Department of MBA",
     "floor": "1st Floor",
     "dept": "Department of MBA",
     "category": "Classroom (2nd Year FM-MM)",
     "landmark": "MBA Wing Corridor • 1st Floor • Capacity: 60",
-    "info": "Enter through the Department of MBA & MCA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 104 on your right (2nd Year FM-MM, Seating Capacity: 60).",
+    "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 104 on your right (2nd Year FM-MM, Seating Capacity: 60).",
     "thumbnail": "Rooms/104/f.jpg",
     "photos": [
       "Rooms/104/a.jpg",
@@ -151,7 +151,7 @@ window.LOCOROM_DATA = {
     "accessPoints": [
       {
         "name": "MBA Main Entrance",
-        "info": "Enter through the Department of MBA & MCA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 104 on your right.",
+        "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 104 on your right.",
         "thumbnail": "Rooms/104/a.jpg",
         "photos": [
           "Rooms/104/a.jpg",
@@ -166,12 +166,12 @@ window.LOCOROM_DATA = {
   },
   "105": {
     "name": "105",
-    "college": "MBA & MCA Block",
+    "college": "Department of MBA",
     "floor": "1st Floor",
     "dept": "Department of MBA",
     "category": "Classroom (2nd Year MM-HR)",
     "landmark": "MBA Wing Corridor • 1st Floor • Capacity: 30",
-    "info": "Enter through the Department of MBA & MCA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 105 on your right (2nd Year MM-HR, Seating Capacity: 30).",
+    "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 105 on your right (2nd Year MM-HR, Seating Capacity: 30).",
     "thumbnail": "Rooms/105/f.jpg",
     "photos": [
       "Rooms/105/a.jpg",
@@ -184,7 +184,7 @@ window.LOCOROM_DATA = {
     "accessPoints": [
       {
         "name": "MBA Main Entrance",
-        "info": "Enter through the Department of MBA & MCA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 105 on your right.",
+        "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 105 on your right.",
         "thumbnail": "Rooms/105/a.jpg",
         "photos": [
           "Rooms/105/a.jpg",
@@ -199,12 +199,12 @@ window.LOCOROM_DATA = {
   },
   "106": {
     "name": "106",
-    "college": "MBA & MCA Block",
+    "college": "Department of MBA",
     "floor": "1st Floor",
     "dept": "Department of MBA",
     "category": "Classroom (1st Year A Section)",
     "landmark": "MBA Wing Corridor • 1st Floor • Capacity: 60",
-    "info": "Enter through the Department of MBA & MCA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 106 on your right (1st Year A Section, Seating Capacity: 60).",
+    "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 106 on your right (1st Year A Section, Seating Capacity: 60).",
     "thumbnail": "Rooms/106/f.jpg",
     "photos": [
       "Rooms/106/a.jpg",
@@ -217,7 +217,7 @@ window.LOCOROM_DATA = {
     "accessPoints": [
       {
         "name": "MBA Main Entrance",
-        "info": "Enter through the Department of MBA & MCA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 106 on your right.",
+        "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 106 on your right.",
         "thumbnail": "Rooms/106/a.jpg",
         "photos": [
           "Rooms/106/a.jpg",
@@ -2065,12 +2065,12 @@ window.LOCOROM_DATA = {
   },
   "Belaku": {
     "name": "Belaku",
-    "college": "MBA & MCA Block",
+    "college": "Department of MBA",
     "floor": "1st Floor",
-    "dept": "Department of MBA & MCA",
+    "dept": "Department of MBA",
     "category": "Seminar / Event Hall",
-    "landmark": "MBA & MCA Block 1st Landing · Beside Lift",
-    "info": "Enter through the MBA & MCA block front entrance. Head up the staircase to the 1st landing; Belaku (ಬೆಳಕು) is located right beside the lift.",
+    "landmark": "MBA Block 1st Landing · Beside Lift",
+    "info": "Enter through the MBA block front entrance. Head up the staircase to the 1st landing; Belaku (ಬೆಳಕು) is located right beside the lift.",
     "thumbnail": "Rooms/Belaku/d.jpg",
     "photos": [
       "Rooms/Belaku/a.jpg",
@@ -2080,8 +2080,8 @@ window.LOCOROM_DATA = {
     ],
     "accessPoints": [
       {
-        "name": "MBA & MCA Main Entrance",
-        "info": "Enter through the MBA & MCA block front entrance. Head up the staircase to the 1st landing; Belaku (ಬೆಳಕು) is located right beside the lift.",
+        "name": "MBA Main Entrance",
+        "info": "Enter through the MBA block front entrance. Head up the staircase to the 1st landing; Belaku (ಬೆಳಕು) is located right beside the lift.",
         "thumbnail": "Rooms/Belaku/a.jpg",
         "photos": [
           "Rooms/Belaku/a.jpg",
@@ -2098,23 +2098,83 @@ window.LOCOROM_DATA = {
     "floor": "Ground Floor",
     "dept": "Department of MCA",
     "category": "Lecture Hall",
-    "landmark": "MCA Academic Block",
-    "info": "Enter through the Department of Master of Computer Applications entrance gate into the corridor, then turn left toward the doorway.",
-    "thumbnail": "Rooms/MCA LH 3/a.jpg",
+    "landmark": "Room MCA LH - III • Ground Floor Academic Wing",
+    "info": "Head straight along the main approach path to the MITM Degree College entrance portico, head left up the staircase through the Department of Master of Computer Applications security gate, turn left down the corridor, and arrive at Room MCA LH - III on your left beside the notice board and fire extinguisher.",
+    "thumbnail": "Rooms/MCA LH 3/d.jpg",
     "photos": [
       "Rooms/MCA LH 3/a.jpg",
       "Rooms/MCA LH 3/b.jpg",
-      "Rooms/MCA LH 3/c.jpg"
+      "Rooms/MCA LH 3/c.jpg",
+      "Rooms/MCA LH 3/d.jpg"
     ],
     "accessPoints": [
       {
-        "name": "Main Approach Path",
-        "info": "Head straight along the main approach path toward the central entrance of the academic building.",
+        "name": "MCA Main Entrance & Corridor",
+        "info": "Head straight along the main approach path to the MITM Degree College entrance portico, head left up the staircase through the Department of Master of Computer Applications security gate, turn left down the corridor, and arrive at Room MCA LH - III on your left beside the notice board and fire extinguisher.",
         "thumbnail": "Rooms/MCA LH 3/a.jpg",
         "photos": [
           "Rooms/MCA LH 3/a.jpg",
           "Rooms/MCA LH 3/b.jpg",
-          "Rooms/MCA LH 3/c.jpg"
+          "Rooms/MCA LH 3/c.jpg",
+          "Rooms/MCA LH 3/d.jpg"
+        ]
+      }
+    ]
+  },
+  "MCA LH 1": {
+    "name": "MCA LH 1",
+    "college": "Department of MCA",
+    "floor": "Ground Floor",
+    "dept": "Department of MCA",
+    "category": "Lecture Hall",
+    "landmark": "Room MCA LH - I • Ground Floor Academic Wing",
+    "info": "Head straight along the main approach path to the MITM Degree College entrance portico, head left up the staircase through the Department of Master of Computer Applications security gate, turn right down the corridor, and arrive at Room MCA LH - I on your left beside the statutory notice board.",
+    "thumbnail": "Rooms/MCA LH 1/d.jpg",
+    "photos": [
+      "Rooms/MCA LH 1/a.jpg",
+      "Rooms/MCA LH 1/b.jpg",
+      "Rooms/MCA LH 1/c.jpg",
+      "Rooms/MCA LH 1/d.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "MCA Main Entrance & Corridor",
+        "info": "Head straight along the main approach path to the MITM Degree College entrance portico, head left up the staircase through the Department of Master of Computer Applications security gate, turn right down the corridor, and arrive at Room MCA LH - I on your left beside the statutory notice board.",
+        "thumbnail": "Rooms/MCA LH 1/a.jpg",
+        "photos": [
+          "Rooms/MCA LH 1/a.jpg",
+          "Rooms/MCA LH 1/b.jpg",
+          "Rooms/MCA LH 1/c.jpg",
+          "Rooms/MCA LH 1/d.jpg"
+        ]
+      }
+    ]
+  },
+  "MCA LH 2": {
+    "name": "MCA LH 2",
+    "college": "Department of MCA",
+    "floor": "Ground Floor",
+    "dept": "Department of MCA",
+    "category": "Lecture Hall",
+    "landmark": "Room MCA LH - II • Ground Floor Academic Wing",
+    "info": "Head straight along the main approach path to the MITM Degree College entrance portico, head left up the staircase through the Department of Master of Computer Applications security gate, turn right down the corridor, and arrive at Room MCA LH - II on your right.",
+    "thumbnail": "Rooms/MCA LH 2/d.jpg",
+    "photos": [
+      "Rooms/MCA LH 2/a.jpg",
+      "Rooms/MCA LH 2/b.jpg",
+      "Rooms/MCA LH 2/c.jpg",
+      "Rooms/MCA LH 2/d.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "MCA Main Entrance & Corridor",
+        "info": "Head straight along the main approach path to the MITM Degree College entrance portico, head left up the staircase through the Department of Master of Computer Applications security gate, turn right down the corridor, and arrive at Room MCA LH - II on your right.",
+        "thumbnail": "Rooms/MCA LH 2/a.jpg",
+        "photos": [
+          "Rooms/MCA LH 2/a.jpg",
+          "Rooms/MCA LH 2/b.jpg",
+          "Rooms/MCA LH 2/c.jpg",
+          "Rooms/MCA LH 2/d.jpg"
         ]
       }
     ]

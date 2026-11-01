@@ -94,11 +94,12 @@ function getCollegeKeysForRoom(r) {
   if (!r) return ["engineering"];
   const college = (r.college || "Engineering").toLowerCase();
   const dept = (r.dept || "").toLowerCase();
-  const combined = `${college} ${dept}`;
+  const name = (r.name || "").toLowerCase();
+  const combined = `${college} ${dept} ${name}`;
 
-  if (combined.includes("mba") && combined.includes("mca")) return ["mba", "mca"];
-  if (combined.includes("mba")) return ["mba"];
+  // MCA is completely decoupled and standalone from MBA
   if (combined.includes("mca")) return ["mca"];
+  if (combined.includes("mba")) return ["mba"];
   if (combined.includes("bca")) return ["bca"];
   if (combined.includes("pharmacy") || combined.includes("pharma")) return ["pharmacy"];
   return ["engineering"];
@@ -116,13 +117,13 @@ function getCollegeMeta(collegeKey) {
       return {
         name: "Department of MBA",
         badge: "Management Block • Belaku",
-        heroQuery: "Search MBA classrooms & seminar halls (e.g. Belaku)...",
+        heroQuery: "Search MBA classrooms & seminar halls (e.g. Belaku, Room 2)...",
       };
     case "mca":
       return {
         name: "Department of MCA",
-        badge: "Postgraduate IT Block • Belaku",
-        heroQuery: "Search MCA labs & halls (e.g. Belaku, PG Labs)...",
+        badge: "Postgraduate IT Block • MCA Classrooms & Labs",
+        heroQuery: "Search MCA classrooms & labs (e.g. MCA LH 1, MCA LH 2, MCA LH 3)...",
       };
     case "bca":
       return {
