@@ -117,7 +117,7 @@ function getCollegeMeta(collegeKey) {
       return {
         name: "Department of MBA",
         badge: "Management Block • Belaku",
-        heroQuery: "Search MBA classrooms & seminar halls (e.g. Belaku, Room 2)...",
+        heroQuery: "Search MBA classrooms & halls (e.g. Belaku, Centre for Future Skills, Room 2)...",
       };
     case "mca":
       return {

@@ -2236,5 +2236,38 @@ window.LOCOROM_DATA = {
         ]
       }
     ]
+  },
+  "Centre for Future Skills": {
+    "name": "Centre for Future Skills",
+    "college": "Department of MBA",
+    "floor": "1st Floor",
+    "dept": "Department of MBA",
+    "category": "Skill Development Center",
+    "landmark": "Centre for Future Skills • Ethnotech Academy • Upper Landing",
+    "info": "Head through the MBA block main entrance, ascend the staircase past the elevator to the upper landing, turn right, and enter the glass doors of the Centre for Future Skills (Ethnotech Academy / NSDC).",
+    "thumbnail": "Rooms/Centre for Future Skills/f.jpg",
+    "photos": [
+      "Rooms/Centre for Future Skills/a.jpg",
+      "Rooms/Centre for Future Skills/b.jpg",
+      "Rooms/Centre for Future Skills/c.jpg",
+      "Rooms/Centre for Future Skills/d.jpg",
+      "Rooms/Centre for Future Skills/e.jpg",
+      "Rooms/Centre for Future Skills/f.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "MBA Main Entrance & Grand Staircase",
+        "info": "Head through the MBA block main entrance, ascend the staircase past the elevator to the upper landing, turn right, and enter the glass doors of the Centre for Future Skills (Ethnotech Academy / NSDC).",
+        "thumbnail": "Rooms/Centre for Future Skills/a.jpg",
+        "photos": [
+          "Rooms/Centre for Future Skills/a.jpg",
+          "Rooms/Centre for Future Skills/b.jpg",
+          "Rooms/Centre for Future Skills/c.jpg",
+          "Rooms/Centre for Future Skills/d.jpg",
+          "Rooms/Centre for Future Skills/e.jpg",
+          "Rooms/Centre for Future Skills/f.jpg"
+        ]
+      }
+    ]
   }
 };
