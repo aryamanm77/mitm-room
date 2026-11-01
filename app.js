@@ -290,6 +290,7 @@ function enterCollege(collegeKey, pushHistory = true) {
   stopAutoPlay();
   state.selectedRoomKey = null;
   state.activeCollege = collegeKey || "engineering";
+  preloadCollegeThumbnails(state.activeCollege);
   state.searchQuery = "";
   state.activeFloor = "all";
 
@@ -366,6 +367,21 @@ function renderQuickRecents() {
 
   wrap.querySelectorAll("[data-open-room]").forEach(btn => {
     btn.addEventListener("click", () => openRoom(btn.getAttribute("data-open-room")));
+  });
+}
+
+
+function preloadCollegeThumbnails(collegeKey) {
+  if (!state.roomKeys) return;
+  const keys = state.roomKeys.filter(k => roomMatchesCollege(state.rooms[k], collegeKey));
+  keys.slice(0, 25).forEach(k => {
+    const r = state.rooms[k];
+    const thumb = r.thumbnail || (r.photos && r.photos[0]);
+    if (thumb) {
+      const img = new Image();
+      img.decoding = "async";
+      img.src = resolveMediaUrl(thumb);
+    }
   });
 }
 
@@ -655,50 +671,73 @@ function renderActiveStepPhoto() {
   if (isVideo) {
     stage.innerHTML = `<video src="${url}" controls autoplay muted loop playsinline class="wt-main-media" onerror="if(!this.dataset.cdn){this.dataset.cdn='1';this.src='${cdnUrl}';}"></video>`;
   } else {
-    stage.innerHTML = `
-      <img
-        src="${url}"
-        alt="Step ${idx + 1} towards Room ${escapeHtml(room.name)}"
-        class="wt-main-media"
-        referrerpolicy="no-referrer"
-        onerror="if(!this.dataset.cdn){this.dataset.cdn='1';this.src='${cdnUrl}';}"
-      />
-    `;
+    let mainImg = stage.querySelector("img.wt-main-media");
+    if (!mainImg) {
+      stage.innerHTML = `
+        <img
+          src="${url}"
+          alt="Step ${idx + 1} towards Room ${escapeHtml(room.name)}"
+          class="wt-main-media"
+          decoding="async"
+          referrerpolicy="no-referrer"
+          onerror="if(!this.dataset.cdn){this.dataset.cdn='1';this.src='${cdnUrl}';}"
+        />
+      `;
+    } else {
+      mainImg.src = url;
+      mainImg.alt = `Step ${idx + 1} towards Room ${escapeHtml(room.name)}`;
+    }
   }
 
-  // Render clickable step thumbnails
-  thumbsRow.innerHTML = photos.map((p, i) => {
-    const u = resolveMediaUrl(p);
-    const cUrl = resolveFallbackCdnUrl(p);
-    const isVid = /\.(mp4|webm)$/i.test(p);
-    return `
-      <button type="button" class="step-thumb-btn ${i === idx ? "active" : ""}" data-step-idx="${i}">
-        ${isVid
-          ? `<span class="vid-label">Video</span>`
-          : `<img src="${u}" alt="Step ${i + 1}" loading="lazy" referrerpolicy="no-referrer" onerror="if(!this.dataset.cdn){this.dataset.cdn='1';this.src='${cUrl}';}" />`
-        }
-        <span class="step-thumb-num tabular-nums">${i + 1}</span>
-      </button>
-    `;
-  }).join("");
+  // Render or update clickable step thumbnails without destroying DOM
+  const currentKeyAp = `${state.selectedRoomKey}-${state.activeApIndex}`;
+  if (thumbsRow.dataset.roomAp !== currentKeyAp) {
+    thumbsRow.dataset.roomAp = currentKeyAp;
+    thumbsRow.innerHTML = photos.map((p, i) => {
+      const u = resolveMediaUrl(p);
+      const cUrl = resolveFallbackCdnUrl(p);
+      const isVid = /\.(mp4|webm)$/i.test(p);
+      return `
+        <button type="button" class="step-thumb-btn ${i === idx ? "active" : ""}" data-step-idx="${i}">
+          ${isVid
+            ? `<span class="vid-label">Video</span>`
+            : `<img src="${u}" alt="Step ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(!this.dataset.cdn){this.dataset.cdn='1';this.src='${cUrl}';}" />`
+          }
+          <span class="step-thumb-num tabular-nums">${i + 1}</span>
+        </button>
+      `;
+    }).join("");
 
-  thumbsRow.querySelectorAll("[data-step-idx]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      state.activePhotoIndex = parseInt(btn.getAttribute("data-step-idx"), 10);
-      renderActiveStepPhoto();
+    thumbsRow.querySelectorAll("[data-step-idx]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        state.activePhotoIndex = parseInt(btn.getAttribute("data-step-idx"), 10);
+        renderActiveStepPhoto();
+      });
     });
-  });
+  } else {
+    thumbsRow.querySelectorAll(".step-thumb-btn").forEach((btn, i) => {
+      btn.classList.toggle("active", i === idx);
+    });
+  }
 
   const activeThumb = thumbsRow.querySelector(".step-thumb-btn.active");
   if (activeThumb) {
     activeThumb.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
   }
 
+  // Preload adjacent steps immediately
   if (total > 1) {
     const nextFile = photos[(idx + 1) % total];
-    if (nextFile && !/\.(mp4|webm)$/i.test(nextFile)) {
-      const preloadImg = new Image();
-      preloadImg.src = resolveMediaUrl(nextFile);
+    const prevFile = photos[(idx - 1 + total) % total];
+    if (nextFile) {
+      const p1 = new Image();
+      p1.decoding = "async";
+      p1.src = resolveMediaUrl(nextFile);
+    }
+    if (prevFile) {
+      const p2 = new Image();
+      p2.decoding = "async";
+      p2.src = resolveMediaUrl(prevFile);
     }
   }
 }
