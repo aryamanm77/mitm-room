@@ -2243,21 +2243,23 @@ window.LOCOROM_DATA = {
     "floor": "1st Floor",
     "dept": "Department of MBA",
     "category": "Skill Development Center",
-    "landmark": "Centre for Future Skills • Ethnotech Academy • Upper Landing",
-    "info": "Head through the MBA block main entrance, ascend the staircase past the elevator to the upper landing, turn right, and enter the glass doors of the Centre for Future Skills (Ethnotech Academy / NSDC).",
-    "thumbnail": "Rooms/Centre for Future Skills/f.jpg",
+    "landmark": "Centre for Future Skills • Ethnotech Academy • Upper Academic Landing",
+    "info": "Head through the MBA block front entrance, ascend the staircases to the upper floor past the elevator, and arrive at the Centre for Future Skills (Skill India • Ethnotech Academy • NSDC) glass doors.",
+    "thumbnail": "Rooms/Centre for Future Skills/h.jpg",
     "photos": [
       "Rooms/Centre for Future Skills/a.jpg",
       "Rooms/Centre for Future Skills/b.jpg",
       "Rooms/Centre for Future Skills/c.jpg",
       "Rooms/Centre for Future Skills/d.jpg",
       "Rooms/Centre for Future Skills/e.jpg",
-      "Rooms/Centre for Future Skills/f.jpg"
+      "Rooms/Centre for Future Skills/f.png",
+      "Rooms/Centre for Future Skills/g.png",
+      "Rooms/Centre for Future Skills/h.jpg"
     ],
     "accessPoints": [
       {
         "name": "MBA Main Entrance & Grand Staircase",
-        "info": "Head through the MBA block main entrance, ascend the staircase past the elevator to the upper landing, turn right, and enter the glass doors of the Centre for Future Skills (Ethnotech Academy / NSDC).",
+        "info": "Head through the MBA block front entrance, ascend the staircases to the upper floor past the elevator, and arrive at the Centre for Future Skills (Skill India • Ethnotech Academy • NSDC) glass doors.",
         "thumbnail": "Rooms/Centre for Future Skills/a.jpg",
         "photos": [
           "Rooms/Centre for Future Skills/a.jpg",
@@ -2265,7 +2267,9 @@ window.LOCOROM_DATA = {
           "Rooms/Centre for Future Skills/c.jpg",
           "Rooms/Centre for Future Skills/d.jpg",
           "Rooms/Centre for Future Skills/e.jpg",
-          "Rooms/Centre for Future Skills/f.jpg"
+          "Rooms/Centre for Future Skills/f.png",
+          "Rooms/Centre for Future Skills/g.png",
+          "Rooms/Centre for Future Skills/h.jpg"
         ]
       }
     ]
