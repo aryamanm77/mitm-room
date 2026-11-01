@@ -117,28 +117,24 @@ function getCollegeMeta(collegeKey) {
         name: "Department of MBA",
         badge: "Management Block • Belaku",
         heroQuery: "Search MBA classrooms & seminar halls (e.g. Belaku)...",
-        icon: "💼"
       };
     case "mca":
       return {
         name: "Department of MCA",
         badge: "Postgraduate IT Block • Belaku",
         heroQuery: "Search MCA labs & halls (e.g. Belaku, PG Labs)...",
-        icon: "🖥️"
       };
     case "bca":
       return {
         name: "Department of BCA",
         badge: "Undergraduate IT Wing",
         heroQuery: "Search BCA programming rooms & classrooms...",
-        icon: "💻"
       };
     case "pharmacy":
       return {
         name: "Faculty of Pharmaceutical Sciences",
         badge: "Health Sciences Block",
         heroQuery: "Search Pharmacy & Chemistry laboratories...",
-        icon: "💊"
       };
     case "engineering":
     default:
@@ -146,7 +142,6 @@ function getCollegeMeta(collegeKey) {
         name: "Engineering Campus",
         badge: "Main Academic Block • 60+ Classrooms & Labs",
         heroQuery: "Search engineering rooms (e.g. 205, 313, DSP Lab, 114)...",
-        icon: "🏛️"
       };
   }
 }
@@ -444,7 +439,7 @@ function renderRoomsGrid() {
     const meta = getCollegeMeta(currentCollege);
     grid.innerHTML = `
       <div class="empty-box">
-        <div style="font-size: 38px; margin-bottom: 12px;">${meta.icon}</div>
+        <svg viewBox="0 0 24 24" class="icon-svg" style="width: 42px; height: 42px; color: var(--color-primary); margin-bottom: 12px;"><path fill="none" stroke="currentColor" stroke-width="2" d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v4M12 14v4M16 14v4"/></svg>
         <h3>${state.searchQuery ? `No rooms matching "${escapeHtml(state.searchQuery)}"` : `${meta.name} Directory Ready`}</h3>
         <p>${state.searchQuery ? "Try searching by room number (e.g. 205, 114, Belaku) or check your spelling." : `This academic block is active and ready for room coordinates and corridor photo paths. You can explore other college blocks or contribute new rooms anytime.`}</p>
         <div class="empty-actions">
@@ -1004,14 +999,7 @@ function bindEvents() {
     });
   });
 
-  // Voice Search on Portal
-  const portalVoiceBtn = document.getElementById("portalVoiceSearchBtn");
-  if (portalVoiceBtn) {
-    portalVoiceBtn.addEventListener("click", () => {
-      const micBtn = document.getElementById("voiceSearchBtn");
-      micBtn?.click();
-    });
-  }
+
 
   // Wing Card Body Click -> Enter College
   document.querySelectorAll(".wing-card").forEach(card => {
@@ -1112,9 +1100,6 @@ function bindEvents() {
     });
   }
 
-  // 7. Voice Search (Microphone Speech Recognition)
-  setupVoiceSearch(searchInput, clearSearchBtn);
-
   // 8. Walkthrough Screen Controls
   document.getElementById("wtBackBtn")?.addEventListener("click", () => {
     if (state.activeCollege) {
@@ -1206,135 +1191,7 @@ function bindEvents() {
   });
 }
 
-// ============================================================================
-// VOICE-TO-TEXT SEARCH (Web Speech API)
-// ============================================================================
-function normalizeSpokenQuery(rawTranscript) {
-  if (!rawTranscript) return "";
-  let cleaned = rawTranscript
-    .trim()
-    .replace(/[.?!,;]+$/g, "")
-    .replace(/^(take me to|where is|how to reach|how do i get to|navigate to|go to|find|search for|search|show me|open)\s+/i, "")
-    .replace(/^room\s+(number\s+)?/i, "")
-    .trim();
 
-  const wordDigits = {
-    zero: "0", oh: "0", one: "1", two: "2", three: "3",
-    four: "4", five: "5", six: "6", seven: "7", eight: "8", nine: "9"
-  };
-  const tokens = cleaned.toLowerCase().split(/\s+/);
-  if (tokens.length >= 2 && tokens.length <= 4 && tokens.every(t => wordDigits[t] !== undefined)) {
-    cleaned = tokens.map(t => wordDigits[t]).join("");
-  }
-
-  return cleaned;
-}
-
-function setupVoiceSearch(searchInput, clearBtn) {
-  const micBtn = document.getElementById("voiceSearchBtn");
-  const banner = document.getElementById("voiceStatusBanner");
-  const bannerText = document.getElementById("voiceStatusText");
-  const bannerCancel = document.getElementById("voiceStopBannerBtn");
-  const searchBox = document.getElementById("searchBarBox");
-
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-  if (!SpeechRecognition) {
-    if (micBtn) {
-      micBtn.title = "Voice search not supported on this browser";
-      micBtn.style.opacity = "0.45";
-      micBtn.style.cursor = "not-allowed";
-    }
-    return;
-  }
-
-  let recognition = null;
-  let isListening = false;
-
-  function stopListening() {
-    if (recognition && isListening) {
-      try { recognition.stop(); } catch (e) {}
-    }
-    isListening = false;
-    micBtn?.classList.remove("active");
-    searchBox?.classList.remove("listening");
-    if (banner) banner.style.display = "none";
-  }
-
-  function startListening() {
-    if (isListening) {
-      stopListening();
-      return;
-    }
-
-    try {
-      recognition = new SpeechRecognition();
-      recognition.lang = "en-IN";
-      recognition.interimResults = true;
-      recognition.maxAlternatives = 1;
-
-      recognition.onstart = () => {
-        isListening = true;
-        micBtn?.classList.add("active");
-        searchBox?.classList.add("listening");
-        if (banner) banner.style.display = "flex";
-        if (bannerText) bannerText.innerHTML = "<strong>Listening…</strong> Say a room number or lab name (e.g. \"Room 205\" or \"Belaku\")";
-      };
-
-      recognition.onresult = (event) => {
-        let transcript = "";
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-          transcript += event.results[i][0].transcript;
-        }
-        const cleaned = normalizeSpokenQuery(transcript);
-        if (searchInput) searchInput.value = cleaned;
-        state.searchQuery = cleaned;
-        if (clearBtn) clearBtn.style.display = cleaned ? "inline-flex" : "none";
-
-        if (bannerText) bannerText.innerHTML = `Heard: "<strong>${escapeHtml(transcript)}</strong>"`;
-        renderRoomsGrid();
-
-        if (event.results[0].isFinal) {
-          const exactKey = findExactOrBestMatch(cleaned);
-          if (exactKey) {
-            showToast(`Found ${state.rooms[exactKey].name}! Opening walkthrough…`);
-            setTimeout(() => {
-              stopListening();
-              openRoom(exactKey);
-            }, 600);
-          } else {
-            stopListening();
-          }
-        }
-      };
-
-      recognition.onerror = (e) => {
-        console.warn("Speech recognition error:", e.error);
-        if (bannerText) {
-          bannerText.innerHTML = e.error === "not-allowed"
-            ? "Microphone access blocked. Enable permissions in browser."
-            : `Voice search error (${e.error}). Try again.`;
-        }
-        setTimeout(stopListening, 2400);
-      };
-
-      recognition.onend = () => {
-        isListening = false;
-        micBtn?.classList.remove("active");
-        searchBox?.classList.remove("listening");
-        if (banner) banner.style.display = "none";
-      };
-
-      recognition.start();
-    } catch (err) {
-      console.error("Failed to start speech recognition:", err);
-      stopListening();
-    }
-  }
-
-  micBtn?.addEventListener("click", startListening);
-  bannerCancel?.addEventListener("click", stopListening);
-}
 
 function findExactOrBestMatch(query) {
   if (!query) return null;

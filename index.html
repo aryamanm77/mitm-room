@@ -309,52 +309,6 @@
       color: var(--color-primary);
       flex-shrink: 0;
     }
-
-    .mic-icon-svg {
-      width: 20px;
-      height: 20px;
-      color: #5f6368;
-      flex-shrink: 0;
-      transition: color var(--ease);
-    }
-    .voice-mic-btn:hover .mic-icon-svg {
-      color: var(--color-primary);
-    }
-    .voice-mic-btn.active .mic-icon-svg {
-      color: #ea4335;
-    }
-
-    .voice-mic-btn {
-      width: 40px;
-      height: 40px;
-      padding: 0;
-      background-color: transparent;
-      border: none;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      flex-shrink: 0;
-      transition: background-color var(--ease), transform var(--ease);
-    }
-
-    .voice-mic-btn:hover {
-      background-color: rgba(60, 64, 67, 0.08);
-      transform: scale(1.05);
-    }
-
-    .voice-mic-btn:active {
-      transform: scale(0.95);
-    }
-
-    .voice-mic-btn.active {
-      background-color: rgba(234, 67, 53, 0.12);
-      animation: pulseMic 1.2s infinite ease-in-out;
-    }
-
-    @keyframes pulseMic {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(234, 67, 53, 0.4); }
       70% { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(234, 67, 53, 0); }
       100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(234, 67, 53, 0); }
     }
@@ -426,80 +380,7 @@
       background-color: var(--bg-elevated);
     }
 
-    .voice-mic-btn {
-      width: 38px;
-      height: 38px;
-      padding: 0;
-      background-color: var(--bg-elevated);
-      border: 1px solid var(--border-hairline);
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-secondary);
-      cursor: pointer;
-      flex-shrink: 0;
-      transition: background-color var(--ease), border-color var(--ease), color var(--ease), transform var(--ease);
-    }
 
-    .voice-mic-btn svg {
-      width: 18px;
-      height: 18px;
-      display: block;
-      stroke: currentColor;
-      stroke-width: 1.9;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      fill: none;
-    }
-
-    .voice-mic-btn:hover {
-      color: var(--text-primary);
-      border-color: var(--border-strong);
-    }
-
-    .voice-mic-btn.listening {
-      background-color: #dc2626;
-      border-color: #dc2626;
-      color: #ffffff;
-    }
-
-    .voice-status-banner {
-      display: none;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 10px;
-      padding: 10px 16px;
-      background-color: var(--bg-surface);
-      border: 1px solid var(--accent);
-      border-radius: 10px;
-      font-size: 13.5px;
-      color: var(--text-primary);
-      text-align: left;
-    }
-
-    .voice-status-banner.active {
-      display: flex;
-    }
-
-    .voice-status-text {
-      color: var(--text-secondary);
-    }
-
-    .voice-status-text strong {
-      color: var(--text-primary);
-    }
-
-    .voice-stop-link {
-      background: none;
-      border: none;
-      color: var(--accent);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-    }
 
     .quick-row {
       display: flex;
@@ -1299,54 +1180,6 @@
       text-align: center;
       margin-bottom: 30px;
       position: relative;
-    }
-
-    .navigo-status-strip {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 7px 20px;
-      background: #ffffff;
-      border: 1px solid var(--border-hairline);
-      border-radius: var(--radius-pill);
-      box-shadow: 0 2px 6px rgba(60, 64, 67, 0.08);
-      margin-bottom: 16px;
-      transition: transform var(--ease), box-shadow var(--ease);
-    }
-    .navigo-status-strip:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(60, 64, 67, 0.12);
-    }
-
-    .navigo-crest {
-      width: 20px;
-      height: 20px;
-      object-fit: contain;
-      border-radius: 50%;
-    }
-
-    .navigo-live-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background-color: var(--color-primary);
-      position: relative;
-      display: inline-block;
-      animation: livePulse 2s infinite ease-in-out;
-    }
-
-    @keyframes livePulse {
-      0% { box-shadow: 0 0 0 0 rgba(11, 87, 208, 0.5); }
-      70% { box-shadow: 0 0 0 7px rgba(11, 87, 208, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(11, 87, 208, 0); }
-    }
-
-    .navigo-status-text {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #3c4043;
     }
 
     .navigo-title {
@@ -2187,11 +2020,6 @@
   <section id="collegePortalScreen" class="navigo-portal-wrap">
     <!-- Hub Hero -->
     <div class="navigo-hero">
-      <div class="navigo-status-strip">
-        <img src="logo.png" alt="MIT Mysore Emblem" class="navigo-crest" />
-        <span class="navigo-live-dot" aria-hidden="true"></span>
-        <span class="navigo-status-text">Campus Indoor Wayfinding System</span>
-      </div>
       <h1 class="navigo-title">Explore MIT Mysore Campus</h1>
       <p class="navigo-subtitle">
         Turn-by-turn indoor corridor photo navigation across academic wings, lecture suites, and laboratories.
@@ -2211,11 +2039,6 @@
           placeholder="Search any room or lab campus-wide (e.g. 102, 205, Belaku, Board Room, CAD)..."
           autocomplete="off"
         />
-        <button type="button" class="voice-mic-btn" id="portalVoiceSearchBtn" title="Speak to Search (Hands-free)" aria-label="Start voice search">
-          <svg class="mic-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="currentColor" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5-3c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
-          </svg>
-        </button>
       </div>
 
       <!-- Live Instant Autocomplete Dropdown Matrix -->
@@ -2315,9 +2138,9 @@
 
             <div class="wing-fast-actions-label">Direct Destination Teleport:</div>
             <div class="wing-fast-chips">
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Belaku">🌟 Belaku (Auditorium)</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="2">🏛️ Board Room (Room 2)</button>
-              <button type="button" class="wing-fast-chip" data-direct-room="1">👥 Staff Room (Room 1)</button>
+              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Belaku">Belaku (Auditorium)</button>
+              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="2">Board Room (Room 2)</button>
+              <button type="button" class="wing-fast-chip" data-direct-room="1">Staff Room (Room 1)</button>
               <button type="button" class="wing-fast-chip" data-direct-room="102">Room 102</button>
               <button type="button" class="wing-fast-chip" data-direct-room="103">Room 103</button>
             </div>
@@ -2354,7 +2177,7 @@
 
             <div class="wing-fast-actions-label">Direct Destination Teleport:</div>
             <div class="wing-fast-chips">
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Belaku">🌟 Belaku Entrance</button>
+              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Belaku">Belaku Entrance</button>
               <button type="button" class="wing-fast-chip" data-direct-college="mca">PG Computing Labs</button>
               <button type="button" class="wing-fast-chip" data-direct-college="mca">Software Studios</button>
             </div>
@@ -2469,7 +2292,7 @@
               <span class="chip-cat">(Pharmacy Wing)</span>
             </button>
             <button type="button" class="matrix-room-chip" data-direct-room="Belaku">
-              <span>🌟 Belaku Hall</span>
+              <span>Belaku Hall</span>
               <span class="chip-cat">(MBA/MCA)</span>
             </button>
             <button type="button" class="floor-explore-all" data-direct-floor="ground" data-for-college="engineering">
@@ -2486,15 +2309,15 @@
           </div>
           <div class="floor-rooms-col">
             <button type="button" class="matrix-room-chip" data-direct-room="Belaku">
-              <span>🌟 Belaku Auditorium</span>
+              <span>Belaku Auditorium</span>
               <span class="chip-cat">(Main Hall)</span>
             </button>
             <button type="button" class="matrix-room-chip" data-direct-room="2">
-              <span>🏛️ Room 2</span>
+              <span>Room 2</span>
               <span class="chip-cat">(MBA Board Room)</span>
             </button>
             <button type="button" class="matrix-room-chip" data-direct-room="1">
-              <span>👥 Room 1</span>
+              <span>Room 1</span>
               <span class="chip-cat">(MBA Faculty)</span>
             </button>
             <button type="button" class="matrix-room-chip" data-direct-room="102">
@@ -2620,7 +2443,9 @@
         <!-- Belaku Auditorium -->
         <div class="hotspot-card" data-direct-room="Belaku">
           <div class="hotspot-top">
-            <div class="hotspot-icon-badge">🎭</div>
+            <div class="hotspot-icon-badge">
+            <svg viewBox="0 0 24 24" class="icon-svg" style="width:22px;height:22px;"><polygon points="5 3 19 12 5 21 5 3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
             <span class="hotspot-loc-tag">MBA &amp; MCA BLOCK</span>
           </div>
           <h3 class="hotspot-name">Belaku (ಬೆಳಕು) Auditorium</h3>
@@ -2636,7 +2461,9 @@
         <!-- MBA Board Room (Room 2) -->
         <div class="hotspot-card" data-direct-room="2">
           <div class="hotspot-top">
-            <div class="hotspot-icon-badge">🏛️</div>
+            <div class="hotspot-icon-badge">
+            <svg viewBox="0 0 24 24" class="icon-svg" style="width:22px;height:22px;"><path fill="none" stroke="currentColor" stroke-width="2" d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v4M12 14v4M16 14v4"/></svg>
+          </div>
             <span class="hotspot-loc-tag">1ST FLOOR • MBA</span>
           </div>
           <h3 class="hotspot-name">MBA Board &amp; Conference Room</h3>
@@ -2652,7 +2479,9 @@
         <!-- MBA Staff Room 1 -->
         <div class="hotspot-card" data-direct-room="1">
           <div class="hotspot-top">
-            <div class="hotspot-icon-badge">👥</div>
+            <div class="hotspot-icon-badge">
+            <svg viewBox="0 0 24 24" class="icon-svg" style="width:22px;height:22px;"><path fill="none" stroke="currentColor" stroke-width="2" d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path fill="none" stroke="currentColor" stroke-width="2" d="M23 21v-2a4 4 0 0 0-3-3.87"/><path fill="none" stroke="currentColor" stroke-width="2" d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
             <span class="hotspot-loc-tag">1ST FLOOR • MBA</span>
           </div>
           <h3 class="hotspot-name">MBA Faculty Staff Room</h3>
@@ -2668,7 +2497,9 @@
         <!-- Engineering Room 114 -->
         <div class="hotspot-card" data-direct-room="114">
           <div class="hotspot-top">
-            <div class="hotspot-icon-badge">🔬</div>
+            <div class="hotspot-icon-badge">
+            <svg viewBox="0 0 24 24" class="icon-svg" style="width:22px;height:22px;"><path fill="none" stroke="currentColor" stroke-width="2" d="M6 18h12M10 22h4M9 2v4a3 3 0 0 1-.88 2.12L4 12.24V20a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.76l-4.12-4.12A3 3 0 0 1 15 6V2H9z"/></svg>
+          </div>
             <span class="hotspot-loc-tag">GROUND • ENG BLOCK</span>
           </div>
           <h3 class="hotspot-name">Engineering Room 114</h3>
@@ -2684,7 +2515,9 @@
         <!-- Engineering 60 Classrooms Hub -->
         <div class="hotspot-card" data-direct-college="engineering">
           <div class="hotspot-top">
-            <div class="hotspot-icon-badge">🏢</div>
+            <div class="hotspot-icon-badge">
+            <svg viewBox="0 0 24 24" class="icon-svg" style="width:22px;height:22px;"><rect x="4" y="2" width="16" height="20" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><line x1="9" y1="6" x2="9" y2="6.01" stroke="currentColor" stroke-width="2"/><line x1="15" y1="6" x2="15" y2="6.01" stroke="currentColor" stroke-width="2"/><line x1="9" y1="10" x2="9" y2="10.01" stroke="currentColor" stroke-width="2"/><line x1="15" y1="10" x2="15" y2="10.01" stroke="currentColor" stroke-width="2"/><line x1="9" y1="14" x2="9" y2="14.01" stroke="currentColor" stroke-width="2"/><line x1="15" y1="14" x2="15" y2="14.01" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
             <span class="hotspot-loc-tag">6 FLOORS • 60 ROOMS</span>
           </div>
           <h3 class="hotspot-name">Engineering Campus Core</h3>
@@ -2730,7 +2563,7 @@
 
     <section class="search-hero">
       <h1>Where are you heading on campus?</h1>
-      <p>Search by room number, speak with your microphone, or choose a campus section below.</p>
+      <p>Search by room number or choose a campus section below.</p>
 
       <div class="search-bar-box" id="searchBarBox">
         <svg viewBox="0 0 24 24" class="search-lead-icon" aria-hidden="true">
@@ -2747,17 +2580,7 @@
           <button type="button" class="clear-search-btn" id="clearSearchBtn" aria-label="Clear search" title="Clear search">
             <svg class="icon-svg" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
-          <button type="button" class="voice-mic-btn" id="voiceSearchBtn" title="Speak to Search (Hands-free)" aria-label="Start voice search">
-            <svg class="mic-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="currentColor" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5-3c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
-            </svg>
-          </button>
         </div>
-      </div>
-
-      <div class="voice-status-banner" id="voiceStatusBanner" role="status" aria-live="polite">
-        <span class="voice-status-text" id="voiceStatusText"><strong>Listening…</strong> Say a room number or lab name (e.g. "Room 205" or "DSP Lab")</span>
-        <button type="button" class="voice-stop-link" id="voiceStopBannerBtn">Cancel</button>
       </div>
 
       

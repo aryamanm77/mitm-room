@@ -18,7 +18,7 @@
 - **Visual Turn-by-Turn Walkthroughs**: Sequential corridor photos showing every turn, staircase, and doorway leading to the room.
 - **High-Performance Image Preloader**: Adjacent photo background caching and non-destructive DOM media swapping for zero-latency walkthrough transitions.
 - **Multi-Access Point Routing**: Switch between starting staircases (e.g. *Point A*, *Point B*, *Point C [Mech Dept]*).
-- **Hands-Free Voice Search**: Speak room numbers or lab names naturally (e.g. "Room 205", "Belaku", "DSP Lab").
+- **Instant Teleport Search**: Real-time autocomplete suggestions across all 68 rooms campus-wide with direct corridor launch.
 - **Direct WhatsApp Sharing**: Send exact room routes directly to WhatsApp (`wa.me`) with a single click.
 - **Clean Light Mode**: Crisp, high-contrast light theme locked against horizontal wobble and screen drift across mobile and desktop.
 
@@ -41,7 +41,7 @@ python -m http.server 8000
 ## 📂 Repository Structure
 
 - [`index.html`](index.html): Modern web application with College Selection Portal, room finder, and photo walkthrough viewer.
-- [`app.js`](app.js): Core application logic, routing, voice search, college filtering, and photo navigation.
+- [`app.js`](app.js): Core application logic, routing, college filtering, and photo navigation.
 - [`rooms_data.js`](rooms_data.js): Pre-indexed room catalog and photo manifest for instant loading.
 - [`rooms_data.json`](rooms_data.json): Machine-readable directory of campus rooms, colleges, and access points.
 - [`logo.png`](logo.png) / [`mitm_logo.jpg`](mitm_logo.jpg): Official Maharaja Institute of Technology Mysore round seal emblem.
