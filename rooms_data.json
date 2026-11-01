@@ -2091,5 +2091,28 @@
         ]
       }
     ]
+  },
+  "MCA LH 3": {
+    "name": "MCA LH 3",
+    "college": "Department of MCA",
+    "floor": "Ground Floor",
+    "dept": "Department of MCA",
+    "category": "Lecture Hall",
+    "landmark": "MCA Academic Block",
+    "info": "Head straight along the main approach path toward the central entrance of the academic building.",
+    "thumbnail": "Rooms/MCA LH 3/a.jpg",
+    "photos": [
+      "Rooms/MCA LH 3/a.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Main Approach Path",
+        "info": "Head straight along the main approach path toward the central entrance of the academic building.",
+        "thumbnail": "Rooms/MCA LH 3/a.jpg",
+        "photos": [
+          "Rooms/MCA LH 3/a.jpg"
+        ]
+      }
+    ]
   }
 }
