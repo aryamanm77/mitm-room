@@ -375,6 +375,41 @@ window.LOCOROM_DATA = {
     ],
     "college": "Engineering"
   },
+  "201": {
+    "name": "MBA / MCA Lab (Room 201)",
+    "college": "Department of MBA",
+    "floor": "1st Floor",
+    "dept": "Department of MBA",
+    "category": "Computer Laboratory",
+    "landmark": "Room 201 • MBA / MCA Lab • Beside Upper Lift Landing (Area: 138.2 Sq.Mtr)",
+    "info": "Enter through the MBA block front entrance, ascend the staircases to the upper floor landing past the elevator, turn left into the corridor, and arrive at Room 201 (MBA/MCA Lab) on your left beside the lift.",
+    "thumbnail": "Rooms/MBA MCA Lab/g.jpg",
+    "photos": [
+      "Rooms/MBA MCA Lab/a.jpg",
+      "Rooms/MBA MCA Lab/b.png",
+      "Rooms/MBA MCA Lab/c.jpg",
+      "Rooms/MBA MCA Lab/d.jpg",
+      "Rooms/MBA MCA Lab/e.png",
+      "Rooms/MBA MCA Lab/f.png",
+      "Rooms/MBA MCA Lab/g.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "MBA Main Entrance & Grand Staircase",
+        "info": "Enter through the MBA block front entrance, ascend the staircases to the upper floor landing past the elevator, turn left into the corridor, and arrive at Room 201 (MBA/MCA Lab) on your left beside the lift.",
+        "thumbnail": "Rooms/MBA MCA Lab/a.jpg",
+        "photos": [
+          "Rooms/MBA MCA Lab/a.jpg",
+          "Rooms/MBA MCA Lab/b.png",
+          "Rooms/MBA MCA Lab/c.jpg",
+          "Rooms/MBA MCA Lab/d.jpg",
+          "Rooms/MBA MCA Lab/e.png",
+          "Rooms/MBA MCA Lab/f.png",
+          "Rooms/MBA MCA Lab/g.jpg"
+        ]
+      }
+    ]
+  },
   "205": {
     "name": "205",
     "floor": "2nd Floor",
@@ -2270,6 +2305,41 @@ window.LOCOROM_DATA = {
           "Rooms/Centre for Future Skills/f.png",
           "Rooms/Centre for Future Skills/g.png",
           "Rooms/Centre for Future Skills/h.jpg"
+        ]
+      }
+    ]
+  },
+  "MBA MCA Lab": {
+    "name": "MBA / MCA Lab (Room 201)",
+    "college": "Department of MBA",
+    "floor": "1st Floor",
+    "dept": "Department of MBA",
+    "category": "Computer Laboratory",
+    "landmark": "Room 201 • MBA / MCA Lab • Beside Upper Lift Landing (Area: 138.2 Sq.Mtr)",
+    "info": "Enter through the MBA block front entrance, ascend the staircases to the upper floor landing past the elevator, turn left into the corridor, and arrive at Room 201 (MBA/MCA Lab) on your left beside the lift.",
+    "thumbnail": "Rooms/MBA MCA Lab/g.jpg",
+    "photos": [
+      "Rooms/MBA MCA Lab/a.jpg",
+      "Rooms/MBA MCA Lab/b.png",
+      "Rooms/MBA MCA Lab/c.jpg",
+      "Rooms/MBA MCA Lab/d.jpg",
+      "Rooms/MBA MCA Lab/e.png",
+      "Rooms/MBA MCA Lab/f.png",
+      "Rooms/MBA MCA Lab/g.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "MBA Main Entrance & Grand Staircase",
+        "info": "Enter through the MBA block front entrance, ascend the staircases to the upper floor landing past the elevator, turn left into the corridor, and arrive at Room 201 (MBA/MCA Lab) on your left beside the lift.",
+        "thumbnail": "Rooms/MBA MCA Lab/a.jpg",
+        "photos": [
+          "Rooms/MBA MCA Lab/a.jpg",
+          "Rooms/MBA MCA Lab/b.png",
+          "Rooms/MBA MCA Lab/c.jpg",
+          "Rooms/MBA MCA Lab/d.jpg",
+          "Rooms/MBA MCA Lab/e.png",
+          "Rooms/MBA MCA Lab/f.png",
+          "Rooms/MBA MCA Lab/g.jpg"
         ]
       }
     ]

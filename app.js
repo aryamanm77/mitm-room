@@ -95,13 +95,19 @@ function getCollegeKeysForRoom(r) {
   const college = (r.college || "Engineering").toLowerCase();
   const dept = (r.dept || "").toLowerCase();
   const name = (r.name || "").toLowerCase();
-  const combined = `${college} ${dept} ${name}`;
 
-  // MCA is completely decoupled and standalone from MBA
-  if (combined.includes("mca")) return ["mca"];
-  if (combined.includes("mba")) return ["mba"];
-  if (combined.includes("bca")) return ["bca"];
-  if (combined.includes("pharmacy") || combined.includes("pharma")) return ["pharmacy"];
+  // 1. Authoritative college / department classification
+  if (college.includes("mca") || (dept.includes("mca") && !dept.includes("mba"))) return ["mca"];
+  if (college.includes("mba") || (dept.includes("mba") && !dept.includes("mca"))) return ["mba"];
+  if (college.includes("bca") || dept.includes("bca")) return ["bca"];
+  if (college.includes("pharmacy") || college.includes("pharma") || dept.includes("pharmacy")) return ["pharmacy"];
+
+  // 2. Name-based heuristics fallback
+  if (name.includes("mca")) return ["mca"];
+  if (name.includes("mba")) return ["mba"];
+  if (name.includes("bca")) return ["bca"];
+  if (name.includes("pharmacy") || name.includes("pharma")) return ["pharmacy"];
+
   return ["engineering"];
 }
 
@@ -117,7 +123,7 @@ function getCollegeMeta(collegeKey) {
       return {
         name: "Department of MBA",
         badge: "Management Block • Belaku",
-        heroQuery: "Search MBA classrooms & halls (e.g. Belaku, Centre for Future Skills, Room 2)...",
+        heroQuery: "Search MBA classrooms & labs (e.g. Belaku, 201, Room 2)...",
       };
     case "mca":
       return {
