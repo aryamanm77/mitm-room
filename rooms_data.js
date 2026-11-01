@@ -2099,11 +2099,12 @@ window.LOCOROM_DATA = {
     "dept": "Department of MCA",
     "category": "Lecture Hall",
     "landmark": "MCA Academic Block",
-    "info": "Enter the main entrance portico beneath the Department of Master of Computer Applications signboard, then turn left toward the staircase.",
+    "info": "Enter through the Department of Master of Computer Applications entrance gate into the corridor, then turn left toward the doorway.",
     "thumbnail": "Rooms/MCA LH 3/a.jpg",
     "photos": [
       "Rooms/MCA LH 3/a.jpg",
-      "Rooms/MCA LH 3/b.jpg"
+      "Rooms/MCA LH 3/b.jpg",
+      "Rooms/MCA LH 3/c.jpg"
     ],
     "accessPoints": [
       {
@@ -2112,7 +2113,8 @@ window.LOCOROM_DATA = {
         "thumbnail": "Rooms/MCA LH 3/a.jpg",
         "photos": [
           "Rooms/MCA LH 3/a.jpg",
-          "Rooms/MCA LH 3/b.jpg"
+          "Rooms/MCA LH 3/b.jpg",
+          "Rooms/MCA LH 3/c.jpg"
         ]
       }
     ]
