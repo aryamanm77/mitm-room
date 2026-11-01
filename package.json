@@ -1,7 +1,7 @@
 {
-  "name": "mit-maps",
-  "version": "1.1.0",
-  "description": "MIT Maps • Indoor Campus Navigation [Maharaja Institute of Technology Mysore]",
+  "name": "mitm-navigo",
+  "version": "1.2.0",
+  "description": "MITM Navigo • Indoor Campus Navigation [Maharaja Institute of Technology Mysore]",
   "scripts": {
     "start": "npx serve .",
     "build": "echo 'Build complete'"

@@ -1,5 +1,5 @@
 /**
- * MIT Maps — Indoor Campus Navigation
+ * MITM Navigo — Indoor Campus Navigation | MIT Mysore
  * Official Indoor Wayfinding, Voice Search, WhatsApp Direct Share & Corridor Photo Walkthroughs
  * Maharaja Institute of Technology Mysore (Engineering, MBA, MCA, BCA, Pharmacy)
  */
@@ -40,6 +40,20 @@ function escapeHtml(str) {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+
+// Fast Preloading of Room Route Media into Browser Cache
+function preloadRoomMedia(room) {
+  if (!room) return;
+  const routes = getRoutesForRoom(room);
+  routes.forEach(route => {
+    (route.photos || []).forEach(src => {
+      const img = new Image();
+      img.decoding = "async";
+      img.src = resolveMediaUrl(src);
+    });
+  });
 }
 
 function friendlyStairName(rawName) {
@@ -168,9 +182,9 @@ function buildWhatsAppShareUrl(roomKey, apIndex = 0) {
 // APP INITIALIZATION
 // ============================================================================
 async function initApp() {
-  const savedTheme = localStorage.getItem("locorom_theme") || "light";
-  document.documentElement.setAttribute("data-theme", savedTheme);
-  updateThemeButtonLabel();
+  // Permanent Light Mode
+  document.documentElement.setAttribute("data-theme", "light");
+  localStorage.setItem("locorom_theme", "light");
 
   try {
     const savedRecents = JSON.parse(localStorage.getItem("locorom_recent_rooms") || "null");
@@ -434,7 +448,7 @@ function renderRoomsGrid() {
       <article class="room-card" data-room-key="${escapeHtml(key)}">
         <div class="room-card-thumb">
           ${thumbUrl && !isVideo
-            ? `<img src="${thumbUrl}" alt="Room ${escapeHtml(r.name)}" loading="lazy" referrerpolicy="no-referrer" onerror="if(!this.dataset.cdn){this.dataset.cdn='1';this.src='${cdnUrl}';}else{this.style.display='none';}" />`
+            ? `<img src="${thumbUrl}" alt="Room ${escapeHtml(r.name)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(!this.dataset.cdn){this.dataset.cdn='1';this.src='${cdnUrl}';}else{this.style.display='none';}" />`
             : `<div class="thumb-placeholder">Room ${escapeHtml(r.name)}</div>`
           }
         </div>
@@ -496,6 +510,7 @@ function openRoom(roomKey, pushHistory = true, initialApIdx = 0) {
 
   stopAutoPlay();
   state.selectedRoomKey = roomKey;
+  preloadRoomMedia(room);
   state.activeApIndex = initialApIdx;
   state.activePhotoIndex = 0;
 
@@ -857,6 +872,13 @@ function bindEvents() {
     card.addEventListener("click", () => {
       const college = card.getAttribute("data-select-college");
       enterCollege(college);
+    });
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        const college = card.getAttribute("data-select-college");
+        enterCollege(college);
+      }
     });
   });
 
