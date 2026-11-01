@@ -2178,5 +2178,34 @@ window.LOCOROM_DATA = {
         ]
       }
     ]
+  },
+  "MCA Lab 1": {
+    "name": "MCA Lab 1",
+    "college": "Department of MCA",
+    "floor": "Ground Floor",
+    "dept": "Department of MCA",
+    "category": "Computer Laboratory",
+    "landmark": "Room MCA LAB - I • Postgraduate Computing Facility",
+    "info": "Head straight along the main approach path to the MITM Degree College entrance portico, head left up the staircase through the Department of Master of Computer Applications security gate, continue straight down the central corridor, and arrive at MCA LAB - I directly ahead.",
+    "thumbnail": "Rooms/MCA Lab 1/d.jpg",
+    "photos": [
+      "Rooms/MCA Lab 1/a.jpg",
+      "Rooms/MCA Lab 1/b.jpg",
+      "Rooms/MCA Lab 1/c.jpg",
+      "Rooms/MCA Lab 1/d.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "MCA Main Entrance & Central Corridor",
+        "info": "Head straight along the main approach path to the MITM Degree College entrance portico, head left up the staircase through the Department of Master of Computer Applications security gate, continue straight down the central corridor, and arrive at MCA LAB - I directly ahead.",
+        "thumbnail": "Rooms/MCA Lab 1/a.jpg",
+        "photos": [
+          "Rooms/MCA Lab 1/a.jpg",
+          "Rooms/MCA Lab 1/b.jpg",
+          "Rooms/MCA Lab 1/c.jpg",
+          "Rooms/MCA Lab 1/d.jpg"
+        ]
+      }
+    ]
   }
 };

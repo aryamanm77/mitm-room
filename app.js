@@ -123,7 +123,7 @@ function getCollegeMeta(collegeKey) {
       return {
         name: "Department of MCA",
         badge: "Postgraduate IT Block • MCA Classrooms & Labs",
-        heroQuery: "Search MCA classrooms & labs (e.g. MCA LH 1, MCA LH 2, MCA LH 3)...",
+        heroQuery: "Search MCA classrooms & labs (e.g. MCA LH 1, MCA Lab 1, MCA LH 3)...",
       };
     case "bca":
       return {
