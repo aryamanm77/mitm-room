@@ -1286,30 +1286,36 @@
     }
 
     /* ==========================================================================
-       CAMPUS SPATIAL TERMINAL & ACADEMIC WINGS PORTAL (MITM NAVIGO)
+       CODEPEN SHOWCASE: KINETIC 3D SPATIAL TERMINAL (MITM NAVIGO)
        ========================================================================== */
     .gm-portal-wrap {
-      max-width: 1280px;
+      max-width: 1300px;
       margin: 0 auto;
-      padding: 32px 20px 80px 20px;
+      padding: 36px 20px 90px 20px;
     }
 
-    /* Terminal Orientation Header */
+    /* Terminal Brand Hero */
     .terminal-hero {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 34px;
+      position: relative;
     }
 
     .terminal-status-strip {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 6px 18px;
+      padding: 7px 20px;
       background: #ffffff;
       border: 1px solid var(--border-hairline);
       border-radius: var(--radius-pill);
-      box-shadow: 0 1px 3px rgba(60, 64, 67, 0.08);
-      margin-bottom: 14px;
+      box-shadow: 0 2px 6px rgba(60, 64, 67, 0.08);
+      margin-bottom: 16px;
+      transition: transform var(--ease), box-shadow var(--ease);
+    }
+    .terminal-status-strip:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(60, 64, 67, 0.12);
     }
 
     .terminal-crest {
@@ -1330,12 +1336,12 @@
 
     @keyframes livePulse {
       0% { box-shadow: 0 0 0 0 rgba(11, 87, 208, 0.5); }
-      70% { box-shadow: 0 0 0 6px rgba(11, 87, 208, 0); }
+      70% { box-shadow: 0 0 0 7px rgba(11, 87, 208, 0); }
       100% { box-shadow: 0 0 0 0 rgba(11, 87, 208, 0); }
     }
 
     .terminal-status-text {
-      font-size: 11.5px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -1344,30 +1350,30 @@
 
     .terminal-title {
       font-family: var(--font-display);
-      font-size: clamp(26px, 4.5vw, 36px);
+      font-size: clamp(28px, 4.8vw, 40px);
       font-weight: 700;
       color: #1f1f1f;
-      letter-spacing: -0.025em;
-      margin-bottom: 8px;
-      line-height: 1.25;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+      line-height: 1.2;
     }
 
     .terminal-subtitle {
-      font-size: 15px;
+      font-size: 15.5px;
       color: #5f6368;
-      max-width: 660px;
+      max-width: 680px;
       margin: 0 auto;
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
-    /* Spatial Search & Navigation Capsule */
+    /* Spatial Capsule Search & Floating Filter Hub */
     .terminal-search-section {
-      margin-bottom: 34px;
+      margin-bottom: 40px;
     }
 
     .terminal-search-capsule {
-      max-width: 680px;
-      margin: 0 auto 16px auto;
+      max-width: 720px;
+      margin: 0 auto 20px auto;
       background: #ffffff;
       border: 1px solid var(--border-hairline);
       border-radius: var(--radius-pill);
@@ -1376,11 +1382,11 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      height: 52px;
+      height: 54px;
       transition: box-shadow var(--ease), border-color var(--ease);
     }
     .terminal-search-capsule:focus-within {
-      box-shadow: 0 3px 12px 2px rgba(11, 87, 208, 0.22);
+      box-shadow: 0 4px 14px 2px rgba(11, 87, 208, 0.22);
       border-color: var(--color-primary);
     }
 
@@ -1404,26 +1410,34 @@
       color: #747775;
     }
 
-    /* Architectural Wing Filter Pills */
-    .terminal-filter-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
+    /* CodePen Kinetic Sliding Filter Nav */
+    .terminal-filter-wrap {
+      position: relative;
+      max-width: 980px;
+      margin: 0 auto;
       overflow-x: auto;
       scrollbar-width: none;
-      padding: 4px 2px;
-      max-width: 960px;
-      margin: 0 auto;
+      padding: 6px 4px;
     }
-    .terminal-filter-row::-webkit-scrollbar {
+    .terminal-filter-wrap::-webkit-scrollbar {
       display: none;
     }
 
-    .gm-filter-chip {
-      background-color: #ffffff;
-      color: #444746;
+    .terminal-filter-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      padding: 6px;
       border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-pill);
+      box-shadow: 0 1px 3px rgba(60, 64, 67, 0.06);
+    }
+
+    .gm-filter-chip {
+      background-color: transparent;
+      color: #444746;
+      border: none;
       border-radius: var(--radius-pill);
       padding: 8px 18px;
       font-family: var(--font-sans);
@@ -1431,23 +1445,20 @@
       font-weight: 500;
       white-space: nowrap;
       cursor: pointer;
-      box-shadow: 0 1px 2px rgba(60, 64, 67, 0.06);
-      transition: all var(--ease);
+      transition: all 180ms ease;
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
     .gm-filter-chip:hover {
-      background-color: #f8fafd;
-      border-color: #747775;
       color: #1f1f1f;
+      background-color: rgba(60, 64, 67, 0.06);
     }
     .gm-filter-chip.active {
-      background-color: #e8f0fe;
-      color: var(--color-primary);
-      border-color: var(--color-primary);
+      background-color: var(--color-primary);
+      color: #ffffff;
       font-weight: 600;
-      box-shadow: 0 1px 3px rgba(11, 87, 208, 0.2);
+      box-shadow: 0 2px 6px rgba(11, 87, 208, 0.3);
     }
 
     /* Section Meta Bar */
@@ -1456,7 +1467,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 22px;
+      margin-bottom: 24px;
       padding-bottom: 12px;
       border-bottom: 1px solid var(--border-hairline);
       flex-wrap: wrap;
@@ -1475,44 +1486,79 @@
       font-weight: 600;
       color: #5f6368;
       background: #f1f3f4;
-      padding: 4px 12px;
+      padding: 4px 14px;
       border-radius: var(--radius-pill);
     }
 
-    /* Bespoke Academic Wing Cards Grid */
+    /* 3D Kinetic Academic Wing Cards Grid (CodePen Style) */
     .gm-places-list {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-      gap: 24px;
-      margin-bottom: 44px;
+      gap: 26px;
+      margin-bottom: 48px;
+      perspective: 1200px;
     }
     @media (max-width: 768px) {
       .gm-places-list {
         grid-template-columns: 1fr;
-        gap: 18px;
+        gap: 20px;
       }
     }
 
-    /* Academic Wing Terminal Card */
+    /* Academic Wing Terminal Card with 3D Tilt & Cursor Glare */
     .gm-place-card {
       background: #ffffff;
       border: 1px solid var(--border-hairline);
-      border-radius: 18px;
-      box-shadow: 0 1px 3px rgba(60, 64, 67, 0.12), 0 1px 2px rgba(60, 64, 67, 0.08);
+      border-radius: 20px;
+      box-shadow: 0 2px 6px rgba(60, 64, 67, 0.08), 0 1px 2px rgba(60, 64, 67, 0.04);
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 180ms cubic-bezier(0, 0, 0.2, 1), box-shadow 180ms cubic-bezier(0, 0, 0.2, 1), border-color 180ms ease;
       cursor: pointer;
       outline: none;
       user-select: none;
       position: relative;
+      transform-style: preserve-3d;
+      transition: transform 140ms ease-out, box-shadow 180ms ease, border-color 180ms ease;
+      will-change: transform, box-shadow;
+    }
+
+    /* Dynamic Luminous Glare Tracking Cursor */
+    .gm-place-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(450px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(11, 87, 208, 0.08), transparent 65%);
+      opacity: 0;
+      transition: opacity 250ms ease;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* Dynamic Glowing Border Line */
+    .card-border-glow {
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--card-accent, #0b57d0), transparent 60%);
+      opacity: 0;
+      transition: opacity 250ms ease;
+      pointer-events: none;
+      z-index: 1;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      padding: 1.5px;
     }
 
     .gm-place-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px -4px rgba(11, 87, 208, 0.18), 0 3px 8px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 14px 34px -6px rgba(11, 87, 208, 0.18), 0 4px 12px rgba(0, 0, 0, 0.06);
       border-color: var(--card-accent, var(--color-primary));
+    }
+    .gm-place-card:hover::after,
+    .gm-place-card:hover .card-border-glow {
+      opacity: 1;
     }
 
     .gm-place-card:focus-visible {
@@ -1527,7 +1573,7 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 4px;
+      height: 4.5px;
       background-color: var(--card-accent, #0b57d0);
       z-index: 2;
     }
@@ -1543,25 +1589,26 @@
     .gm-card-photo-wrap {
       position: relative;
       width: 100%;
-      height: 185px;
+      height: 190px;
       background-color: #f1f3f4;
       overflow: hidden;
+      transform: translateZ(10px);
     }
 
     .gm-card-photo {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 350ms cubic-bezier(0, 0, 0.2, 1);
+      transition: transform 400ms cubic-bezier(0, 0, 0.2, 1);
     }
     .gm-place-card:hover .gm-card-photo {
-      transform: scale(1.04);
+      transform: scale(1.05);
     }
 
     .gm-card-photo-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.45) 100%);
+      background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.5) 100%);
       pointer-events: none;
     }
 
@@ -1575,7 +1622,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      z-index: 1;
+      z-index: 2;
     }
 
     .terminal-wing-tag {
@@ -1585,7 +1632,7 @@
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: var(--radius-pill);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.2);
@@ -1596,26 +1643,27 @@
       color: #1f1f1f;
       font-size: 11.5px;
       font-weight: 700;
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: var(--radius-pill);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.22);
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
     }
     .terminal-room-count-badge .badge-dot {
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background-color: var(--card-accent, #0b57d0);
     }
 
     /* Spatial Details Deck */
     .gm-card-body {
-      padding: 20px 22px 22px 22px;
+      padding: 22px 24px 24px 24px;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
+      transform: translateZ(15px);
     }
 
     .gm-card-header-line {
@@ -1636,7 +1684,7 @@
 
     .gm-card-title {
       font-family: var(--font-display);
-      font-size: 19px;
+      font-size: 19.5px;
       font-weight: 700;
       color: #1f1f1f;
       line-height: 1.3;
@@ -1699,7 +1747,7 @@
       color: #3c4043;
       background-color: #ffffff;
       border: 1px solid var(--border-hairline);
-      padding: 3px 9px;
+      padding: 4px 10px;
       border-radius: 6px;
       white-space: nowrap;
       box-shadow: 0 1px 2px rgba(60, 64, 67, 0.04);
@@ -1708,7 +1756,7 @@
     /* Action Row with Magnetic Button */
     .gm-card-actions {
       margin-top: auto;
-      padding-top: 14px;
+      padding-top: 16px;
       border-top: 1px solid var(--border-hairline);
     }
 
@@ -1718,7 +1766,7 @@
       color: #ffffff;
       border: none;
       border-radius: 12px;
-      padding: 11px 18px;
+      padding: 12px 18px;
       font-family: var(--font-sans);
       font-size: 14px;
       font-weight: 600;
@@ -1727,33 +1775,33 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      box-shadow: 0 1px 3px rgba(60, 64, 67, 0.25);
-      transition: all 180ms ease;
+      box-shadow: 0 2px 6px rgba(60, 64, 67, 0.2);
+      transition: all 200ms ease;
     }
 
     .gm-btn-directions .action-arrow {
-      transition: transform 180ms ease;
+      transition: transform 200ms ease;
     }
 
     .gm-place-card:hover .gm-btn-directions {
       filter: brightness(1.08);
-      box-shadow: 0 4px 12px rgba(11, 87, 208, 0.35);
+      box-shadow: 0 4px 14px rgba(11, 87, 208, 0.35);
     }
 
     .gm-place-card:hover .gm-btn-directions .action-arrow {
-      transform: translateX(4px);
+      transform: translateX(5px);
     }
 
     /* Dedicated Campus Satellite Radar Section */
     .portal-map-section {
-      margin-top: 16px;
+      margin-top: 18px;
     }
 
     .gm-map-card {
       background: #ffffff;
       border: 1px solid var(--border-hairline);
-      border-radius: 18px;
-      box-shadow: 0 1px 3px rgba(60, 64, 67, 0.12);
+      border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(60, 64, 67, 0.1);
       overflow: hidden;
     }
 
@@ -1762,7 +1810,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 16px 22px;
+      padding: 16px 24px;
       border-bottom: 1px solid var(--border-hairline);
       flex-wrap: wrap;
     }
@@ -1840,7 +1888,7 @@
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
-      padding: 14px 20px;
+      padding: 14px 22px;
       border-top: 1px solid var(--border-hairline);
       background-color: #ffffff;
     }
@@ -2028,7 +2076,7 @@
   </header>
 
   <!-- ==========================================================================
-       SCREEN 0: COLLEGE SELECTION PORTAL (Spatial Academic Wings Wayfinding Hub)
+       SCREEN 0: COLLEGE SELECTION PORTAL (Kinetic 3D Spatial Wings Hub)
        ========================================================================== -->
   <section id="collegePortalScreen" class="gm-portal-wrap">
     <!-- Terminal Orientation Header -->
@@ -2064,14 +2112,16 @@
         </button>
       </div>
 
-      <!-- Architectural Wing Filter Pills -->
-      <div class="terminal-filter-row" role="tablist" aria-label="Campus Building Categories">
-        <button type="button" class="gm-filter-chip active" data-portal-filter="all">All Academic Wings (5)</button>
-        <button type="button" class="gm-filter-chip" data-portal-filter="engineering">Engineering Block (60)</button>
-        <button type="button" class="gm-filter-chip" data-portal-filter="mba">Department of MBA</button>
-        <button type="button" class="gm-filter-chip" data-portal-filter="mca">Department of MCA</button>
-        <button type="button" class="gm-filter-chip" data-portal-filter="bca">Department of BCA</button>
-        <button type="button" class="gm-filter-chip" data-portal-filter="pharmacy">Pharmacy Sciences</button>
+      <!-- Architectural Wing Filter Pills (Sliding Capsule Style) -->
+      <div class="terminal-filter-wrap">
+        <div class="terminal-filter-row" role="tablist" aria-label="Campus Building Categories">
+          <button type="button" class="gm-filter-chip active" data-portal-filter="all">All Academic Wings (5)</button>
+          <button type="button" class="gm-filter-chip" data-portal-filter="engineering">Engineering Block (60)</button>
+          <button type="button" class="gm-filter-chip" data-portal-filter="mba">Department of MBA</button>
+          <button type="button" class="gm-filter-chip" data-portal-filter="mca">Department of MCA</button>
+          <button type="button" class="gm-filter-chip" data-portal-filter="bca">Department of BCA</button>
+          <button type="button" class="gm-filter-chip" data-portal-filter="pharmacy">Pharmacy Sciences</button>
+        </div>
       </div>
     </div>
 
@@ -2085,6 +2135,7 @@
       <div class="gm-places-list" id="gmPlacesList">
         <!-- 1. Engineering Academic Block -->
         <article class="gm-place-card" data-select-college="engineering" id="placeCard-engineering" tabindex="0" role="button" aria-label="Select Engineering Academic Block">
+          <div class="card-border-glow" aria-hidden="true"></div>
           <div class="gm-card-photo-wrap">
             <img src="Rooms/114/a.jpg" alt="Engineering Academic Block" class="gm-card-photo" loading="lazy" decoding="async" />
             <div class="gm-card-photo-overlay"></div>
@@ -2140,6 +2191,7 @@
 
         <!-- 2. Department of MBA -->
         <article class="gm-place-card" data-select-college="mba" id="placeCard-mba" tabindex="0" role="button" aria-label="Select Department of MBA">
+          <div class="card-border-glow" aria-hidden="true"></div>
           <div class="gm-card-photo-wrap">
             <img src="Rooms/Belaku/a.jpg" alt="Department of MBA &amp; MCA Building" class="gm-card-photo" loading="lazy" decoding="async" />
             <div class="gm-card-photo-overlay"></div>
@@ -2193,6 +2245,7 @@
 
         <!-- 3. Department of MCA -->
         <article class="gm-place-card" data-select-college="mca" id="placeCard-mca" tabindex="0" role="button" aria-label="Select Department of MCA">
+          <div class="card-border-glow" aria-hidden="true"></div>
           <div class="gm-card-photo-wrap">
             <img src="Rooms/Belaku/d.jpg" alt="Department of MCA and Belaku Entrance" class="gm-card-photo" loading="lazy" decoding="async" />
             <div class="gm-card-photo-overlay"></div>
@@ -2245,6 +2298,7 @@
 
         <!-- 4. Department of BCA -->
         <article class="gm-place-card" data-select-college="bca" id="placeCard-bca" tabindex="0" role="button" aria-label="Select Department of BCA">
+          <div class="card-border-glow" aria-hidden="true"></div>
           <div class="gm-card-photo-wrap">
             <img src="Rooms/117/1.jpg" alt="Department of BCA Computing Suites" class="gm-card-photo" loading="lazy" decoding="async" />
             <div class="gm-card-photo-overlay"></div>
@@ -2297,6 +2351,7 @@
 
         <!-- 5. Faculty of Pharmaceutical Sciences -->
         <article class="gm-place-card" data-select-college="pharmacy" id="placeCard-pharmacy" tabindex="0" role="button" aria-label="Select Faculty of Pharmaceutical Sciences">
+          <div class="card-border-glow" aria-hidden="true"></div>
           <div class="gm-card-photo-wrap">
             <img src="Rooms/118/1.jpg" alt="Faculty of Pharmaceutical Sciences" class="gm-card-photo" loading="lazy" decoding="async" />
             <div class="gm-card-photo-overlay"></div>

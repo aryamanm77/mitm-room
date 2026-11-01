@@ -258,6 +258,7 @@ function showToast(msg) {
 // SCREEN 0: COLLEGE SELECTION PORTAL
 // ============================================================================
 function showPortalView(pushHistory = true) {
+  setTimeout(init3DTiltAndSpotlight, 50);
   stopAutoPlay();
   state.selectedRoomKey = null;
   state.activeCollege = null;
@@ -801,7 +802,47 @@ function syncFloorNavButtons() {
 // ============================================================================
 // EVENT LISTENERS & USER INTERACTIONS
 // ============================================================================
+
+// ============================================================================
+// CODEPEN SHOWCASE: 3D KINETIC TILT & CURSOR SPOTLIGHT ENGINE
+// ============================================================================
+function init3DTiltAndSpotlight() {
+  const isPointerFine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (!isPointerFine) return;
+
+  const cards = document.querySelectorAll(".gm-place-card");
+  cards.forEach(card => {
+    let ticking = false;
+
+    card.addEventListener("pointermove", (e) => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const normX = (x / rect.width) - 0.5;
+        const normY = (y / rect.height) - 0.5;
+
+        // 3D perspective rotation + dynamic glare
+        const rotateY = normX * 10;
+        const rotateX = -normY * 10;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px) scale3d(1.015, 1.015, 1.015)`;
+        card.style.setProperty("--mouse-x", `${x.toFixed(1)}px`);
+        card.style.setProperty("--mouse-y", `${y.toFixed(1)}px`);
+        ticking = false;
+      });
+    });
+
+    card.addEventListener("pointerleave", () => {
+      card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) scale3d(1, 1, 1)";
+    });
+  });
+}
+
 function bindEvents() {
+  init3DTiltAndSpotlight();
 
 
 
