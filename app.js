@@ -854,11 +854,11 @@ function bindEvents() {
       document.querySelectorAll("[data-nav-mode]").forEach(b => b.classList.toggle("active", b === btn));
 
       const viewWings = document.getElementById("viewModeWings");
-      const viewFloors = document.getElementById("viewModeFloors");
+      const viewDepts = document.getElementById("viewModeDepartments");
       const viewHotspots = document.getElementById("viewModeHotspots");
 
       if (viewWings) viewWings.style.display = mode === "wings" ? "block" : "none";
-      if (viewFloors) viewFloors.style.display = mode === "floors" ? "block" : "none";
+      if (viewDepts) viewDepts.style.display = mode === "departments" ? "block" : "none";
       if (viewHotspots) viewHotspots.style.display = mode === "hotspots" ? "block" : "none";
     });
   });
