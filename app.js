@@ -287,6 +287,15 @@ function showPortalView(pushHistory = true) {
 // ============================================================================
 // SCREEN 1: DEDICATED COLLEGE ROOM FINDER
 // ============================================================================
+function enterCollegeWithFloor(collegeKey, floorKey) {
+  enterCollege(collegeKey);
+  if (floorKey) {
+    state.activeFloor = floorKey;
+    syncFloorNavButtons();
+    renderRoomsGrid();
+  }
+}
+
 function enterCollege(collegeKey, pushHistory = true) {
   stopAutoPlay();
   state.selectedRoomKey = null;
@@ -804,13 +813,13 @@ function syncFloorNavButtons() {
 // ============================================================================
 
 // ============================================================================
-// CODEPEN SHOWCASE: 3D KINETIC TILT & CURSOR SPOTLIGHT ENGINE
+// 3D KINETIC TILT & CURSOR SPOTLIGHT ENGINE (MITM NAVIGO)
 // ============================================================================
 function init3DTiltAndSpotlight() {
   const isPointerFine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   if (!isPointerFine) return;
 
-  const cards = document.querySelectorAll(".gm-place-card");
+  const cards = document.querySelectorAll(".wing-card");
   cards.forEach(card => {
     let ticking = false;
 
@@ -824,9 +833,8 @@ function init3DTiltAndSpotlight() {
         const normX = (x / rect.width) - 0.5;
         const normY = (y / rect.height) - 0.5;
 
-        // 3D perspective rotation + dynamic glare
-        const rotateY = normX * 10;
-        const rotateX = -normY * 10;
+        const rotateY = normX * 9;
+        const rotateX = -normY * 9;
 
         card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px) scale3d(1.015, 1.015, 1.015)`;
         card.style.setProperty("--mouse-x", `${x.toFixed(1)}px`);
@@ -844,53 +852,142 @@ function init3DTiltAndSpotlight() {
 function bindEvents() {
   init3DTiltAndSpotlight();
 
-
-
-  // Interactive Building Jump Chips below map
-  document.querySelectorAll("[data-jump-college]").forEach(btn => {
+  // Navigation Mode Switcher (Wings / Floors / Hotspots)
+  document.querySelectorAll("[data-nav-mode]").forEach(btn => {
     btn.addEventListener("click", () => {
-      const col = btn.getAttribute("data-jump-college");
-      enterCollege(col);
+      const mode = btn.getAttribute("data-nav-mode");
+      document.querySelectorAll("[data-nav-mode]").forEach(b => b.classList.toggle("active", b === btn));
+
+      const viewWings = document.getElementById("viewModeWings");
+      const viewFloors = document.getElementById("viewModeFloors");
+      const viewHotspots = document.getElementById("viewModeHotspots");
+
+      if (viewWings) viewWings.style.display = mode === "wings" ? "block" : "none";
+      if (viewFloors) viewFloors.style.display = mode === "floors" ? "block" : "none";
+      if (viewHotspots) viewHotspots.style.display = mode === "hotspots" ? "block" : "none";
     });
   });
 
-  // Google Maps Portal Search Input
+  // Direct Room Launchers (Teleports directly to walkthrough from any mode!)
+  document.addEventListener("click", (e) => {
+    const directRoomBtn = e.target.closest("[data-direct-room]");
+    if (directRoomBtn) {
+      e.stopPropagation();
+      e.preventDefault();
+      const rKey = directRoomBtn.getAttribute("data-direct-room");
+      if (rKey && state.rooms[rKey]) {
+        openRoom(rKey);
+      }
+      return;
+    }
+
+    const directFloorBtn = e.target.closest("[data-direct-floor]");
+    if (directFloorBtn) {
+      e.stopPropagation();
+      e.preventDefault();
+      const floor = directFloorBtn.getAttribute("data-direct-floor");
+      const col = directFloorBtn.getAttribute("data-for-college") || "engineering";
+      enterCollegeWithFloor(col, floor);
+      return;
+    }
+
+    const directColBtn = e.target.closest("[data-direct-college]");
+    if (directColBtn) {
+      e.stopPropagation();
+      e.preventDefault();
+      const col = directColBtn.getAttribute("data-direct-college");
+      enterCollege(col);
+      return;
+    }
+  });
+
+  // Universal Instant Teleport Search Bar & Autocomplete Dropdown
   const portalSearch = document.getElementById("portalSearchInput");
-  if (portalSearch) {
+  const portalDropdown = document.getElementById("portalSearchDropdown");
+
+  if (portalSearch && portalDropdown) {
     portalSearch.addEventListener("input", () => {
       const q = portalSearch.value.trim().toLowerCase();
-      document.querySelectorAll(".gm-place-card").forEach(card => {
+      if (!q) {
+        portalDropdown.style.display = "none";
+        portalDropdown.innerHTML = "";
+        // Reset card filter
+        document.querySelectorAll(".wing-card").forEach(c => c.style.display = "flex");
+        return;
+      }
+
+      // Filter wing cards on wings tab
+      document.querySelectorAll(".wing-card").forEach(card => {
         const text = card.textContent.toLowerCase();
-        card.style.display = (!q || text.includes(q)) ? "flex" : "none";
+        card.style.display = text.includes(q) ? "flex" : "none";
       });
+
+      // Find matching rooms campus-wide
+      const matchedKeys = state.roomKeys.filter(k => {
+        const r = state.rooms[k];
+        if (!r) return false;
+        const blob = [r.name, r.floor, r.dept, r.category, r.landmark, r.info].join(" ").toLowerCase();
+        return blob.includes(q);
+      }).slice(0, 8);
+
+      if (matchedKeys.length === 0) {
+        portalDropdown.innerHTML = `<div style="padding: 14px 18px; font-size: 13px; color: #5f6368; text-align: center;">No campus rooms matching "${escapeHtml(q)}"</div>`;
+        portalDropdown.style.display = "block";
+      } else {
+        portalDropdown.innerHTML = matchedKeys.map(k => {
+          const r = state.rooms[k];
+          const title = r.name.length <= 5 ? `Room ${r.name}` : r.name;
+          return `
+            <div class="portal-suggest-item" data-direct-room="${escapeHtml(k)}">
+              <div class="suggest-left">
+                <span class="suggest-badge">${escapeHtml(k.slice(0, 3))}</span>
+                <div>
+                  <div class="suggest-name">${escapeHtml(title)}</div>
+                  <div class="suggest-meta">${escapeHtml(r.dept || r.college || "")} • ${escapeHtml(r.floor || "")}</div>
+                </div>
+              </div>
+              <button type="button" class="suggest-action">
+                <span>Navigate &rarr;</span>
+              </button>
+            </div>
+          `;
+        }).join("");
+        portalDropdown.style.display = "block";
+      }
     });
 
     portalSearch.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         e.preventDefault();
         const q = portalSearch.value.trim();
-        // Check for direct room match first
         const matched = findExactOrBestMatch(q);
         if (matched) {
+          portalDropdown.style.display = "none";
           openRoom(matched);
         } else {
-          // Open first visible college card
-          const firstVisible = document.querySelector('.gm-place-card[style*="flex"], .gm-place-card:not([style*="display: none"])');
+          const firstVisible = document.querySelector('.wing-card[style*="flex"], .wing-card:not([style*="display: none"])');
           if (firstVisible) {
             enterCollege(firstVisible.getAttribute("data-select-college"));
           }
         }
       }
     });
+
+    // Close dropdown on outside click
+    document.addEventListener("click", (e) => {
+      if (!portalSearch.contains(e.target) && !portalDropdown.contains(e.target)) {
+        portalDropdown.style.display = "none";
+      }
+    });
   }
 
-  // Google Maps Portal Category Filter Chips
+  // Academic Wing Filter Chips (All Wings, Eng, MBA, MCA, BCA, Pharmacy)
   document.querySelectorAll("[data-portal-filter]").forEach(chip => {
     chip.addEventListener("click", () => {
       const filter = chip.getAttribute("data-portal-filter");
       document.querySelectorAll("[data-portal-filter]").forEach(c => c.classList.toggle("active", c === chip));
 
-      document.querySelectorAll(".gm-place-card").forEach(card => {
+      document.querySelectorAll(".wing-card").forEach(card => {
         const cardCol = card.getAttribute("data-select-college");
         const show = (filter === "all" || cardCol === filter);
         card.style.display = show ? "flex" : "none";
@@ -898,36 +995,7 @@ function bindEvents() {
     });
   });
 
-  // Google Maps Interactive SVG Map Building Clicks & Hovers
-  document.querySelectorAll("[data-map-college]").forEach(el => {
-    const col = el.getAttribute("data-map-college");
-    el.addEventListener("click", () => {
-      enterCollege(col);
-    });
-
-    el.addEventListener("mouseenter", () => {
-      document.getElementById("placeCard-" + col)?.classList.add("highlighted");
-      document.getElementById("mapBuilding-" + col)?.classList.add("active");
-    });
-
-    el.addEventListener("mouseleave", () => {
-      document.getElementById("placeCard-" + col)?.classList.remove("highlighted");
-      document.getElementById("mapBuilding-" + col)?.classList.remove("active");
-    });
-  });
-
-  // Place Cards Hover Highlights Map
-  document.querySelectorAll(".gm-place-card").forEach(card => {
-    const col = card.getAttribute("data-select-college");
-    card.addEventListener("mouseenter", () => {
-      document.getElementById("mapBuilding-" + col)?.classList.add("active");
-    });
-    card.addEventListener("mouseleave", () => {
-      document.getElementById("mapBuilding-" + col)?.classList.remove("active");
-    });
-  });
-
-  // Google Maps Portal Card Action Buttons
+  // Wing Primary Enter Buttons
   document.querySelectorAll("[data-btn-college]").forEach(btn => {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -940,12 +1008,19 @@ function bindEvents() {
   const portalVoiceBtn = document.getElementById("portalVoiceSearchBtn");
   if (portalVoiceBtn) {
     portalVoiceBtn.addEventListener("click", () => {
-      const mainSearch = document.getElementById("mainSearchInput");
       const micBtn = document.getElementById("voiceSearchBtn");
-      // Trigger voice search
       micBtn?.click();
     });
   }
+
+  // Wing Card Body Click -> Enter College
+  document.querySelectorAll(".wing-card").forEach(card => {
+    card.addEventListener("click", (e) => {
+      if (e.target.closest("button")) return;
+      const col = card.getAttribute("data-select-college");
+      enterCollege(col);
+    });
+  });
 
   // 1. College Selection Portal Cards -> Enter College Only
   document.querySelectorAll("[data-select-college]").forEach(card => {

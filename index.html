@@ -23,7 +23,7 @@
 
   <style>
     :root {
-      /* Google Maps Design System Typography */
+      /* MITM Navigo Modern Geometric Typography */
       --font-display: 'Google Sans', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-sans: 'Google Sans', 'Plus Jakarta Sans', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
@@ -46,7 +46,7 @@
       --ease: 120ms cubic-bezier(0, 0, 0.2, 1);
     }
 
-    /* Light Theme (Default Google Maps Aesthetic) */
+    /* Permanent Light Theme (MITM Navigo Aesthetic) */
     [data-theme="light"] {
       --bg-canvas: #ffffff;
       --bg-surface: #ffffff;
@@ -1185,7 +1185,7 @@
     }
 
     /* ==========================================================================
-       GOOGLE MAPS BUTTONS & PILL CONTROLS
+       CAMPUS NAVIGATION BUTTONS & PILL CONTROLS
        ========================================================================== */
     .button-primary-filled {
       background-color: var(--color-primary, #0b57d0);
@@ -1286,22 +1286,22 @@
     }
 
     /* ==========================================================================
-       CODEPEN SHOWCASE: KINETIC 3D SPATIAL TERMINAL (MITM NAVIGO)
+       MITM NAVIGO: MULTI-MODE CAMPUS WAYFINDING HUB (BESPOKE DESIGN SYSTEM)
        ========================================================================== */
-    .gm-portal-wrap {
+    .navigo-portal-wrap {
       max-width: 1300px;
       margin: 0 auto;
-      padding: 36px 20px 90px 20px;
+      padding: 36px 20px 80px 20px;
     }
 
     /* Terminal Brand Hero */
-    .terminal-hero {
+    .navigo-hero {
       text-align: center;
-      margin-bottom: 34px;
+      margin-bottom: 30px;
       position: relative;
     }
 
-    .terminal-status-strip {
+    .navigo-status-strip {
       display: inline-flex;
       align-items: center;
       gap: 10px;
@@ -1313,24 +1313,25 @@
       margin-bottom: 16px;
       transition: transform var(--ease), box-shadow var(--ease);
     }
-    .terminal-status-strip:hover {
+    .navigo-status-strip:hover {
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(60, 64, 67, 0.12);
     }
 
-    .terminal-crest {
-      width: 22px;
-      height: 22px;
+    .navigo-crest {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
       border-radius: 50%;
-      object-fit: cover;
     }
 
-    .terminal-live-dot {
+    .navigo-live-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
       background-color: var(--color-primary);
-      box-shadow: 0 0 0 3px rgba(11, 87, 208, 0.2);
+      position: relative;
+      display: inline-block;
       animation: livePulse 2s infinite ease-in-out;
     }
 
@@ -1340,7 +1341,7 @@
       100% { box-shadow: 0 0 0 0 rgba(11, 87, 208, 0); }
     }
 
-    .terminal-status-text {
+    .navigo-status-text {
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.06em;
@@ -1348,9 +1349,9 @@
       color: #3c4043;
     }
 
-    .terminal-title {
+    .navigo-title {
       font-family: var(--font-display);
-      font-size: clamp(28px, 4.8vw, 40px);
+      font-size: clamp(28px, 4.8vw, 42px);
       font-weight: 700;
       color: #1f1f1f;
       letter-spacing: -0.03em;
@@ -1358,7 +1359,7 @@
       line-height: 1.2;
     }
 
-    .terminal-subtitle {
+    .navigo-subtitle {
       font-size: 15.5px;
       color: #5f6368;
       max-width: 680px;
@@ -1366,254 +1367,309 @@
       line-height: 1.55;
     }
 
-    /* Spatial Capsule Search & Floating Filter Hub */
-    .terminal-search-section {
-      margin-bottom: 40px;
+    /* Universal Instant Teleport Search Hub */
+    .navigo-search-hub {
+      position: relative;
+      max-width: 720px;
+      margin: 0 auto 28px auto;
+      z-index: 50;
     }
 
-    .terminal-search-capsule {
-      max-width: 720px;
-      margin: 0 auto 20px auto;
+    .navigo-search-box {
       background: #ffffff;
       border: 1px solid var(--border-hairline);
       border-radius: var(--radius-pill);
-      box-shadow: 0 2px 8px rgba(60, 64, 67, 0.12), 0 1px 3px rgba(60, 64, 67, 0.08);
-      padding: 4px 8px 4px 18px;
+      box-shadow: 0 2px 10px rgba(60, 64, 67, 0.12);
+      padding: 6px 14px 6px 20px;
       display: flex;
       align-items: center;
       gap: 12px;
       height: 54px;
       transition: box-shadow var(--ease), border-color var(--ease);
     }
-    .terminal-search-capsule:focus-within {
-      box-shadow: 0 4px 14px 2px rgba(11, 87, 208, 0.22);
+    .navigo-search-box:focus-within {
+      box-shadow: 0 4px 18px 2px rgba(11, 87, 208, 0.24);
       border-color: var(--color-primary);
     }
 
-    .terminal-search-icon {
-      width: 20px;
-      height: 20px;
-      color: var(--color-primary);
+    .navigo-search-icon {
+      width: 22px;
+      height: 22px;
+      color: #5f6368;
       flex-shrink: 0;
     }
 
-    .gm-search-input {
-      flex-grow: 1;
+    .navigo-search-input {
+      flex: 1;
       border: none;
-      background: transparent;
+      outline: none;
       font-family: var(--font-sans);
       font-size: 15px;
       color: #1f1f1f;
-      outline: none;
+      background: transparent;
     }
-    .gm-search-input::placeholder {
+    .navigo-search-input::placeholder {
       color: #747775;
     }
 
-    /* CodePen Kinetic Sliding Filter Nav */
-    .terminal-filter-wrap {
-      position: relative;
-      max-width: 980px;
-      margin: 0 auto;
-      overflow-x: auto;
-      scrollbar-width: none;
-      padding: 6px 4px;
-    }
-    .terminal-filter-wrap::-webkit-scrollbar {
-      display: none;
-    }
-
-    .terminal-filter-row {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+    /* Live Suggestion Dropdown */
+    .portal-suggest-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
       background: #ffffff;
-      padding: 6px;
       border: 1px solid var(--border-hairline);
-      border-radius: var(--radius-pill);
-      box-shadow: 0 1px 3px rgba(60, 64, 67, 0.06);
+      border-radius: 18px;
+      box-shadow: 0 8px 30px rgba(60, 64, 67, 0.2);
+      overflow: hidden;
+      max-height: 380px;
+      overflow-y: auto;
+      z-index: 100;
     }
 
-    .gm-filter-chip {
-      background-color: transparent;
-      color: #444746;
-      border: none;
-      border-radius: var(--radius-pill);
-      padding: 8px 18px;
-      font-family: var(--font-sans);
-      font-size: 13px;
-      font-weight: 500;
-      white-space: nowrap;
-      cursor: pointer;
-      transition: all 180ms ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .gm-filter-chip:hover {
-      color: #1f1f1f;
-      background-color: rgba(60, 64, 67, 0.06);
-    }
-    .gm-filter-chip.active {
-      background-color: var(--color-primary);
-      color: #ffffff;
-      font-weight: 600;
-      box-shadow: 0 2px 6px rgba(11, 87, 208, 0.3);
-    }
-
-    /* Section Meta Bar */
-    .terminal-section-bar {
+    .portal-suggest-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 24px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border-hairline);
-      flex-wrap: wrap;
+      gap: 12px;
+      padding: 12px 18px;
+      border-bottom: 1px solid #f1f3f4;
+      cursor: pointer;
+      transition: background-color var(--ease);
+    }
+    .portal-suggest-item:last-child {
+      border-bottom: none;
+    }
+    .portal-suggest-item:hover {
+      background-color: #f8fafd;
     }
 
-    .terminal-section-heading {
-      font-family: var(--font-display);
-      font-size: 20px;
+    .suggest-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .suggest-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: #e8f0fe;
+      color: var(--color-primary);
       font-weight: 700;
-      color: #1f1f1f;
-      letter-spacing: -0.015em;
+      font-size: 13px;
+      flex-shrink: 0;
     }
 
-    .terminal-wing-counter {
-      font-size: 12px;
+    .suggest-name {
+      font-size: 14.5px;
       font-weight: 600;
-      color: #5f6368;
-      background: #f1f3f4;
-      padding: 4px 14px;
-      border-radius: var(--radius-pill);
+      color: #1f1f1f;
+      margin-bottom: 2px;
     }
 
-    /* 3D Kinetic Academic Wing Cards Grid (CodePen Style) */
-    .gm-places-list {
+    .suggest-meta {
+      font-size: 12px;
+      color: #5f6368;
+    }
+
+    .suggest-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--color-primary);
+      background: #e8f0fe;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      border: none;
+      white-space: nowrap;
+    }
+
+    /* Navigation Mode Switcher Bar */
+    .navigo-mode-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 0 auto 32px auto;
+      background: #f1f3f4;
+      padding: 6px;
+      border-radius: var(--radius-pill);
+      max-width: 620px;
+    }
+
+    .navigo-mode-btn {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: transparent;
+      border: none;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #444746;
+      cursor: pointer;
+      transition: all var(--ease);
+    }
+    .navigo-mode-btn:hover {
+      color: #1f1f1f;
+    }
+    .navigo-mode-btn.active {
+      background: #ffffff;
+      color: var(--color-primary);
+      box-shadow: 0 2px 6px rgba(60, 64, 67, 0.15);
+    }
+    .navigo-mode-btn .icon-svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    /* Sub-Filter Wrap for Wings */
+    .wings-filter-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .wing-filter-chip {
+      background-color: #ffffff;
+      color: #444746;
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-pill);
+      padding: 7px 16px;
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--ease);
+      box-shadow: 0 1px 2px rgba(60, 64, 67, 0.04);
+    }
+    .wing-filter-chip:hover {
+      border-color: #c4c7c5;
+      background-color: #f8fafd;
+      color: #1f1f1f;
+    }
+    .wing-filter-chip.active {
+      background-color: #e8f0fe;
+      color: var(--color-primary);
+      border-color: rgba(11, 87, 208, 0.4);
+      font-weight: 700;
+    }
+
+    /* VIEW PANELS */
+    .nav-view-panel {
+      animation: viewFadeIn 0.25s ease-out;
+    }
+    @keyframes viewFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 3D Kinetic Wing Cards Grid */
+    .wings-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-      gap: 26px;
-      margin-bottom: 48px;
+      gap: 24px;
       perspective: 1200px;
     }
-    @media (max-width: 768px) {
-      .gm-places-list {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-    }
 
-    /* Academic Wing Terminal Card with 3D Tilt & Cursor Glare */
-    .gm-place-card {
+    .wing-card {
       background: #ffffff;
       border: 1px solid var(--border-hairline);
       border-radius: 20px;
-      box-shadow: 0 2px 6px rgba(60, 64, 67, 0.08), 0 1px 2px rgba(60, 64, 67, 0.04);
+      box-shadow: 0 2px 8px rgba(60, 64, 67, 0.08);
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      position: relative;
       cursor: pointer;
       outline: none;
-      user-select: none;
-      position: relative;
+      transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.25s cubic-bezier(0.2, 0, 0, 1), border-color 0.25s ease;
       transform-style: preserve-3d;
-      transition: transform 140ms ease-out, box-shadow 180ms ease, border-color 180ms ease;
-      will-change: transform, box-shadow;
+      will-change: transform;
+      --mouse-x: 50%;
+      --mouse-y: 50%;
     }
 
-    /* Dynamic Luminous Glare Tracking Cursor */
-    .gm-place-card::after {
-      content: '';
+    .wing-card::before {
+      content: "";
       position: absolute;
       inset: 0;
       border-radius: inherit;
-      background: radial-gradient(450px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(11, 87, 208, 0.08), transparent 65%);
-      opacity: 0;
-      transition: opacity 250ms ease;
+      background: radial-gradient(circle 280px at var(--mouse-x) var(--mouse-y), rgba(11, 87, 208, 0.08), transparent 70%);
       pointer-events: none;
-      z-index: 3;
-    }
-
-    /* Dynamic Glowing Border Line */
-    .card-border-glow {
-      position: absolute;
-      inset: -1px;
-      border-radius: inherit;
-      background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--card-accent, #0b57d0), transparent 60%);
+      z-index: 2;
       opacity: 0;
-      transition: opacity 250ms ease;
-      pointer-events: none;
-      z-index: 1;
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      padding: 1.5px;
+      transition: opacity 0.3s ease;
     }
-
-    .gm-place-card:hover {
-      box-shadow: 0 14px 34px -6px rgba(11, 87, 208, 0.18), 0 4px 12px rgba(0, 0, 0, 0.06);
-      border-color: var(--card-accent, var(--color-primary));
-    }
-    .gm-place-card:hover::after,
-    .gm-place-card:hover .card-border-glow {
+    .wing-card:hover::before {
       opacity: 1;
     }
 
-    .gm-place-card:focus-visible {
-      border-color: var(--color-primary);
-      box-shadow: 0 0 0 3px rgba(11, 87, 208, 0.28);
-    }
-
-    /* Wing Signature Top Border Stripe */
-    .gm-place-card::before {
-      content: '';
+    .wing-border-glow {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4.5px;
-      background-color: var(--card-accent, #0b57d0);
-      z-index: 2;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 3;
+      padding: 1.5px;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      background: radial-gradient(circle 240px at var(--mouse-x) var(--mouse-y), rgba(11, 87, 208, 0.4), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .wing-card:hover .wing-border-glow {
+      opacity: 1;
     }
 
-    /* Distinctive Block Color Themes */
-    .gm-place-card[data-select-college="engineering"] { --card-accent: #0b57d0; }
-    .gm-place-card[data-select-college="mba"] { --card-accent: #b3261e; }
-    .gm-place-card[data-select-college="mca"] { --card-accent: #6750a4; }
-    .gm-place-card[data-select-college="bca"] { --card-accent: #146c2e; }
-    .gm-place-card[data-select-college="pharmacy"] { --card-accent: #006874; }
+    .wing-card:hover {
+      box-shadow: 0 14px 34px -4px rgba(60, 64, 67, 0.16), 0 6px 14px -2px rgba(60, 64, 67, 0.1);
+      border-color: rgba(11, 87, 208, 0.35);
+    }
 
-    /* Visual Photo Banner */
-    .gm-card-photo-wrap {
+    .wing-photo-wrap {
       position: relative;
       width: 100%;
       height: 190px;
-      background-color: #f1f3f4;
       overflow: hidden;
-      transform: translateZ(10px);
+      background: #e8eaed;
+      flex-shrink: 0;
     }
 
-    .gm-card-photo {
+    .wing-photo {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 400ms cubic-bezier(0, 0, 0.2, 1);
+      display: block;
+      transition: transform 0.45s cubic-bezier(0.2, 0, 0, 1);
     }
-    .gm-place-card:hover .gm-card-photo {
-      transform: scale(1.05);
+    .wing-card:hover .wing-photo {
+      transform: scale(1.04);
     }
 
-    .gm-card-photo-overlay {
+    .wing-photo-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.5) 100%);
+      background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.55) 100%);
       pointer-events: none;
     }
 
-    /* Floating Badges on Photo */
-    .terminal-card-badges {
+    .wing-card-badges {
       position: absolute;
       top: 14px;
       left: 14px;
@@ -1622,316 +1678,366 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      z-index: 2;
+      pointer-events: none;
+      z-index: 4;
     }
 
-    .terminal-wing-tag {
-      background: rgba(18, 18, 18, 0.85);
-      color: #ffffff;
+    .wing-block-tag {
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 4px 12px;
+      padding: 4px 10px;
       border-radius: var(--radius-pill);
+      background: rgba(15, 20, 25, 0.85);
+      color: #ffffff;
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
 
-    .terminal-room-count-badge {
-      background: #ffffff;
-      color: #1f1f1f;
-      font-size: 11.5px;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: var(--radius-pill);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.22);
+    .wing-room-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-    }
-    .terminal-room-count-badge .badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background-color: var(--card-accent, #0b57d0);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.95);
+      color: #1f1f1f;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
     }
 
-    /* Spatial Details Deck */
-    .gm-card-body {
-      padding: 22px 24px 24px 24px;
+    .wing-body {
+      padding: 20px 22px 22px 22px;
       display: flex;
       flex-direction: column;
-      flex-grow: 1;
-      transform: translateZ(15px);
+      flex: 1;
+      position: relative;
+      z-index: 4;
     }
 
-    .gm-card-header-line {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 6px;
-    }
-
-    .gm-card-category {
-      font-size: 11px;
+    .wing-category {
+      font-size: 11.5px;
       font-weight: 700;
-      text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: var(--card-accent, #0b57d0);
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 4px;
     }
 
-    .gm-card-title {
+    .wing-title {
       font-family: var(--font-display);
-      font-size: 19.5px;
+      font-size: 20px;
       font-weight: 700;
       color: #1f1f1f;
-      line-height: 1.3;
-      margin-bottom: 6px;
+      line-height: 1.25;
+      margin-bottom: 8px;
     }
 
-    .gm-card-desc {
+    .wing-desc {
       font-size: 13.5px;
-      color: #444746;
       line-height: 1.5;
+      color: #5f6368;
       margin-bottom: 14px;
     }
 
-    /* Spatial Specifications Matrix (Blueprint 3-Column Layout) */
-    .spatial-specs-matrix {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      background: #f8fafd;
-      border: 1px solid rgba(60, 64, 67, 0.1);
-      border-radius: 12px;
-      padding: 10px 12px;
-      margin-bottom: 16px;
-    }
-
-    .spec-cell {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .spec-cell-label {
-      font-size: 10px;
+    /* Direct Action & Fast Launchers Row */
+    .wing-fast-actions-label {
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       color: #747775;
+      margin-bottom: 8px;
     }
 
-    .spec-cell-value {
-      font-size: 12px;
-      font-weight: 600;
-      color: #1f1f1f;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    /* Department Tags Cluster */
-    .gm-card-dept-pills {
+    .wing-fast-chips {
       display: flex;
+      align-items: center;
+      gap: 6px;
       flex-wrap: wrap;
-      gap: 5px;
       margin-bottom: 16px;
     }
 
-    .dept-pill {
-      font-size: 11px;
-      font-weight: 500;
+    .wing-fast-chip {
+      background: #f1f3f4;
+      border: 1px solid transparent;
+      border-radius: var(--radius-pill);
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 600;
       color: #3c4043;
-      background-color: #ffffff;
-      border: 1px solid var(--border-hairline);
-      padding: 4px 10px;
-      border-radius: 6px;
-      white-space: nowrap;
-      box-shadow: 0 1px 2px rgba(60, 64, 67, 0.04);
+      cursor: pointer;
+      transition: all var(--ease);
+    }
+    .wing-fast-chip:hover {
+      background: #e8f0fe;
+      color: var(--color-primary);
+      border-color: rgba(11, 87, 208, 0.3);
+      transform: translateY(-1px);
+    }
+    .wing-fast-chip.primary-spot {
+      background: #fef7e0;
+      color: #b06000;
+      border-color: #fce8b2;
+    }
+    .wing-fast-chip.primary-spot:hover {
+      background: #feefc3;
+      color: #8c4c00;
     }
 
-    /* Action Row with Magnetic Button */
-    .gm-card-actions {
+    .wing-footer {
       margin-top: auto;
-      padding-top: 16px;
-      border-top: 1px solid var(--border-hairline);
+      padding-top: 12px;
+      border-top: 1px solid #f1f3f4;
     }
 
-    .gm-btn-directions {
+    .wing-primary-btn {
       width: 100%;
-      background-color: var(--card-accent, #0b57d0);
-      color: #ffffff;
+      height: 44px;
+      border-radius: var(--radius-pill);
       border: none;
-      border-radius: 12px;
-      padding: 12px 18px;
+      background-color: var(--color-primary);
+      color: #ffffff;
       font-family: var(--font-sans);
       font-size: 14px;
       font-weight: 600;
-      cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      box-shadow: 0 2px 6px rgba(60, 64, 67, 0.2);
-      transition: all 200ms ease;
+      gap: 8px;
+      cursor: pointer;
+      transition: all var(--ease);
+      box-shadow: 0 1px 3px rgba(11, 87, 208, 0.25);
     }
-
-    .gm-btn-directions .action-arrow {
-      transition: transform 200ms ease;
-    }
-
-    .gm-place-card:hover .gm-btn-directions {
+    .wing-primary-btn:hover {
       filter: brightness(1.08);
       box-shadow: 0 4px 14px rgba(11, 87, 208, 0.35);
     }
-
-    .gm-place-card:hover .gm-btn-directions .action-arrow {
-      transform: translateX(5px);
+    .wing-primary-btn .btn-arrow {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.2s ease;
+    }
+    .wing-card:hover .wing-primary-btn .btn-arrow {
+      transform: translateX(4px);
     }
 
-    /* Dedicated Campus Satellite Radar Section */
-    .portal-map-section {
-      margin-top: 18px;
+    /* VIEW 2: FLOOR BY FLOOR DIRECT MATRIX */
+    .floor-matrix-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
-    .gm-map-card {
+    .floor-matrix-row {
       background: #ffffff;
       border: 1px solid var(--border-hairline);
-      border-radius: 20px;
-      box-shadow: 0 2px 8px rgba(60, 64, 67, 0.1);
-      overflow: hidden;
-    }
-
-    .gm-map-topbar {
+      border-radius: 16px;
+      padding: 18px 22px;
+      box-shadow: 0 2px 6px rgba(60, 64, 67, 0.06);
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 16px 24px;
-      border-bottom: 1px solid var(--border-hairline);
-      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 20px;
+      transition: border-color var(--ease), box-shadow var(--ease);
+    }
+    .floor-matrix-row:hover {
+      border-color: rgba(11, 87, 208, 0.3);
+      box-shadow: 0 4px 14px rgba(60, 64, 67, 0.1);
     }
 
-    .gm-map-title-wrap {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .floor-badge-col {
+      min-width: 130px;
+      flex-shrink: 0;
     }
 
-    .gm-map-title {
-      font-family: var(--font-display);
-      font-size: 16px;
-      font-weight: 700;
-      color: #1f1f1f;
-    }
-
-    .gm-map-subtitle {
-      font-size: 12px;
-      color: #5f6368;
-    }
-
-    .gm-map-mode-pills {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .gm-map-pill {
-      background-color: #ffffff;
-      border: 1px solid var(--border-hairline);
-      border-radius: var(--radius-pill);
-      padding: 6px 14px;
-      font-size: 12px;
-      font-weight: 600;
-      color: #3c4043;
-      cursor: pointer;
+    .floor-level-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      text-decoration: none;
-      transition: all var(--ease);
-      box-shadow: 0 1px 2px rgba(60, 64, 67, 0.06);
-    }
-    .gm-map-pill:hover {
+      font-size: 13px;
+      font-weight: 700;
       color: var(--color-primary);
-      border-color: var(--color-primary);
-      background-color: #f8fafd;
-    }
-    .gm-map-pill.external-link {
-      color: var(--color-primary);
-      border-color: rgba(11, 87, 208, 0.3);
-      font-weight: 600;
+      background: #e8f0fe;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 4px;
     }
 
-    .gm-map-canvas-wrap {
-      width: 100%;
-      height: 390px;
-      background-color: #e5e3df;
-      position: relative;
-      overflow: hidden;
+    .floor-wing-hint {
+      font-size: 11.5px;
+      color: #5f6368;
     }
 
-    .gm-live-iframe {
-      width: 100%;
-      height: 100%;
-      min-height: 390px;
-      border: none;
-      display: block;
-    }
-
-    .gm-map-building-jump {
+    .floor-rooms-col {
+      flex: 1;
       display: flex;
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
-      padding: 14px 22px;
-      border-top: 1px solid var(--border-hairline);
-      background-color: #ffffff;
     }
 
-    .jump-label {
-      font-size: 12px;
-      font-weight: 700;
-      color: #5f6368;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .jump-chip {
-      background-color: #f8fafd;
+    .matrix-room-chip {
+      background: #f8fafd;
       border: 1px solid var(--border-hairline);
-      border-radius: var(--radius-pill);
-      padding: 6px 14px;
-      font-size: 12px;
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 13px;
       font-weight: 600;
-      color: #3c4043;
+      color: #1f1f1f;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       transition: all var(--ease);
     }
-    .jump-chip:hover {
-      color: var(--color-primary);
+    .matrix-room-chip:hover {
+      background: #ffffff;
       border-color: var(--color-primary);
-      background-color: #e8f0fe;
+      color: var(--color-primary);
+      box-shadow: 0 3px 8px rgba(11, 87, 208, 0.18);
+      transform: translateY(-1px);
+    }
+    .matrix-room-chip .chip-cat {
+      font-size: 11px;
+      color: #5f6368;
+      font-weight: 500;
     }
 
-    .jump-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
+    .floor-explore-all {
+      background: transparent;
+      border: 1px dashed rgba(11, 87, 208, 0.5);
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--color-primary);
+      cursor: pointer;
+      transition: all var(--ease);
     }
-    .jump-dot.eng { background-color: #0b57d0; }
-    .jump-dot.mba { background-color: #b3261e; }
-    .jump-dot.mca { background-color: #6750a4; }
-    .jump-dot.bca { background-color: #146c2e; }
-    .jump-dot.pharmacy { background-color: #006874; }
+    .floor-explore-all:hover {
+      background: #e8f0fe;
+      border-style: solid;
+    }
+
+    /* VIEW 3: POPULAR HOTSPOTS GRID */
+    .hotspots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+    }
+
+    .hotspot-card {
+      background: #ffffff;
+      border: 1px solid var(--border-hairline);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(60, 64, 67, 0.08);
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease);
+      cursor: pointer;
+    }
+    .hotspot-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 22px rgba(60, 64, 67, 0.14);
+      border-color: rgba(11, 87, 208, 0.35);
+    }
+
+    .hotspot-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .hotspot-icon-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #e8f0fe;
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .hotspot-loc-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: #f1f3f4;
+      color: #3c4043;
+    }
+
+    .hotspot-name {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: #1f1f1f;
+      margin-bottom: 6px;
+    }
+
+    .hotspot-desc {
+      font-size: 13px;
+      color: #5f6368;
+      line-height: 1.45;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    .hotspot-btn {
+      width: 100%;
+      height: 40px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-hairline);
+      background: #f8fafd;
+      color: var(--color-primary);
+      font-weight: 600;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all var(--ease);
+    }
+    .hotspot-card:hover .hotspot-btn {
+      background: var(--color-primary);
+      color: #ffffff;
+      border-color: var(--color-primary);
+    }
+
+    @media (max-width: 768px) {
+      .navigo-portal-wrap {
+        padding: 20px 14px 60px 14px;
+      }
+      .wings-grid, .hotspots-grid {
+        grid-template-columns: 1fr;
+      }
+      .floor-matrix-row {
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
+      }
+      .floor-badge-col {
+        min-width: unset;
+      }
+      .navigo-mode-nav {
+        flex-wrap: wrap;
+      }
+      .navigo-mode-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+    }
 
     /* ==========================================================================
        COLLEGE ACTIVE BAR (Inside Home Screen)
@@ -2076,33 +2182,33 @@
   </header>
 
   <!-- ==========================================================================
-       SCREEN 0: COLLEGE SELECTION PORTAL (Kinetic 3D Spatial Wings Hub)
+       SCREEN 0: CAMPUS WAYFINDING HUB (MITM NAVIGO)
        ========================================================================== -->
-  <section id="collegePortalScreen" class="gm-portal-wrap">
-    <!-- Terminal Orientation Header -->
-    <div class="terminal-hero">
-      <div class="terminal-status-strip">
-        <img src="logo.png" alt="MIT Mysore Emblem" class="terminal-crest" />
-        <span class="terminal-live-dot" aria-hidden="true"></span>
-        <span class="terminal-status-text">Campus Indoor Wayfinding System</span>
+  <section id="collegePortalScreen" class="navigo-portal-wrap">
+    <!-- Hub Hero -->
+    <div class="navigo-hero">
+      <div class="navigo-status-strip">
+        <img src="logo.png" alt="MIT Mysore Emblem" class="navigo-crest" />
+        <span class="navigo-live-dot" aria-hidden="true"></span>
+        <span class="navigo-status-text">Campus Indoor Wayfinding System</span>
       </div>
-      <h1 class="terminal-title">Choose Your Academic Wing</h1>
-      <p class="terminal-subtitle">
-        Select a campus wing below to access turn-by-turn corridor photo walkthroughs, lecture suites, and research laboratories.
+      <h1 class="navigo-title">Explore MIT Mysore Campus</h1>
+      <p class="navigo-subtitle">
+        Turn-by-turn indoor corridor photo navigation across academic wings, lecture suites, and laboratories.
       </p>
     </div>
 
-    <!-- Spatial Search & Filter Hub -->
-    <div class="terminal-search-section">
-      <div class="terminal-search-capsule">
-        <svg viewBox="0 0 24 24" class="terminal-search-icon" aria-hidden="true">
-          <polygon points="3 11 22 2 13 21 11 13 3 11" fill="currentColor"/>
+    <!-- Universal Instant Teleport Search Hub -->
+    <div class="navigo-search-hub">
+      <div class="navigo-search-box">
+        <svg viewBox="0 0 24 24" class="navigo-search-icon" aria-hidden="true">
+          <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
         </svg>
         <input
           type="text"
           id="portalSearchInput"
-          class="gm-search-input"
-          placeholder="Search any room, department, or wing (e.g. 102, 205, Belaku, CSE, MCA)..."
+          class="navigo-search-input"
+          placeholder="Search any room or lab campus-wide (e.g. 102, 205, Belaku, Board Room, CAD)..."
           autocomplete="off"
         />
         <button type="button" class="voice-mic-btn" id="portalVoiceSearchBtn" title="Speak to Search (Hands-free)" aria-label="Start voice search">
@@ -2112,291 +2218,225 @@
         </button>
       </div>
 
-      <!-- Architectural Wing Filter Pills (Sliding Capsule Style) -->
-      <div class="terminal-filter-wrap">
-        <div class="terminal-filter-row" role="tablist" aria-label="Campus Building Categories">
-          <button type="button" class="gm-filter-chip active" data-portal-filter="all">All Academic Wings (5)</button>
-          <button type="button" class="gm-filter-chip" data-portal-filter="engineering">Engineering Block (60)</button>
-          <button type="button" class="gm-filter-chip" data-portal-filter="mba">Department of MBA</button>
-          <button type="button" class="gm-filter-chip" data-portal-filter="mca">Department of MCA</button>
-          <button type="button" class="gm-filter-chip" data-portal-filter="bca">Department of BCA</button>
-          <button type="button" class="gm-filter-chip" data-portal-filter="pharmacy">Pharmacy Sciences</button>
-        </div>
-      </div>
+      <!-- Live Instant Autocomplete Dropdown Matrix -->
+      <div id="portalSearchDropdown" class="portal-suggest-dropdown" style="display: none;" role="listbox"></div>
     </div>
 
-    <!-- Academic Wings Section -->
-    <div class="portal-section">
-      <div class="terminal-section-bar">
-        <h2 class="terminal-section-heading">Campus Academic Blocks</h2>
-        <span class="terminal-wing-counter">5 Wings Online • MIT Mysore</span>
+    <!-- Navigation Mode Switcher Bar (3 Functional Views) -->
+    <div class="navigo-mode-nav" role="tablist">
+      <button type="button" class="navigo-mode-btn active" data-nav-mode="wings">
+        <svg viewBox="0 0 24 24" class="icon-svg"><path fill="none" stroke="currentColor" stroke-width="2" d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v4M12 14v4M16 14v4"/></svg>
+        <span>Academic Wings</span>
+      </button>
+      <button type="button" class="navigo-mode-btn" data-nav-mode="floors">
+        <svg viewBox="0 0 24 24" class="icon-svg"><line x1="12" y1="2" x2="12" y2="22" stroke="currentColor" stroke-width="2"/><polyline points="17 7 12 2 7 7" stroke="currentColor" stroke-width="2" fill="none"/><polyline points="17 17 12 22 7 17" stroke="currentColor" stroke-width="2" fill="none"/><line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="2"/></svg>
+        <span>Floor-by-Floor Matrix</span>
+      </button>
+      <button type="button" class="navigo-mode-btn" data-nav-mode="hotspots">
+        <svg viewBox="0 0 24 24" class="icon-svg"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span>Popular Hotspots</span>
+      </button>
+    </div>
+
+    <!-- ========================================================================
+         VIEW 1: ACADEMIC WINGS WITH DIRECT FAST-LAUNCHERS
+         ======================================================================== -->
+    <div id="viewModeWings" class="nav-view-panel">
+      <!-- Wing Sub-filters -->
+      <div class="wings-filter-wrap" role="tablist" aria-label="Campus Building Categories">
+        <button type="button" class="wing-filter-chip active" data-portal-filter="all">All Wings (5)</button>
+        <button type="button" class="wing-filter-chip" data-portal-filter="engineering">Engineering Block (60)</button>
+        <button type="button" class="wing-filter-chip" data-portal-filter="mba">Department of MBA</button>
+        <button type="button" class="wing-filter-chip" data-portal-filter="mca">Department of MCA</button>
+        <button type="button" class="wing-filter-chip" data-portal-filter="bca">Department of BCA</button>
+        <button type="button" class="wing-filter-chip" data-portal-filter="pharmacy">Pharmacy Sciences</button>
       </div>
 
-      <div class="gm-places-list" id="gmPlacesList">
+      <div class="wings-grid" id="wingsGrid">
         <!-- 1. Engineering Academic Block -->
-        <article class="gm-place-card" data-select-college="engineering" id="placeCard-engineering" tabindex="0" role="button" aria-label="Select Engineering Academic Block">
-          <div class="card-border-glow" aria-hidden="true"></div>
-          <div class="gm-card-photo-wrap">
-            <img src="Rooms/114/a.jpg" alt="Engineering Academic Block" class="gm-card-photo" loading="lazy" decoding="async" />
-            <div class="gm-card-photo-overlay"></div>
-            <div class="terminal-card-badges">
-              <span class="terminal-wing-tag">WING 01 • BLOCK A</span>
-              <span class="terminal-room-count-badge">
+        <article class="wing-card" data-select-college="engineering" tabindex="0" role="button" aria-label="Explore Engineering Academic Block">
+          <div class="wing-border-glow" aria-hidden="true"></div>
+          <div class="wing-photo-wrap">
+            <img src="Rooms/114/a.jpg" alt="Engineering Academic Block" class="wing-photo" loading="lazy" decoding="async" />
+            <div class="wing-photo-overlay"></div>
+            <div class="wing-card-badges">
+              <span class="wing-block-tag">WING 01 • MAIN BLOCK</span>
+              <span class="wing-room-badge">
                 <span class="badge-dot"></span>
                 <span>60 Rooms Indexed</span>
               </span>
             </div>
           </div>
-          <div class="gm-card-body">
-            <div class="gm-card-header-line">
-              <span class="gm-card-category">BE / B.Tech • Engineering Disciplines</span>
-            </div>
-            <h2 class="gm-card-title">Engineering Academic Block</h2>
-            <p class="gm-card-desc">
-              Houses CSE, ISE, ECE, Mechanical, Civil, and AI &amp; Data Science departments, specialized research centers, and computing facilities.
+          <div class="wing-body">
+            <div class="wing-category">BE / B.Tech • Engineering Disciplines</div>
+            <h2 class="wing-title">Engineering Academic Block</h2>
+            <p class="wing-desc">
+              Houses CSE, ISE, ECE, Mechanical, Civil, AI &amp; DS, specialized research centers, and computing facilities.
             </p>
 
-            <div class="spatial-specs-matrix">
-              <div class="spec-cell">
-                <span class="spec-cell-label">Levels</span>
-                <span class="spec-cell-value">Floors G to 5</span>
-              </div>
-              <div class="spec-cell">
-                <span class="spec-cell-label">Location</span>
-                <span class="spec-cell-value">Main Quadrangle</span>
-              </div>
-              <div class="spec-cell">
-                <span class="spec-cell-label">Stairways</span>
-                <span class="spec-cell-value">Points A, B &amp; C</span>
-              </div>
+            <div class="wing-fast-actions-label">Fast Floor Jump:</div>
+            <div class="wing-fast-chips">
+              <button type="button" class="wing-fast-chip" data-direct-floor="ground" data-for-college="engineering">Ground &amp; Labs</button>
+              <button type="button" class="wing-fast-chip" data-direct-floor="1st Floor" data-for-college="engineering">1st Floor</button>
+              <button type="button" class="wing-fast-chip" data-direct-floor="2nd Floor" data-for-college="engineering">2nd Floor (CSE)</button>
+              <button type="button" class="wing-fast-chip" data-direct-floor="3rd Floor" data-for-college="engineering">3rd Floor (ISE/Mech)</button>
+              <button type="button" class="wing-fast-chip" data-direct-floor="4-5" data-for-college="engineering">4th &amp; 5th Floor</button>
             </div>
 
-            <div class="gm-card-dept-pills">
-              <span class="dept-pill">CSE</span>
-              <span class="dept-pill">ISE</span>
-              <span class="dept-pill">ECE</span>
-              <span class="dept-pill">Mechanical</span>
-              <span class="dept-pill">Civil</span>
-              <span class="dept-pill">AI &amp; DS</span>
-            </div>
-
-            <div class="gm-card-actions">
-              <button type="button" class="gm-btn-directions" data-btn-college="engineering">
-                <span>Enter Engineering Wing</span>
-                <svg viewBox="0 0 24 24" class="action-arrow icon-svg" style="width:16px;height:16px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            <div class="wing-footer">
+              <button type="button" class="wing-primary-btn" data-btn-college="engineering">
+                <span>Explore Engineering Wing</span>
+                <svg viewBox="0 0 24 24" class="btn-arrow icon-svg"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </button>
             </div>
           </div>
         </article>
 
         <!-- 2. Department of MBA -->
-        <article class="gm-place-card" data-select-college="mba" id="placeCard-mba" tabindex="0" role="button" aria-label="Select Department of MBA">
-          <div class="card-border-glow" aria-hidden="true"></div>
-          <div class="gm-card-photo-wrap">
-            <img src="Rooms/Belaku/a.jpg" alt="Department of MBA &amp; MCA Building" class="gm-card-photo" loading="lazy" decoding="async" />
-            <div class="gm-card-photo-overlay"></div>
-            <div class="terminal-card-badges">
-              <span class="terminal-wing-tag">WING 02 • BLOCK B</span>
-              <span class="terminal-room-count-badge">
+        <article class="wing-card" data-select-college="mba" tabindex="0" role="button" aria-label="Explore Department of MBA">
+          <div class="wing-border-glow" aria-hidden="true"></div>
+          <div class="wing-photo-wrap">
+            <img src="Rooms/Belaku/a.jpg" alt="Department of MBA &amp; MCA Building" class="wing-photo" loading="lazy" decoding="async" />
+            <div class="wing-photo-overlay"></div>
+            <div class="wing-card-badges">
+              <span class="wing-block-tag">WING 02 • STANDALONE BLOCK</span>
+              <span class="wing-room-badge">
                 <span class="badge-dot"></span>
-                <span>Rooms 1, 2, 102–106 &amp; Belaku</span>
+                <span>Belaku Auditorium &amp; Rooms</span>
               </span>
             </div>
           </div>
-          <div class="gm-card-body">
-            <div class="gm-card-header-line">
-              <span class="gm-card-category">Management Studies • Standalone Facility</span>
-            </div>
-            <h2 class="gm-card-title">Department of MBA</h2>
-            <p class="gm-card-desc">
+          <div class="wing-body">
+            <div class="wing-category">Management Studies • Standalone Facility</div>
+            <h2 class="wing-title">Department of MBA</h2>
+            <p class="wing-desc">
               Master of Business Administration block featuring Belaku (ಬೆಳಕು) auditorium, Board Room, faculty chambers, and smart lecture suites.
             </p>
 
-            <div class="spatial-specs-matrix">
-              <div class="spec-cell">
-                <span class="spec-cell-label">Levels</span>
-                <span class="spec-cell-value">Ground &amp; 1st Floor</span>
-              </div>
-              <div class="spec-cell">
-                <span class="spec-cell-label">Location</span>
-                <span class="spec-cell-value">South Quadrangle</span>
-              </div>
-              <div class="spec-cell">
-                <span class="spec-cell-label">Stairways</span>
-                <span class="spec-cell-value">Stairs to 1st Landing</span>
-              </div>
+            <div class="wing-fast-actions-label">Direct Destination Teleport:</div>
+            <div class="wing-fast-chips">
+              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Belaku">🌟 Belaku (Auditorium)</button>
+              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="2">🏛️ Board Room (Room 2)</button>
+              <button type="button" class="wing-fast-chip" data-direct-room="1">👥 Staff Room (Room 1)</button>
+              <button type="button" class="wing-fast-chip" data-direct-room="102">Room 102</button>
+              <button type="button" class="wing-fast-chip" data-direct-room="103">Room 103</button>
             </div>
 
-            <div class="gm-card-dept-pills">
-              <span class="dept-pill">Belaku (ಬೆಳಕು)</span>
-              <span class="dept-pill">Rooms 1 &amp; 2</span>
-              <span class="dept-pill">Rooms 102–106</span>
-              <span class="dept-pill">Board Room</span>
-            </div>
-
-            <div class="gm-card-actions">
-              <button type="button" class="gm-btn-directions" data-btn-college="mba">
+            <div class="wing-footer">
+              <button type="button" class="wing-primary-btn" data-btn-college="mba">
                 <span>Enter MBA Wing</span>
-                <svg viewBox="0 0 24 24" class="action-arrow icon-svg" style="width:16px;height:16px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                <svg viewBox="0 0 24 24" class="btn-arrow icon-svg"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </button>
             </div>
           </div>
         </article>
 
         <!-- 3. Department of MCA -->
-        <article class="gm-place-card" data-select-college="mca" id="placeCard-mca" tabindex="0" role="button" aria-label="Select Department of MCA">
-          <div class="card-border-glow" aria-hidden="true"></div>
-          <div class="gm-card-photo-wrap">
-            <img src="Rooms/Belaku/d.jpg" alt="Department of MCA and Belaku Entrance" class="gm-card-photo" loading="lazy" decoding="async" />
-            <div class="gm-card-photo-overlay"></div>
-            <div class="terminal-card-badges">
-              <span class="terminal-wing-tag">WING 03 • BLOCK C</span>
-              <span class="terminal-room-count-badge">
+        <article class="wing-card" data-select-college="mca" tabindex="0" role="button" aria-label="Explore Department of MCA">
+          <div class="wing-border-glow" aria-hidden="true"></div>
+          <div class="wing-photo-wrap">
+            <img src="Rooms/Belaku/d.jpg" alt="Department of MCA and Belaku Entrance" class="wing-photo" loading="lazy" decoding="async" />
+            <div class="wing-photo-overlay"></div>
+            <div class="wing-card-badges">
+              <span class="wing-block-tag">WING 03 • PG IT BLOCK</span>
+              <span class="wing-room-badge">
                 <span class="badge-dot"></span>
                 <span>Postgraduate IT Division</span>
               </span>
             </div>
           </div>
-          <div class="gm-card-body">
-            <div class="gm-card-header-line">
-              <span class="gm-card-category">Computer Applications • Postgraduate</span>
-            </div>
-            <h2 class="gm-card-title">Department of MCA</h2>
-            <p class="gm-card-desc">
+          <div class="wing-body">
+            <div class="wing-category">Computer Applications • Postgraduate</div>
+            <h2 class="wing-title">Department of MCA</h2>
+            <p class="wing-desc">
               Master of Computer Applications division with software engineering studios, computing laboratories, and direct access to Belaku hall.
             </p>
 
-            <div class="spatial-specs-matrix">
-              <div class="spec-cell">
-                <span class="spec-cell-label">Levels</span>
-                <span class="spec-cell-value">Ground &amp; 1st Floor</span>
-              </div>
-              <div class="spec-cell">
-                <span class="spec-cell-label">Location</span>
-                <span class="spec-cell-value">MBA &amp; MCA Block</span>
-              </div>
-              <div class="spec-cell">
-                <span class="spec-cell-label">Stairways</span>
-                <span class="spec-cell-value">Beside Elevator</span>
-              </div>
+            <div class="wing-fast-actions-label">Direct Destination Teleport:</div>
+            <div class="wing-fast-chips">
+              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Belaku">🌟 Belaku Entrance</button>
+              <button type="button" class="wing-fast-chip" data-direct-college="mca">PG Computing Labs</button>
+              <button type="button" class="wing-fast-chip" data-direct-college="mca">Software Studios</button>
             </div>
 
-            <div class="gm-card-dept-pills">
-              <span class="dept-pill">PG Computing Labs</span>
-              <span class="dept-pill">Software Studios</span>
-              <span class="dept-pill">Belaku Hall</span>
-            </div>
-
-            <div class="gm-card-actions">
-              <button type="button" class="gm-btn-directions" data-btn-college="mca">
+            <div class="wing-footer">
+              <button type="button" class="wing-primary-btn" data-btn-college="mca">
                 <span>Enter MCA Wing</span>
-                <svg viewBox="0 0 24 24" class="action-arrow icon-svg" style="width:16px;height:16px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                <svg viewBox="0 0 24 24" class="btn-arrow icon-svg"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </button>
             </div>
           </div>
         </article>
 
         <!-- 4. Department of BCA -->
-        <article class="gm-place-card" data-select-college="bca" id="placeCard-bca" tabindex="0" role="button" aria-label="Select Department of BCA">
-          <div class="card-border-glow" aria-hidden="true"></div>
-          <div class="gm-card-photo-wrap">
-            <img src="Rooms/117/1.jpg" alt="Department of BCA Computing Suites" class="gm-card-photo" loading="lazy" decoding="async" />
-            <div class="gm-card-photo-overlay"></div>
-            <div class="terminal-card-badges">
-              <span class="terminal-wing-tag">WING 04 • BLOCK D</span>
-              <span class="terminal-room-count-badge">
+        <article class="wing-card" data-select-college="bca" tabindex="0" role="button" aria-label="Explore Department of BCA">
+          <div class="wing-border-glow" aria-hidden="true"></div>
+          <div class="wing-photo-wrap">
+            <img src="Rooms/117/1.jpg" alt="Department of BCA Computing Suites" class="wing-photo" loading="lazy" decoding="async" />
+            <div class="wing-photo-overlay"></div>
+            <div class="wing-card-badges">
+              <span class="wing-block-tag">WING 04 • IT DIVISION</span>
+              <span class="wing-room-badge">
                 <span class="badge-dot"></span>
                 <span>Undergraduate IT Wing</span>
               </span>
             </div>
           </div>
-          <div class="gm-card-body">
-            <div class="gm-card-header-line">
-              <span class="gm-card-category">Computer Applications • Undergraduate</span>
-            </div>
-            <h2 class="gm-card-title">Department of BCA</h2>
-            <p class="gm-card-desc">
+          <div class="wing-body">
+            <div class="wing-category">Computer Applications • Undergraduate</div>
+            <h2 class="wing-title">Department of BCA</h2>
+            <p class="wing-desc">
               Bachelor of Computer Applications featuring modern coding studios, web technology laboratories, and interactive lecture theaters.
             </p>
 
-            <div class="spatial-specs-matrix">
-              <div class="spec-cell">
-                <span class="spec-cell-label">Levels</span>
-                <span class="spec-cell-value">Ground Level</span>
-              </div>
-              <div class="spec-cell">
-                <span class="spec-cell-label">Location</span>
-                <span class="spec-cell-value">IT Academic Wing</span>
-              </div>
-              <div class="spec-cell">
-                <span class="spec-cell-label">Stairways</span>
-                <span class="spec-cell-value">Direct Ground Entry</span>
-              </div>
+            <div class="wing-fast-actions-label">Fast Shortcuts:</div>
+            <div class="wing-fast-chips">
+              <button type="button" class="wing-fast-chip" data-direct-college="bca">Coding Laboratories</button>
+              <button type="button" class="wing-fast-chip" data-direct-college="bca">Web Tech Studios</button>
+              <button type="button" class="wing-fast-chip" data-direct-college="bca">Lecture Theaters</button>
             </div>
 
-            <div class="gm-card-dept-pills">
-              <span class="dept-pill">Coding Laboratories</span>
-              <span class="dept-pill">Web Tech Studios</span>
-              <span class="dept-pill">Lecture Theaters</span>
-            </div>
-
-            <div class="gm-card-actions">
-              <button type="button" class="gm-btn-directions" data-btn-college="bca">
+            <div class="wing-footer">
+              <button type="button" class="wing-primary-btn" data-btn-college="bca">
                 <span>Enter BCA Wing</span>
-                <svg viewBox="0 0 24 24" class="action-arrow icon-svg" style="width:16px;height:16px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                <svg viewBox="0 0 24 24" class="btn-arrow icon-svg"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </button>
             </div>
           </div>
         </article>
 
         <!-- 5. Faculty of Pharmaceutical Sciences -->
-        <article class="gm-place-card" data-select-college="pharmacy" id="placeCard-pharmacy" tabindex="0" role="button" aria-label="Select Faculty of Pharmaceutical Sciences">
-          <div class="card-border-glow" aria-hidden="true"></div>
-          <div class="gm-card-photo-wrap">
-            <img src="Rooms/118/1.jpg" alt="Faculty of Pharmaceutical Sciences" class="gm-card-photo" loading="lazy" decoding="async" />
-            <div class="gm-card-photo-overlay"></div>
-            <div class="terminal-card-badges">
-              <span class="terminal-wing-tag">WING 05 • BLOCK E</span>
-              <span class="terminal-room-count-badge">
+        <article class="wing-card" data-select-college="pharmacy" tabindex="0" role="button" aria-label="Explore Faculty of Pharmaceutical Sciences">
+          <div class="wing-border-glow" aria-hidden="true"></div>
+          <div class="wing-photo-wrap">
+            <img src="Rooms/118/1.jpg" alt="Faculty of Pharmaceutical Sciences" class="wing-photo" loading="lazy" decoding="async" />
+            <div class="wing-photo-overlay"></div>
+            <div class="wing-card-badges">
+              <span class="wing-block-tag">WING 05 • HEALTH SCIENCES</span>
+              <span class="wing-room-badge">
                 <span class="badge-dot"></span>
-                <span>Health &amp; Pharmacy Sciences</span>
+                <span>Pharmacy &amp; Research</span>
               </span>
             </div>
           </div>
-          <div class="gm-card-body">
-            <div class="gm-card-header-line">
-              <span class="gm-card-category">Pharmaceutical Sciences • Research</span>
-            </div>
-            <h2 class="gm-card-title">Faculty of Pharmaceutical Sciences</h2>
-            <p class="gm-card-desc">
+          <div class="wing-body">
+            <div class="wing-category">Pharmaceutical Sciences • Research</div>
+            <h2 class="wing-title">Faculty of Pharmaceutical Sciences</h2>
+            <p class="wing-desc">
               Dedicated pharmaceutical block with formulation suites, organic chemistry research chambers, and pharmacognosy laboratories.
             </p>
 
-            <div class="spatial-specs-matrix">
-              <div class="spec-cell">
-                <span class="spec-cell-label">Levels</span>
-                <span class="spec-cell-value">Dedicated Block</span>
-              </div>
-              <div class="spec-cell">
-                <span class="spec-cell-label">Location</span>
-                <span class="spec-cell-value">Science Quadrangle</span>
-              </div>
-              <div class="spec-cell">
-                <span class="spec-cell-label">Stairways</span>
-                <span class="spec-cell-value">East Staircase</span>
-              </div>
+            <div class="wing-fast-actions-label">Fast Shortcuts:</div>
+            <div class="wing-fast-chips">
+              <button type="button" class="wing-fast-chip" data-direct-college="pharmacy">Pharmaceutics Labs</button>
+              <button type="button" class="wing-fast-chip" data-direct-college="pharmacy">Chemistry Suites</button>
+              <button type="button" class="wing-fast-chip" data-direct-college="pharmacy">Research Chambers</button>
             </div>
 
-            <div class="gm-card-dept-pills">
-              <span class="dept-pill">Pharmaceutics Labs</span>
-              <span class="dept-pill">Chemistry Suites</span>
-              <span class="dept-pill">Research Chambers</span>
-            </div>
-
-            <div class="gm-card-actions">
-              <button type="button" class="gm-btn-directions" data-btn-college="pharmacy">
+            <div class="wing-footer">
+              <button type="button" class="wing-primary-btn" data-btn-college="pharmacy">
                 <span>Enter Pharmacy Wing</span>
-                <svg viewBox="0 0 24 24" class="action-arrow icon-svg" style="width:16px;height:16px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                <svg viewBox="0 0 24 24" class="btn-arrow icon-svg"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </button>
             </div>
           </div>
@@ -2404,66 +2444,256 @@
       </div>
     </div>
 
-    <!-- Campus Satellite Radar Section -->
-    <div class="portal-map-section">
-      <div class="gm-map-card">
-        <div class="gm-map-topbar">
-          <div class="gm-map-title-wrap">
-            <svg viewBox="0 0 24 24" class="icon-svg" style="width:20px;height:20px;color:var(--color-primary);"><polygon points="3 11 22 2 13 21 11 13 3 11" fill="currentColor"/></svg>
-            <div>
-              <div class="gm-map-title">Campus Satellite Radar &amp; Orientation</div>
-              <div class="gm-map-subtitle">12.3664° N, 76.6870° E • Maharaja Institute of Technology Mysore (Belagola Campus)</div>
-            </div>
+    <!-- ========================================================================
+         VIEW 2: CAMPUS FLOOR-BY-FLOOR MATRIX (CROSS-WING DIRECTORY)
+         ======================================================================== -->
+    <div id="viewModeFloors" class="nav-view-panel" style="display: none;">
+      <div class="floor-matrix-wrap">
+        <!-- Ground Floor -->
+        <div class="floor-matrix-row">
+          <div class="floor-badge-col">
+            <div class="floor-level-pill">Ground Floor</div>
+            <div class="floor-wing-hint">Workshops &amp; Labs</div>
           </div>
-
-          <div class="gm-map-mode-pills">
-            <a
-              href="https://www.google.com/maps/place/Maharaja+Institute+of+Technology+Mysore/@12.3664692,76.6869629,450m/data=!3m1!1e3!4m6!3m5!1s0x3baf71273625ff79:0xe21bc942801a6077!8m2!3d12.3663906!4d76.6887613!16s%2Fg%2F11gh4cvl_2?entry=ttu"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="gm-map-pill external-link"
-              title="Open exact location in Google Maps App"
-            >
-              <span>Open in Google Maps App</span>
-              <svg viewBox="0 0 24 24" style="width:13px;height:13px;"><path fill="currentColor" d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
-            </a>
+          <div class="floor-rooms-col">
+            <button type="button" class="matrix-room-chip" data-direct-room="114">
+              <span>Room 114</span>
+              <span class="chip-cat">(Eng Block)</span>
+            </button>
+            <button type="button" class="matrix-room-chip" data-direct-room="117">
+              <span>Room 117</span>
+              <span class="chip-cat">(BCA Wing)</span>
+            </button>
+            <button type="button" class="matrix-room-chip" data-direct-room="118">
+              <span>Room 118</span>
+              <span class="chip-cat">(Pharmacy Wing)</span>
+            </button>
+            <button type="button" class="matrix-room-chip" data-direct-room="Belaku">
+              <span>🌟 Belaku Hall</span>
+              <span class="chip-cat">(MBA/MCA)</span>
+            </button>
+            <button type="button" class="floor-explore-all" data-direct-floor="ground" data-for-college="engineering">
+              <span>Explore All Ground Floor Rooms &rarr;</span>
+            </button>
           </div>
         </div>
 
-        <div class="gm-map-canvas-wrap" id="campusMapCanvasWrap">
-          <iframe
-            id="gmapsEmbedFrame"
-            class="gm-live-iframe"
-            src="https://maps.google.com/maps?q=Maharaja+Institute+of+Technology+Mysore&amp;t=k&amp;z=18&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
-            loading="lazy"
-            allowfullscreen=""
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Maharaja Institute of Technology Mysore - Google Maps Live Satellite"
-          ></iframe>
+        <!-- 1st Floor -->
+        <div class="floor-matrix-row">
+          <div class="floor-badge-col">
+            <div class="floor-level-pill">1st Floor</div>
+            <div class="floor-wing-hint">Auditorium &amp; MBA Block</div>
+          </div>
+          <div class="floor-rooms-col">
+            <button type="button" class="matrix-room-chip" data-direct-room="Belaku">
+              <span>🌟 Belaku Auditorium</span>
+              <span class="chip-cat">(Main Hall)</span>
+            </button>
+            <button type="button" class="matrix-room-chip" data-direct-room="2">
+              <span>🏛️ Room 2</span>
+              <span class="chip-cat">(MBA Board Room)</span>
+            </button>
+            <button type="button" class="matrix-room-chip" data-direct-room="1">
+              <span>👥 Room 1</span>
+              <span class="chip-cat">(MBA Faculty)</span>
+            </button>
+            <button type="button" class="matrix-room-chip" data-direct-room="102">
+              <span>Room 102</span>
+              <span class="chip-cat">(MBA Suite)</span>
+            </button>
+            <button type="button" class="matrix-room-chip" data-direct-room="103">
+              <span>Room 103</span>
+              <span class="chip-cat">(MBA Suite)</span>
+            </button>
+            <button type="button" class="matrix-room-chip" data-direct-room="104">
+              <span>Room 104</span>
+              <span class="chip-cat">(MBA Suite)</span>
+            </button>
+            <button type="button" class="matrix-room-chip" data-direct-room="105">
+              <span>Room 105</span>
+              <span class="chip-cat">(MBA Suite)</span>
+            </button>
+            <button type="button" class="matrix-room-chip" data-direct-room="106">
+              <span>Room 106</span>
+              <span class="chip-cat">(MBA Suite)</span>
+            </button>
+            <button type="button" class="floor-explore-all" data-direct-floor="1st Floor" data-for-college="engineering">
+              <span>Explore All 1st Floor Rooms &rarr;</span>
+            </button>
+          </div>
         </div>
 
-        <!-- Interactive Building Quick-Select Chips -->
-        <div class="gm-map-building-jump">
-          <span class="jump-label">Quick Jump:</span>
-          <button type="button" class="jump-chip" data-jump-college="engineering">
-            <span class="jump-dot eng"></span>
-            <span>Wing 01 (Engineering)</span>
+        <!-- 2nd Floor -->
+        <div class="floor-matrix-row">
+          <div class="floor-badge-col">
+            <div class="floor-level-pill">2nd Floor</div>
+            <div class="floor-wing-hint">Computer Science &amp; Labs</div>
+          </div>
+          <div class="floor-rooms-col">
+            <button type="button" class="matrix-room-chip" data-direct-room="201">
+              <span>Room 201</span>
+              <span class="chip-cat">(CSE Wing)</span>
+            </button>
+            <button type="button" class="matrix-room-chip" data-direct-room="202">
+              <span>Room 202</span>
+              <span class="chip-cat">(CSE Wing)</span>
+            </button>
+            <button type="button" class="matrix-room-chip" data-direct-room="204">
+              <span>Room 204</span>
+              <span class="chip-cat">(CSE Wing)</span>
+            </button>
+            <button type="button" class="matrix-room-chip" data-direct-room="205">
+              <span>Room 205</span>
+              <span class="chip-cat">(CSE Wing)</span>
+            </button>
+            <button type="button" class="matrix-room-chip" data-direct-room="208">
+              <span>Room 208</span>
+              <span class="chip-cat">(CSE Wing)</span>
+            </button>
+            <button type="button" class="floor-explore-all" data-direct-floor="2nd Floor" data-for-college="engineering">
+              <span>Explore All 2nd Floor Rooms (17 Rooms) &rarr;</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3rd Floor -->
+        <div class="floor-matrix-row">
+          <div class="floor-badge-col">
+            <div class="floor-level-pill">3rd Floor</div>
+            <div class="floor-wing-hint">ISE &amp; Mechanical</div>
+          </div>
+          <div class="floor-rooms-col">
+            <button type="button" class="matrix-room-chip" data-direct-room="301">
+              <span>Room 301</span>
+              <span class="chip-cat">(ISE Block)</span>
+            </button>
+            <button type="button" class="matrix-room-chip" data-direct-room="303">
+              <span>Room 303</span>
+              <span class="chip-cat">(ISE Block)</span>
+            </button>
+            <button type="button" class="matrix-room-chip" data-direct-room="305">
+              <span>Room 305</span>
+              <span class="chip-cat">(ISE Block)</span>
+            </button>
+            <button type="button" class="matrix-room-chip" data-direct-room="308">
+              <span>Room 308</span>
+              <span class="chip-cat">(ISE Block)</span>
+            </button>
+            <button type="button" class="floor-explore-all" data-direct-floor="3rd Floor" data-for-college="engineering">
+              <span>Explore All 3rd Floor Rooms (13 Rooms) &rarr;</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4th & 5th Floor -->
+        <div class="floor-matrix-row">
+          <div class="floor-badge-col">
+            <div class="floor-level-pill">4th &amp; 5th Floor</div>
+            <div class="floor-wing-hint">AI, DS &amp; Seminars</div>
+          </div>
+          <div class="floor-rooms-col">
+            <button type="button" class="matrix-room-chip" data-direct-room="401">
+              <span>Room 401</span>
+              <span class="chip-cat">(AI &amp; DS Wing)</span>
+            </button>
+            <button type="button" class="matrix-room-chip" data-direct-room="405">
+              <span>Room 405</span>
+              <span class="chip-cat">(AI &amp; DS Wing)</span>
+            </button>
+            <button type="button" class="matrix-room-chip" data-direct-room="501">
+              <span>Room 501</span>
+              <span class="chip-cat">(Seminar Level)</span>
+            </button>
+            <button type="button" class="floor-explore-all" data-direct-floor="4-5" data-for-college="engineering">
+              <span>Explore All 4th &amp; 5th Floor Rooms (15 Rooms) &rarr;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================
+         VIEW 3: CAMPUS HOTSPOTS & AUDITORIUMS
+         ======================================================================== -->
+    <div id="viewModeHotspots" class="nav-view-panel" style="display: none;">
+      <div class="hotspots-grid">
+        <!-- Belaku Auditorium -->
+        <div class="hotspot-card" data-direct-room="Belaku">
+          <div class="hotspot-top">
+            <div class="hotspot-icon-badge">🎭</div>
+            <span class="hotspot-loc-tag">MBA &amp; MCA BLOCK</span>
+          </div>
+          <h3 class="hotspot-name">Belaku (ಬೆಳಕು) Auditorium</h3>
+          <p class="hotspot-desc">
+            Primary college auditorium, amphitheater staging, cultural festivals, and keynote seminars.
+          </p>
+          <button type="button" class="hotspot-btn">
+            <span>Launch Walkthrough (4 Steps)</span>
+            <svg viewBox="0 0 24 24" class="icon-svg" style="width:15px;height:15px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </button>
-          <button type="button" class="jump-chip" data-jump-college="mba">
-            <span class="jump-dot mba"></span>
-            <span>Wing 02 (MBA &amp; Belaku)</span>
+        </div>
+
+        <!-- MBA Board Room (Room 2) -->
+        <div class="hotspot-card" data-direct-room="2">
+          <div class="hotspot-top">
+            <div class="hotspot-icon-badge">🏛️</div>
+            <span class="hotspot-loc-tag">1ST FLOOR • MBA</span>
+          </div>
+          <h3 class="hotspot-name">MBA Board &amp; Conference Room</h3>
+          <p class="hotspot-desc">
+            Room 2 executive boardroom, administrative conferences, and faculty council meetings.
+          </p>
+          <button type="button" class="hotspot-btn">
+            <span>Launch Walkthrough (6 Steps)</span>
+            <svg viewBox="0 0 24 24" class="icon-svg" style="width:15px;height:15px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </button>
-          <button type="button" class="jump-chip" data-jump-college="mca">
-            <span class="jump-dot mca"></span>
-            <span>Wing 03 (MCA)</span>
+        </div>
+
+        <!-- MBA Staff Room 1 -->
+        <div class="hotspot-card" data-direct-room="1">
+          <div class="hotspot-top">
+            <div class="hotspot-icon-badge">👥</div>
+            <span class="hotspot-loc-tag">1ST FLOOR • MBA</span>
+          </div>
+          <h3 class="hotspot-name">MBA Faculty Staff Room</h3>
+          <p class="hotspot-desc">
+            Room 1 faculty headquarters, academic mentoring suites, and professorial chambers.
+          </p>
+          <button type="button" class="hotspot-btn">
+            <span>Launch Walkthrough (6 Steps)</span>
+            <svg viewBox="0 0 24 24" class="icon-svg" style="width:15px;height:15px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </button>
-          <button type="button" class="jump-chip" data-jump-college="bca">
-            <span class="jump-dot bca"></span>
-            <span>Wing 04 (BCA)</span>
+        </div>
+
+        <!-- Engineering Room 114 -->
+        <div class="hotspot-card" data-direct-room="114">
+          <div class="hotspot-top">
+            <div class="hotspot-icon-badge">🔬</div>
+            <span class="hotspot-loc-tag">GROUND • ENG BLOCK</span>
+          </div>
+          <h3 class="hotspot-name">Engineering Room 114</h3>
+          <p class="hotspot-desc">
+            ECE &amp; Engineering laboratory complex accessed via direct quadrangle entrance.
+          </p>
+          <button type="button" class="hotspot-btn">
+            <span>Launch Walkthrough</span>
+            <svg viewBox="0 0 24 24" class="icon-svg" style="width:15px;height:15px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </button>
-          <button type="button" class="jump-chip" data-jump-college="pharmacy">
-            <span class="jump-dot pharmacy"></span>
-            <span>Wing 05 (Pharmacy)</span>
+        </div>
+
+        <!-- Engineering 60 Classrooms Hub -->
+        <div class="hotspot-card" data-direct-college="engineering">
+          <div class="hotspot-top">
+            <div class="hotspot-icon-badge">🏢</div>
+            <span class="hotspot-loc-tag">6 FLOORS • 60 ROOMS</span>
+          </div>
+          <h3 class="hotspot-name">Engineering Campus Core</h3>
+          <p class="hotspot-desc">
+            Full directory of 60 classrooms, lecture suites, and computing studios across all 6 levels.
+          </p>
+          <button type="button" class="hotspot-btn">
+            <span>Browse All 60 Rooms</span>
+            <svg viewBox="0 0 24 24" class="icon-svg" style="width:15px;height:15px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </button>
         </div>
       </div>

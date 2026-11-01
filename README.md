@@ -1,25 +1,26 @@
-# MIT Maps • Indoor Campus Navigation
+# MITM Navigo • Indoor Campus Navigation
 **Maharaja Institute of Technology Mysore**
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://locorom.streamlit.app/)
 
-**MIT Maps** is the official indoor visual wayfinding and destination locator built for **Maharaja Institute of Technology Mysore (MIT Mysore)**. It provides step-by-step corridor walkthroughs and photos guiding students, staff, and visitors from campus access points directly to classrooms, laboratories, seminar halls, and departments.
+**MITM Navigo** is the official indoor visual wayfinding and destination locator built for **Maharaja Institute of Technology Mysore (MIT Mysore)**. It provides step-by-step corridor walkthroughs and photos guiding students, staff, and visitors from campus access points directly to classrooms, laboratories, seminar halls, and departments.
 
 ---
 
 ## ✨ Features & Architecture
 
-- **Institutional College Portal**: Initial selection screen allowing visitors to choose between **Engineering (BE/B.Tech)**, **MBA**, **MCA**, **BCA**, and **Pharmacy**, entering that specific college block directly.
+- **Multi-Mode Campus Wayfinding Hub**: Choose between **Academic Wings**, **Floor-by-Floor Matrix**, and **Popular Hotspots** with instant 1-tap navigation.
+- **Universal Instant Teleport Search**: Real-time autocomplete suggestions across all 68 rooms campus-wide with direct corridor launch.
 - **Dedicated College Directories**:
-  - **Engineering**: 60 classrooms & research labs (CSE, ISE, ECE, Mechanical, Civil, AI/ML) across 5 floors.
-  - **MBA & MCA**: Department of MBA & MCA block featuring **Belaku (ಬೆಳಕು)**, seminar halls, and faculty suites.
-  - **BCA & Pharmacy**: Mapped blocks ready for classroom additions.
+  - **Engineering**: 60 classrooms & research labs (CSE, ISE, ECE, Mechanical, Civil, AI/ML) across 6 floors.
+  - **MBA & MCA**: Standalone block featuring **Belaku (ಬೆಳಕು)** auditorium, Board Room 2, and Staff Room 1.
+  - **BCA & Pharmacy**: Mapped computing suites and pharmaceutical sciences blocks.
 - **Visual Turn-by-Turn Walkthroughs**: Sequential corridor photos showing every turn, staircase, and doorway leading to the room.
-- **Google Maps Design System**: Clean aesthetic featuring `#0b57d0` primary styling, rounded pill controls (`border-radius: 20px`), subtle elevation shadows, and Google Sans typography.
+- **High-Performance Image Preloader**: Adjacent photo background caching and non-destructive DOM media swapping for zero-latency walkthrough transitions.
 - **Multi-Access Point Routing**: Switch between starting staircases (e.g. *Point A*, *Point B*, *Point C [Mech Dept]*).
 - **Hands-Free Voice Search**: Speak room numbers or lab names naturally (e.g. "Room 205", "Belaku", "DSP Lab").
 - **Direct WhatsApp Sharing**: Send exact room routes directly to WhatsApp (`wa.me`) with a single click.
-- **Light & Dark Theme**: Google Maps inspired theme toggle with smooth transitions.
+- **Clean Light Mode**: Crisp, high-contrast light theme locked against horizontal wobble and screen drift across mobile and desktop.
 
 ---
 
