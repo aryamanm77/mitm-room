@@ -2413,5 +2413,40 @@
         ]
       }
     ]
+  },
+  "BCA 203": {
+    "name": "BCA Room 203",
+    "college": "Department of BCA",
+    "floor": "1st Floor",
+    "dept": "Department of BCA",
+    "category": "Lecture Classroom",
+    "landmark": "MITM Degree College • Department of BCA • Room No 203 (adjacent to Laboratory - 1)",
+    "info": "Head through the MITM Degree College entrance portico, climb the staircase to the upper floor corridor, proceed past Room 201 and Room 202 down the hallway, and locate Room No 203 on the left beside Laboratory - 1.",
+    "thumbnail": "Rooms/BCA 203/g.jpg",
+    "photos": [
+      "Rooms/BCA 203/a.jpg",
+      "Rooms/BCA 203/b.jpg",
+      "Rooms/BCA 203/c.jpg",
+      "Rooms/BCA 203/d.jpg",
+      "Rooms/BCA 203/e.jpg",
+      "Rooms/BCA 203/f.jpg",
+      "Rooms/BCA 203/g.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Degree College Main Entrance & Staircase",
+        "info": "Head through the MITM Degree College entrance portico, climb the staircase to the upper floor corridor, proceed past Room 201 and Room 202 down the hallway, and locate Room No 203 on the left beside Laboratory - 1.",
+        "thumbnail": "Rooms/BCA 203/a.jpg",
+        "photos": [
+          "Rooms/BCA 203/a.jpg",
+          "Rooms/BCA 203/b.jpg",
+          "Rooms/BCA 203/c.jpg",
+          "Rooms/BCA 203/d.jpg",
+          "Rooms/BCA 203/e.jpg",
+          "Rooms/BCA 203/f.jpg",
+          "Rooms/BCA 203/g.jpg"
+        ]
+      }
+    ]
   }
 }
