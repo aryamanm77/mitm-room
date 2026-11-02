@@ -2518,5 +2518,40 @@ window.LOCOROM_DATA = {
         ]
       }
     ]
+  },
+  "BCA Lab 1 & 2": {
+    "name": "BCA Laboratory 1 & 2",
+    "college": "Department of BCA",
+    "floor": "1st Floor",
+    "dept": "Department of BCA",
+    "category": "Computer Laboratory",
+    "landmark": "MITM Degree College • Department of BCA • Laboratory 1 & 2 (Computer Coding Lab)",
+    "info": "Head through the MITM Degree College entrance portico, climb the staircase to the upper floor corridor, proceed straight to the end of the hallway past Room 203, and enter through the double doors into Laboratory 1 & 2.",
+    "thumbnail": "Rooms/BCA Lab 1-2/g.jpg",
+    "photos": [
+      "Rooms/BCA Lab 1-2/a.jpg",
+      "Rooms/BCA Lab 1-2/b.jpg",
+      "Rooms/BCA Lab 1-2/c.jpg",
+      "Rooms/BCA Lab 1-2/d.jpg",
+      "Rooms/BCA Lab 1-2/e.jpg",
+      "Rooms/BCA Lab 1-2/f.jpg",
+      "Rooms/BCA Lab 1-2/g.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Degree College Main Entrance & Corridor Route",
+        "info": "Head through the MITM Degree College entrance portico, climb the staircase to the upper floor corridor, proceed straight to the end of the hallway past Room 203, and enter through the double doors into Laboratory 1 & 2.",
+        "thumbnail": "Rooms/BCA Lab 1-2/a.jpg",
+        "photos": [
+          "Rooms/BCA Lab 1-2/a.jpg",
+          "Rooms/BCA Lab 1-2/b.jpg",
+          "Rooms/BCA Lab 1-2/c.jpg",
+          "Rooms/BCA Lab 1-2/d.jpg",
+          "Rooms/BCA Lab 1-2/e.jpg",
+          "Rooms/BCA Lab 1-2/f.jpg",
+          "Rooms/BCA Lab 1-2/g.jpg"
+        ]
+      }
+    ]
   }
 };
