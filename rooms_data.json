@@ -2483,5 +2483,40 @@
         ]
       }
     ]
+  },
+  "BCA 205": {
+    "name": "BCA Room 205",
+    "college": "Department of BCA",
+    "floor": "1st Floor",
+    "dept": "Department of BCA",
+    "category": "Lecture Classroom",
+    "landmark": "MITM Degree College • Department of BCA • Room No 205",
+    "info": "Head through the MITM Degree College entrance portico, climb the staircase to the upper floor corridor, continue past Room 204 down the hallway, and turn right into Room No 205.",
+    "thumbnail": "Rooms/BCA 205/g.jpg",
+    "photos": [
+      "Rooms/BCA 205/a.jpg",
+      "Rooms/BCA 205/b.jpg",
+      "Rooms/BCA 205/c.jpg",
+      "Rooms/BCA 205/d.jpg",
+      "Rooms/BCA 205/e.jpg",
+      "Rooms/BCA 205/f.jpg",
+      "Rooms/BCA 205/g.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Degree College Main Entrance & Staircase",
+        "info": "Head through the MITM Degree College entrance portico, climb the staircase to the upper floor corridor, continue past Room 204 down the hallway, and turn right into Room No 205.",
+        "thumbnail": "Rooms/BCA 205/a.jpg",
+        "photos": [
+          "Rooms/BCA 205/a.jpg",
+          "Rooms/BCA 205/b.jpg",
+          "Rooms/BCA 205/c.jpg",
+          "Rooms/BCA 205/d.jpg",
+          "Rooms/BCA 205/e.jpg",
+          "Rooms/BCA 205/f.jpg",
+          "Rooms/BCA 205/g.jpg"
+        ]
+      }
+    ]
   }
 }
