@@ -2343,5 +2343,28 @@ window.LOCOROM_DATA = {
         ]
       }
     ]
+  },
+  "BCA 201": {
+    "name": "BCA Room 201",
+    "college": "Department of BCA",
+    "floor": "2nd Floor",
+    "dept": "Department of BCA",
+    "category": "Classroom / Lecture Hall",
+    "landmark": "MITM Degree College • Department of BCA • Room 201",
+    "info": "Head straight along the main approach path toward the central entrance portico of the MITM Degree College building.",
+    "thumbnail": "Rooms/BCA 201/a.jpg",
+    "photos": [
+      "Rooms/BCA 201/a.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Main Approach Path",
+        "info": "Head straight along the main approach path toward the central entrance portico of the MITM Degree College building.",
+        "thumbnail": "Rooms/BCA 201/a.jpg",
+        "photos": [
+          "Rooms/BCA 201/a.jpg"
+        ]
+      }
+    ]
   }
 };
