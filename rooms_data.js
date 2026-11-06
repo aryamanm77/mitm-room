@@ -2658,5 +2658,40 @@ window.LOCOROM_DATA = {
         ]
       }
     ]
+  },
+  "BCA 209": {
+    "name": "BCA Room 209",
+    "college": "Department of BCA",
+    "floor": "1st Floor",
+    "dept": "Department of BCA",
+    "category": "Lecture Classroom",
+    "landmark": "MITM Degree College • Department of BCA • Room No 209",
+    "info": "Head through the MITM Degree College entrance portico, climb the staircase to the upper floor, turn left into the west corridor, proceed past Rooms 206, 207, and 208 down the hallway, and enter Room No 209 on the left.",
+    "thumbnail": "Rooms/BCA 209/g.jpg",
+    "photos": [
+      "Rooms/BCA 209/a.jpg",
+      "Rooms/BCA 209/b.jpg",
+      "Rooms/BCA 209/c.jpg",
+      "Rooms/BCA 209/d.jpg",
+      "Rooms/BCA 209/e.jpg",
+      "Rooms/BCA 209/f.jpg",
+      "Rooms/BCA 209/g.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Degree College Main Entrance & West Corridor",
+        "info": "Head through the MITM Degree College entrance portico, climb the staircase to the upper floor, turn left into the west corridor, proceed past Rooms 206, 207, and 208 down the hallway, and enter Room No 209 on the left.",
+        "thumbnail": "Rooms/BCA 209/a.jpg",
+        "photos": [
+          "Rooms/BCA 209/a.jpg",
+          "Rooms/BCA 209/b.jpg",
+          "Rooms/BCA 209/c.jpg",
+          "Rooms/BCA 209/d.jpg",
+          "Rooms/BCA 209/e.jpg",
+          "Rooms/BCA 209/f.jpg",
+          "Rooms/BCA 209/g.jpg"
+        ]
+      }
+    ]
   }
 };
