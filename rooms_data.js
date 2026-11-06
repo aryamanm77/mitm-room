@@ -2553,5 +2553,110 @@ window.LOCOROM_DATA = {
         ]
       }
     ]
+  },
+  "BCA 206": {
+    "name": "BCA Room 206",
+    "college": "Department of BCA",
+    "floor": "1st Floor",
+    "dept": "Department of BCA",
+    "category": "Lecture Classroom",
+    "landmark": "MITM Degree College • Department of BCA • Room No 206",
+    "info": "Head through the MITM Degree College entrance portico, climb the staircase to the upper floor, turn left into the west corridor, proceed down the hallway, and enter Room No 206 on the left.",
+    "thumbnail": "Rooms/BCA 206/g.jpg",
+    "photos": [
+      "Rooms/BCA 206/a.jpg",
+      "Rooms/BCA 206/b.jpg",
+      "Rooms/BCA 206/c.jpg",
+      "Rooms/BCA 206/d.jpg",
+      "Rooms/BCA 206/e.jpg",
+      "Rooms/BCA 206/f.jpg",
+      "Rooms/BCA 206/g.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Degree College Main Entrance & West Corridor",
+        "info": "Head through the MITM Degree College entrance portico, climb the staircase to the upper floor, turn left into the west corridor, proceed down the hallway, and enter Room No 206 on the left.",
+        "thumbnail": "Rooms/BCA 206/a.jpg",
+        "photos": [
+          "Rooms/BCA 206/a.jpg",
+          "Rooms/BCA 206/b.jpg",
+          "Rooms/BCA 206/c.jpg",
+          "Rooms/BCA 206/d.jpg",
+          "Rooms/BCA 206/e.jpg",
+          "Rooms/BCA 206/f.jpg",
+          "Rooms/BCA 206/g.jpg"
+        ]
+      }
+    ]
+  },
+  "BCA 207": {
+    "name": "BCA Room 207",
+    "college": "Department of BCA",
+    "floor": "1st Floor",
+    "dept": "Department of BCA",
+    "category": "Lecture Classroom",
+    "landmark": "MITM Degree College • Department of BCA • Room No 207",
+    "info": "Head through the MITM Degree College entrance portico, climb the staircase to the upper floor, turn left into the west corridor, proceed past Room 206 down the hallway, and enter Room No 207 on the left.",
+    "thumbnail": "Rooms/BCA 207/g.jpg",
+    "photos": [
+      "Rooms/BCA 207/a.jpg",
+      "Rooms/BCA 207/b.jpg",
+      "Rooms/BCA 207/c.jpg",
+      "Rooms/BCA 207/d.jpg",
+      "Rooms/BCA 207/e.jpg",
+      "Rooms/BCA 207/f.jpg",
+      "Rooms/BCA 207/g.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Degree College Main Entrance & West Corridor",
+        "info": "Head through the MITM Degree College entrance portico, climb the staircase to the upper floor, turn left into the west corridor, proceed past Room 206 down the hallway, and enter Room No 207 on the left.",
+        "thumbnail": "Rooms/BCA 207/a.jpg",
+        "photos": [
+          "Rooms/BCA 207/a.jpg",
+          "Rooms/BCA 207/b.jpg",
+          "Rooms/BCA 207/c.jpg",
+          "Rooms/BCA 207/d.jpg",
+          "Rooms/BCA 207/e.jpg",
+          "Rooms/BCA 207/f.jpg",
+          "Rooms/BCA 207/g.jpg"
+        ]
+      }
+    ]
+  },
+  "BCA 208": {
+    "name": "BCA Room 208",
+    "college": "Department of BCA",
+    "floor": "1st Floor",
+    "dept": "Department of BCA",
+    "category": "Lecture Classroom",
+    "landmark": "MITM Degree College • Department of BCA • Room No 208",
+    "info": "Head through the MITM Degree College entrance portico, climb the staircase to the upper floor, turn left into the west corridor, proceed past Room 206 and Room 207 down the hallway, and enter Room No 208 on the left.",
+    "thumbnail": "Rooms/BCA 208/g.jpg",
+    "photos": [
+      "Rooms/BCA 208/a.jpg",
+      "Rooms/BCA 208/b.jpg",
+      "Rooms/BCA 208/c.jpg",
+      "Rooms/BCA 208/d.jpg",
+      "Rooms/BCA 208/e.jpg",
+      "Rooms/BCA 208/f.jpg",
+      "Rooms/BCA 208/g.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Degree College Main Entrance & West Corridor",
+        "info": "Head through the MITM Degree College entrance portico, climb the staircase to the upper floor, turn left into the west corridor, proceed past Room 206 and Room 207 down the hallway, and enter Room No 208 on the left.",
+        "thumbnail": "Rooms/BCA 208/a.jpg",
+        "photos": [
+          "Rooms/BCA 208/a.jpg",
+          "Rooms/BCA 208/b.jpg",
+          "Rooms/BCA 208/c.jpg",
+          "Rooms/BCA 208/d.jpg",
+          "Rooms/BCA 208/e.jpg",
+          "Rooms/BCA 208/f.jpg",
+          "Rooms/BCA 208/g.jpg"
+        ]
+      }
+    ]
   }
 };

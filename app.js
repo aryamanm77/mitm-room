@@ -135,7 +135,7 @@ function getCollegeMeta(collegeKey) {
       return {
         name: "Department of BCA",
         badge: "Undergraduate IT Wing",
-        heroQuery: "Search BCA classrooms & labs (e.g. Lab 1 & 2, Room 201)...",
+        heroQuery: "Search BCA classrooms & labs (e.g. Room 201 - 208, Lab 1 & 2)...",
       };
     case "pharmacy":
       return {
