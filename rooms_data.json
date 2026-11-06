@@ -3025,64 +3025,6 @@
       }
     ]
   },
-  "Common Room - Boys": {
-    "name": "Common Room - Boys",
-    "college": "Faculty of Pharmaceutical Sciences",
-    "floor": "Ground Floor",
-    "dept": "Student Amenities",
-    "category": "Student Lounge",
-    "landmark": "Health Sciences Block • Ground Floor • Boys Common Room",
-    "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and proceed to the Boys Common Room.",
-    "thumbnail": "Rooms/Common Room - Boys/d.jpg",
-    "photos": [
-      "Rooms/Common Room - Boys/a.jpg",
-      "Rooms/Common Room - Boys/b.jpg",
-      "Rooms/Common Room - Boys/c.jpg",
-      "Rooms/Common Room - Boys/d.jpg"
-    ],
-    "accessPoints": [
-      {
-        "name": "Health Sciences Ground Floor Entrance",
-        "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and proceed to the Boys Common Room.",
-        "thumbnail": "Rooms/Common Room - Boys/a.jpg",
-        "photos": [
-          "Rooms/Common Room - Boys/a.jpg",
-          "Rooms/Common Room - Boys/b.jpg",
-          "Rooms/Common Room - Boys/c.jpg",
-          "Rooms/Common Room - Boys/d.jpg"
-        ]
-      }
-    ]
-  },
-  "Common Room - Girls": {
-    "name": "Common Room - Girls",
-    "college": "Faculty of Pharmaceutical Sciences",
-    "floor": "Ground Floor",
-    "dept": "Student Amenities",
-    "category": "Student Lounge",
-    "landmark": "Health Sciences Block • Ground Floor • Girls Common Room",
-    "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and proceed to the Girls Common Room.",
-    "thumbnail": "Rooms/Common Room - Girls/d.jpg",
-    "photos": [
-      "Rooms/Common Room - Girls/a.jpg",
-      "Rooms/Common Room - Girls/b.jpg",
-      "Rooms/Common Room - Girls/c.jpg",
-      "Rooms/Common Room - Girls/d.jpg"
-    ],
-    "accessPoints": [
-      {
-        "name": "Health Sciences Ground Floor Entrance",
-        "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and proceed to the Girls Common Room.",
-        "thumbnail": "Rooms/Common Room - Girls/a.jpg",
-        "photos": [
-          "Rooms/Common Room - Girls/a.jpg",
-          "Rooms/Common Room - Girls/b.jpg",
-          "Rooms/Common Room - Girls/c.jpg",
-          "Rooms/Common Room - Girls/d.jpg"
-        ]
-      }
-    ]
-  },
   "Medical Surgical Nursing Department": {
     "name": "Medical Surgical Nursing Department",
     "college": "Faculty of Pharmaceutical Sciences",
