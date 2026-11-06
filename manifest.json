@@ -2,7 +2,7 @@
   "name": "MITM Navigo",
   "short_name": "Navigo",
   "description": "Official indoor visual wayfinding and step-by-step corridor photo walkthroughs for Maharaja Institute of Technology Mysore.",
-  "id": "mitm-navigo-app",
+  "id": "mitm-navigo-app-v4",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

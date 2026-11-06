@@ -1,9 +1,9 @@
-const CACHE_NAME = "navigo-v2";
+const CACHE_NAME = "navigo-v4";
 const PRECACHE_ASSETS = [
   "./",
   "index.html",
-  "app.js",
-  "rooms_data.js",
+  "app.js?v=20261107-04",
+  "rooms_data.js?v=20261107-04",
   "rooms_data.json",
   "logo.png",
   "icon-192.png",
@@ -35,6 +35,12 @@ self.addEventListener("activate", (event) => {
   );
 });
 
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.action === "skipWaiting") {
+    self.skipWaiting();
+  }
+});
+
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
@@ -53,6 +59,6 @@ self.addEventListener("fetch", (event) => {
         }
         return networkResponse;
       })
-      .catch(() => caches.match(event.request))
+      .catch(() => caches.match(event.request, { ignoreSearch: true }))
   );
 });
