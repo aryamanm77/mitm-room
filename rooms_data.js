@@ -2693,5 +2693,40 @@ window.LOCOROM_DATA = {
         ]
       }
     ]
+  },
+  "BCA 210": {
+    "name": "BCA Room 210",
+    "college": "Department of BCA",
+    "floor": "1st Floor",
+    "dept": "Department of BCA",
+    "category": "Lecture Classroom",
+    "landmark": "MITM Degree College • Department of BCA • Room No 210",
+    "info": "Head through the MITM Degree College entrance portico, climb the staircase to the upper floor, turn left into the west corridor, proceed down the hallway, and enter Room No 210 on the right.",
+    "thumbnail": "Rooms/BCA 210/g.jpg",
+    "photos": [
+      "Rooms/BCA 210/a.jpg",
+      "Rooms/BCA 210/b.jpg",
+      "Rooms/BCA 210/c.jpg",
+      "Rooms/BCA 210/d.jpg",
+      "Rooms/BCA 210/e.jpg",
+      "Rooms/BCA 210/f.jpg",
+      "Rooms/BCA 210/g.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Degree College Main Entrance & West Corridor",
+        "info": "Head through the MITM Degree College entrance portico, climb the staircase to the upper floor, turn left into the west corridor, proceed down the hallway, and enter Room No 210 on the right.",
+        "thumbnail": "Rooms/BCA 210/a.jpg",
+        "photos": [
+          "Rooms/BCA 210/a.jpg",
+          "Rooms/BCA 210/b.jpg",
+          "Rooms/BCA 210/c.jpg",
+          "Rooms/BCA 210/d.jpg",
+          "Rooms/BCA 210/e.jpg",
+          "Rooms/BCA 210/f.jpg",
+          "Rooms/BCA 210/g.jpg"
+        ]
+      }
+    ]
   }
 };
