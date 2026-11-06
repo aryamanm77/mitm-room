@@ -100,13 +100,13 @@ function getCollegeKeysForRoom(r) {
   if (college.includes("mca") || (dept.includes("mca") && !dept.includes("mba"))) return ["mca"];
   if (college.includes("mba") || (dept.includes("mba") && !dept.includes("mca"))) return ["mba"];
   if (college.includes("bca") || dept.includes("bca")) return ["bca"];
-  if (college.includes("pharmacy") || college.includes("pharma") || dept.includes("pharmacy")) return ["pharmacy"];
+  if (college.includes("pharmacy") || college.includes("pharma") || college.includes("nursing") || dept.includes("pharmacy") || dept.includes("nursing")) return ["pharmacy"];
 
   // 2. Name-based heuristics fallback
   if (name.includes("mca")) return ["mca"];
   if (name.includes("mba")) return ["mba"];
   if (name.includes("bca")) return ["bca"];
-  if (name.includes("pharmacy") || name.includes("pharma")) return ["pharmacy"];
+  if (name.includes("pharmacy") || name.includes("pharma") || name.includes("nursing")) return ["pharmacy"];
 
   return ["engineering"];
 }
@@ -140,8 +140,8 @@ function getCollegeMeta(collegeKey) {
     case "pharmacy":
       return {
         name: "Faculty of Pharmaceutical Sciences",
-        badge: "Health Sciences Block",
-        heroQuery: "Search Pharmacy & Chemistry laboratories...",
+        badge: "Health Sciences Block • Pharmacy & Nursing",
+        heroQuery: "Search Pharmacy & Nursing rooms (e.g. Admin Block, Principal, Nursing Foundation)...",
       };
     case "engineering":
     default:

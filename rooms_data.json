@@ -2763,5 +2763,382 @@
         ]
       }
     ]
+  },
+  "Pharmacy Administrative Block": {
+    "name": "Administrative Block",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "Ground Floor",
+    "dept": "Health Sciences Administration",
+    "category": "Administrative Office",
+    "landmark": "Health Sciences Block • Ground Floor • Administrative Block",
+    "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and enter the Administrative Block on the left.",
+    "thumbnail": "Rooms/Pharmacy Admin Block/d.jpg",
+    "photos": [
+      "Rooms/Pharmacy Admin Block/a.jpg",
+      "Rooms/Pharmacy Admin Block/b.jpg",
+      "Rooms/Pharmacy Admin Block/c.jpg",
+      "Rooms/Pharmacy Admin Block/d.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Health Sciences Ground Floor Entrance",
+        "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and enter the Administrative Block on the left.",
+        "thumbnail": "Rooms/Pharmacy Admin Block/a.jpg",
+        "photos": [
+          "Rooms/Pharmacy Admin Block/a.jpg",
+          "Rooms/Pharmacy Admin Block/b.jpg",
+          "Rooms/Pharmacy Admin Block/c.jpg",
+          "Rooms/Pharmacy Admin Block/d.jpg"
+        ]
+      }
+    ]
+  },
+  "Pharmacy Principal Office": {
+    "name": "Principal Office",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "Ground Floor",
+    "dept": "College Directorate",
+    "category": "Executive Cabin",
+    "landmark": "Health Sciences Block • Ground Floor • Principal Office",
+    "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and enter the Principal Office on the left.",
+    "thumbnail": "Rooms/Pharmacy Principal Office/d.jpg",
+    "photos": [
+      "Rooms/Pharmacy Principal Office/a.jpg",
+      "Rooms/Pharmacy Principal Office/b.jpg",
+      "Rooms/Pharmacy Principal Office/c.jpg",
+      "Rooms/Pharmacy Principal Office/d.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Health Sciences Ground Floor Entrance",
+        "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and enter the Principal Office on the left.",
+        "thumbnail": "Rooms/Pharmacy Principal Office/a.jpg",
+        "photos": [
+          "Rooms/Pharmacy Principal Office/a.jpg",
+          "Rooms/Pharmacy Principal Office/b.jpg",
+          "Rooms/Pharmacy Principal Office/c.jpg",
+          "Rooms/Pharmacy Principal Office/d.jpg"
+        ]
+      }
+    ]
+  },
+  "Pharmacy Vice Principal Office": {
+    "name": "Vice-Principal Office",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "Ground Floor",
+    "dept": "College Directorate",
+    "category": "Executive Cabin",
+    "landmark": "Health Sciences Block • Ground Floor • Vice-Principal Office",
+    "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and enter the Vice-Principal Office on the left.",
+    "thumbnail": "Rooms/Pharmacy Vice Principal Office/d.jpg",
+    "photos": [
+      "Rooms/Pharmacy Vice Principal Office/a.jpg",
+      "Rooms/Pharmacy Vice Principal Office/b.jpg",
+      "Rooms/Pharmacy Vice Principal Office/c.jpg",
+      "Rooms/Pharmacy Vice Principal Office/d.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Health Sciences Ground Floor Entrance",
+        "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and enter the Vice-Principal Office on the left.",
+        "thumbnail": "Rooms/Pharmacy Vice Principal Office/a.jpg",
+        "photos": [
+          "Rooms/Pharmacy Vice Principal Office/a.jpg",
+          "Rooms/Pharmacy Vice Principal Office/b.jpg",
+          "Rooms/Pharmacy Vice Principal Office/c.jpg",
+          "Rooms/Pharmacy Vice Principal Office/d.jpg"
+        ]
+      }
+    ]
+  },
+  "Pharmacy Staff Room": {
+    "name": "Staff Room",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "Ground Floor",
+    "dept": "Faculty & Academic Staff",
+    "category": "Faculty Workspace",
+    "landmark": "Health Sciences Block • Ground Floor • Staff Room",
+    "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and enter the Staff Room.",
+    "thumbnail": "Rooms/Pharmacy Staff Room/d.jpg",
+    "photos": [
+      "Rooms/Pharmacy Staff Room/a.jpg",
+      "Rooms/Pharmacy Staff Room/b.jpg",
+      "Rooms/Pharmacy Staff Room/c.jpg",
+      "Rooms/Pharmacy Staff Room/d.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Health Sciences Ground Floor Entrance",
+        "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and enter the Staff Room.",
+        "thumbnail": "Rooms/Pharmacy Staff Room/a.jpg",
+        "photos": [
+          "Rooms/Pharmacy Staff Room/a.jpg",
+          "Rooms/Pharmacy Staff Room/b.jpg",
+          "Rooms/Pharmacy Staff Room/c.jpg",
+          "Rooms/Pharmacy Staff Room/d.jpg"
+        ]
+      }
+    ]
+  },
+  "Associate Professor Room": {
+    "name": "Associate Professor Room",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "Ground Floor",
+    "dept": "Faculty & Academic Staff",
+    "category": "Faculty Cabin",
+    "landmark": "Health Sciences Block • Ground Floor • Associate Professor Room",
+    "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and enter the Associate Professor Room.",
+    "thumbnail": "Rooms/Associate Professor Room/d.jpg",
+    "photos": [
+      "Rooms/Associate Professor Room/a.jpg",
+      "Rooms/Associate Professor Room/b.jpg",
+      "Rooms/Associate Professor Room/c.jpg",
+      "Rooms/Associate Professor Room/d.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Health Sciences Ground Floor Entrance",
+        "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and enter the Associate Professor Room.",
+        "thumbnail": "Rooms/Associate Professor Room/a.jpg",
+        "photos": [
+          "Rooms/Associate Professor Room/a.jpg",
+          "Rooms/Associate Professor Room/b.jpg",
+          "Rooms/Associate Professor Room/c.jpg",
+          "Rooms/Associate Professor Room/d.jpg"
+        ]
+      }
+    ]
+  },
+  "Nursing Foundation Department": {
+    "name": "Nursing Foundation Department",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "Ground Floor",
+    "dept": "Department of Nursing",
+    "category": "Academic Department",
+    "landmark": "Health Sciences Block • Ground Floor • Nursing Foundation Department",
+    "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and enter the Nursing Foundation Department on the left.",
+    "thumbnail": "Rooms/Nursing Foundation Department/d.jpg",
+    "photos": [
+      "Rooms/Nursing Foundation Department/a.jpg",
+      "Rooms/Nursing Foundation Department/b.jpg",
+      "Rooms/Nursing Foundation Department/c.jpg",
+      "Rooms/Nursing Foundation Department/d.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Health Sciences Ground Floor Entrance",
+        "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and enter the Nursing Foundation Department on the left.",
+        "thumbnail": "Rooms/Nursing Foundation Department/a.jpg",
+        "photos": [
+          "Rooms/Nursing Foundation Department/a.jpg",
+          "Rooms/Nursing Foundation Department/b.jpg",
+          "Rooms/Nursing Foundation Department/c.jpg",
+          "Rooms/Nursing Foundation Department/d.jpg"
+        ]
+      }
+    ]
+  },
+  "AV Aids Lab": {
+    "name": "AV Aids Lab",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "Ground Floor",
+    "dept": "Department of Nursing & Health Sciences",
+    "category": "Specialized Laboratory",
+    "landmark": "Health Sciences Block • Ground Floor • AV Aids Lab",
+    "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and proceed to the AV Aids Laboratory.",
+    "thumbnail": "Rooms/AV Aids Lab/d.jpg",
+    "photos": [
+      "Rooms/AV Aids Lab/a.jpg",
+      "Rooms/AV Aids Lab/b.jpg",
+      "Rooms/AV Aids Lab/c.jpg",
+      "Rooms/AV Aids Lab/d.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Health Sciences Ground Floor Entrance",
+        "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and proceed to the AV Aids Laboratory.",
+        "thumbnail": "Rooms/AV Aids Lab/a.jpg",
+        "photos": [
+          "Rooms/AV Aids Lab/a.jpg",
+          "Rooms/AV Aids Lab/b.jpg",
+          "Rooms/AV Aids Lab/c.jpg",
+          "Rooms/AV Aids Lab/d.jpg"
+        ]
+      }
+    ]
+  },
+  "Counselling Room": {
+    "name": "Counselling Room",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "Ground Floor",
+    "dept": "Student Support & Guidance",
+    "category": "Consultation Cabin",
+    "landmark": "Health Sciences Block • Ground Floor • Counselling Room",
+    "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and proceed to the Counselling Room.",
+    "thumbnail": "Rooms/Counselling Room/d.jpg",
+    "photos": [
+      "Rooms/Counselling Room/a.jpg",
+      "Rooms/Counselling Room/b.jpg",
+      "Rooms/Counselling Room/c.jpg",
+      "Rooms/Counselling Room/d.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Health Sciences Ground Floor Entrance",
+        "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and proceed to the Counselling Room.",
+        "thumbnail": "Rooms/Counselling Room/a.jpg",
+        "photos": [
+          "Rooms/Counselling Room/a.jpg",
+          "Rooms/Counselling Room/b.jpg",
+          "Rooms/Counselling Room/c.jpg",
+          "Rooms/Counselling Room/d.jpg"
+        ]
+      }
+    ]
+  },
+  "SNA Room": {
+    "name": "SNA Room",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "Ground Floor",
+    "dept": "Student Nurses Association",
+    "category": "Student Association",
+    "landmark": "Health Sciences Block • Ground Floor • SNA Room",
+    "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and proceed to the Student Nurses Association (SNA) Room.",
+    "thumbnail": "Rooms/SNA Room/d.jpg",
+    "photos": [
+      "Rooms/SNA Room/a.jpg",
+      "Rooms/SNA Room/b.jpg",
+      "Rooms/SNA Room/c.jpg",
+      "Rooms/SNA Room/d.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Health Sciences Ground Floor Entrance",
+        "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and proceed to the Student Nurses Association (SNA) Room.",
+        "thumbnail": "Rooms/SNA Room/a.jpg",
+        "photos": [
+          "Rooms/SNA Room/a.jpg",
+          "Rooms/SNA Room/b.jpg",
+          "Rooms/SNA Room/c.jpg",
+          "Rooms/SNA Room/d.jpg"
+        ]
+      }
+    ]
+  },
+  "Common Room - Boys": {
+    "name": "Common Room - Boys",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "Ground Floor",
+    "dept": "Student Amenities",
+    "category": "Student Lounge",
+    "landmark": "Health Sciences Block • Ground Floor • Boys Common Room",
+    "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and proceed to the Boys Common Room.",
+    "thumbnail": "Rooms/Common Room - Boys/d.jpg",
+    "photos": [
+      "Rooms/Common Room - Boys/a.jpg",
+      "Rooms/Common Room - Boys/b.jpg",
+      "Rooms/Common Room - Boys/c.jpg",
+      "Rooms/Common Room - Boys/d.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Health Sciences Ground Floor Entrance",
+        "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and proceed to the Boys Common Room.",
+        "thumbnail": "Rooms/Common Room - Boys/a.jpg",
+        "photos": [
+          "Rooms/Common Room - Boys/a.jpg",
+          "Rooms/Common Room - Boys/b.jpg",
+          "Rooms/Common Room - Boys/c.jpg",
+          "Rooms/Common Room - Boys/d.jpg"
+        ]
+      }
+    ]
+  },
+  "Common Room - Girls": {
+    "name": "Common Room - Girls",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "Ground Floor",
+    "dept": "Student Amenities",
+    "category": "Student Lounge",
+    "landmark": "Health Sciences Block • Ground Floor • Girls Common Room",
+    "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and proceed to the Girls Common Room.",
+    "thumbnail": "Rooms/Common Room - Girls/d.jpg",
+    "photos": [
+      "Rooms/Common Room - Girls/a.jpg",
+      "Rooms/Common Room - Girls/b.jpg",
+      "Rooms/Common Room - Girls/c.jpg",
+      "Rooms/Common Room - Girls/d.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Health Sciences Ground Floor Entrance",
+        "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, and proceed to the Girls Common Room.",
+        "thumbnail": "Rooms/Common Room - Girls/a.jpg",
+        "photos": [
+          "Rooms/Common Room - Girls/a.jpg",
+          "Rooms/Common Room - Girls/b.jpg",
+          "Rooms/Common Room - Girls/c.jpg",
+          "Rooms/Common Room - Girls/d.jpg"
+        ]
+      }
+    ]
+  },
+  "Medical Surgical Nursing Department": {
+    "name": "Medical Surgical Nursing Department",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "Ground Floor",
+    "dept": "Department of Nursing",
+    "category": "Clinical Department",
+    "landmark": "Health Sciences Block • Ground Floor • Medical Surgical Nursing Department",
+    "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, walk towards the end hallway, and enter the Medical Surgical Nursing Department.",
+    "thumbnail": "Rooms/Medical Surgical Nursing Department/d.jpg",
+    "photos": [
+      "Rooms/Medical Surgical Nursing Department/a.jpg",
+      "Rooms/Medical Surgical Nursing Department/b.jpg",
+      "Rooms/Medical Surgical Nursing Department/c.jpg",
+      "Rooms/Medical Surgical Nursing Department/d.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Health Sciences Ground Floor Entrance",
+        "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, walk towards the end hallway, and enter the Medical Surgical Nursing Department.",
+        "thumbnail": "Rooms/Medical Surgical Nursing Department/a.jpg",
+        "photos": [
+          "Rooms/Medical Surgical Nursing Department/a.jpg",
+          "Rooms/Medical Surgical Nursing Department/b.jpg",
+          "Rooms/Medical Surgical Nursing Department/c.jpg",
+          "Rooms/Medical Surgical Nursing Department/d.jpg"
+        ]
+      }
+    ]
+  },
+  "OBG & Paediatric Nursing Department": {
+    "name": "OBG & Paediatric Nursing Department",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "Ground Floor",
+    "dept": "Department of Nursing",
+    "category": "Clinical Department",
+    "landmark": "Health Sciences Block • Ground Floor • OBG & Paediatric Nursing Department",
+    "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, walk towards the end hallway, and enter the OBG & Paediatric Department.",
+    "thumbnail": "Rooms/OBG and Paediatric Nursing/d.jpg",
+    "photos": [
+      "Rooms/OBG and Paediatric Nursing/a.jpg",
+      "Rooms/OBG and Paediatric Nursing/b.jpg",
+      "Rooms/OBG and Paediatric Nursing/c.jpg",
+      "Rooms/OBG and Paediatric Nursing/d.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "Health Sciences Ground Floor Entrance",
+        "info": "Enter the central block portico, turn right into the Health Sciences corridor on the ground floor, walk towards the end hallway, and enter the OBG & Paediatric Department.",
+        "thumbnail": "Rooms/OBG and Paediatric Nursing/a.jpg",
+        "photos": [
+          "Rooms/OBG and Paediatric Nursing/a.jpg",
+          "Rooms/OBG and Paediatric Nursing/b.jpg",
+          "Rooms/OBG and Paediatric Nursing/c.jpg",
+          "Rooms/OBG and Paediatric Nursing/d.jpg"
+        ]
+      }
+    ]
   }
 }
