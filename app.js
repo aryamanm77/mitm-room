@@ -188,6 +188,11 @@ async function initApp() {
   document.documentElement.setAttribute("data-theme", "light");
   localStorage.setItem("locorom_theme", "light");
 
+  // Register PWA Service Worker for standalone installation & caching
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js", { scope: "./" }).catch(() => {});
+  }
+
   try {
     const savedRecents = JSON.parse(localStorage.getItem("locorom_recent_rooms") || "null");
     if (Array.isArray(savedRecents) && savedRecents.length > 0) {
