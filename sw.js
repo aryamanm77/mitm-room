@@ -1,4 +1,4 @@
-const CACHE_NAME = "navigo-v1";
+const CACHE_NAME = "navigo-v2";
 const PRECACHE_ASSETS = [
   "./",
   "index.html",
