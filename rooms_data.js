@@ -1935,15 +1935,33 @@ window.ROOMS_DATA = {
   },
   "Auditorium": {
     "name": "Auditorium",
-    "floor": "Campus Amenities",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
     "dept": "Campus Events & Assemblies",
-    "category": "Main Auditorium",
-    "landmark": "Central Campus Ground Level",
-    "info": "",
-    "thumbnail": "",
-    "photos": [],
-    "accessPoints": [],
-    "college": "Engineering"
+    "category": "Main Auditorium / Assembly Hall",
+    "landmark": "2nd Floor Health Sciences Corridor, East Wing End",
+    "info": "MIT Pharmacy College Auditorium equipped with stage, acoustics, double entrance doors, and large-capacity assembly seating for academic symposiums, conferences, and ceremonies.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, turn right into the East corridor, and walk straight to the double doors at the far end of the corridor into the Auditorium.",
+        "photos": [
+          "Rooms/Auditorium/a.jpg",
+          "Rooms/Auditorium/b.jpg",
+          "Rooms/Auditorium/c.jpg",
+          "Rooms/Auditorium/d.jpg",
+          "Rooms/Auditorium/e.jpg",
+          "Rooms/Auditorium/f.jpg",
+          "Rooms/Auditorium/g.jpg",
+          "Rooms/Auditorium/h.jpg",
+          "Rooms/Auditorium/i.jpg",
+          "Rooms/Auditorium/j.jpg",
+          "Rooms/Auditorium/k.jpg",
+          "Rooms/Auditorium/l.jpg",
+          "Rooms/Auditorium/m.jpg"
+        ]
+      }
+    ]
   },
   "B002": {
     "name": "B002",
@@ -3565,6 +3583,156 @@ window.ROOMS_DATA = {
           "Rooms/Pharmaceutics-II Lab/h.jpg",
           "Rooms/Pharmaceutics-II Lab/i.jpg",
           "Rooms/Pharmaceutics-II Lab/j.jpg"
+        ]
+      }
+    ]
+  },
+  "Pharmacy Confidential Room": {
+    "name": "Pharmacy Confidential Room",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Faculty of Pharmaceutical Sciences",
+    "category": "Administrative / Confidential Office",
+    "landmark": "2nd Floor Health Sciences Corridor, East Wing, First Door on Left",
+    "info": "Pharmacy Confidential Room designated for examination custody, university question paper security, confidential academic evaluation, and administrative records.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, turn right into the East corridor, and enter the Confidential Room at the first door on the left.",
+        "photos": [
+          "Rooms/Pharmacy Confidential Room/a.jpg",
+          "Rooms/Pharmacy Confidential Room/b.jpg",
+          "Rooms/Pharmacy Confidential Room/c.jpg",
+          "Rooms/Pharmacy Confidential Room/d.jpg",
+          "Rooms/Pharmacy Confidential Room/e.jpg",
+          "Rooms/Pharmacy Confidential Room/f.jpg",
+          "Rooms/Pharmacy Confidential Room/g.jpg",
+          "Rooms/Pharmacy Confidential Room/h.jpg",
+          "Rooms/Pharmacy Confidential Room/i.jpg",
+          "Rooms/Pharmacy Confidential Room/j.jpg",
+          "Rooms/Pharmacy Confidential Room/k.jpg",
+          "Rooms/Pharmacy Confidential Room/l.jpg",
+          "Rooms/Pharmacy Confidential Room/m.jpg"
+        ]
+      }
+    ]
+  },
+  "Pharmacy Class Room 4": {
+    "name": "Pharmacy Class Room 4",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Faculty of Pharmaceutical Sciences",
+    "category": "Lecture Hall / Classroom",
+    "landmark": "2nd Floor Health Sciences Corridor, East Wing, Second Door on Left",
+    "info": "Pharmacy Class Room 4 (B.Pharm 4th Semester) equipped with lecture podium, teaching blackboard, student benches, and multimedia instructional facilities.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, turn right into the East corridor past Confidential Room, and enter Class Room 4 on the left.",
+        "photos": [
+          "Rooms/Pharmacy Class Room 4/a.jpg",
+          "Rooms/Pharmacy Class Room 4/b.jpg",
+          "Rooms/Pharmacy Class Room 4/c.jpg",
+          "Rooms/Pharmacy Class Room 4/d.jpg",
+          "Rooms/Pharmacy Class Room 4/e.jpg",
+          "Rooms/Pharmacy Class Room 4/f.jpg",
+          "Rooms/Pharmacy Class Room 4/g.jpg",
+          "Rooms/Pharmacy Class Room 4/h.jpg",
+          "Rooms/Pharmacy Class Room 4/i.jpg",
+          "Rooms/Pharmacy Class Room 4/j.jpg",
+          "Rooms/Pharmacy Class Room 4/k.jpg",
+          "Rooms/Pharmacy Class Room 4/l.jpg",
+          "Rooms/Pharmacy Class Room 4/m.jpg"
+        ]
+      }
+    ]
+  },
+  "Pharmacy 1st Sem Class Room": {
+    "name": "Pharmacy 1st Sem Class Room",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Faculty of Pharmaceutical Sciences",
+    "category": "Lecture Hall / Classroom",
+    "landmark": "2nd Floor Health Sciences Corridor, East Wing, Third Door on Left",
+    "info": "Pharmacy 1st Semester Class Room (B.Pharm 1st Sem) dedicated to foundational pharmaceutical sciences coursework, student lectures, and academic seminars.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, turn right into the East corridor past Class Room 4, and enter 1st Sem Class Room on the left.",
+        "photos": [
+          "Rooms/Pharmacy 1st Sem Class Room/a.jpg",
+          "Rooms/Pharmacy 1st Sem Class Room/b.jpg",
+          "Rooms/Pharmacy 1st Sem Class Room/c.jpg",
+          "Rooms/Pharmacy 1st Sem Class Room/d.jpg",
+          "Rooms/Pharmacy 1st Sem Class Room/e.jpg",
+          "Rooms/Pharmacy 1st Sem Class Room/f.jpg",
+          "Rooms/Pharmacy 1st Sem Class Room/g.jpg",
+          "Rooms/Pharmacy 1st Sem Class Room/h.jpg",
+          "Rooms/Pharmacy 1st Sem Class Room/i.jpg",
+          "Rooms/Pharmacy 1st Sem Class Room/j.jpg",
+          "Rooms/Pharmacy 1st Sem Class Room/k.jpg",
+          "Rooms/Pharmacy 1st Sem Class Room/l.jpg",
+          "Rooms/Pharmacy 1st Sem Class Room/m.jpg"
+        ]
+      }
+    ]
+  },
+  "Pharmacy 2nd Sem Class Room": {
+    "name": "Pharmacy 2nd Sem Class Room",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Faculty of Pharmaceutical Sciences",
+    "category": "Lecture Hall / Classroom",
+    "landmark": "2nd Floor Health Sciences Corridor, East Wing, Fourth Door on Left",
+    "info": "Pharmacy 2nd Semester Class Room (B.Pharm 2nd Sem) configured with student benches, faculty platform, teaching whiteboard, and curriculum lecture provisions.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, turn right into the East corridor past 1st Sem Class Room, and enter 2nd Sem Class Room on the left.",
+        "photos": [
+          "Rooms/Pharmacy 2nd Sem Class Room/a.jpg",
+          "Rooms/Pharmacy 2nd Sem Class Room/b.jpg",
+          "Rooms/Pharmacy 2nd Sem Class Room/c.jpg",
+          "Rooms/Pharmacy 2nd Sem Class Room/d.jpg",
+          "Rooms/Pharmacy 2nd Sem Class Room/e.jpg",
+          "Rooms/Pharmacy 2nd Sem Class Room/f.jpg",
+          "Rooms/Pharmacy 2nd Sem Class Room/g.jpg",
+          "Rooms/Pharmacy 2nd Sem Class Room/h.jpg",
+          "Rooms/Pharmacy 2nd Sem Class Room/i.jpg",
+          "Rooms/Pharmacy 2nd Sem Class Room/j.jpg",
+          "Rooms/Pharmacy 2nd Sem Class Room/k.jpg",
+          "Rooms/Pharmacy 2nd Sem Class Room/l.jpg",
+          "Rooms/Pharmacy 2nd Sem Class Room/m.jpg"
+        ]
+      }
+    ]
+  },
+  "Pharmacy Exam Hall 1": {
+    "name": "Pharmacy Exam Hall 1",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Faculty of Pharmaceutical Sciences",
+    "category": "Examination Hall / Lecture Hall",
+    "landmark": "2nd Floor Health Sciences Corridor, East Wing, Near Auditorium",
+    "info": "Pharmacy Exam Hall 1 (B.Pharm 6th Semester / Examination Hall 1) spacious academic hall configured for university semester examinations, major evaluations, and large combined class sessions.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, turn right into the East corridor, proceed toward the end near the auditorium, and enter Exam Hall 1 on the left.",
+        "photos": [
+          "Rooms/Pharmacy Exam Hall 1/a.jpg",
+          "Rooms/Pharmacy Exam Hall 1/b.jpg",
+          "Rooms/Pharmacy Exam Hall 1/c.jpg",
+          "Rooms/Pharmacy Exam Hall 1/d.jpg",
+          "Rooms/Pharmacy Exam Hall 1/e.jpg",
+          "Rooms/Pharmacy Exam Hall 1/f.jpg",
+          "Rooms/Pharmacy Exam Hall 1/g.jpg",
+          "Rooms/Pharmacy Exam Hall 1/h.jpg",
+          "Rooms/Pharmacy Exam Hall 1/i.jpg",
+          "Rooms/Pharmacy Exam Hall 1/j.jpg",
+          "Rooms/Pharmacy Exam Hall 1/k.jpg",
+          "Rooms/Pharmacy Exam Hall 1/l.jpg",
+          "Rooms/Pharmacy Exam Hall 1/m.jpg"
         ]
       }
     ]
