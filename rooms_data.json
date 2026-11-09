@@ -3325,5 +3325,32 @@
         ]
       }
     ]
+  },
+  "Pharmacy Class Room 2": {
+    "name": "Pharmacy Class Room 2",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Faculty of Pharmaceutical Sciences",
+    "category": "Lecture Hall / Classroom",
+    "landmark": "2nd Floor Health Sciences Corridor, East Wing",
+    "info": "Pharmacy Class Room 2 equipped with lecture podium, whiteboard, student benches, and multimedia teaching support.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, turn right into the East corridor past the Museum, and proceed to Pharmacy Class Room 2 on the left.",
+        "photos": [
+          "Rooms/Pharmacy Class Room 2/a.jpg",
+          "Rooms/Pharmacy Class Room 2/b.jpg",
+          "Rooms/Pharmacy Class Room 2/c.jpg",
+          "Rooms/Pharmacy Class Room 2/d.jpg",
+          "Rooms/Pharmacy Class Room 2/e.jpg",
+          "Rooms/Pharmacy Class Room 2/f.jpg",
+          "Rooms/Pharmacy Class Room 2/g.jpg",
+          "Rooms/Pharmacy Class Room 2/h.jpg",
+          "Rooms/Pharmacy Class Room 2/i.jpg",
+          "Rooms/Pharmacy Class Room 2/j.jpg"
+        ]
+      }
+    ]
   }
 }
