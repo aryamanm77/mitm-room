@@ -3352,5 +3352,32 @@
         ]
       }
     ]
+  },
+  "Pharmacy Class Room 3": {
+    "name": "Pharmacy Class Room 3",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Faculty of Pharmaceutical Sciences",
+    "category": "Lecture Hall / Classroom",
+    "landmark": "2nd Floor Health Sciences Corridor, Room 212",
+    "info": "Pharmacy Class Room 3 (Room No 212) equipped with classroom seating, whiteboard, lecture podium, and instructional facilities.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, turn right into the East corridor, proceed past Class Room 2 to the end of the corridor, and turn left into Class Room 3 (Room No 212).",
+        "photos": [
+          "Rooms/Pharmacy Class Room 3/a.jpg",
+          "Rooms/Pharmacy Class Room 3/b.jpg",
+          "Rooms/Pharmacy Class Room 3/c.jpg",
+          "Rooms/Pharmacy Class Room 3/d.jpg",
+          "Rooms/Pharmacy Class Room 3/e.jpg",
+          "Rooms/Pharmacy Class Room 3/f.jpg",
+          "Rooms/Pharmacy Class Room 3/g.jpg",
+          "Rooms/Pharmacy Class Room 3/h.jpg",
+          "Rooms/Pharmacy Class Room 3/i.jpg",
+          "Rooms/Pharmacy Class Room 3/j.jpg"
+        ]
+      }
+    ]
   }
 }
