@@ -3136,5 +3136,32 @@
         ]
       }
     ]
+  },
+  "Pharmaceutical Microbiology Lab": {
+    "name": "Pharmaceutical Microbiology Lab",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Department of Pharmaceutics & Microbiology",
+    "category": "Specialized Laboratory",
+    "landmark": "2nd Floor Health Sciences Corridor, Left Wing",
+    "info": "Pharmaceutical Microbiology Lab equipped for aseptic cultures, sterilization testing, antibiotic assays, and microbiological research.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, and proceed down the corridor to Pharmaceutical Microbiology Lab on the left.",
+        "photos": [
+          "Rooms/Pharmaceutical Microbiology Lab/a.jpg",
+          "Rooms/Pharmaceutical Microbiology Lab/b.jpg",
+          "Rooms/Pharmaceutical Microbiology Lab/c.jpg",
+          "Rooms/Pharmaceutical Microbiology Lab/d.jpg",
+          "Rooms/Pharmaceutical Microbiology Lab/e.jpg",
+          "Rooms/Pharmaceutical Microbiology Lab/f.jpg",
+          "Rooms/Pharmaceutical Microbiology Lab/g.jpg",
+          "Rooms/Pharmaceutical Microbiology Lab/h.jpg",
+          "Rooms/Pharmaceutical Microbiology Lab/i.jpg",
+          "Rooms/Pharmaceutical Microbiology Lab/j.jpg"
+        ]
+      }
+    ]
   }
 }
