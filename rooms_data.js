@@ -3406,5 +3406,32 @@ window.LOCOROM_DATA = {
         ]
       }
     ]
+  },
+  "Central Instrumentation Room": {
+    "name": "Central Instrumentation Room",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Faculty of Pharmaceutical Sciences",
+    "category": "Laboratory / Practical Lab",
+    "landmark": "2nd Floor Health Sciences Corridor, West Wing",
+    "info": "Central Instrumentation Room housing advanced analytical instruments, spectrophotometers, chromatographic systems, and precision pharmaceutical research equipment.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, turn left into the West corridor, and proceed to the Central Instrumentation Room entrance on the left.",
+        "photos": [
+          "Rooms/Central Instrumentation Room/a.jpg",
+          "Rooms/Central Instrumentation Room/b.jpg",
+          "Rooms/Central Instrumentation Room/c.jpg",
+          "Rooms/Central Instrumentation Room/d.jpg",
+          "Rooms/Central Instrumentation Room/e.jpg",
+          "Rooms/Central Instrumentation Room/f.jpg",
+          "Rooms/Central Instrumentation Room/g.jpg",
+          "Rooms/Central Instrumentation Room/h.jpg",
+          "Rooms/Central Instrumentation Room/i.jpg",
+          "Rooms/Central Instrumentation Room/j.jpg"
+        ]
+      }
+    ]
   }
 };
