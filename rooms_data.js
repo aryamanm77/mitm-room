@@ -3190,5 +3190,32 @@ window.LOCOROM_DATA = {
         ]
       }
     ]
+  },
+  "Human Anatomy & Physiology Lab": {
+    "name": "Human Anatomy & Physiology Lab",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Department of Pharmacology & Human Anatomy",
+    "category": "Specialized Laboratory",
+    "landmark": "2nd Floor Health Sciences Corridor, Left Wing",
+    "info": "Human Anatomy & Physiology Lab equipped with anatomical models, physiological recording apparatus, histology slides, microscopes, and diagnostic measurement tools.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, and proceed down the corridor to Human Anatomy & Physiology Lab on the left.",
+        "photos": [
+          "Rooms/Human Anatomy & Physiology Lab/a.jpg",
+          "Rooms/Human Anatomy & Physiology Lab/b.jpg",
+          "Rooms/Human Anatomy & Physiology Lab/c.jpg",
+          "Rooms/Human Anatomy & Physiology Lab/d.jpg",
+          "Rooms/Human Anatomy & Physiology Lab/e.jpg",
+          "Rooms/Human Anatomy & Physiology Lab/f.jpg",
+          "Rooms/Human Anatomy & Physiology Lab/g.jpg",
+          "Rooms/Human Anatomy & Physiology Lab/h.jpg",
+          "Rooms/Human Anatomy & Physiology Lab/i.jpg",
+          "Rooms/Human Anatomy & Physiology Lab/j.jpg"
+        ]
+      }
+    ]
   }
 };
