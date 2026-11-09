@@ -3244,5 +3244,32 @@
         ]
       }
     ]
+  },
+  "Pharmaceutics-I Lab": {
+    "name": "Pharmaceutics-I Lab",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Department of Pharmaceutics",
+    "category": "Specialized Laboratory",
+    "landmark": "2nd Floor Health Sciences Corridor, Left Wing",
+    "info": "Pharmaceutics-I Lab equipped for formulation design, compounding, liquid dosage forms, emulsions, suspensions, and unit operations.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, and proceed down the corridor to Pharmaceutics-I Lab on the left.",
+        "photos": [
+          "Rooms/Pharmaceutics-I Lab/a.jpg",
+          "Rooms/Pharmaceutics-I Lab/b.jpg",
+          "Rooms/Pharmaceutics-I Lab/c.jpg",
+          "Rooms/Pharmaceutics-I Lab/d.jpg",
+          "Rooms/Pharmaceutics-I Lab/e.jpg",
+          "Rooms/Pharmaceutics-I Lab/f.jpg",
+          "Rooms/Pharmaceutics-I Lab/g.jpg",
+          "Rooms/Pharmaceutics-I Lab/h.jpg",
+          "Rooms/Pharmaceutics-I Lab/i.jpg",
+          "Rooms/Pharmaceutics-I Lab/j.jpg"
+        ]
+      }
+    ]
   }
 }
