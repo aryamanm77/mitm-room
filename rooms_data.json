@@ -3487,5 +3487,32 @@
         ]
       }
     ]
+  },
+  "Pharmaceutics Lab": {
+    "name": "Pharmaceutics Lab",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Department of Pharmaceutics",
+    "category": "Laboratory / Practical Lab",
+    "landmark": "2nd Floor Health Sciences Corridor, West Wing",
+    "info": "Pharmaceutics Lab dedicated to pharmaceutical dosage forms, formulation technology, compounding techniques, physical pharmacy, and drug delivery systems.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, turn left into the West corridor, proceed past Central Instrumentation Room, and enter the Pharmaceutics Lab on the left.",
+        "photos": [
+          "Rooms/Pharmaceutics Lab/a.jpg",
+          "Rooms/Pharmaceutics Lab/b.jpg",
+          "Rooms/Pharmaceutics Lab/c.jpg",
+          "Rooms/Pharmaceutics Lab/d.jpg",
+          "Rooms/Pharmaceutics Lab/e.jpg",
+          "Rooms/Pharmaceutics Lab/f.jpg",
+          "Rooms/Pharmaceutics Lab/g.jpg",
+          "Rooms/Pharmaceutics Lab/h.jpg",
+          "Rooms/Pharmaceutics Lab/i.jpg",
+          "Rooms/Pharmaceutics Lab/j.jpg"
+        ]
+      }
+    ]
   }
 }
