@@ -3541,5 +3541,32 @@
         ]
       }
     ]
+  },
+  "Pharmaceutics-II Lab": {
+    "name": "Pharmaceutics-II Lab",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Department of Pharmaceutics",
+    "category": "Laboratory / Practical Lab",
+    "landmark": "2nd Floor Health Sciences Corridor, West Wing",
+    "info": "Pharmaceutics-II Lab dedicated to advanced dosage forms, semisolid formulations, sterile preparations, sustained-release drug delivery systems, and pharmaceutical technology practicals.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, turn left into the corridor past the Law College entrance, proceed along the corridor, and enter Pharmaceutics-II Lab on the left.",
+        "photos": [
+          "Rooms/Pharmaceutics-II Lab/a.jpg",
+          "Rooms/Pharmaceutics-II Lab/b.jpg",
+          "Rooms/Pharmaceutics-II Lab/c.jpg",
+          "Rooms/Pharmaceutics-II Lab/d.jpg",
+          "Rooms/Pharmaceutics-II Lab/e.jpg",
+          "Rooms/Pharmaceutics-II Lab/f.jpg",
+          "Rooms/Pharmaceutics-II Lab/g.jpg",
+          "Rooms/Pharmaceutics-II Lab/h.jpg",
+          "Rooms/Pharmaceutics-II Lab/i.jpg",
+          "Rooms/Pharmaceutics-II Lab/j.jpg"
+        ]
+      }
+    ]
   }
 }
