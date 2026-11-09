@@ -3271,5 +3271,32 @@ window.LOCOROM_DATA = {
         ]
       }
     ]
+  },
+  "Pharmacy Museum": {
+    "name": "Pharmacy Museum",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Department of Pharmacognosy & Academic Resources",
+    "category": "Academic Facility & Museum",
+    "landmark": "2nd Floor Health Sciences Corridor, East Wing",
+    "info": "Pharmacy Museum featuring crude drugs, herbarium specimens, formulation models, anatomical charts, and historic pharmaceutical equipment.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, turn right into the East corridor, and proceed to the Pharmacy Museum on the left.",
+        "photos": [
+          "Rooms/Pharmacy Museum/a.jpg",
+          "Rooms/Pharmacy Museum/b.jpg",
+          "Rooms/Pharmacy Museum/c.jpg",
+          "Rooms/Pharmacy Museum/d.jpg",
+          "Rooms/Pharmacy Museum/e.jpg",
+          "Rooms/Pharmacy Museum/f.jpg",
+          "Rooms/Pharmacy Museum/g.jpg",
+          "Rooms/Pharmacy Museum/h.jpg",
+          "Rooms/Pharmacy Museum/i.jpg",
+          "Rooms/Pharmacy Museum/j.jpg"
+        ]
+      }
+    ]
   }
 };
