@@ -3736,5 +3736,40 @@
         ]
       }
     ]
+  },
+  "Maharaja Institute of Ayurveda Medical Sciences & Hospital": {
+    "name": "Maharaja Institute of Ayurveda Medical Sciences & Hospital",
+    "college": "Department of MBA",
+    "floor": "2nd Floor",
+    "dept": "Ayurveda Medical Sciences & Hospital",
+    "category": "Medical Institute / Hospital / Administrative Office",
+    "landmark": "MBA / MCA Block Upper Floor · Beside Upper Lift Landing",
+    "info": "Enter through the MBA & MCA block front entrance. Ascend the staircase to the upper floor landing past the elevator, and turn right into the Maharaja Institute of Ayurveda Medical Sciences & Hospital glass entrance doors.",
+    "thumbnail": "Rooms/Ayurveda Medical Sciences & Hospital/g.jpg",
+    "photos": [
+      "Rooms/Ayurveda Medical Sciences & Hospital/a.jpg",
+      "Rooms/Ayurveda Medical Sciences & Hospital/b.jpg",
+      "Rooms/Ayurveda Medical Sciences & Hospital/c.jpg",
+      "Rooms/Ayurveda Medical Sciences & Hospital/d.jpg",
+      "Rooms/Ayurveda Medical Sciences & Hospital/e.jpg",
+      "Rooms/Ayurveda Medical Sciences & Hospital/f.jpg",
+      "Rooms/Ayurveda Medical Sciences & Hospital/g.jpg"
+    ],
+    "accessPoints": [
+      {
+        "name": "MBA & MCA Main Entrance",
+        "info": "Enter through the MBA & MCA block front entrance. Ascend the staircase to the upper floor landing past the elevator, and turn right into the Maharaja Institute of Ayurveda Medical Sciences & Hospital glass entrance doors.",
+        "thumbnail": "Rooms/Ayurveda Medical Sciences & Hospital/a.jpg",
+        "photos": [
+          "Rooms/Ayurveda Medical Sciences & Hospital/a.jpg",
+          "Rooms/Ayurveda Medical Sciences & Hospital/b.jpg",
+          "Rooms/Ayurveda Medical Sciences & Hospital/c.jpg",
+          "Rooms/Ayurveda Medical Sciences & Hospital/d.jpg",
+          "Rooms/Ayurveda Medical Sciences & Hospital/e.jpg",
+          "Rooms/Ayurveda Medical Sciences & Hospital/f.jpg",
+          "Rooms/Ayurveda Medical Sciences & Hospital/g.jpg"
+        ]
+      }
+    ]
   }
 }

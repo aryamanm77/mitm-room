@@ -2002,24 +2002,7 @@
       </p>
     </div>
 
-    <!-- Universal Instant Teleport Search Hub -->
-    <div class="navigo-search-hub">
-      <div class="navigo-search-box">
-        <svg viewBox="0 0 24 24" class="navigo-search-icon" aria-hidden="true">
-          <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-        </svg>
-        <input
-          type="text"
-          id="portalSearchInput"
-          class="navigo-search-input"
-          placeholder="Search any room or lab campus-wide (e.g. 102, 205, Belaku, Board Room, CAD)..."
-          autocomplete="off"
-        />
-      </div>
 
-      <!-- Live Instant Autocomplete Dropdown Matrix -->
-      <div id="portalSearchDropdown" class="portal-suggest-dropdown" style="display: none;" role="listbox"></div>
-    </div>
 
     <!-- Navigation Mode Switcher Bar (3 Functional Views) -->
     <div class="navigo-mode-nav" role="tablist">
@@ -2041,15 +2024,7 @@
          VIEW 1: ACADEMIC WINGS WITH DIRECT FAST-LAUNCHERS
          ======================================================================== -->
     <div id="viewModeWings" class="nav-view-panel">
-      <!-- Wing Sub-filters -->
-      <div class="wings-filter-wrap" role="tablist" aria-label="Campus Building Categories">
-        <button type="button" class="wing-filter-chip active" data-portal-filter="all">All Wings (5)</button>
-        <button type="button" class="wing-filter-chip" data-portal-filter="engineering">Engineering Block (60)</button>
-        <button type="button" class="wing-filter-chip" data-portal-filter="mba">Department of MBA</button>
-        <button type="button" class="wing-filter-chip" data-portal-filter="mca">Department of MCA</button>
-        <button type="button" class="wing-filter-chip" data-portal-filter="bca">Department of BCA</button>
-        <button type="button" class="wing-filter-chip" data-portal-filter="pharmacy">Pharmacy &amp; Nursing</button>
-      </div>
+
 
       <div class="wings-grid" id="wingsGrid">
         <!-- 1. Engineering Academic Block -->
@@ -2096,15 +2071,7 @@
               Master of Business Administration block featuring Belaku (ಬೆಳಕು) auditorium, Centre for Future Skills, Board Room, faculty chambers, and smart lecture suites.
             </p>
 
-            <div class="wing-fast-actions-label">Direct Destination Teleport:</div>
-            <div class="wing-fast-chips">
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Belaku">Belaku (Auditorium)</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="MBA MCA Lab">MBA / MCA Lab (201)</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Centre for Future Skills">Centre for Future Skills</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="2">Board Room (Room 2)</button>
-              <button type="button" class="wing-fast-chip" data-direct-room="1">Staff Room (Room 1)</button>
-              <button type="button" class="wing-fast-chip" data-direct-room="102">Room 102</button>
-            </div>
+
 
             <div class="wing-footer">
               <button type="button" class="wing-primary-btn" data-btn-college="mba">
@@ -2128,14 +2095,7 @@
               Master of Computer Applications division featuring modern lecture halls (MCA LH 1, LH 2, LH 3, LH 4), computing laboratories (MCA Lab 1), and software engineering studios.
             </p>
 
-            <div class="wing-fast-actions-label">Direct Destination Teleport:</div>
-            <div class="wing-fast-chips">
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="MCA LH 1">MCA LH 1 (LH-I)</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="MCA LH 2">MCA LH 2 (LH-II)</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="MCA LH 3">MCA LH 3 (LH-III)</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="MCA LH 4">MCA LH 4 (LH-IV)</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="MCA Lab 1">MCA Lab 1</button>
-            </div>
+
 
             <div class="wing-footer">
               <button type="button" class="wing-primary-btn" data-btn-college="mca">
@@ -2159,23 +2119,7 @@
               Bachelor of Computer Applications featuring modern coding studios, web technology laboratories, and interactive lecture theaters.
             </p>
 
-            <div class="wing-fast-actions-label">Direct Destination Teleport:</div>
-            <div class="wing-fast-chips">
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="BCA Lab 1 & 2">BCA Lab 1 &amp; 2</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="BCA 201">BCA Room 201</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="BCA 202">BCA Room 202</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="BCA 203">BCA Room 203</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="BCA 204">BCA Room 204</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="BCA 205">BCA Room 205</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="BCA 206">BCA Room 206</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="BCA 207">BCA Room 207</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="BCA 208">BCA Room 208</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="BCA 209">BCA Room 209</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="BCA 210">BCA Room 210</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="BCA 211">BCA Room 211</button>
-              <button type="button" class="wing-fast-chip" data-direct-college="bca">Web Tech Studios</button>
-              <button type="button" class="wing-fast-chip" data-direct-college="bca">Lecture Theaters</button>
-            </div>
+
 
             <div class="wing-footer">
               <button type="button" class="wing-primary-btn" data-btn-college="bca">
@@ -2199,44 +2143,7 @@
               Dedicated pharmaceutical block with formulation suites, organic chemistry research chambers, and pharmacognosy laboratories.
             </p>
 
-            <div class="wing-fast-actions-label">Direct Destination Teleport:</div>
-            <div class="wing-fast-chips">
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmacy Administrative Block">Administrative Block</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmacy Principal Office">Principal Office</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmacy Vice Principal Office">Vice-Principal</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmacy Staff Room">Staff Room</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Associate Professor Room">Associate Professor</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Nursing Foundation Department">Nursing Foundation</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="AV Aids Lab">AV Aids Lab</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Counselling Room">Counselling Room</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="SNA Room">SNA Room</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Medical Surgical Nursing Department">Medical Surgical Nursing</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="OBG & Paediatric Nursing Department">OBG &amp; Paediatric</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmaceutical Chemistry-I Lab">Pharmaceutical Chemistry-I Lab</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmaceutical Chemistry Lab">Pharmaceutical Chemistry Lab</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmaceutical Microbiology Lab">Pharmaceutical Microbiology Lab</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmaceutical Analysis Lab">Pharmaceutical Analysis Lab</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Human Anatomy & Physiology Lab">Human Anatomy &amp; Physiology Lab</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmacology Lab">Pharmacology Lab</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmaceutics-I Lab">Pharmaceutics-I Lab</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmacy Museum">Pharmacy Museum</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmacy Class Room 1">Pharmacy Class Room 1</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmacy Class Room 2">Pharmacy Class Room 2</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmacy Class Room 3">Pharmacy Class Room 3</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmacy Laboratory 3">Pharmacy Laboratory 3</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Central Instrumentation Room">Central Instrumentation Room</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmaceutical Chemistry-II Lab">Pharmaceutical Chemistry-II Lab</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Machine Room">Machine Room</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmaceutics Lab">Pharmaceutics Lab</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmacognosy-I Lab">Pharmacognosy-I Lab</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmaceutics-II Lab">Pharmaceutics-II Lab</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmacy Confidential Room">Confidential Room</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmacy Class Room 4">Pharmacy Class Room 4</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmacy 1st Sem Class Room">1st Sem Class Room</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmacy 2nd Sem Class Room">2nd Sem Class Room</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Pharmacy Exam Hall 1">Pharmacy Exam Hall 1</button>
-              <button type="button" class="wing-fast-chip primary-spot" data-direct-room="Auditorium">Auditorium</button>
-            </div>
+
 
             <div class="wing-footer">
               <button type="button" class="wing-primary-btn" data-btn-college="pharmacy">
@@ -2615,7 +2522,7 @@
       </div>
 
       
-      <div class="quick-row" id="quickChipsRow"></div>
+
     </section>
 
     <section>
@@ -2732,7 +2639,7 @@
 
   <div class="toast-host" id="toastHost"></div>
 
-  <script src="rooms_data.js?v=20261109-18"></script>
-  <script type="module" src="app.js?v=20261109-18"></script>
+  <script src="rooms_data.js?v=20261109-19"></script>
+  <script type="module" src="app.js?v=20261109-19"></script>
 </body>
 </html>

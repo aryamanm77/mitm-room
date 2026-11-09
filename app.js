@@ -372,6 +372,7 @@ function showHomeView(pushHistory = true) {
 }
 
 function renderQuickRecents() {
+  return;
   const wrap = document.getElementById("quickChipsRow");
   if (!wrap) return;
 
