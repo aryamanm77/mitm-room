@@ -3379,5 +3379,32 @@
         ]
       }
     ]
+  },
+  "Pharmacy Laboratory 3": {
+    "name": "Pharmacy Laboratory 3",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Faculty of Pharmaceutical Sciences",
+    "category": "Laboratory / Practical Lab",
+    "landmark": "2nd Floor Health Sciences Corridor, East Wing End",
+    "info": "Pharmacy Laboratory 3 (Computer Room / Laboratory-3 / Lab-4) equipped with computing workstations, pharmaceutical software terminals, and digital instrumentation systems.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, turn right into the East corridor, and proceed straight to the double doors at the far end of the corridor into Laboratory 3 / Computer Room.",
+        "photos": [
+          "Rooms/Pharmacy Laboratory 3/a.jpg",
+          "Rooms/Pharmacy Laboratory 3/b.jpg",
+          "Rooms/Pharmacy Laboratory 3/c.jpg",
+          "Rooms/Pharmacy Laboratory 3/d.jpg",
+          "Rooms/Pharmacy Laboratory 3/e.jpg",
+          "Rooms/Pharmacy Laboratory 3/f.jpg",
+          "Rooms/Pharmacy Laboratory 3/g.jpg",
+          "Rooms/Pharmacy Laboratory 3/h.jpg",
+          "Rooms/Pharmacy Laboratory 3/i.jpg",
+          "Rooms/Pharmacy Laboratory 3/j.jpg"
+        ]
+      }
+    ]
   }
 }
