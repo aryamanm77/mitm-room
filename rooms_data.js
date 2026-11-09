@@ -3433,5 +3433,59 @@ window.LOCOROM_DATA = {
         ]
       }
     ]
+  },
+  "Pharmaceutical Chemistry-II Lab": {
+    "name": "Pharmaceutical Chemistry-II Lab",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Faculty of Pharmaceutical Sciences",
+    "category": "Laboratory / Practical Lab",
+    "landmark": "2nd Floor Health Sciences Corridor, West Wing",
+    "info": "Pharmaceutical Chemistry-II Lab equipped for advanced synthetic chemistry, organic medicinal synthesis, qualitative and quantitative chemical analysis, and chemical storage.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, turn left into the West corridor, and proceed to the double entrance on the right marked Pharmaceutical Chemistry-II Lab.",
+        "photos": [
+          "Rooms/Pharmaceutical Chemistry-II Lab/a.jpg",
+          "Rooms/Pharmaceutical Chemistry-II Lab/b.jpg",
+          "Rooms/Pharmaceutical Chemistry-II Lab/c.jpg",
+          "Rooms/Pharmaceutical Chemistry-II Lab/d.jpg",
+          "Rooms/Pharmaceutical Chemistry-II Lab/e.jpg",
+          "Rooms/Pharmaceutical Chemistry-II Lab/f.jpg",
+          "Rooms/Pharmaceutical Chemistry-II Lab/g.jpg",
+          "Rooms/Pharmaceutical Chemistry-II Lab/h.jpg",
+          "Rooms/Pharmaceutical Chemistry-II Lab/i.jpg",
+          "Rooms/Pharmaceutical Chemistry-II Lab/j.jpg"
+        ]
+      }
+    ]
+  },
+  "Machine Room": {
+    "name": "Machine Room",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Faculty of Pharmaceutical Sciences",
+    "category": "Laboratory / Practical Lab",
+    "landmark": "2nd Floor Health Sciences Corridor, West Wing",
+    "info": "Pharmacy Machine Room equipped with pharmaceutical manufacturing equipment, tablet compression machines, coating pans, granulators, and pilot-scale processing machinery.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, turn left into the West corridor, and proceed to the double entrance on the right marked Machine Room.",
+        "photos": [
+          "Rooms/Machine Room/a.jpg",
+          "Rooms/Machine Room/b.jpg",
+          "Rooms/Machine Room/c.jpg",
+          "Rooms/Machine Room/d.jpg",
+          "Rooms/Machine Room/e.jpg",
+          "Rooms/Machine Room/f.jpg",
+          "Rooms/Machine Room/g.jpg",
+          "Rooms/Machine Room/h.jpg",
+          "Rooms/Machine Room/i.jpg",
+          "Rooms/Machine Room/j.jpg"
+        ]
+      }
+    ]
   }
 };
