@@ -3217,5 +3217,32 @@
         ]
       }
     ]
+  },
+  "Pharmacology Lab": {
+    "name": "Pharmacology Lab",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Department of Pharmacology",
+    "category": "Specialized Laboratory",
+    "landmark": "2nd Floor Health Sciences Corridor, Right Wing",
+    "info": "Pharmacology Lab equipped for experimental pharmacology, isolated tissue organ baths, animal simulation software, bioassays, and drug screening experiments.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, and proceed down the corridor to Pharmacology Lab on the right.",
+        "photos": [
+          "Rooms/Pharmacology Lab/a.jpg",
+          "Rooms/Pharmacology Lab/b.jpg",
+          "Rooms/Pharmacology Lab/c.jpg",
+          "Rooms/Pharmacology Lab/d.jpg",
+          "Rooms/Pharmacology Lab/e.jpg",
+          "Rooms/Pharmacology Lab/f.jpg",
+          "Rooms/Pharmacology Lab/g.jpg",
+          "Rooms/Pharmacology Lab/h.jpg",
+          "Rooms/Pharmacology Lab/i.jpg",
+          "Rooms/Pharmacology Lab/j.jpg"
+        ]
+      }
+    ]
   }
 }
