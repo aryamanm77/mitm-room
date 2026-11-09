@@ -3163,5 +3163,32 @@
         ]
       }
     ]
+  },
+  "Pharmaceutical Analysis Lab": {
+    "name": "Pharmaceutical Analysis Lab",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Department of Pharmaceutical Analysis",
+    "category": "Specialized Laboratory",
+    "landmark": "2nd Floor Health Sciences Corridor, Right Wing",
+    "info": "Pharmaceutical Analysis Lab equipped for instrumental analysis, assay validation, titrimetric methods, and pharmaceutical quality control.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, and proceed down the corridor to Pharmaceutical Analysis Lab on the right.",
+        "photos": [
+          "Rooms/Pharmaceutical Analysis Lab/a.jpg",
+          "Rooms/Pharmaceutical Analysis Lab/b.jpg",
+          "Rooms/Pharmaceutical Analysis Lab/c.jpg",
+          "Rooms/Pharmaceutical Analysis Lab/d.jpg",
+          "Rooms/Pharmaceutical Analysis Lab/e.jpg",
+          "Rooms/Pharmaceutical Analysis Lab/f.jpg",
+          "Rooms/Pharmaceutical Analysis Lab/g.jpg",
+          "Rooms/Pharmaceutical Analysis Lab/h.jpg",
+          "Rooms/Pharmaceutical Analysis Lab/i.jpg",
+          "Rooms/Pharmaceutical Analysis Lab/j.jpg"
+        ]
+      }
+    ]
   }
 }
