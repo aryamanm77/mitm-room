@@ -3109,5 +3109,32 @@
         ]
       }
     ]
+  },
+  "Pharmaceutical Chemistry Lab": {
+    "name": "Pharmaceutical Chemistry Lab",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Department of Pharmaceutical Chemistry",
+    "category": "Specialized Laboratory",
+    "landmark": "2nd Floor Health Sciences Corridor, Right Wing (Adjacent to Store Room - II)",
+    "info": "Pharmaceutical Chemistry Lab equipped for qualitative and quantitative inorganic/organic drug analysis, chemical synthesis, and pharmaceutical testing.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, and proceed down the corridor to Pharmaceutical Chemistry Lab on the right.",
+        "photos": [
+          "Rooms/Pharmaceutical Chemistry Lab/a.jpg",
+          "Rooms/Pharmaceutical Chemistry Lab/b.jpg",
+          "Rooms/Pharmaceutical Chemistry Lab/c.jpg",
+          "Rooms/Pharmaceutical Chemistry Lab/d.jpg",
+          "Rooms/Pharmaceutical Chemistry Lab/e.jpg",
+          "Rooms/Pharmaceutical Chemistry Lab/f.jpg",
+          "Rooms/Pharmaceutical Chemistry Lab/g.jpg",
+          "Rooms/Pharmaceutical Chemistry Lab/h.jpg",
+          "Rooms/Pharmaceutical Chemistry Lab/i.jpg",
+          "Rooms/Pharmaceutical Chemistry Lab/j.jpg"
+        ]
+      }
+    ]
   }
 }
