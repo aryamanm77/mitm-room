@@ -3514,5 +3514,32 @@
         ]
       }
     ]
+  },
+  "Pharmacognosy-I Lab": {
+    "name": "Pharmacognosy-I Lab",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Department of Pharmacognosy",
+    "category": "Laboratory / Practical Lab",
+    "landmark": "2nd Floor Health Sciences Corridor, West Wing",
+    "info": "Pharmacognosy-I Lab dedicated to the morphological and microscopical study of crude drugs of natural origin, extraction, isolation, and phyto-chemical screening of medicinal plant constituents.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, turn left into the West corridor, proceed past Pharmaceutical Chemistry-II Lab, and enter Pharmacognosy-I Lab on the right.",
+        "photos": [
+          "Rooms/Pharmacognosy-I Lab/a.jpg",
+          "Rooms/Pharmacognosy-I Lab/b.jpg",
+          "Rooms/Pharmacognosy-I Lab/c.jpg",
+          "Rooms/Pharmacognosy-I Lab/d.jpg",
+          "Rooms/Pharmacognosy-I Lab/e.jpg",
+          "Rooms/Pharmacognosy-I Lab/f.jpg",
+          "Rooms/Pharmacognosy-I Lab/g.jpg",
+          "Rooms/Pharmacognosy-I Lab/h.jpg",
+          "Rooms/Pharmacognosy-I Lab/i.jpg",
+          "Rooms/Pharmacognosy-I Lab/j.jpg"
+        ]
+      }
+    ]
   }
 }
