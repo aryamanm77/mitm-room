@@ -3082,5 +3082,32 @@ window.LOCOROM_DATA = {
         ]
       }
     ]
+  },
+  "Pharmaceutical Chemistry-I Lab": {
+    "name": "Pharmaceutical Chemistry-I Lab",
+    "college": "Faculty of Pharmaceutical Sciences",
+    "floor": "2nd Floor",
+    "dept": "Department of Pharmaceutical Chemistry",
+    "category": "Specialized Laboratory",
+    "landmark": "2nd Floor Health Sciences Corridor, Left Wing",
+    "info": "Pharmaceutical Chemistry - I Lab equipped for pharmaceutical analysis, organic synthesis, drug testing, and formulation research.",
+    "accessPoints": [
+      {
+        "name": "Main Entrance",
+        "info": "Enter through Degree & Pharmacy block courtyard, take the stairwell to the 2nd floor, and proceed down the corridor to Pharmaceutical Chemistry-I Lab on the left.",
+        "photos": [
+          "Rooms/Pharmaceutical Chemistry-I Lab/a.jpg",
+          "Rooms/Pharmaceutical Chemistry-I Lab/b.jpg",
+          "Rooms/Pharmaceutical Chemistry-I Lab/c.jpg",
+          "Rooms/Pharmaceutical Chemistry-I Lab/d.jpg",
+          "Rooms/Pharmaceutical Chemistry-I Lab/e.jpg",
+          "Rooms/Pharmaceutical Chemistry-I Lab/f.jpg",
+          "Rooms/Pharmaceutical Chemistry-I Lab/g.jpg",
+          "Rooms/Pharmaceutical Chemistry-I Lab/h.jpg",
+          "Rooms/Pharmaceutical Chemistry-I Lab/i.jpg",
+          "Rooms/Pharmaceutical Chemistry-I Lab/j.jpg"
+        ]
+      }
+    ]
   }
 };
