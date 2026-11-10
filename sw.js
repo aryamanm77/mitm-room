@@ -1,11 +1,12 @@
-const CACHE_NAME = "navigo-v26";
+const CACHE_NAME = "navigo-v27";
 const PRECACHE_ASSETS = [
   "./",
   "index.html",
-  "app.js?v=20261110-03",
-  "rooms_data.js?v=20261110-03",
+  "app.js?v=20261110-04",
+  "rooms_data.js?v=20261110-04",
   "rooms_data.json",
   "logo.png",
+  "whatsapp.png",
   "icon-192.png",
   "icon-512.png",
   "manifest.json"
