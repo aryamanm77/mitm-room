@@ -129,9 +129,10 @@
     }
 
     /* Zero horizontal overflow on all screen containers */
-    .top-bar, .container, .gm-portal-wrap, .walkthrough-screen, .search-hero {
+    .top-bar, .container, .gm-portal-wrap, .walkthrough-wrap, .viewer-box, .photo-stage-wrap, .viewer-bottom-controls, .search-hero {
       width: 100%;
       max-width: 100%;
+      box-sizing: border-box;
       overflow-x: hidden;
     }
 
@@ -691,9 +692,12 @@
        SCREEN 2: STEP-BY-STEP CORRIDOR WALKTHROUGH + WHATSAPP SHARE
        ========================================================================== */
     .walkthrough-wrap {
+      width: 100%;
       max-width: 980px;
       margin: 0 auto;
-      padding: 24px 20px 64px 20px;
+      padding: 20px 16px 64px 16px;
+      box-sizing: border-box;
+      overflow-x: hidden;
     }
 
     .wt-top-actions {
@@ -808,17 +812,19 @@
     }
 
     .stair-tab-btn {
-      flex: 1;
-      min-width: 160px;
+      flex: 1 1 120px;
+      min-width: 0;
       background: transparent;
       border: none;
       border-radius: 7px;
-      padding: 9px 14px;
-      font-size: 13.5px;
+      padding: 9px 12px;
+      font-size: 13px;
       font-weight: 600;
       color: var(--text-secondary);
       cursor: pointer;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .stair-tab-btn.active {
@@ -853,6 +859,9 @@
 
     /* Walkthrough Viewer Card (Corridor Photos) */
     .viewer-box {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
       background-color: var(--bg-surface);
       border: 1px solid var(--border-hairline);
       border-radius: 14px;
@@ -863,37 +872,56 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      padding: 12px 18px;
+      gap: 10px;
+      padding: 12px 14px;
       border-bottom: 1px solid var(--border-hairline);
+      box-sizing: border-box;
+      width: 100%;
+      min-width: 0;
     }
 
     .step-counter {
       font-family: var(--font-mono);
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 600;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .step-counter-main {
+      white-space: nowrap;
+    }
+
+    .step-counter-tag {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .viewer-top-right {
       display: flex;
       align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
+      gap: 8px;
+      flex-shrink: 0;
     }
 
     .auto-play-btn {
       background-color: var(--bg-elevated);
       border: 1px solid var(--border-strong);
       border-radius: 8px;
-      padding: 7px 14px;
-      font-size: 13px;
+      padding: 6px 12px;
+      font-size: 12.5px;
       font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
       transition: all 180ms ease;
     }
 
@@ -920,14 +948,15 @@
       background-color: var(--bg-elevated);
       border: 1px solid var(--border-strong);
       border-radius: 8px;
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       color: var(--text-secondary);
       transition: all 160ms ease;
+      flex-shrink: 0;
     }
 
     .btn-icon-square:hover {
@@ -952,57 +981,67 @@
     .photo-stage-wrap {
       position: relative;
       height: clamp(380px, 60vh, 580px);
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
       background: radial-gradient(circle at center, #131b2e 0%, #060911 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
       user-select: none;
+      -webkit-user-select: none;
+      touch-action: pan-y;
     }
 
     .photo-stage {
       position: relative;
       width: 100%;
       height: 100%;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
     }
 
     .wt-main-media {
+      position: absolute;
+      inset: 0;
+      margin: auto;
       max-width: 100%;
       max-height: 100%;
       width: auto;
       height: auto;
       object-fit: contain;
       user-select: none;
+      -webkit-user-select: none;
       border-radius: 6px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-      transition: opacity 220ms ease, transform 240ms ease;
-      will-change: opacity, transform;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      transition: opacity 220ms ease;
+      will-change: opacity;
+      pointer-events: auto;
     }
 
     .wt-main-media.is-transitioning {
       opacity: 0;
-      transform: scale(0.985);
+      z-index: 3;
     }
 
     .wt-main-media.is-ready {
       opacity: 1;
-      transform: scale(1);
+      z-index: 2;
     }
 
     .wt-main-media.is-old {
-      position: absolute;
-      pointer-events: none;
+      opacity: 1;
       z-index: 1;
+      pointer-events: none;
     }
 
     .stage-overlay-badge {
       position: absolute;
-      top: 14px;
-      left: 14px;
+      top: 12px;
+      left: 12px;
       z-index: 12;
       display: inline-flex;
       align-items: center;
@@ -1014,14 +1053,20 @@
       font-weight: 600;
       background: rgba(15, 23, 42, 0.85);
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.15);
       color: #f1f5f9;
       pointer-events: none;
+      max-width: calc(100% - 24px);
+      box-sizing: border-box;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       transition: all 200ms ease;
     }
 
     .stage-overlay-badge.destination {
-      background: rgba(16, 185, 129, 0.9);
+      background: rgba(16, 185, 129, 0.92);
       border-color: rgba(52, 211, 153, 0.6);
       color: #ffffff;
       font-weight: 700;
@@ -1035,12 +1080,6 @@
 
     .step-tag-walk {
       color: var(--text-secondary);
-    }
-
-    .step-nav-btn.arrived-btn {
-      background-color: #10b981;
-      border-color: #10b981;
-      color: #ffffff;
     }
 
     /* Fullscreen Mode */
@@ -1085,10 +1124,12 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 44px;
-      height: 44px;
-      border-radius: 8px;
-      background-color: rgba(15, 23, 42, 0.85);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background-color: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: #ffffff;
       cursor: pointer;
@@ -1096,43 +1137,63 @@
       align-items: center;
       justify-content: center;
       z-index: 15;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
       transition: all 160ms ease;
     }
 
-    .stage-arrow:hover {
-      background-color: var(--accent);
-      transform: translateY(-50%) scale(1.08);
+    @media (hover: hover) {
+      .stage-arrow:hover {
+        background-color: var(--accent);
+        border-color: var(--accent);
+        transform: translateY(-50%) scale(1.08);
+      }
     }
 
-    .stage-arrow.left { left: 14px; }
-    .stage-arrow.right { right: 14px; }
+    .stage-arrow.left { left: 10px; }
+    .stage-arrow.right { right: 10px; }
 
     .viewer-bottom-controls {
-      padding: 16px 18px;
+      padding: 14px 16px;
       border-top: 1px solid var(--border-hairline);
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .big-step-buttons {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 10px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .step-nav-btn {
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
       background-color: var(--bg-elevated);
       border: 1px solid var(--border-strong);
       border-radius: 10px;
-      padding: 12px 18px;
-      font-size: 15px;
+      padding: 11px 12px;
+      font-size: 14px;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: all 160ms ease;
+    }
+
+    .step-nav-btn span {
+      overflow: hidden;
+      text-overflow: ellipsis;
       white-space: nowrap;
     }
 
@@ -1216,11 +1277,62 @@
 
     @media (max-width: 680px) {
       .top-bar {
-        padding: 0 16px;
-        gap: 14px;
+        padding: 0 12px;
+        gap: 10px;
+      }
+      .walkthrough-wrap {
+        padding: 12px 8px 48px 8px;
+      }
+      .viewer-top-bar {
+        padding: 10px 10px;
+        gap: 6px;
+      }
+      .step-counter {
+        font-size: 12.5px;
+      }
+      .step-counter-tag {
+        display: none;
+      }
+      .auto-play-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+        gap: 5px;
+      }
+      .btn-icon-square {
+        width: 32px;
+        height: 32px;
       }
       .photo-stage-wrap {
-        height: clamp(340px, 64vh, 500px);
+        height: clamp(320px, 58vh, 480px);
+      }
+      .stage-arrow {
+        width: 32px;
+        height: 32px;
+      }
+      .stage-arrow.left { left: 6px; }
+      .stage-arrow.right { right: 6px; }
+      .stage-overlay-badge {
+        top: 8px;
+        left: 8px;
+        font-size: 11.5px;
+        padding: 4px 10px;
+        max-width: calc(100% - 16px);
+      }
+      .viewer-bottom-controls {
+        padding: 10px;
+        gap: 10px;
+      }
+      .big-step-buttons {
+        gap: 8px;
+      }
+      .step-nav-btn {
+        padding: 10px 8px;
+        font-size: 13px;
+        gap: 5px;
+      }
+      .step-thumb-btn {
+        width: 56px;
+        height: 40px;
       }
     }
 
@@ -2777,10 +2889,10 @@
         <div class="big-step-buttons">
           <button type="button" class="step-nav-btn" id="wtPrevBtn">
             <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-            <span>Previous Step</span>
+            <span>Previous</span>
           </button>
           <button type="button" class="step-nav-btn primary" id="wtNextBtn">
-            <span>Next Step</span>
+            <span>Next</span>
             <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
           </button>
         </div>
@@ -2792,7 +2904,7 @@
 
   <div class="toast-host" id="toastHost"></div>
 
-  <script src="rooms_data.js?v=20261110-04"></script>
-  <script type="module" src="app.js?v=20261110-04"></script>
+  <script src="rooms_data.js?v=20261110-05"></script>
+  <script type="module" src="app.js?v=20261110-05"></script>
 </body>
 </html>

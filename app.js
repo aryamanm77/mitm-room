@@ -701,7 +701,7 @@ function renderActiveStepPhoto() {
   // Counter & Progress
   const stepTag = idx === 0 ? "Start" : isAtDestination ? "Destination Reached" : "Walking Step";
   if (stepCounter) {
-    stepCounter.innerHTML = `Step <span class="step-num">${idx + 1}</span> of ${total} &middot; <span class="${isAtDestination ? "step-tag-dest" : "step-tag-walk"}">${stepTag}</span>`;
+    stepCounter.innerHTML = `<span class="step-counter-main">Step <span class="step-num">${idx + 1}</span> of ${total}</span> <span class="step-counter-tag ${isAtDestination ? "step-tag-dest" : "step-tag-walk"}">&middot; ${stepTag}</span>`;
   }
   if (progressFill) {
     progressFill.style.width = `${((idx + 1) / total) * 100}%`;
@@ -725,14 +725,17 @@ function renderActiveStepPhoto() {
   // Prev / Next button states
   if (prevBtn) {
     prevBtn.disabled = idx === 0;
+    prevBtn.innerHTML = `<svg class="icon-svg" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> <span>Previous</span>`;
   }
   if (nextBtn) {
     if (isAtDestination) {
       nextBtn.classList.add("arrived-btn");
-      nextBtn.innerHTML = `<span>Arrived at Destination</span> <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>`;
+      nextBtn.innerHTML = `<span>Arrived</span> <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>`;
+      nextBtn.title = `Arrived at Room ${room.name}. Tap to view from start`;
     } else {
       nextBtn.classList.remove("arrived-btn");
-      nextBtn.innerHTML = `<span>Next Step</span> <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>`;
+      nextBtn.innerHTML = `<span>Next</span> <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>`;
+      nextBtn.title = "Go to next step";
     }
     nextBtn.disabled = false;
   }
@@ -753,6 +756,9 @@ function renderActiveStepPhoto() {
     if (isVideo) {
       stage.innerHTML = `<video src="${url}" controls autoplay muted loop playsinline class="wt-main-media is-ready" onerror="if(!this.dataset.cdn){this.dataset.cdn='1';this.src='${cdnUrl}';}"></video>`;
     } else {
+      // Remove any pending transitioning images from rapid clicking
+      stage.querySelectorAll(".wt-main-media.is-transitioning").forEach(el => el.remove());
+
       const existingMedia = stage.querySelector(".wt-main-media:not(.is-old)");
       if (!existingMedia) {
         const img = document.createElement("img");
