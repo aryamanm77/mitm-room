@@ -3773,3 +3773,4 @@ window.ROOMS_DATA = {
     ]
   }
 };
+window.LOCOROM_DATA = window.ROOMS_DATA;

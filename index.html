@@ -1440,6 +1440,37 @@
       color: var(--accent);
     }
 
+    .top-share-app-btn {
+      background-color: var(--color-primary-container);
+      border: 1px solid rgba(11, 87, 208, 0.25);
+      border-radius: var(--radius-lg);
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-primary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all var(--ease);
+    }
+    .top-share-app-btn:hover {
+      background-color: #d3e3fd;
+      border-color: var(--color-primary);
+    }
+    .top-share-app-btn .icon-svg {
+      width: 15px;
+      height: 15px;
+    }
+    @media (max-width: 600px) {
+      .top-share-app-btn span {
+        display: none;
+      }
+      .top-share-app-btn {
+        padding: 7px 10px;
+      }
+    }
+
     /* ==========================================================================
        MITM NAVIGO: MULTI-MODE CAMPUS WAYFINDING HUB (BESPOKE DESIGN SYSTEM)
        ========================================================================== */
@@ -2264,6 +2295,11 @@
         <svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         <span>Colleges</span>
       </button>
+
+      <button type="button" class="top-share-app-btn" id="topShareAppBtn" title="Share MITM Navigo App">
+        <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        <span>Share App</span>
+      </button>
     </div>
   </header>
 
@@ -2904,7 +2940,7 @@
 
   <div class="toast-host" id="toastHost"></div>
 
-  <script src="rooms_data.js?v=20261110-10"></script>
-  <script type="module" src="app.js?v=20261110-10"></script>
+  <script src="rooms_data.js?v=20261110-11"></script>
+  <script type="module" src="app.js?v=20261110-11"></script>
 </body>
 </html>

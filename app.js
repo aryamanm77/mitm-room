@@ -263,8 +263,9 @@ async function initApp() {
     }
   } catch (e) {}
 
-  if (window.LOCOROM_DATA && Object.keys(window.LOCOROM_DATA).length > 0) {
-    state.rooms = window.LOCOROM_DATA;
+  const embeddedData = window.ROOMS_DATA || window.LOCOROM_DATA;
+  if (embeddedData && Object.keys(embeddedData).length > 0) {
+    state.rooms = embeddedData;
   } else {
     try {
       const res = await fetch("rooms_data.json");
@@ -300,6 +301,8 @@ async function initApp() {
       state.activeCollege = collegeKeys[0] || "engineering";
     }
     openRoom(matchedRoomKey, false, isNaN(urlAp) ? 0 : urlAp);
+    // Normalize address bar so reopening the app later shows the College Selection Portal first
+    window.history.replaceState({ view: "walkthrough", room: matchedRoomKey, college: state.activeCollege }, "", window.location.pathname);
   } else {
     // Fresh app launch / open: Always present the College Selection Portal first
     showPortalView(false);
@@ -634,12 +637,9 @@ function openRoom(roomKey, pushHistory = true, initialApIdx = 0) {
   window.scrollTo(0, 0);
 
   if (pushHistory) {
-    const url = new URL(window.location.origin + window.location.pathname);
-    url.searchParams.set("room", roomKey);
-    if (initialApIdx > 0) url.searchParams.set("ap", String(initialApIdx));
-    window.history.pushState({ view: "walkthrough", room: roomKey, college: state.activeCollege }, "", url.toString());
+    window.history.pushState({ view: "walkthrough", room: roomKey, college: state.activeCollege }, "", window.location.pathname);
   } else {
-    window.history.replaceState({ view: "walkthrough", room: roomKey, college: state.activeCollege }, "", window.location.href);
+    window.history.replaceState({ view: "walkthrough", room: roomKey, college: state.activeCollege }, "", window.location.pathname);
   }
 
   renderWalkthroughView();
@@ -1228,6 +1228,29 @@ function bindEvents() {
     showPortalView();
   });
 
+  document.getElementById("topShareAppBtn")?.addEventListener("click", async () => {
+    const appUrl = window.location.origin + window.location.pathname;
+    const shareData = {
+      title: "MITM Navigo",
+      text: "*MITM Navigo — Maharaja Institute of Technology Mysore*\nOfficial indoor campus wayfinding and photo walkthroughs for Engineering, MBA, MCA, BCA, and Pharmacy:\n",
+      url: appUrl
+    };
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        return;
+      } catch (e) {
+        if (e.name === "AbortError") return;
+      }
+    }
+    try {
+      await navigator.clipboard.writeText(appUrl);
+      showToast("MITM Navigo link copied!");
+    } catch (e) {
+      prompt("Copy app link:", appUrl);
+    }
+  });
+
   document.getElementById("brandHomeLink")?.addEventListener("click", (e) => {
     e.preventDefault();
     showPortalView();
@@ -1405,17 +1428,15 @@ function bindEvents() {
 
   // 11. Browser Back / Forward (popstate)
   window.addEventListener("popstate", (e) => {
-    const params = new URLSearchParams(window.location.search);
-    const r = params.get("room");
-    const apIdx = parseInt(params.get("ap") || "0", 10);
-
-    const matchedRoomKey = findRoomKey(r);
-    if (matchedRoomKey) {
-      const room = state.rooms[matchedRoomKey];
-      const collegeKeys = getCollegeKeysForRoom(room);
-      state.activeCollege = collegeKeys[0] || "engineering";
-      openRoom(matchedRoomKey, false, isNaN(apIdx) ? 0 : apIdx);
-    } else if (e.state && e.state.view === "college" && e.state.college) {
+    if (e.state && e.state.view === "walkthrough" && e.state.room) {
+      const matchedRoomKey = findRoomKey(e.state.room);
+      if (matchedRoomKey) {
+        state.activeCollege = e.state.college || state.activeCollege;
+        openRoom(matchedRoomKey, false);
+        return;
+      }
+    }
+    if (e.state && e.state.view === "college" && e.state.college) {
       enterCollege(e.state.college, false);
     } else {
       showPortalView(false);
