@@ -5,7 +5,7 @@ window.ROOMS_DATA = {
     "floor": "1st Floor",
     "dept": "Department of MBA",
     "category": "Faculty Staff Room",
-    "landmark": "MBA Wing Corridor • 1st Floor • Total Area: 107.25 Sq.Mtr",
+    "landmark": "MBA Block Corridor • 1st Floor • Total Area: 107.25 Sq.Mtr",
     "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 1 on your left (MBA Faculty Staff Room, Total Area: 107.25 Sq.Mtr).",
     "thumbnail": "Rooms/1/f.jpg",
     "photos": [
@@ -38,7 +38,7 @@ window.ROOMS_DATA = {
     "floor": "1st Floor",
     "dept": "Department of MBA",
     "category": "Board Room / Staff Room",
-    "landmark": "MBA Wing Corridor • 1st Floor • Total Area: 9.2 Sq.Mtr",
+    "landmark": "MBA Block Corridor • 1st Floor • Total Area: 9.2 Sq.Mtr",
     "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 2 on your left (Board Room / Faculty Staff Room, Total Area: 9.2 Sq.Mtr).",
     "thumbnail": "Rooms/2/f.jpg",
     "photos": [
@@ -71,7 +71,7 @@ window.ROOMS_DATA = {
     "floor": "1st Floor",
     "dept": "Department of MBA",
     "category": "Classroom (2nd Year FM-HR)",
-    "landmark": "MBA Wing Corridor • 1st Floor • Capacity: 60",
+    "landmark": "MBA Block Corridor • 1st Floor • Capacity: 60",
     "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 102 on your right (2nd Year FM-HR, Seating Capacity: 60).",
     "thumbnail": "Rooms/102/f.jpg",
     "photos": [
@@ -104,7 +104,7 @@ window.ROOMS_DATA = {
     "floor": "1st Floor",
     "dept": "Department of MBA",
     "category": "Classroom (1st Year B Section)",
-    "landmark": "MBA Wing Corridor • 1st Floor • Capacity: 60",
+    "landmark": "MBA Block Corridor • 1st Floor • Capacity: 60",
     "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 103 on your right (1st Year B Section, Seating Capacity: 60).",
     "thumbnail": "Rooms/103/f.jpg",
     "photos": [
@@ -137,7 +137,7 @@ window.ROOMS_DATA = {
     "floor": "1st Floor",
     "dept": "Department of MBA",
     "category": "Classroom (2nd Year FM-MM)",
-    "landmark": "MBA Wing Corridor • 1st Floor • Capacity: 60",
+    "landmark": "MBA Block Corridor • 1st Floor • Capacity: 60",
     "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 104 on your right (2nd Year FM-MM, Seating Capacity: 60).",
     "thumbnail": "Rooms/104/f.jpg",
     "photos": [
@@ -170,7 +170,7 @@ window.ROOMS_DATA = {
     "floor": "1st Floor",
     "dept": "Department of MBA",
     "category": "Classroom (2nd Year MM-HR)",
-    "landmark": "MBA Wing Corridor • 1st Floor • Capacity: 30",
+    "landmark": "MBA Block Corridor • 1st Floor • Capacity: 30",
     "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 105 on your right (2nd Year MM-HR, Seating Capacity: 30).",
     "thumbnail": "Rooms/105/f.jpg",
     "photos": [
@@ -203,7 +203,7 @@ window.ROOMS_DATA = {
     "floor": "1st Floor",
     "dept": "Department of MBA",
     "category": "Classroom (1st Year A Section)",
-    "landmark": "MBA Wing Corridor • 1st Floor • Capacity: 60",
+    "landmark": "MBA Block Corridor • 1st Floor • Capacity: 60",
     "info": "Enter through the Department of MBA block front entrance. Head up the front staircase to the 1st landing, turn right past the elevator, enter through the MBA glass doors, and proceed down the corridor to Room 106 on your right (1st Year A Section, Seating Capacity: 60).",
     "thumbnail": "Rooms/106/f.jpg",
     "photos": [
@@ -235,7 +235,7 @@ window.ROOMS_DATA = {
     "floor": "1st Floor",
     "dept": "Administration & Admissions",
     "category": "Administrative Office",
-    "landmark": "West Wing · Near Admission & Scholarship Section",
+    "landmark": "West Block · Near Admission & Scholarship Section",
     "info": "(*admission section*) corridor (next to kings washroom) or next to (scholarship section)",
     "thumbnail": "Rooms/114/a.jpg",
     "photos": [
@@ -326,7 +326,7 @@ window.ROOMS_DATA = {
     "floor": "1st Floor",
     "dept": "Mechanical Engineering",
     "category": "Academic Classroom",
-    "landmark": "East Wing · Beside Mechanical HOD Cabin",
+    "landmark": "East Block · Beside Mechanical HOD Cabin",
     "info": "",
     "thumbnail": "Rooms/126/Point C [stair case near Mech Dept]/thumbnail.jpg",
     "photos": [],
@@ -353,7 +353,7 @@ window.ROOMS_DATA = {
     "floor": "1st Floor",
     "dept": "Mechanical Engineering",
     "category": "Academic Classroom",
-    "landmark": "East Wing · Beside Mechanical HOD Cabin",
+    "landmark": "East Block · Beside Mechanical HOD Cabin",
     "info": "",
     "thumbnail": "Rooms/127/Point C [stair case near Mech Dept]/thumbnail.jpg",
     "photos": [],
@@ -415,7 +415,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Electronics & Communication",
     "category": "Academic Classroom",
-    "landmark": "West Wing · Point A Left / Point B Right",
+    "landmark": "West Block · Point A Left / Point B Right",
     "info": "",
     "thumbnail": "Rooms/205/Point A/thumbnail.jpg",
     "photos": [],
@@ -461,7 +461,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Electronics & Communication",
     "category": "Academic Classroom",
-    "landmark": "West Wing · Next to Theater Classroom 208",
+    "landmark": "West Block · Next to Theater Classroom 208",
     "info": "",
     "thumbnail": "Rooms/206/Point A/thumbnail.jpg",
     "photos": [],
@@ -506,7 +506,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Electronics & Communication",
     "category": "Theater Classroom",
-    "landmark": "West Wing · Adjacent to EC HOD Chamber",
+    "landmark": "West Block · Adjacent to EC HOD Chamber",
     "info": "",
     "thumbnail": "Rooms/208/Point A/thumbnail.jpg",
     "photos": [],
@@ -655,7 +655,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Information Science & Eng.",
     "category": "Academic Classroom",
-    "landmark": "East Wing · Next to Theater Room 224",
+    "landmark": "East Block · Next to Theater Room 224",
     "info": "",
     "thumbnail": "Rooms/223/Point C/thumbnail.jpg",
     "photos": [],
@@ -682,7 +682,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Information Science & Eng.",
     "category": "Theater Classroom",
-    "landmark": "East Wing · Left of Point C Staircase",
+    "landmark": "East Block · Left of Point C Staircase",
     "info": "",
     "thumbnail": "Rooms/224/Point C/thumbnail.jpg",
     "photos": [],
@@ -710,7 +710,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Mechanical / Interdisciplinary",
     "category": "Academic Classroom",
-    "landmark": "East Wing · Directly Opposite Point C Staircase",
+    "landmark": "East Block · Directly Opposite Point C Staircase",
     "info": "",
     "thumbnail": "Rooms/225/Point C/thumbnail.jpg",
     "photos": [],
@@ -736,7 +736,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Information Science & Eng.",
     "category": "Academic Classroom",
-    "landmark": "Central Wing · Right of IS HOD Chamber",
+    "landmark": "Central Block · Right of IS HOD Chamber",
     "info": "",
     "thumbnail": "Rooms/229/Point B/thumbnail.jpg",
     "photos": [],
@@ -778,7 +778,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Information Science & Eng.",
     "category": "Theater Classroom",
-    "landmark": "Central Wing · Right of IS HOD Chamber",
+    "landmark": "Central Block · Right of IS HOD Chamber",
     "info": "",
     "thumbnail": "Rooms/230/Point B/thumbnail.jpg",
     "photos": [],
@@ -820,7 +820,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Information Science & Eng.",
     "category": "Academic Classroom",
-    "landmark": "Central Wing · Front/Left of IS HOD Chamber",
+    "landmark": "Central Block · Front/Left of IS HOD Chamber",
     "info": "",
     "thumbnail": "Rooms/232/Point B/thumbnail.jpg",
     "photos": [],
@@ -906,7 +906,7 @@ window.ROOMS_DATA = {
     "floor": "3rd Floor",
     "dept": "Computer Science & Eng.",
     "category": "Theater Classroom",
-    "landmark": "West Wing · Adjacent to CS HOD Chamber",
+    "landmark": "West Block · Adjacent to CS HOD Chamber",
     "info": "",
     "thumbnail": "Rooms/305/Point A/thumbnail.jpg",
     "photos": [],
@@ -936,7 +936,7 @@ window.ROOMS_DATA = {
     "floor": "3rd Floor",
     "dept": "Computer Science & Eng.",
     "category": "Academic Classroom",
-    "landmark": "West Wing · Past Staff Room",
+    "landmark": "West Block · Past Staff Room",
     "info": "",
     "thumbnail": "Rooms/309/Point A/thumbnail.jpg",
     "photos": [],
@@ -1078,7 +1078,7 @@ window.ROOMS_DATA = {
     "floor": "3rd Floor",
     "dept": "Civil Engineering",
     "category": "Theater Classroom",
-    "landmark": "East Wing · Past Civil HOD Chamber",
+    "landmark": "East Block · Past Civil HOD Chamber",
     "info": "",
     "thumbnail": "Rooms/319/Point A/thumbnail.jpg",
     "photos": [],
@@ -1129,7 +1129,7 @@ window.ROOMS_DATA = {
     "floor": "3rd Floor",
     "dept": "Civil Engineering",
     "category": "Academic Classroom",
-    "landmark": "East Wing · Directly Opposite Point C Staircase",
+    "landmark": "East Block · Directly Opposite Point C Staircase",
     "info": "",
     "thumbnail": "Rooms/320/Point B/thumbnail.jpg",
     "photos": [],
@@ -1222,7 +1222,7 @@ window.ROOMS_DATA = {
     "floor": "3rd Floor",
     "dept": "Computer Science & Eng.",
     "category": "Academic Classroom",
-    "landmark": "Central Wing · First Class at Point B",
+    "landmark": "Central Block · First Class at Point B",
     "info": "",
     "thumbnail": "Rooms/324/Point B/thumbnail.jpg",
     "photos": [],
@@ -1269,7 +1269,7 @@ window.ROOMS_DATA = {
     "floor": "3rd Floor",
     "dept": "Computer Science & Eng.",
     "category": "Theater Classroom",
-    "landmark": "Central-East Wing · Right of Point B",
+    "landmark": "Central-East Block · Right of Point B",
     "info": "",
     "thumbnail": "Rooms/325/Point B/thumbnail.jpg",
     "photos": [],
@@ -1378,7 +1378,7 @@ window.ROOMS_DATA = {
     "floor": "4th Floor",
     "dept": "AI & Machine Learning / CSE",
     "category": "Academic Classroom",
-    "landmark": "West Wing · Beside 3rd Floor Staff Room",
+    "landmark": "West Block · Beside 3rd Floor Staff Room",
     "info": "",
     "thumbnail": "Rooms/401/Point A/thumbnail.jpg",
     "photos": [],
@@ -1462,7 +1462,7 @@ window.ROOMS_DATA = {
     "floor": "4th Floor",
     "dept": "Computer Science & Eng.",
     "category": "Academic Classroom",
-    "landmark": "Central Wing · Directly Opposite Point B",
+    "landmark": "Central Block · Directly Opposite Point B",
     "info": "",
     "thumbnail": "Rooms/419/Point B/thumbnail.jpg",
     "photos": [],
@@ -1491,7 +1491,7 @@ window.ROOMS_DATA = {
     "floor": "4th Floor",
     "dept": "Computer Science & Eng.",
     "category": "Theater Classroom",
-    "landmark": "Central Wing · Opposite Point B Staircase",
+    "landmark": "Central Block · Opposite Point B Staircase",
     "info": "",
     "thumbnail": "Rooms/420/Point B/thumbnail.jpg",
     "photos": [],
@@ -1517,7 +1517,7 @@ window.ROOMS_DATA = {
   "452": {
     "name": "452",
     "floor": "4th Floor",
-    "dept": "Fifth-Year / PG Wing",
+    "dept": "Fifth-Year / PG Block",
     "category": "Academic Classroom",
     "landmark": "4th Floor Annex Corridor",
     "info": "",
@@ -1544,7 +1544,7 @@ window.ROOMS_DATA = {
   "453": {
     "name": "453",
     "floor": "4th Floor",
-    "dept": "Fifth-Year / PG Wing",
+    "dept": "Fifth-Year / PG Block",
     "category": "Academic Classroom",
     "landmark": "4th Floor Annex Corridor",
     "info": "",
@@ -1695,7 +1695,7 @@ window.ROOMS_DATA = {
     "floor": "1st Floor",
     "dept": "Mechanical Engineering",
     "category": "Engineering Laboratory",
-    "landmark": "East Wing · Beside Mechanical HOD Cabin",
+    "landmark": "East Block · Beside Mechanical HOD Cabin",
     "info": "",
     "thumbnail": "Rooms/123 (Design Laboratory, Heat and Mass Transfer Laboratory)/Point C [stair case near Mech Dept]/thumbnail.jpg",
     "photos": [],
@@ -1716,7 +1716,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Electronics & Power Eng.",
     "category": "Engineering Laboratory",
-    "landmark": "West Wing · Adjacent to Staff Room",
+    "landmark": "West Block · Adjacent to Staff Room",
     "info": "",
     "thumbnail": "Rooms/211 PE lab/Point A/thumbnail.jpg",
     "photos": [],
@@ -1745,7 +1745,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Electronics & Signal Processing",
     "category": "Engineering Laboratory",
-    "landmark": "West Wing · Adjacent to Staff Room",
+    "landmark": "West Block · Adjacent to Staff Room",
     "info": "",
     "thumbnail": "Rooms/213 DSP lab/Point A/thumbnail.jpg",
     "photos": [],
@@ -1775,7 +1775,7 @@ window.ROOMS_DATA = {
     "floor": "3rd Floor",
     "dept": "Civil / Computer Science",
     "category": "Academic Classroom",
-    "landmark": "East Wing · First Right from Point C",
+    "landmark": "East Block · First Right from Point C",
     "info": "",
     "thumbnail": "Rooms/321B/Point B/thumbnail.jpg",
     "photos": [],
@@ -1823,7 +1823,7 @@ window.ROOMS_DATA = {
     "floor": "4th Floor",
     "dept": "AI & Machine Learning / CSE",
     "category": "Classroom Cluster",
-    "landmark": "West Wing · Right of Point A Staircase",
+    "landmark": "West Block · Right of Point A Staircase",
     "info": "",
     "thumbnail": "Rooms/405,406,410/Point A/thumbnail.jpg",
     "photos": [],
@@ -1876,7 +1876,7 @@ window.ROOMS_DATA = {
     "floor": "4th Floor",
     "dept": "Computer Science & Design",
     "category": "Academic Seminar Room",
-    "landmark": "Central Wing · Next to Staff Room",
+    "landmark": "Central Block · Next to Staff Room",
     "info": "",
     "thumbnail": "Rooms/416b/Point B/thumbnail.jpg",
     "photos": [],
@@ -1909,7 +1909,7 @@ window.ROOMS_DATA = {
     "floor": "4th Floor",
     "dept": "Engineering Cluster",
     "category": "Classroom Block",
-    "landmark": "West-Central Wing · Between Point A & Point B",
+    "landmark": "West-Central Block · Between Point A & Point B",
     "info": "",
     "thumbnail": "Rooms/422,423,424,425,426,427/Point A/thumbnail.jpg",
     "photos": [],
@@ -1939,7 +1939,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Campus Events & Assemblies",
     "category": "Main Auditorium / Assembly Hall",
-    "landmark": "2nd Floor Health Sciences Corridor, East Wing End",
+    "landmark": "2nd Floor Health Sciences Corridor, East Block End",
     "info": "MIT Pharmacy College Auditorium equipped with stage, acoustics, double entrance doors, and large-capacity assembly seating for academic symposiums, conferences, and ceremonies.",
     "accessPoints": [
       {
@@ -2004,7 +2004,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Computer Science & Business Systems",
     "category": "Engineering Laboratory",
-    "landmark": "CSBS Dedicated Wing",
+    "landmark": "CSBS Dedicated Block",
     "info": "",
     "thumbnail": "Rooms/CSBS lab class room/a.jpg",
     "photos": [
@@ -2043,7 +2043,7 @@ window.ROOMS_DATA = {
     "floor": "Basement & Ground",
     "dept": "Mechanical Engineering",
     "category": "Engineering Laboratory",
-    "landmark": "Ground / Basement Workshop Wing",
+    "landmark": "Ground / Basement Workshop Block",
     "info": "",
     "thumbnail": "Rooms/Foundry and Forging Laboratory/1.jpg",
     "photos": [
@@ -2151,7 +2151,7 @@ window.ROOMS_DATA = {
     "floor": "Ground Floor",
     "dept": "Department of MCA",
     "category": "Lecture Hall",
-    "landmark": "Room MCA LH - III • Ground Floor Academic Wing",
+    "landmark": "Room MCA LH - III • Ground Floor Academic Block",
     "info": "Head straight along the main approach path to the MITM Degree College entrance portico, head left up the staircase through the Department of Master of Computer Applications security gate, turn left down the corridor, and arrive at Room MCA LH - III on your left beside the notice board and fire extinguisher.",
     "thumbnail": "Rooms/MCA LH 3/d.jpg",
     "photos": [
@@ -2180,7 +2180,7 @@ window.ROOMS_DATA = {
     "floor": "Ground Floor",
     "dept": "Department of MCA",
     "category": "Lecture Hall",
-    "landmark": "Room MCA LH - I • Ground Floor Academic Wing",
+    "landmark": "Room MCA LH - I • Ground Floor Academic Block",
     "info": "Head straight along the main approach path to the MITM Degree College entrance portico, head left up the staircase through the Department of Master of Computer Applications security gate, turn right down the corridor, and arrive at Room MCA LH - I on your left beside the statutory notice board.",
     "thumbnail": "Rooms/MCA LH 1/d.jpg",
     "photos": [
@@ -2209,7 +2209,7 @@ window.ROOMS_DATA = {
     "floor": "Ground Floor",
     "dept": "Department of MCA",
     "category": "Lecture Hall",
-    "landmark": "Room MCA LH - II • Ground Floor Academic Wing",
+    "landmark": "Room MCA LH - II • Ground Floor Academic Block",
     "info": "Head straight along the main approach path to the MITM Degree College entrance portico, head left up the staircase through the Department of Master of Computer Applications security gate, turn right down the corridor, and arrive at Room MCA LH - II on your right.",
     "thumbnail": "Rooms/MCA LH 2/d.jpg",
     "photos": [
@@ -2267,7 +2267,7 @@ window.ROOMS_DATA = {
     "floor": "Ground Floor",
     "dept": "Department of MCA",
     "category": "Lecture Hall",
-    "landmark": "Room MCA LH - IV • Ground Floor Academic Wing",
+    "landmark": "Room MCA LH - IV • Ground Floor Academic Block",
     "info": "Head straight along the main approach path to the MITM Degree College entrance portico, head left up the staircase through the Department of Master of Computer Applications security gate, proceed down the corridor and turn left to arrive at Room MCA LH - IV on your left beside the notice board.",
     "thumbnail": "Rooms/MCA LH 4/d.jpg",
     "photos": [
@@ -3107,7 +3107,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Department of Pharmaceutical Chemistry",
     "category": "Specialized Laboratory",
-    "landmark": "2nd Floor Health Sciences Corridor, Left Wing",
+    "landmark": "2nd Floor Health Sciences Corridor, Left Block",
     "info": "Pharmaceutical Chemistry - I Lab equipped for pharmaceutical analysis, organic synthesis, drug testing, and formulation research.",
     "accessPoints": [
       {
@@ -3134,7 +3134,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Department of Pharmaceutical Chemistry",
     "category": "Specialized Laboratory",
-    "landmark": "2nd Floor Health Sciences Corridor, Right Wing (Adjacent to Store Room - II)",
+    "landmark": "2nd Floor Health Sciences Corridor, Right Block (Adjacent to Store Room - II)",
     "info": "Pharmaceutical Chemistry Lab equipped for qualitative and quantitative inorganic/organic drug analysis, chemical synthesis, and pharmaceutical testing.",
     "accessPoints": [
       {
@@ -3161,7 +3161,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Department of Pharmaceutics & Microbiology",
     "category": "Specialized Laboratory",
-    "landmark": "2nd Floor Health Sciences Corridor, Left Wing",
+    "landmark": "2nd Floor Health Sciences Corridor, Left Block",
     "info": "Pharmaceutical Microbiology Lab equipped for aseptic cultures, sterilization testing, antibiotic assays, and microbiological research.",
     "accessPoints": [
       {
@@ -3188,7 +3188,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Department of Pharmaceutical Analysis",
     "category": "Specialized Laboratory",
-    "landmark": "2nd Floor Health Sciences Corridor, Right Wing",
+    "landmark": "2nd Floor Health Sciences Corridor, Right Block",
     "info": "Pharmaceutical Analysis Lab equipped for instrumental analysis, assay validation, titrimetric methods, and pharmaceutical quality control.",
     "accessPoints": [
       {
@@ -3215,7 +3215,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Department of Pharmacology & Human Anatomy",
     "category": "Specialized Laboratory",
-    "landmark": "2nd Floor Health Sciences Corridor, Left Wing",
+    "landmark": "2nd Floor Health Sciences Corridor, Left Block",
     "info": "Human Anatomy & Physiology Lab equipped with anatomical models, physiological recording apparatus, histology slides, microscopes, and diagnostic measurement tools.",
     "accessPoints": [
       {
@@ -3242,7 +3242,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Department of Pharmacology",
     "category": "Specialized Laboratory",
-    "landmark": "2nd Floor Health Sciences Corridor, Right Wing",
+    "landmark": "2nd Floor Health Sciences Corridor, Right Block",
     "info": "Pharmacology Lab equipped for experimental pharmacology, isolated tissue organ baths, animal simulation software, bioassays, and drug screening experiments.",
     "accessPoints": [
       {
@@ -3269,7 +3269,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Department of Pharmaceutics",
     "category": "Specialized Laboratory",
-    "landmark": "2nd Floor Health Sciences Corridor, Left Wing",
+    "landmark": "2nd Floor Health Sciences Corridor, Left Block",
     "info": "Pharmaceutics-I Lab equipped for formulation design, compounding, liquid dosage forms, emulsions, suspensions, and unit operations.",
     "accessPoints": [
       {
@@ -3296,7 +3296,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Department of Pharmacognosy & Academic Resources",
     "category": "Academic Facility & Museum",
-    "landmark": "2nd Floor Health Sciences Corridor, East Wing",
+    "landmark": "2nd Floor Health Sciences Corridor, East Block",
     "info": "Pharmacy Museum featuring crude drugs, herbarium specimens, formulation models, anatomical charts, and historic pharmaceutical equipment.",
     "accessPoints": [
       {
@@ -3323,7 +3323,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Faculty of Pharmaceutical Sciences",
     "category": "Lecture Hall / Classroom",
-    "landmark": "2nd Floor Health Sciences Corridor, East Wing",
+    "landmark": "2nd Floor Health Sciences Corridor, East Block",
     "info": "Pharmacy Class Room 1 equipped with lecture podium, whiteboard, student benches, and multimedia teaching support.",
     "accessPoints": [
       {
@@ -3350,7 +3350,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Faculty of Pharmaceutical Sciences",
     "category": "Lecture Hall / Classroom",
-    "landmark": "2nd Floor Health Sciences Corridor, East Wing",
+    "landmark": "2nd Floor Health Sciences Corridor, East Block",
     "info": "Pharmacy Class Room 2 equipped with lecture podium, whiteboard, student benches, and multimedia teaching support.",
     "accessPoints": [
       {
@@ -3404,7 +3404,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Faculty of Pharmaceutical Sciences",
     "category": "Laboratory / Practical Lab",
-    "landmark": "2nd Floor Health Sciences Corridor, East Wing End",
+    "landmark": "2nd Floor Health Sciences Corridor, East Block End",
     "info": "Pharmacy Laboratory 3 (Computer Room / Laboratory-3 / Lab-4) equipped with computing workstations, pharmaceutical software terminals, and digital instrumentation systems.",
     "accessPoints": [
       {
@@ -3431,7 +3431,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Faculty of Pharmaceutical Sciences",
     "category": "Laboratory / Practical Lab",
-    "landmark": "2nd Floor Health Sciences Corridor, West Wing",
+    "landmark": "2nd Floor Health Sciences Corridor, West Block",
     "info": "Central Instrumentation Room housing advanced analytical instruments, spectrophotometers, chromatographic systems, and precision pharmaceutical research equipment.",
     "accessPoints": [
       {
@@ -3458,7 +3458,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Faculty of Pharmaceutical Sciences",
     "category": "Laboratory / Practical Lab",
-    "landmark": "2nd Floor Health Sciences Corridor, West Wing",
+    "landmark": "2nd Floor Health Sciences Corridor, West Block",
     "info": "Pharmaceutical Chemistry-II Lab equipped for advanced synthetic chemistry, organic medicinal synthesis, qualitative and quantitative chemical analysis, and chemical storage.",
     "accessPoints": [
       {
@@ -3485,7 +3485,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Faculty of Pharmaceutical Sciences",
     "category": "Laboratory / Practical Lab",
-    "landmark": "2nd Floor Health Sciences Corridor, West Wing",
+    "landmark": "2nd Floor Health Sciences Corridor, West Block",
     "info": "Pharmacy Machine Room equipped with pharmaceutical manufacturing equipment, tablet compression machines, coating pans, granulators, and pilot-scale processing machinery.",
     "accessPoints": [
       {
@@ -3512,7 +3512,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Department of Pharmaceutics",
     "category": "Laboratory / Practical Lab",
-    "landmark": "2nd Floor Health Sciences Corridor, West Wing",
+    "landmark": "2nd Floor Health Sciences Corridor, West Block",
     "info": "Pharmaceutics Lab dedicated to pharmaceutical dosage forms, formulation technology, compounding techniques, physical pharmacy, and drug delivery systems.",
     "accessPoints": [
       {
@@ -3539,7 +3539,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Department of Pharmacognosy",
     "category": "Laboratory / Practical Lab",
-    "landmark": "2nd Floor Health Sciences Corridor, West Wing",
+    "landmark": "2nd Floor Health Sciences Corridor, West Block",
     "info": "Pharmacognosy-I Lab dedicated to the morphological and microscopical study of crude drugs of natural origin, extraction, isolation, and phyto-chemical screening of medicinal plant constituents.",
     "accessPoints": [
       {
@@ -3566,7 +3566,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Department of Pharmaceutics",
     "category": "Laboratory / Practical Lab",
-    "landmark": "2nd Floor Health Sciences Corridor, West Wing",
+    "landmark": "2nd Floor Health Sciences Corridor, West Block",
     "info": "Pharmaceutics-II Lab dedicated to advanced dosage forms, semisolid formulations, sterile preparations, sustained-release drug delivery systems, and pharmaceutical technology practicals.",
     "accessPoints": [
       {
@@ -3593,7 +3593,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Faculty of Pharmaceutical Sciences",
     "category": "Administrative / Confidential Office",
-    "landmark": "2nd Floor Health Sciences Corridor, East Wing, First Door on Left",
+    "landmark": "2nd Floor Health Sciences Corridor, East Block, First Door on Left",
     "info": "Pharmacy Confidential Room designated for examination custody, university question paper security, confidential academic evaluation, and administrative records.",
     "accessPoints": [
       {
@@ -3623,7 +3623,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Faculty of Pharmaceutical Sciences",
     "category": "Lecture Hall / Classroom",
-    "landmark": "2nd Floor Health Sciences Corridor, East Wing, Second Door on Left",
+    "landmark": "2nd Floor Health Sciences Corridor, East Block, Second Door on Left",
     "info": "Pharmacy Class Room 4 (B.Pharm 4th Semester) equipped with lecture podium, teaching blackboard, student benches, and multimedia instructional facilities.",
     "accessPoints": [
       {
@@ -3653,7 +3653,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Faculty of Pharmaceutical Sciences",
     "category": "Lecture Hall / Classroom",
-    "landmark": "2nd Floor Health Sciences Corridor, East Wing, Third Door on Left",
+    "landmark": "2nd Floor Health Sciences Corridor, East Block, Third Door on Left",
     "info": "Pharmacy 1st Semester Class Room (B.Pharm 1st Sem) dedicated to foundational pharmaceutical sciences coursework, student lectures, and academic seminars.",
     "accessPoints": [
       {
@@ -3683,7 +3683,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Faculty of Pharmaceutical Sciences",
     "category": "Lecture Hall / Classroom",
-    "landmark": "2nd Floor Health Sciences Corridor, East Wing, Fourth Door on Left",
+    "landmark": "2nd Floor Health Sciences Corridor, East Block, Fourth Door on Left",
     "info": "Pharmacy 2nd Semester Class Room (B.Pharm 2nd Sem) configured with student benches, faculty platform, teaching whiteboard, and curriculum lecture provisions.",
     "accessPoints": [
       {
@@ -3713,7 +3713,7 @@ window.ROOMS_DATA = {
     "floor": "2nd Floor",
     "dept": "Faculty of Pharmaceutical Sciences",
     "category": "Examination Hall / Lecture Hall",
-    "landmark": "2nd Floor Health Sciences Corridor, East Wing, Near Auditorium",
+    "landmark": "2nd Floor Health Sciences Corridor, East Block, Near Auditorium",
     "info": "Pharmacy Exam Hall 1 (B.Pharm 6th Semester / Examination Hall 1) spacious academic hall configured for university semester examinations, major evaluations, and large combined class sessions.",
     "accessPoints": [
       {

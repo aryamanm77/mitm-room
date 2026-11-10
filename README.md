@@ -8,7 +8,7 @@
 
 ## ✨ Features & Architecture
 
-- **Multi-Mode Campus Wayfinding Hub**: Choose between **Academic Wings**, **Department & Facility Hub**, and **Popular Hotspots** with instant 1-tap navigation.
+- **Multi-Mode Campus Wayfinding Hub**: Choose between **Academic Blocks**, **Department & Facility Hub**, and **Popular Hotspots** with instant 1-tap navigation.
 - **Universal Instant Teleport Search**: Real-time autocomplete suggestions across all 68 rooms campus-wide with direct corridor launch.
 - **Dedicated College Directories**:
   - **Engineering**: 60 classrooms & research labs (CSE, ISE, ECE, Mechanical, Civil, AI/ML) across 6 floors.

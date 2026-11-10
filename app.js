@@ -160,7 +160,7 @@ function getCollegeMeta(collegeKey) {
     case "bca":
       return {
         name: "Department of BCA",
-        badge: "Undergraduate IT Wing",
+        badge: "Undergraduate IT Block",
         heroQuery: "Search BCA classrooms & labs...",
       };
     case "pharmacy":
@@ -1053,7 +1053,7 @@ function init3DTiltAndSpotlight() {
 function bindEvents() {
   init3DTiltAndSpotlight();
 
-  // Navigation Mode Switcher (Wings / Floors / Hotspots)
+  // Navigation Mode Switcher (Blocks / Departments / Hotspots)
   document.querySelectorAll("[data-nav-mode]").forEach(btn => {
     btn.addEventListener("click", () => {
       const mode = btn.getAttribute("data-nav-mode");
@@ -1063,7 +1063,7 @@ function bindEvents() {
       const viewDepts = document.getElementById("viewModeDepartments");
       const viewHotspots = document.getElementById("viewModeHotspots");
 
-      if (viewWings) viewWings.style.display = mode === "wings" ? "block" : "none";
+      if (viewWings) viewWings.style.display = (mode === "wings" || mode === "blocks") ? "block" : "none";
       if (viewDepts) viewDepts.style.display = mode === "departments" ? "block" : "none";
       if (viewHotspots) viewHotspots.style.display = mode === "hotspots" ? "block" : "none";
     });
@@ -1182,7 +1182,7 @@ function bindEvents() {
     });
   }
 
-  // Academic Wing Filter Chips (All Wings, Eng, MBA, MCA, BCA, Pharmacy)
+  // Academic Block Filter Chips (All Blocks, Eng, MBA, MCA, BCA, Pharmacy)
   document.querySelectorAll("[data-portal-filter]").forEach(chip => {
     chip.addEventListener("click", () => {
       const filter = chip.getAttribute("data-portal-filter");
@@ -1196,7 +1196,7 @@ function bindEvents() {
     });
   });
 
-  // Wing Primary Enter Buttons
+  // Block Primary Enter Buttons
   document.querySelectorAll("[data-btn-college]").forEach(btn => {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -1207,7 +1207,7 @@ function bindEvents() {
 
 
 
-  // Wing Card Body Click -> Enter College
+  // Block Card Body Click -> Enter College
   document.querySelectorAll(".wing-card").forEach(card => {
     card.addEventListener("click", (e) => {
       if (e.target.closest("button")) return;
