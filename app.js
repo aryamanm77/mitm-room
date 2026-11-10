@@ -188,7 +188,6 @@ function buildWhatsAppShareUrl(roomKey, apIndex = 0) {
   const titleLabel = room.name.length <= 5 ? `Room ${room.name}` : room.name;
 
   const deepLinkUrl = new URL(window.location.origin + window.location.pathname);
-  if (state.activeCollege) deepLinkUrl.searchParams.set("college", state.activeCollege);
   deepLinkUrl.searchParams.set("room", roomKey);
   if (apIndex > 0) {
     deepLinkUrl.searchParams.set("ap", String(apIndex));
@@ -292,6 +291,7 @@ async function initApp() {
   const matchedRoomKey = findRoomKey(rawRoom);
 
   if (matchedRoomKey) {
+    // Only direct shared room link opens walkthrough directly
     const room = state.rooms[matchedRoomKey];
     const collegeKeys = getCollegeKeysForRoom(room);
     if (rawCollege && collegeKeys.includes(rawCollege.toLowerCase())) {
@@ -300,10 +300,12 @@ async function initApp() {
       state.activeCollege = collegeKeys[0] || "engineering";
     }
     openRoom(matchedRoomKey, false, isNaN(urlAp) ? 0 : urlAp);
-  } else if (rawCollege && ["engineering", "mba", "mca", "bca", "pharmacy"].includes(rawCollege.toLowerCase())) {
-    enterCollege(rawCollege.toLowerCase(), false);
   } else {
+    // Fresh app launch / open: Always present the College Selection Portal first
     showPortalView(false);
+    if (window.location.search) {
+      window.history.replaceState({ view: "portal" }, "", window.location.pathname);
+    }
   }
 }
 
@@ -419,19 +421,9 @@ function enterCollege(collegeKey, pushHistory = true) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 
   if (pushHistory) {
-    const url = new URL(window.location.href);
-    url.searchParams.delete("room");
-    url.searchParams.delete("ap");
-    url.searchParams.set("college", state.activeCollege);
-    window.history.pushState({ view: "college", college: state.activeCollege }, "", url.toString());
+    window.history.pushState({ view: "college", college: state.activeCollege }, "", window.location.pathname);
   } else {
-    const url = new URL(window.location.href);
-    url.searchParams.delete("room");
-    url.searchParams.delete("ap");
-    if (state.activeCollege) {
-      url.searchParams.set("college", state.activeCollege);
-    }
-    window.history.replaceState({ view: "college", college: state.activeCollege }, "", url.toString());
+    window.history.replaceState({ view: "college", college: state.activeCollege }, "", window.location.pathname);
   }
 }
 
@@ -642,13 +634,9 @@ function openRoom(roomKey, pushHistory = true, initialApIdx = 0) {
   window.scrollTo(0, 0);
 
   if (pushHistory) {
-    const url = new URL(window.location.href);
-    if (state.activeCollege) {
-      url.searchParams.set("college", state.activeCollege);
-    }
+    const url = new URL(window.location.origin + window.location.pathname);
     url.searchParams.set("room", roomKey);
     if (initialApIdx > 0) url.searchParams.set("ap", String(initialApIdx));
-    else url.searchParams.delete("ap");
     window.history.pushState({ view: "walkthrough", room: roomKey, college: state.activeCollege }, "", url.toString());
   } else {
     window.history.replaceState({ view: "walkthrough", room: roomKey, college: state.activeCollege }, "", window.location.href);
@@ -1334,15 +1322,36 @@ function bindEvents() {
   });
   document.getElementById("wtAutoPlayBtn")?.addEventListener("click", toggleAutoPlay);
 
-  document.getElementById("wtShareBtn")?.addEventListener("click", () => {
+  document.getElementById("wtShareBtn")?.addEventListener("click", async () => {
     if (!state.selectedRoomKey) return;
+    const room = state.rooms[state.selectedRoomKey];
+    const roomName = room ? (room.name.length <= 5 ? "Room " + room.name : room.name) : "Room";
     const shareUrl = new URL(window.location.origin + window.location.pathname);
-    if (state.activeCollege) shareUrl.searchParams.set("college", state.activeCollege);
     shareUrl.searchParams.set("room", state.selectedRoomKey);
     if (state.activeApIndex > 0) {
       shareUrl.searchParams.set("ap", String(state.activeApIndex));
     }
-    navigator.clipboard.writeText(shareUrl.toString()).then(() => showToast("Exact room link copied!"));
+    const fullUrl = shareUrl.toString();
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `MIT Maps — ${roomName}`,
+          text: `Direct walkthrough for ${roomName} (${room?.college || "MIT Mysore"}):`,
+          url: fullUrl
+        });
+        return;
+      } catch (err) {
+        if (err.name === "AbortError") return;
+      }
+    }
+
+    try {
+      await navigator.clipboard.writeText(fullUrl);
+      showToast("Exact room link copied!");
+    } catch (e) {
+      prompt("Copy room link:", fullUrl);
+    }
   });
 
   // 9. Mobile Touch Swipe for Walkthrough Stage
@@ -1398,19 +1407,14 @@ function bindEvents() {
   window.addEventListener("popstate", (e) => {
     const params = new URLSearchParams(window.location.search);
     const r = params.get("room");
-    const rawCollege = params.get("college");
     const apIdx = parseInt(params.get("ap") || "0", 10);
 
     const matchedRoomKey = findRoomKey(r);
     if (matchedRoomKey) {
       const room = state.rooms[matchedRoomKey];
       const collegeKeys = getCollegeKeysForRoom(room);
-      state.activeCollege = (rawCollege && collegeKeys.includes(rawCollege.toLowerCase()))
-        ? rawCollege.toLowerCase()
-        : (collegeKeys[0] || "engineering");
+      state.activeCollege = collegeKeys[0] || "engineering";
       openRoom(matchedRoomKey, false, isNaN(apIdx) ? 0 : apIdx);
-    } else if (rawCollege && ["engineering", "mba", "mca", "bca", "pharmacy"].includes(rawCollege.toLowerCase())) {
-      enterCollege(rawCollege.toLowerCase(), false);
     } else if (e.state && e.state.view === "college" && e.state.college) {
       enterCollege(e.state.college, false);
     } else {
