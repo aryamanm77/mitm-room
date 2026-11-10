@@ -123,32 +123,32 @@ function getCollegeMeta(collegeKey) {
       return {
         name: "Department of MBA",
         badge: "Management Block • Belaku",
-        heroQuery: "Search MBA classrooms & labs (e.g. Belaku, 201, Room 2)...",
+        heroQuery: "Search MBA classrooms & labs...",
       };
     case "mca":
       return {
         name: "Department of MCA",
         badge: "Postgraduate IT Block • MCA Classrooms & Labs",
-        heroQuery: "Search MCA classrooms & labs (e.g. MCA LH 1, MCA LH 4, MCA Lab 1)...",
+        heroQuery: "Search MCA classrooms & labs...",
       };
     case "bca":
       return {
         name: "Department of BCA",
         badge: "Undergraduate IT Wing",
-        heroQuery: "Search BCA classrooms & labs (e.g. Room 201 - 211, Lab 1 & 2)...",
+        heroQuery: "Search BCA classrooms & labs...",
       };
     case "pharmacy":
       return {
         name: "Faculty of Pharmaceutical Sciences",
         badge: "Health Sciences Block • Pharmacy & Nursing",
-        heroQuery: "Search Pharmacy & Nursing rooms (e.g. Admin Block, Principal, Nursing Foundation)...",
+        heroQuery: "Search Pharmacy & Nursing rooms...",
       };
     case "engineering":
     default:
       return {
         name: "Engineering Campus",
         badge: "Main Academic Block • 60+ Classrooms & Labs",
-        heroQuery: "Search engineering rooms (e.g. 205, 313, DSP Lab, 114)...",
+        heroQuery: "Search engineering rooms...",
       };
   }
 }
