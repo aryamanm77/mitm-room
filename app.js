@@ -207,15 +207,45 @@ function buildWhatsAppShareUrl(roomKey, apIndex = 0) {
 }
 
 // ============================================================================
+// ROOM KEY RESOLVER FOR DEEP-LINKING AND SHARING
+// ============================================================================
+function findRoomKey(query) {
+  if (!query || typeof query !== "string") return null;
+  const raw = query.trim();
+  if (!raw) return null;
+  if (state.rooms && state.rooms[raw]) return raw;
+
+  const normalized = raw.toLowerCase().replace(/^room\s+/i, "").trim();
+  const keys = Object.keys(state.rooms || {});
+
+  // 1. Exact match case-insensitive
+  for (const k of keys) {
+    if (k.toLowerCase() === raw.toLowerCase()) return k;
+  }
+  // 2. Match without "room" prefix
+  for (const k of keys) {
+    if (k.toLowerCase() === normalized) return k;
+  }
+  // 3. Match against room.name property
+  for (const k of keys) {
+    const r = state.rooms[k];
+    if (r && r.name) {
+      const nameNorm = r.name.toLowerCase().replace(/^room\s+/i, "").trim();
+      if (nameNorm === normalized || r.name.toLowerCase() === raw.toLowerCase()) {
+        return k;
+      }
+    }
+  }
+  return null;
+}
+
+// ============================================================================
 // APP INITIALIZATION
 // ============================================================================
 async function initApp() {
   // Permanent Light Mode
   document.documentElement.setAttribute("data-theme", "light");
   localStorage.setItem("locorom_theme", "light");
-
-  // Always force College Selection Portal as default first screen immediately
-  showPortalView(false);
 
   // Register PWA Service Worker for standalone installation & caching with auto-update
   if ("serviceWorker" in navigator) {
@@ -255,23 +285,25 @@ async function initApp() {
   bindEvents();
 
   // URL Deep-Linking & Initial View Routing:
-  // When opening the app, ALWAYS show the College Selection Portal first
   const params = new URLSearchParams(window.location.search);
-  const urlRoom = params.get("room");
+  const rawRoom = params.get("room");
+  const rawCollege = params.get("college");
   const urlAp = parseInt(params.get("ap") || "0", 10);
+  const matchedRoomKey = findRoomKey(rawRoom);
 
-  if (urlRoom && state.rooms[urlRoom]) {
-    // Only direct deep links to a specific room walkthrough bypass the portal
-    const room = state.rooms[urlRoom];
+  if (matchedRoomKey) {
+    const room = state.rooms[matchedRoomKey];
     const collegeKeys = getCollegeKeysForRoom(room);
-    state.activeCollege = collegeKeys[0];
-    openRoom(urlRoom, false, isNaN(urlAp) ? 0 : urlAp);
-  } else {
-    // Fresh app launch / open: Always present the College Selection Portal
-    showPortalView(false);
-    if (window.location.search) {
-      window.history.replaceState({ view: "portal" }, "", window.location.pathname);
+    if (rawCollege && collegeKeys.includes(rawCollege.toLowerCase())) {
+      state.activeCollege = rawCollege.toLowerCase();
+    } else {
+      state.activeCollege = collegeKeys[0] || "engineering";
     }
+    openRoom(matchedRoomKey, false, isNaN(urlAp) ? 0 : urlAp);
+  } else if (rawCollege && ["engineering", "mba", "mca", "bca", "pharmacy"].includes(rawCollege.toLowerCase())) {
+    enterCollege(rawCollege.toLowerCase(), false);
+  } else {
+    showPortalView(false);
   }
 }
 
@@ -387,7 +419,19 @@ function enterCollege(collegeKey, pushHistory = true) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 
   if (pushHistory) {
-    window.history.pushState({ view: "college", college: state.activeCollege }, "", window.location.pathname);
+    const url = new URL(window.location.href);
+    url.searchParams.delete("room");
+    url.searchParams.delete("ap");
+    url.searchParams.set("college", state.activeCollege);
+    window.history.pushState({ view: "college", college: state.activeCollege }, "", url.toString());
+  } else {
+    const url = new URL(window.location.href);
+    url.searchParams.delete("room");
+    url.searchParams.delete("ap");
+    if (state.activeCollege) {
+      url.searchParams.set("college", state.activeCollege);
+    }
+    window.history.replaceState({ view: "college", college: state.activeCollege }, "", url.toString());
   }
 }
 
@@ -599,11 +643,15 @@ function openRoom(roomKey, pushHistory = true, initialApIdx = 0) {
 
   if (pushHistory) {
     const url = new URL(window.location.href);
+    if (state.activeCollege) {
+      url.searchParams.set("college", state.activeCollege);
+    }
     url.searchParams.set("room", roomKey);
     if (initialApIdx > 0) url.searchParams.set("ap", String(initialApIdx));
     else url.searchParams.delete("ap");
-    url.searchParams.delete("college");
     window.history.pushState({ view: "walkthrough", room: roomKey, college: state.activeCollege }, "", url.toString());
+  } else {
+    window.history.replaceState({ view: "walkthrough", room: roomKey, college: state.activeCollege }, "", window.location.href);
   }
 
   renderWalkthroughView();
@@ -1350,13 +1398,19 @@ function bindEvents() {
   window.addEventListener("popstate", (e) => {
     const params = new URLSearchParams(window.location.search);
     const r = params.get("room");
+    const rawCollege = params.get("college");
     const apIdx = parseInt(params.get("ap") || "0", 10);
 
-    if (r && state.rooms[r]) {
-      const room = state.rooms[r];
+    const matchedRoomKey = findRoomKey(r);
+    if (matchedRoomKey) {
+      const room = state.rooms[matchedRoomKey];
       const collegeKeys = getCollegeKeysForRoom(room);
-      state.activeCollege = collegeKeys[0];
-      openRoom(r, false, isNaN(apIdx) ? 0 : apIdx);
+      state.activeCollege = (rawCollege && collegeKeys.includes(rawCollege.toLowerCase()))
+        ? rawCollege.toLowerCase()
+        : (collegeKeys[0] || "engineering");
+      openRoom(matchedRoomKey, false, isNaN(apIdx) ? 0 : apIdx);
+    } else if (rawCollege && ["engineering", "mba", "mca", "bca", "pharmacy"].includes(rawCollege.toLowerCase())) {
+      enterCollege(rawCollege.toLowerCase(), false);
     } else if (e.state && e.state.view === "college" && e.state.college) {
       enterCollege(e.state.college, false);
     } else {
