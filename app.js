@@ -291,8 +291,16 @@ async function initApp() {
   const urlAp = parseInt(params.get("ap") || "0", 10);
   const matchedRoomKey = findRoomKey(rawRoom);
 
-  if (matchedRoomKey) {
-    // Only direct shared room link opens walkthrough directly
+  const isReload = Boolean(
+    (window.performance && performance.getEntriesByType && performance.getEntriesByType("navigation")[0]?.type === "reload") ||
+    (window.performance && window.performance.navigation && window.performance.navigation.type === 1)
+  );
+
+  const alreadyConsumed = rawRoom ? sessionStorage.getItem("navigo_share_consumed_" + rawRoom) : null;
+
+  if (matchedRoomKey && !isReload && !alreadyConsumed) {
+    // Only direct shared room link opens walkthrough directly on the first navigation
+    sessionStorage.setItem("navigo_share_consumed_" + matchedRoomKey, "1");
     const room = state.rooms[matchedRoomKey];
     const collegeKeys = getCollegeKeysForRoom(room);
     if (rawCollege && collegeKeys.includes(rawCollege.toLowerCase())) {
@@ -301,10 +309,10 @@ async function initApp() {
       state.activeCollege = collegeKeys[0] || "engineering";
     }
     openRoom(matchedRoomKey, false, isNaN(urlAp) ? 0 : urlAp);
-    // Normalize address bar so reopening the app later shows the College Selection Portal first
-    window.history.replaceState({ view: "walkthrough", room: matchedRoomKey, college: state.activeCollege }, "", window.location.pathname);
+    // Normalize address bar immediately so reopening or refreshing the app ALWAYS presents College Selection Portal
+    window.history.replaceState({ view: "portal" }, "", window.location.pathname);
   } else {
-    // Fresh app launch / open: Always present the College Selection Portal first
+    // Fresh app launch / open / restore: Always present the College Selection Portal first
     showPortalView(false);
     if (window.location.search) {
       window.history.replaceState({ view: "portal" }, "", window.location.pathname);
@@ -346,13 +354,11 @@ function showPortalView(pushHistory = true) {
   const portalScreen = document.getElementById("collegePortalScreen");
   const homeScreen = document.getElementById("homeScreen");
   const walkthroughScreen = document.getElementById("walkthroughScreen");
-  const topFloorNav = document.getElementById("topFloorNav");
   const topPortalBtn = document.getElementById("topPortalBtn");
 
   if (portalScreen) portalScreen.style.display = "block";
   if (homeScreen) homeScreen.style.display = "none";
   if (walkthroughScreen) walkthroughScreen.style.display = "none";
-  if (topFloorNav) topFloorNav.style.display = "none";
   if (topPortalBtn) topPortalBtn.style.display = "none";
 
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -388,13 +394,11 @@ function enterCollege(collegeKey, pushHistory = true) {
   const portalScreen = document.getElementById("collegePortalScreen");
   const homeScreen = document.getElementById("homeScreen");
   const walkthroughScreen = document.getElementById("walkthroughScreen");
-  const topFloorNav = document.getElementById("topFloorNav");
   const topPortalBtn = document.getElementById("topPortalBtn");
 
   if (portalScreen) portalScreen.style.display = "none";
   if (homeScreen) homeScreen.style.display = "block";
   if (walkthroughScreen) walkthroughScreen.style.display = "none";
-  if (topFloorNav) topFloorNav.style.display = "flex";
   if (topPortalBtn) topPortalBtn.style.display = "inline-flex";
 
   // Update Active College Banner UI
@@ -625,13 +629,11 @@ function openRoom(roomKey, pushHistory = true, initialApIdx = 0) {
   const portalScreen = document.getElementById("collegePortalScreen");
   const homeScreen = document.getElementById("homeScreen");
   const walkthroughScreen = document.getElementById("walkthroughScreen");
-  const topFloorNav = document.getElementById("topFloorNav");
   const topPortalBtn = document.getElementById("topPortalBtn");
 
   if (portalScreen) portalScreen.style.display = "none";
   if (homeScreen) homeScreen.style.display = "none";
   if (walkthroughScreen) walkthroughScreen.style.display = "block";
-  if (topFloorNav) topFloorNav.style.display = "none";
   if (topPortalBtn) topPortalBtn.style.display = "inline-flex";
 
   window.scrollTo(0, 0);
@@ -697,12 +699,7 @@ function renderWalkthroughView() {
         stopAutoPlay();
         state.activeApIndex = parseInt(btn.getAttribute("data-ap-idx"), 10);
         state.activePhotoIndex = 0;
-        const url = new URL(window.location.href);
-        if (state.activeCollege) url.searchParams.set("college", state.activeCollege);
-        url.searchParams.set("room", state.selectedRoomKey);
-        if (state.activeApIndex > 0) url.searchParams.set("ap", String(state.activeApIndex));
-        else url.searchParams.delete("ap");
-        window.history.replaceState({ room: state.selectedRoomKey, ap: state.activeApIndex }, "", url.toString());
+        window.history.replaceState({ view: "walkthrough", room: state.selectedRoomKey, ap: state.activeApIndex, college: state.activeCollege }, "", window.location.pathname);
         renderWalkthroughView();
       });
     });

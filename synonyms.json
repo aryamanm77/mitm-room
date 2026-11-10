@@ -1,0 +1,83 @@
+{
+  "canteen": [
+    "cafeteria", "food court", "mess", "canteen", "cantin", "snacks", "coffee", "tea", "tiffin",
+    "breakfast", "lunch", "oota", "thindi", "khana", "beverage", "refreshment", "cafe"
+  ],
+  "library": [
+    "library", "libary", "librari", "reading room", "reference section", "books", "book bank",
+    "pusthakalaya", "granthalaya", "journal", "digital library", "study room"
+  ],
+  "fee": [
+    "fee", "fees", "tuition", "payment", "cost", "charge", "charges", "eshtu", "kitna",
+    "expense", "dues", "scholarship", "concession", "refund"
+  ],
+  "hostel": [
+    "hostel", "hostle", "hostal", "dorm", "dormitory", "pg", "accommodation", "stay",
+    "boarding", "room stay", "mess food", "warden"
+  ],
+  "bus": [
+    "bus", "transport", "college bus", "route", "vehicle", "van", "pickup", "drop",
+    "bus pass", "transportation", "commute", "timing"
+  ],
+  "placement": [
+    "placement", "placements", "placment", "job", "jobs", "campus interview", "recruitment",
+    "company", "companies", "package", "salary", "ctc", "internship", "hiring", "career"
+  ],
+  "admission": [
+    "admission", "admissions", "admision", "joining", "enroll", "enrollment", "seat",
+    "seats", "intake", "kcet", "comedk", "pgcet", "management quota", "lateral entry", "eligibility"
+  ],
+  "principal": [
+    "principal", "director", "head of college", "dean", "chief", "murali"
+  ],
+  "hod": [
+    "hod", "head of department", "department head", "dept head", "chairperson"
+  ],
+  "auditorium": [
+    "auditorium", "audi", "belaku", "belku", "seminar hall", "stage", "convention hall", "hall"
+  ],
+  "restroom": [
+    "restroom", "washroom", "toilet", "lavatory", "loo", "bathroom", "water closet", "wc"
+  ],
+  "water": [
+    "drinking water", "water cooler", "filter water", "neeru", "pani", "aqua", "water"
+  ],
+  "exam": [
+    "exam", "exams", "examination", "internals", "ia", "cie", "see", "vtu exam",
+    "semester exam", "results", "marks", "revaluation", "backlog", "supplementary"
+  ],
+  "branch": [
+    "branch", "course", "program", "department", "stream", "cse", "ise", "ece",
+    "mech", "civil", "aids", "aiml", "mba", "mca", "bca", "pharmacy"
+  ],
+  "contact": [
+    "contact", "phone", "number", "mobile", "telephone", "email", "address", "location",
+    "where", "route", "map", "directions", "reach"
+  ],
+  "kannada_words": {
+    "yelli": "where",
+    "elli": "where",
+    "yelli ide": "where is it",
+    "eshtu": "how much",
+    "yavaga": "when",
+    "hege": "how",
+    "yaaru": "who",
+    "oota": "canteen food",
+    "thindi": "canteen snacks",
+    "neeru": "drinking water",
+    "shulka": "fees",
+    "daari": "directions route",
+    "madodu": "process how to do"
+  },
+  "hindi_words": {
+    "kahan": "where",
+    "kidhar": "where",
+    "kitna": "how much",
+    "kab": "when",
+    "kaise": "how",
+    "kaun": "who",
+    "khana": "canteen food",
+    "pani": "drinking water",
+    "paisa": "fees"
+  }
+}

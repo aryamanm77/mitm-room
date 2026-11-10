@@ -5,7 +5,9 @@
   "description": "MITM Navigo - Indoor Campus Navigation [Maharaja Institute of Technology Mysore]",
   "scripts": {
     "start": "npx serve .",
-    "test": "node test_chatbot.js",
+    "test": "node test_campus_matcher.js",
+    "test:all": "node test_chatbot.js && node test_campus_matcher.js",
+    "validate": "node validate_data.js",
     "build": "echo 'Build complete'"
   },
   "keywords": [

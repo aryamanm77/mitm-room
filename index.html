@@ -2,7 +2,7 @@
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content" />
   <title>MITM Navigo</title>
   <meta name="description" content="Official indoor visual wayfinding and step-by-step corridor photo walkthroughs for Maharaja Institute of Technology Mysore (Engineering, MBA, MCA, BCA, Pharmacy)." />
   <meta property="og:site_name" content="MITM Navigo" />
@@ -26,11 +26,12 @@
     // Guaranteed Instant First View: Always load College Selection Page first on open
     (function() {
       try {
-        var p = new URLSearchParams(window.location.search);
-        if (!p.get('room')) {
-          if (window.location.search) {
-            window.history.replaceState({ view: 'portal' }, '', window.location.pathname);
-          }
+        var isReload = Boolean(
+          (window.performance && performance.getEntriesByType && performance.getEntriesByType('navigation')[0] && performance.getEntriesByType('navigation')[0].type === 'reload') ||
+          (window.performance && window.performance.navigation && window.performance.navigation.type === 1)
+        );
+        if (isReload && window.location.search) {
+          window.history.replaceState({ view: 'portal' }, '', window.location.pathname);
         }
       } catch (e) {}
     })();
@@ -222,39 +223,49 @@
       flex-shrink: 0;
     }
 
-    .floor-nav {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      overflow-x: auto;
-      scrollbar-width: none;
+    .home-floor-nav-wrap {
+      margin: 14px 0 18px 0;
     }
 
-    .floor-nav::-webkit-scrollbar {
+    .floor-nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 2px;
+    }
+
+    .floor-nav-bar::-webkit-scrollbar {
       display: none;
     }
 
-    .floor-nav-link {
-      background: none;
-      border: none;
-      padding: 6px 0;
-      font-size: 14px;
+    .floor-pill {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-full);
+      padding: 7px 16px;
+      font-size: 13px;
       font-weight: 600;
       color: var(--text-secondary);
       cursor: pointer;
       white-space: nowrap;
       flex-shrink: 0;
-      border-bottom: 2px solid transparent;
-      transition: color var(--ease), border-color var(--ease);
+      transition: all var(--ease);
     }
 
-    .floor-nav-link:hover {
-      color: var(--text-primary);
+    .floor-pill:hover {
+      background: var(--color-primary-container);
+      color: var(--color-primary);
+      border-color: rgba(11, 87, 208, 0.25);
     }
 
-    .floor-nav-link.active {
-      color: var(--text-primary);
-      border-bottom-color: var(--accent);
+    .floor-pill.active {
+      background: var(--color-primary);
+      color: #ffffff;
+      border-color: var(--color-primary);
+      box-shadow: 0 2px 8px rgba(11, 87, 208, 0.25);
     }
 
     .theme-btn {
@@ -2283,16 +2294,6 @@
       <span class="brand-primary-name">MITM Navigo</span>
     </a>
 
-    <!-- Top Floor Links (Active in College Room Finder) -->
-    <nav class="floor-nav" id="topFloorNav" aria-label="Floor Filter" style="display: none;">
-      <button type="button" class="floor-nav-link active" data-floor-filter="all">All Rooms</button>
-      <button type="button" class="floor-nav-link" data-floor-filter="ground">Ground &amp; Labs</button>
-      <button type="button" class="floor-nav-link" data-floor-filter="1st Floor">1st Floor</button>
-      <button type="button" class="floor-nav-link" data-floor-filter="2nd Floor">2nd Floor</button>
-      <button type="button" class="floor-nav-link" data-floor-filter="3rd Floor">3rd Floor</button>
-      <button type="button" class="floor-nav-link" data-floor-filter="4-5">4th &amp; 5th Floor</button>
-    </nav>
-
     <div class="top-bar-right">
       <button type="button" class="top-portal-btn" id="topPortalBtn" title="Switch College / Academic Block" style="display: none;">
         <svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -2832,6 +2833,18 @@
 
     </section>
 
+    <!-- Floor Filter Navigation (Within College Room Finder) -->
+    <div class="home-floor-nav-wrap">
+      <nav class="floor-nav-bar" id="homeFloorNav" aria-label="Floor Filter">
+        <button type="button" class="floor-pill active" data-floor-filter="all">All Rooms</button>
+        <button type="button" class="floor-pill" data-floor-filter="ground">Ground &amp; Labs</button>
+        <button type="button" class="floor-pill" data-floor-filter="1st Floor">1st Floor</button>
+        <button type="button" class="floor-pill" data-floor-filter="2nd Floor">2nd Floor</button>
+        <button type="button" class="floor-pill" data-floor-filter="3rd Floor">3rd Floor</button>
+        <button type="button" class="floor-pill" data-floor-filter="4-5">4th &amp; 5th Floor</button>
+      </nav>
+    </div>
+
     <section>
       <div class="section-bar">
         <div class="section-bar-left">
@@ -2943,14 +2956,14 @@
 
   <div class="toast-host" id="toastHost"></div>
 
-  <script src="rooms_data.js?v=20261110-12"></script>
-  <script type="module" src="app.js?v=20261110-12"></script>
+  <script src="rooms_data.js?v=20261110-15"></script>
+  <script type="module" src="app.js?v=20261110-15"></script>
 
   <!-- Highlight.js for Chatbot code syntax highlighting -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <!-- Math.js for Chatbot expressions & unit conversions -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.1/math.min.js"></script>
   <!-- MITM Navigo Chatbot Engine -->
-  <script src="chatbot.js?v=20261110-12"></script>
+  <script src="chatbot.js?v=20261110-15"></script>
 </body>
 </html>

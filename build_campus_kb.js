@@ -1,0 +1,1378 @@
+// Generator for MITM Navigo Campus Knowledge Base
+// Creates exhaustive campus-data.json covering all 16 categories with 10+ realistic phrasings per entry.
+// Adheres strictly to Zero AI / LLM, Zero API keys, and real project facts.
+
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const ENTRIES = [
+  // ==========================================
+  // 1. ABOUT THE COLLEGE
+  // ==========================================
+  {
+    id: "about_overview",
+    title: "About Maharaja Institute of Technology Mysore (MITM)",
+    category: "about",
+    keywords: ["about", "history", "trust", "founder", "established", "campus", "met", "maharaja education trust", "belawadi", "srirangapatna"],
+    aliases: ["about mitm", "about college", "mit mysore history", "who founded mitm", "campus area", "when was mitm started"],
+    question_examples: [
+      "Tell me about MIT Mysore",
+      "about college",
+      "history of mitm",
+      "when was mit mysore established",
+      "who founded the college",
+      "mitm yavaga start aytu",
+      "college bagge heli",
+      "mit mysore kahan hai aur kab bana",
+      "ಯಾವಾಗ ಸ್ಥಾಪನೆಯಾಯಿತು",
+      "about mitm pls",
+      "I am a parent wanting to know about this institution",
+      "How big is the MIT Mysore campus?",
+      "tell me about maharaja education trust"
+    ],
+    answer_short: "Maharaja Institute of Technology Mysore (MITM) was established in 2007 by the Maharaja Education Trust (MET). It is set on an 11-acre green campus at Belawadi, Srirangapatna Taluk, near Mysore.",
+    answer_detail: "Maharaja Institute of Technology Mysore (MITM) was founded in 2007 under the auspices of the Maharaja Education Trust (MET), Mysore. The institution spans an 11-acre campus at Belawadi, Srirangapatna Taluk (approximately 3 km behind K.R. Mills, off the Mysore-Bangalore corridor). The college is dedicated to providing quality technical education and research across engineering, management, computer applications, and pharmaceutical sciences.",
+    links: [
+      { title: "Official Website", url: "https://mitmysore.in", type: "external" },
+      { title: "View Campus Blocks", url: "#college=engineering", type: "college" }
+    ]
+  },
+  {
+    id: "about_vision_mission",
+    title: "Vision & Mission of MIT Mysore",
+    category: "about",
+    keywords: ["vision", "mission", "goals", "objectives", "core values", "philosophy"],
+    aliases: ["college vision", "college mission", "mitm vision and mission", "aim of mitm"],
+    question_examples: [
+      "What is the vision and mission of MIT Mysore?",
+      "vision and mission",
+      "college vision",
+      "mission of mitm",
+      "what are the core values",
+      "college vision enu",
+      "mitm uddesha enu",
+      "mit mysore ka vision aur mission kya hai",
+      "ದೂರದೃಷ್ಟಿ ಮತ್ತು ಧ್ಯೇಯ",
+      "vision mission pls",
+      "I'm evaluating institutions based on academic vision and philosophy",
+      "What is the educational mission of Maharaja Institute of Technology?"
+    ],
+    answer_short: "MIT Mysore's vision is to be a premier center of technical education and research, developing socially conscious and technically competent professionals.",
+    answer_detail: "Vision & Mission:\n* **Vision**: To be recognized as a premier technical education institution fostering innovation, ethical values, and research excellence.\n* **Mission**:\n  - Provide outcome-based education through state-of-the-art infrastructure and student-centered teaching methodologies.\n  - Encourage continuous industry-academia interaction, research, and entrepreneurship.\n  - Inculcate ethical integrity, environmental awareness, and societal responsibility among students.",
+    links: [
+      { title: "Official Website", url: "https://mitmysore.in", type: "external" }
+    ]
+  },
+  {
+    id: "about_affiliation",
+    title: "Affiliation, Approvals and Accreditations",
+    category: "about",
+    keywords: ["affiliation", "vtu", "aicte", "accreditation", "nba", "naac", "autonomous", "approval", "recognised"],
+    aliases: ["is mitm vtu affiliated", "aicte approved", "naac grade", "is mitm autonomous", "vtu college"],
+    question_examples: [
+      "Is MIT Mysore affiliated to VTU?",
+      "aicte approval",
+      "is mitm autonomous or affiliated",
+      "vtu affiliation details",
+      "naac accreditation of mitm",
+      "mitm vtu college aa",
+      "college autonomous aa athava vtu na",
+      "kya mit mysore vtu se affiliated hai",
+      "ವಿಟಿಯು ಮಾನ್ಯತೆ ಹೊಂದಿದೆಯೇ",
+      "vtu approved?",
+      "I'm a visitor verifying the college accreditations",
+      "difference between autonomous and vtu status here"
+    ],
+    answer_short: "MIT Mysore is approved by AICTE New Delhi, recognized by the Government of Karnataka, and permanently affiliated to Visvesvaraya Technological University (VTU), Belagavi. It holds accreditations from NAAC and NBA.",
+    answer_detail: "MIT Mysore operates under the following official accreditations and recognitions:\n* **Affiliation**: Visvesvaraya Technological University (VTU), Belagavi, Karnataka.\n* **Approval**: All India Council for Technical Education (AICTE), New Delhi.\n* **Government Recognition**: Recognized by the Department of Technical Education, Government of Karnataka.\n* **Quality Accreditations**: Accredited by the National Assessment and Accreditation Council (NAAC), National Board of Accreditation (NBA), and ISO certified.",
+    links: [
+      { title: "VTU Official Portal", url: "https://vtu.ac.in", type: "external" },
+      { title: "MIT Mysore Website", url: "https://mitmysore.in", type: "external" }
+    ]
+  },
+
+  // ==========================================
+  // 2. CONTACT & REACHING CAMPUS
+  // ==========================================
+  {
+    id: "contact_main",
+    title: "College Contact Information & Office Details",
+    category: "contact",
+    keywords: ["contact", "phone", "email", "address", "principal", "office", "enquiry", "telephone", "helpline"],
+    aliases: ["college phone number", "principal email", "mitm address", "how to contact mitm", "office phone"],
+    question_examples: [
+      "What is the contact number of MIT Mysore?",
+      "phone number",
+      "principal email id",
+      "mitm contact details",
+      "office landline number",
+      "college phone number enu",
+      "contact madodu hege",
+      "mitm ka contact number kya hai",
+      "ಕಾಲೇಜು ಸಂಪರ್ಕ ಸಂಖ್ಯೆ",
+      "contact pls",
+      "I am a parent looking for the administrative office contact",
+      "Who can I call for general enquiries?"
+    ],
+    answer_short: "You can contact MIT Mysore at +91 8236-292601 or email principal@mitmysore.in. The college is located at Belawadi, Srirangapatna Taluk, Mandya District, Karnataka - 571438.",
+    answer_detail: "Official College Contact Details:\n* **Phone**: +91 8236-292601\n* **Principal Email**: principal@mitmysore.in\n* **Postal Address**: Maharaja Institute of Technology Mysore, Belawadi, Naguvanahalli Post, Srirangapatna Taluk, Mandya District, Karnataka – 571438 (approx 3 km behind K.R. Mills).\n* **Office Timings**: 9:00 AM – 5:00 PM (Monday to Friday), 9:00 AM – 1:30 PM (Saturday).",
+    links: [
+      { title: "Call Office", url: "tel:+918236292601", type: "external" },
+      { title: "Email Principal", url: "mailto:principal@mitmysore.in", type: "external" },
+      { title: "Open Google Maps", url: "https://maps.google.com/?q=Maharaja+Institute+of+Technology+Mysore", type: "external" }
+    ]
+  },
+  {
+    id: "contact_directions",
+    title: "How to Reach MIT Mysore (Bus, Train, Directions)",
+    category: "contact",
+    keywords: ["how to reach", "directions", "bus route", "train", "railway station", "distance", "route", "auto", "location"],
+    aliases: ["how to go to mitm", "distance from mysore railway station", "nearest bus stand", "reach college", "bus to mitm"],
+    question_examples: [
+      "How to reach MIT Mysore?",
+      "how to go to mitm",
+      "directions to college",
+      "distance from mysore railway station",
+      "which bus goes to mitm",
+      "college ge hege hogodu",
+      "mysore station inda eshtu doora",
+      "mit mysore kaise pahunche",
+      "ಕಾಲೇಜಿಗೆ ಹೋಗುವ ದಾರಿ",
+      "how to reach pls",
+      "I am a visitor arriving at Mysore Junction railway station",
+      "how far is the college from suburban bus stand?"
+    ],
+    answer_short: "MIT Mysore is located at Belawadi, about 15 km from Mysore Railway Station and Suburb Bus Stand. It is reachable via city buses toward Belawadi/K.R. Mills, college buses, autos, or cabs.",
+    answer_detail: "Directions to Reach MIT Mysore:\n* **From Mysore City Railway Station (~15 km)**: Take a taxi, auto, or city bus from city bus stand toward K.R. Mills / Belawadi.\n* **From Mysore Suburb Bus Stand (~16 km)**: Regular KSRTC and city buses ply toward Mandya/Srirangapatna. Disembark at K.R. Mills stop and take an auto (approx 3 km) to campus.\n* **College Bus Service**: MIT Mysore runs a dedicated fleet of over 100 buses across Mysore, Mandya, Srirangapatna, and surrounding towns with direct campus drop-off.\n* **Landmark**: Situated 3 km behind K.R. Mills off the Mysore-Bangalore road.",
+    links: [
+      { title: "Open Google Maps Directions", url: "https://maps.google.com/?q=Maharaja+Institute+of+Technology+Mysore", type: "external" }
+    ]
+  },
+  {
+    id: "contact_office_hours",
+    title: "Administrative Office Hours & Visiting Timings",
+    category: "contact",
+    keywords: ["office hours", "timings", "working hours", "visiting hours", "saturday", "holidays"],
+    aliases: ["when is office open", "college timing", "admin office timing", "office closing time"],
+    question_examples: [
+      "What are the college office timings?",
+      "office hours",
+      "when is administrative office open",
+      "saturday working hours",
+      "visiting hours for parents",
+      "office yavaga open aguthe",
+      "office timings enu",
+      "college office kitne baje khulta hai",
+      "ಕಚೇರಿಯ ಕೆಲಸದ ಸಮಯ",
+      "office timing pls",
+      "I am a parent wanting to know the best time to meet the administrative staff",
+      "Is the college office open on weekends?"
+    ],
+    answer_short: "The Administrative Office is open from 9:00 AM to 5:00 PM on weekdays (Monday through Friday), and 9:00 AM to 1:30 PM on working Saturdays.",
+    answer_detail: "Office Working Schedule:\n* **Monday to Friday**: 9:00 AM to 5:00 PM (Lunch break: 1:15 PM – 2:00 PM).\n* **Saturday**: 9:00 AM to 1:30 PM (Half day).\n* **Sunday & Gazetted Holidays**: Closed.\n* **Location**: Administrative block, ground floor foyer near Staircase Point A.",
+    links: [
+      { title: "Call Office", url: "tel:+918236292601", type: "external" }
+    ]
+  },
+
+  // ==========================================
+  // 3. COURSES & PROGRAMS
+  // ==========================================
+  {
+    id: "courses_engineering",
+    title: "Undergraduate B.E. / B.Tech Engineering Branches",
+    category: "courses",
+    keywords: ["courses", "branches", "engineering", "be", "btech", "cse", "ise", "ece", "mechanical", "civil", "aids", "aiml", "csbs", "cyber"],
+    aliases: ["what branches are available", "engineering courses", "be courses in mitm", "computer science intake", "btech branches"],
+    question_examples: [
+      "What engineering courses are offered at MIT Mysore?",
+      "branches available",
+      "courses in mitm",
+      "be branches list",
+      "does mitm have cse and aids",
+      "yav yav engineering branch ide",
+      "cse branch ideya",
+      "mit mysore me kaun kaun se engineering branch hai",
+      "ಇಂಜಿನಿಯರಿಂಗ್ ಕೋರ್ಸ್‌ಗಳು",
+      "courses list pls",
+      "I'm a first-year applicant looking for computer science and data science options",
+      "difference between CSE and ISE here",
+      "list all btech programs"
+    ],
+    answer_short: "MIT Mysore offers B.E. programs in Computer Science & Engineering, Information Science, Electronics & Communication, Mechanical, Civil, AI & Data Science, AI & ML, IoT & Cyber Security, and CSBS.",
+    answer_detail: "Approved B.E. Undergraduate Programs (4 Years / 8 Semesters):\n* **Computer Science & Engineering (CSE)**\n* **Information Science & Engineering (ISE)**\n* **Electronics & Communication Engineering (ECE)**\n* **Artificial Intelligence & Data Science (AI & DS)**\n* **Artificial Intelligence & Machine Learning (AI & ML)**\n* **Computer Science & Business Systems (CSBS)**\n* **IoT & Cyber Security with Blockchain**\n* **Mechanical Engineering (ME)**\n* **Civil Engineering (CV)**\n\nAll programs are affiliated to VTU Belagavi and approved by AICTE.",
+    links: [
+      { title: "Explore Engineering Block", url: "#college=engineering", type: "college" }
+    ]
+  },
+  {
+    id: "courses_pg_allied",
+    title: "Postgraduate & Allied Programs (MBA, MCA, BCA, Pharmacy)",
+    category: "courses",
+    keywords: ["mba", "mca", "bca", "pharmacy", "mtech", "postgraduate", "pg", "dpharm", "bpharm", "management"],
+    aliases: ["mba course details", "mca in mitm", "does mitm have bca", "pharmacy college in mitm", "mtech branches"],
+    question_examples: [
+      "Does MIT Mysore offer MBA and MCA?",
+      "mca course",
+      "mba in mitm",
+      "bca program details",
+      "pharmacy courses in campus",
+      "mba mca ideya illi",
+      "bca admission hege",
+      "kya yahan mba aur mca hota hai",
+      "ಎಂಬಿಎ ಮತ್ತು ಎಂಸಿಎ ಕೋರ್ಸ್‌ಗಳು",
+      "mca fees and duration",
+      "I'm a graduate student looking for MCA lab and lecture halls",
+      "tell me about faculty of pharmaceutical sciences"
+    ],
+    answer_short: "MIT Mysore offers MBA (2 years), MCA (2 years), M.Tech programs, BCA (3 years), and Pharmaceutical Sciences (B.Pharm, D.Pharm) in dedicated campus blocks.",
+    answer_detail: "Postgraduate & Allied Campus Programs:\n* **MBA (Master of Business Administration)**: 2 Years / 4 Semesters, housed in Department of MBA block with Belaku Auditorium.\n* **MCA (Master of Computer Applications)**: 2 Years / 4 Semesters, featuring MCA LH 1-4 and MCA Lab 1.\n* **BCA (Bachelor of Computer Applications)**: 3 Years / 6 Semesters, with 11 dedicated lecture studios and computing labs.\n* **Faculty of Pharmaceutical Sciences**: Offers pharmacy and health programs with pharmaceutical analysis, pharmacology, and pharmaceutics research laboratories.",
+    links: [
+      { title: "Enter Department of MBA", url: "#college=mba", type: "college" },
+      { title: "Enter Department of MCA", url: "#college=mca", type: "college" },
+      { title: "Enter Department of BCA", url: "#college=bca", type: "college" },
+      { title: "Enter Pharmaceutical Sciences", url: "#college=pharmacy", type: "college" }
+    ]
+  },
+  {
+    id: "courses_eligibility",
+    title: "Course Eligibility Criteria (B.E., MBA, MCA, BCA)",
+    category: "courses",
+    keywords: ["eligibility", "qualification", "cut off", "marks percentage", "pcm", "entrance requirement"],
+    aliases: ["eligibility for be", "who can apply for cse", "percentage required for engineering", "mca eligibility"],
+    question_examples: [
+      "What is the eligibility criteria for engineering and PG courses?",
+      "eligibility criteria",
+      "who can apply for be",
+      "minimum marks required for cse",
+      "puc percentage for engineering",
+      "engineering ge eligibility enu",
+      "pcm percentage eshtu beku",
+      "admission ke liye kitna percentage chahiye",
+      "ಪ್ರವೇಶದ ಅರ್ಹತೆಗಳು",
+      "eligibility criteria pls",
+      "I am a PUC student with 50% in PCM, am I eligible for admission?",
+      "What qualification is required for MCA lateral or regular entry?"
+    ],
+    answer_short: "For B.E., candidates must have passed 10+2 / 2nd PUC with Physics & Math plus Chemistry/Bio/CS with minimum 45% marks (40% for Karnataka SC/ST/OBC). For MCA/MBA, a relevant Bachelor's degree with 50% is required.",
+    answer_detail: "Eligibility Guidelines:\n* **B.E. Programs**: Passed 10+2 / 2nd PUC or equivalent with Physics and Mathematics as compulsory subjects, along with Chemistry / Biology / Computer Science. Minimum 45% aggregate in optional subjects (40% for Karnataka SC, ST, and OBC candidates).\n* **MBA**: Recognized Bachelor's degree of minimum 3 years duration with at least 50% marks aggregate (45% for reserved categories) and a valid PGCET/KMAT score.\n* **MCA**: Recognized BCA / B.Sc. (Computer Science/IT) or equivalent degree with mathematics at 10+2 or degree level, with at least 50% marks.\n* **B.E. Lateral Entry**: Diploma or B.Sc. with minimum 45% marks eligible for direct 2nd-year admission via DCET.",
+    links: [
+      { title: "Contact Admissions Section", url: "tel:+918236292601", type: "external" }
+    ]
+  },
+
+  // ==========================================
+  // 4. ADMISSIONS
+  // ==========================================
+  {
+    id: "admissions_process",
+    title: "Admission Process & Entrance Exams (KCET, COMEDK, PGCET)",
+    category: "admissions",
+    keywords: ["admission", "admissions", "kcet", "comedk", "pgcet", "kmat", "management quota", "quota", "joining", "seat"],
+    aliases: ["how to get admission in mitm", "admission procedure", "cet code", "comedk code", "management seat"],
+    question_examples: [
+      "How to get admission into MIT Mysore?",
+      "admission process",
+      "kcet admission",
+      "comedk admission procedure",
+      "management quota admission",
+      "mitm ge admission hege togollodu",
+      "seat booking hege",
+      "mit mysore me admission kaise le",
+      "ಪ್ರವೇಶ ಪ್ರಕ್ರಿಯೆ ಹೇಗೆ",
+      "admission procedure pls",
+      "I'm a parent inquiring about B.E. admission through KCET",
+      "what entrance exams are accepted for MBA and MCA?"
+    ],
+    answer_short: "Admissions to B.E. are through KCET (KEA) and COMEDK counselling, plus Management Quota. For MBA/MCA, admissions are conducted via PGCET and KMAT.",
+    answer_detail: "Admission Routes for MIT Mysore:\n* **B.E. Programs**: Qualified candidates must participate in Karnataka Examinations Authority (KEA - KCET) or COMEDK counselling. A quota of seats is also available under Management.\n* **MBA & MCA Programs**: Admissions through Karnataka PGCET or national KMAT entrance exams followed by centralized counselling.\n* **Eligibility for B.E.**: Pass in 10+2 / PUC with Physics & Mathematics along with Chemistry/Bio/CS with minimum 45% marks (40% for Karnataka SC/ST/OBC).\n* **Office**: Admissions desk is situated near Point A (Admission Staircase) on the ground floor of the Administrative block.",
+    links: [
+      { title: "KEA Official Portal", url: "https://cetonline.karnataka.gov.in/kea/", type: "external" },
+      { title: "COMEDK Official Portal", url: "https://www.comedk.org", type: "external" },
+      { title: "Navigate to Admission Desk", url: "#room=114", type: "walkthrough" }
+    ]
+  },
+  {
+    id: "admissions_documents",
+    title: "Documents Required for College Admission",
+    category: "admissions",
+    keywords: ["documents", "certificates", "marks card", "tc", "transfer certificate", "migration", "checklist", "original"],
+    aliases: ["documents needed for admission", "what papers to bring", "admission verification documents", "certificates for reporting"],
+    question_examples: [
+      "What documents are required for admission reporting?",
+      "documents required",
+      "admission checklist",
+      "what certificates to submit",
+      "papers needed for joining",
+      "admission ge yav documets beku",
+      "marks card original submit madbeka",
+      "admission ke liye kaunse documents chahiye",
+      "ಪ್ರವೇಶಕ್ಕೆ ಅಗತ್ಯವಿರುವ ದಾಖಲೆಗಳು",
+      "doc list pls",
+      "I'm a first-year student reporting to the college office today",
+      "do non-Karnataka students need migration certificate?"
+    ],
+    answer_short: "You need 10th & 12th marks cards, KEA/COMEDK allotment order, Transfer Certificate, Conduct Certificate, Caste/Income certificates (if applicable), Migration certificate (for non-Karnataka), and passport photos.",
+    answer_detail: "Document Checklist for Physical Reporting:\n1. KEA / COMEDK Admission Allotment Order and Fee Receipt (Original + 3 copies).\n2. 10th / SSLC Marks Card (Original + 3 copies).\n3. 12th / 2nd PUC Marks Card (Original + 3 copies).\n4. Transfer Certificate (TC) from previous institution.\n5. Conduct / Study Certificate (minimum 7 years for Karnataka candidates).\n6. Caste and Income Certificate (if claiming reservation/scholarship).\n7. Migration Certificate (for students coming from outside Karnataka / non-PUC boards).\n8. Recent passport-size photographs (5 copies).\n9. Aadhaar card photocopy.",
+    links: [
+      { title: "Contact Admissions Section", url: "tel:+918236292601", type: "external" }
+    ]
+  },
+
+  // ==========================================
+  // 5. FEES & SCHOLARSHIPS
+  // ==========================================
+  {
+    id: "fees_scholarships_info",
+    title: "Fee Structure & Available Scholarships (SSP, Vidyasiri, NSP)",
+    category: "fees_scholarships",
+    keywords: ["fee", "fees", "scholarship", "ssp", "vidyasiri", "nsp", "tuition", "refund", "payment", "challan"],
+    aliases: ["college fees", "hostel fees", "scholarships in mitm", "ssp scholarship how to apply", "fees per year"],
+    question_examples: [
+      "What is the fee structure and scholarship details?",
+      "fees structure",
+      "how much is the fees for cse",
+      "scholarship details",
+      "ssp scholarship application",
+      "college fee eshtu",
+      "scholarship hege apply madodu",
+      "mit mysore ki fees kitni hai",
+      "ಶುಲ್ಕ ಮತ್ತು ವಿದ್ಯಾರ್ಥಿವೇತನ",
+      "fee details pls",
+      "I am a parent asking for the annual tuition fee breakdown",
+      "What government scholarships can Karnataka students apply for?"
+    ],
+    answer_short: "KCET and COMEDK fees are set as per annual government notifications. Karnataka students can apply for Post-Matric SSP, Vidyasiri, and National Scholarships (NSP) through the college accounts office.",
+    answer_detail: "Fee Structure & Scholarships Guidance:\n* **Government / KCET Quota**: Annual tuition and university fees are governed by the Karnataka Examinations Authority (KEA) fee regulation.\n* **COMEDK & Management Quota**: Prescribed annually per branch. For exact verified figures, please visit the college accounts section or contact office.\n* **Scholarships Available**:\n  - State Scholarship Portal (SSP Karnataka) for SC/ST/OBC/Minority students.\n  - Vidyasiri (E-Pass) food and accommodation support.\n  - National Scholarship Portal (NSP) for merit and minority schemes.\n* **Accounts Section**: Ground floor near Point A. Fees can be paid via online portal, RTGS/NEFT, or DD drawn in favor of Principal, Maharaja Institute of Technology Mysore.",
+    links: [
+      { title: "Karnataka SSP Portal", url: "https://ssp.postmatric.karnataka.gov.in", type: "external" },
+      { title: "National Scholarship Portal", url: "https://scholarships.gov.in", type: "external" }
+    ]
+  },
+  {
+    id: "fees_payment_refund",
+    title: "Fee Payment Modes & Refund Policy",
+    category: "fees_scholarships",
+    keywords: ["payment mode", "dd", "net banking", "rtgs", "neft", "refund", "cancellation", "challan"],
+    aliases: ["how to pay fees", "can i pay fees online", "refund policy if seat cancelled", "dd name for college fee"],
+    question_examples: [
+      "How to pay college fees and what is the refund policy?",
+      "how to pay fees",
+      "dd name for payment",
+      "online fee payment options",
+      "refund policy upon cancellation",
+      "fee online pay madboda",
+      "seat cancel madidre refund sigutha",
+      "fees kaise pay kare",
+      "ಶುಲ್ಕ ಪಾವತಿ ಮತ್ತು ಮರುಪಾವತಿ",
+      "payment modes pls",
+      "I'm a parent needing the official account details for RTGS / NEFT fee transfer",
+      "What is the AICTE refund norm if admission is withdrawn?"
+    ],
+    answer_short: "Fees can be paid online via net banking, RTGS/NEFT, or Demand Draft (DD) in favor of Principal, Maharaja Institute of Technology Mysore. Refunds follow official AICTE / KEA cancellation norms.",
+    answer_detail: "Payment & Cancellation Policy:\n* **Payment Modes Accepted**:\n  - Demand Draft (DD) drawn in favor of 'Principal, Maharaja Institute of Technology Mysore' payable at Mysore.\n  - RTGS / NEFT transfer into official college bank account (challan available at Accounts Counter).\n  - Online payment portal.\n* **Refund Policy**: Follows standard AICTE and Karnataka Higher Education Department regulations. Complete refunds with nominal deduction apply if cancelled before the notified last admission date.",
+    links: [
+      { title: "Contact Accounts Counter", url: "tel:+918236292601", type: "external" }
+    ]
+  },
+
+  // ==========================================
+  // 6. DEPARTMENTS
+  // ==========================================
+  {
+    id: "dept_cse",
+    title: "Department of Computer Science & Engineering (CSE)",
+    category: "departments",
+    keywords: ["cse", "computer science", "cs department", "programming", "labs", "hod cse", "coding studio"],
+    aliases: ["cse branch", "computer science engineering", "where is cse department", "cse labs"],
+    question_examples: [
+      "Tell me about the Computer Science and Engineering department",
+      "cse department",
+      "where are cse labs",
+      "cse hod room",
+      "computer science facilities",
+      "cse department elli ide",
+      "cs labs yav floor alli ide",
+      "cse department kahan hai",
+      "ಕಂಪ್ಯೂಟರ್ ಸೈನ್ಸ್ ವಿಭಾಗ",
+      "cse lab route pls",
+      "I'm a first-year CSE student looking for the programming laboratories",
+      "difference between CSE and ISE"
+    ],
+    answer_short: "The CSE Department is located in the Engineering Academic Block. It features advanced computing facilities, data science studios, and research laboratories spanning the upper floors.",
+    answer_detail: "Department of Computer Science & Engineering (CSE):\n* **Location**: Engineering Academic Block (Levels 2 to 4).\n* **Facilities**: High-performance computing labs, AI/ML systems, Linux workstations, project rooms, and departmental seminar chambers.\n* **Technical Forum**: Active student coding club and technical symposiums.\n* **Curriculum**: VTU outcome-based education (OBE) scheme covering Data Structures, Algorithms, DBMS, OS, AI, and Cloud Computing.",
+    links: [
+      { title: "Enter Engineering Block", url: "#college=engineering", type: "college" },
+      { title: "View Room 205 (CSE Floor)", url: "#room=205", type: "walkthrough" }
+    ]
+  },
+  {
+    id: "dept_ise",
+    title: "Department of Information Science & Engineering (ISE)",
+    category: "departments",
+    keywords: ["ise", "information science", "software", "web tech", "cloud", "algorithms"],
+    aliases: ["ise department", "information science engineering", "ise branch", "where is ise"],
+    question_examples: [
+      "Where is the Information Science and Engineering department?",
+      "ise department",
+      "information science labs",
+      "what is ise course",
+      "ise branch details",
+      "ise department elli ide",
+      "information science yav floor",
+      "ise department kahan hai",
+      "ಮಾಹಿತಿ ವಿಜ್ಞಾನ ವಿಭಾಗ",
+      "ise details pls",
+      "I'm deciding between CSE and ISE, what are the department features?",
+      "Where are Information Science software laboratories located?"
+    ],
+    answer_short: "The ISE Department is located in the Engineering Academic Block, offering advanced labs in web technologies, software engineering, and cloud platforms under VTU curriculum.",
+    answer_detail: "Department of Information Science & Engineering (ISE):\n* **Location**: Engineering Academic Block (Levels 2 and 3).\n* **Focus Areas**: Software Engineering, Cloud Computing, Full-Stack Web Development, Data Analytics, and Information Security.\n* **Laboratories**: Networked programming labs, mobile app development studios, and database management centers.",
+    links: [
+      { title: "Enter Engineering Block", url: "#college=engineering", type: "college" }
+    ]
+  },
+  {
+    id: "dept_ece",
+    title: "Department of Electronics & Communication Engineering (ECE)",
+    category: "departments",
+    keywords: ["ece", "electronics", "communication", "dsp lab", "power electronics", "vlsi", "embedded", "room 211", "room 213"],
+    aliases: ["ece department", "electronics labs", "dsp lab location", "power electronics lab"],
+    question_examples: [
+      "Where is the ECE department and labs?",
+      "ece department",
+      "dsp lab location",
+      "power electronics lab room",
+      "electronics communication department",
+      "ece labs elli ide",
+      "dsp lab yav room",
+      "ece department kahan hai",
+      "ಎಲೆಕ್ಟ್ರಾನಿಕ್ಸ್ ವಿಭಾಗ",
+      "ece lab route pls",
+      "I am an ECE student looking for Room 211 and Room 213",
+      "Where is PE Lab located?"
+    ],
+    answer_short: "The ECE Department is located on the 2nd Floor of the Engineering Academic Block, featuring Room 211 (PE Lab) and Room 213 (DSP Lab).",
+    answer_detail: "Department of Electronics & Communication Engineering (ECE):\n* **Location**: 2nd Floor, Engineering Academic Block.\n* **Specialized Labs**:\n  - **Room 211 PE Lab**: Power Electronics & Drives Laboratory.\n  - **Room 213 DSP Lab**: Digital Signal Processing & Microcontroller Laboratory.\n  - Embedded Systems, VLSI Design, and Communication Systems Labs.\n* Access via Point B (Central Staircase) or Point A to Level 2.",
+    links: [
+      { title: "Open Room 211 PE Lab", url: "#room=211 PE lab", type: "walkthrough" },
+      { title: "Open Room 213 DSP Lab", url: "#room=213 DSP lab", type: "walkthrough" }
+    ]
+  },
+  {
+    id: "dept_mech",
+    title: "Department of Mechanical Engineering & Workshops",
+    category: "departments",
+    keywords: ["mechanical", "mech", "workshop", "machine shop", "foundry", "forging", "fluid mechanics", "heat transfer", "room 123"],
+    aliases: ["mech department", "mechanical workshop", "where is machine shop", "fluid mechanics lab"],
+    question_examples: [
+      "Where is the Mechanical Engineering department and workshops?",
+      "mechanical department",
+      "machine shop location",
+      "foundry and forging lab",
+      "heat and mass transfer lab",
+      "mechanical workshop elli ide",
+      "machine shop yavaga open",
+      "mechanical department kahan hai",
+      "ಮೆಕ್ಯಾನಿಕಲ್ ವಿಭಾಗ",
+      "mech lab route pls",
+      "I am looking for the Foundry and Forging Laboratory",
+      "Where is Room 123 Design Lab?"
+    ],
+    answer_short: "The Mechanical Engineering Department and heavy laboratories (Machine Shop, Foundry & Forging, Fluid Mechanics, Room 123 Design Lab) are situated on the Ground Level and accessed via Point C.",
+    answer_detail: "Mechanical Engineering Facilities:\n* **Ground Level Labs**:\n  - **Machine Shop**: Lathes, shapers, milling machines.\n  - **Foundry and Forging Laboratory**: Casting and smithy setups.\n  - **Fluid Mechanics and Machines Laboratory**: Flow measurement and hydraulic turbines.\n  - **Room 123**: Design Laboratory, Heat and Mass Transfer Laboratory.\n* **Access**: Point C (Mech Dept Staircase) provides immediate visual corridor access.",
+    links: [
+      { title: "Open Room 123 Lab", url: "#room=123 (Design Laboratory, Heat and Mass Transfer Laboratory)", type: "walkthrough" },
+      { title: "Open Machine Shop", url: "#room=Machine Shop", type: "walkthrough" }
+    ]
+  },
+  {
+    id: "dept_civil",
+    title: "Department of Civil Engineering",
+    category: "departments",
+    keywords: ["civil", "civil engineering", "surveying", "cad lab", "concrete", "structures", "geotechnical"],
+    aliases: ["civil department", "where is civil department", "civil engineering labs"],
+    question_examples: [
+      "Where is the Civil Engineering department?",
+      "civil department",
+      "civil engineering labs",
+      "surveying lab",
+      "cad lab civil",
+      "civil department elli ide",
+      "civil labs yav block",
+      "civil engineering kahan hai",
+      "ಸಿವಿಲ್ ಇಂಜಿನಿಯರಿಂಗ್ ವಿಭಾಗ",
+      "civil department route",
+      "I'm a Civil Engineering student looking for surveying equipment and materials lab",
+      "What are the research areas in Civil Engineering here?"
+    ],
+    answer_short: "The Civil Engineering Department is located in the Engineering Academic Block, featuring geotechnical, structural, surveying, environmental, and CAD design facilities.",
+    answer_detail: "Civil Engineering Department Facilities:\n* **Laboratories**: Basic Material Testing Lab, Geotechnical Engineering Lab, Environmental Engineering Lab, Extensive Surveying Field Store, and Computer-Aided Design (CAD) drafting labs.\n* **VTU Research Center**: Conducts research in concrete technology and structural dynamics.",
+    links: [
+      { title: "Enter Engineering Block", url: "#college=engineering", type: "college" }
+    ]
+  },
+  {
+    id: "dept_mba_mca_block",
+    title: "Department of MBA & MCA Block Overview",
+    category: "departments",
+    keywords: ["mba", "mca", "belaku", "future skills", "lh 1", "lh 2", "mca lab 1", "board room"],
+    aliases: ["mba block", "mca block", "where is mca lab", "where is belaku auditorium", "future skills center"],
+    question_examples: [
+      "Where is the MBA and MCA Department block?",
+      "where is mca lab",
+      "mca lh 1 location",
+      "belaku auditorium location",
+      "centre for future skills",
+      "mca lab elli ide",
+      "belaku auditorium yav block",
+      "mca department kahan hai",
+      "ಎಂಸಿಎ ಲ್ಯಾಬ್ ಎಲ್ಲಿದೆ",
+      "mca lab 1 route",
+      "I'm an MCA student looking for MCA Lab 1 and LH 2",
+      "How do I reach the Centre for Future Skills?"
+    ],
+    answer_short: "The Department of MBA & MCA is located in its standalone academic block, housing Belaku Auditorium, Centre for Future Skills, MCA Lecture Halls (LH 1-4), and MCA Lab 1.",
+    answer_detail: "Department of MBA & MCA Block Highlights:\n* **Belaku (ಬೆಳಕು) Auditorium**: Flagship 500+ capacity air-conditioned auditorium for international conferences, convocations, and fests.\n* **Centre for Future Skills**: Emerging technologies incubation suite.\n* **MCA Facilities**: MCA LH 1, LH 2, LH 3, LH 4, and MCA Lab 1.\n* **MBA Facilities**: Smart management lecture halls, board room, and faculty chambers.\n* **Hospitality**: Located adjacent to the campus entrance gardens.",
+    links: [
+      { title: "Open Belaku Auditorium Walkthrough", url: "#room=Belaku", type: "walkthrough" },
+      { title: "Open MCA Lab 1 Walkthrough", url: "#room=MCA Lab 1", type: "walkthrough" },
+      { title: "Open Centre for Future Skills", url: "#room=Centre for Future Skills", type: "walkthrough" }
+    ]
+  },
+  {
+    id: "dept_bca_pharmacy",
+    title: "Department of BCA & Faculty of Pharmaceutical Sciences",
+    category: "departments",
+    keywords: ["bca", "pharmacy", "bca 201", "bca labs", "pharmacology", "pharmaceutics", "pharmacognosy", "pharmacy museum"],
+    aliases: ["bca block", "pharmacy block", "where is bca lab", "where is pharmacy lab"],
+    question_examples: [
+      "Where are BCA and Pharmacy classrooms and laboratories located?",
+      "bca department",
+      "pharmacy block location",
+      "where is bca 201",
+      "pharmacy labs list",
+      "bca classrooms elli ide",
+      "pharmacy lab yav block",
+      "bca aur pharmacy department kahan hai",
+      "ಬಿಸಿಎ ಮತ್ತು ಫಾರ್ಮಸಿ ವಿಭಾಗ",
+      "bca rooms route pls",
+      "I am looking for BCA Rooms 201 to 211",
+      "Where is the Pharmacognosy and Pharmaceutics Lab?"
+    ],
+    answer_short: "The BCA Department features Rooms 201 to 211 and dual software labs. The Faculty of Pharmaceutical Sciences houses pharmaceutics, pharmacology, chemistry research labs, and an on-campus clinic.",
+    answer_detail: "BCA & Pharmaceutical Sciences Facilities:\n* **BCA Rooms**: Rooms BCA 201 to 211 and BCA Lab 1 & 2 on the 2nd level.\n* **Pharmacy Laboratories**: Pharmaceutics I & II, Pharmaceutical Chemistry I & II, Pharmacology Lab, Pharmacognosy Lab, Central Instrumentation Room, Machine Room, and Pharmacy Museum.\n* **Clinical Support**: Located near the Maharaja Institute of Ayurveda Medical Sciences & Hospital.",
+    links: [
+      { title: "Enter Department of BCA", url: "#college=bca", type: "college" },
+      { title: "Enter Pharmaceutical Sciences", url: "#college=pharmacy", type: "college" }
+    ]
+  },
+
+  // ==========================================
+  // 7. BUILDINGS & INDOOR NAVIGATION
+  // ==========================================
+  {
+    id: "nav_engineering_block",
+    title: "Engineering Academic Block (6 Floors Directory)",
+    category: "buildings_navigation",
+    keywords: ["engineering block", "floors", "ground floor", "first floor", "second floor", "third floor", "fourth floor", "fifth floor", "staircase"],
+    aliases: ["engineering building", "how many floors in engineering block", "find room in engineering"],
+    question_examples: [
+      "How is the Engineering Academic Block organized across floors?",
+      "engineering block floors",
+      "ground floor rooms",
+      "first floor engineering",
+      "second floor engineering",
+      "engineering block alli yav yav floor ide",
+      "engineering building route",
+      "engineering block me kaun kaun se rooms hai",
+      "ಇಂಜಿನಿಯರಿಂಗ್ ಕಟ್ಟಡ",
+      "engg block map",
+      "I am a parent looking for Room 114 and Room 117 on the first floor",
+      "how to navigate engineering block"
+    ],
+    answer_short: "The Engineering Academic Block has 6 levels (Ground to 5th Floor) with 59 mapped classrooms and labs, served by Staircase Point A, Central Staircase Point B, and Mech Staircase Point C.",
+    answer_detail: "Engineering Academic Block Floor Directory:\n* **Ground Level**: Mechanical Machine Shop, Foundry Lab, Fluid Mechanics Lab, B002, B-003, M-003, M-005.\n* **1st Floor**: Rooms 114, 117, 118, 119, 126, 127.\n* **2nd Floor**: Rooms 205, 206, 208, 211 (PE Lab), 212, 213 (DSP Lab), 216, 219, 223-232, 252, 253.\n* **3rd Floor**: Rooms 305, 309, 313, 315, 319, 320, 321, 321B, 324, 325, 334, 352, 353.\n* **4th Floor**: Rooms 401, 405-410, 414, 415, 416a, 416b, 419, 420, 422-427, 452, 453, CSBS Lab.\n* **5th Floor**: Rooms 551, 552, 556, 557.",
+    links: [
+      { title: "View Engineering Block Rooms", url: "#college=engineering", type: "college" },
+      { title: "Open Room 117 Walkthrough", url: "#room=117", type: "walkthrough" },
+      { title: "Open Room 205 Walkthrough", url: "#room=205", type: "walkthrough" }
+    ]
+  },
+  {
+    id: "nav_belaku_auditorium",
+    title: "Belaku (ಬೆಳಕು) Auditorium Navigation",
+    category: "buildings_navigation",
+    keywords: ["belaku", "auditorium", "belku", "stage", "audi", "convocation", "hall"],
+    aliases: ["where is belaku auditorium", "how to go to belaku", "belaku audi route", "auditorium walk"],
+    question_examples: [
+      "Where is Belaku Auditorium and how do I get there?",
+      "belaku auditorium",
+      "where is belaku",
+      "how to reach auditorium",
+      "belaku hall route",
+      "belaku auditorium elli ide",
+      "belaku ge hege hogodu",
+      "belaku auditorium kahan hai",
+      "ಬೆಳಕು ಸಭಾಂಗಣ ಎಲ್ಲಿದೆ",
+      "belaku route pls",
+      "I am attending a seminar in Belaku Auditorium, how do I reach from the gate?",
+      "Where is the main stage auditorium?"
+    ],
+    answer_short: "Belaku Auditorium is situated on the Ground Floor of the Department of MBA Block. Tap below to launch photographic corridor navigation straight to the auditorium.",
+    answer_detail: "Belaku (ಬೆಳಕು) Auditorium Walkthrough:\n* **Block**: Department of MBA Complex.\n* **Location**: Ground Level main entrance foyer.\n* **Capacity**: 500+ air-conditioned seats with modern audiovisual projection.\n* **Directions**: Enter through the main campus driveway, turn left toward the MBA complex entrance, and Belaku Auditorium is located immediately on your left.",
+    links: [
+      { title: "Launch Belaku Walkthrough", url: "#room=Belaku", type: "walkthrough" }
+    ]
+  },
+  {
+    id: "nav_mca_lab_1",
+    title: "MCA Lab 1 Navigation",
+    category: "buildings_navigation",
+    keywords: ["mca lab", "mca lab 1", "computer lab", "mca block", "programming lab"],
+    aliases: ["where is mca lab 1", "route to mca lab", "how to reach mca lab", "mca computer lab"],
+    question_examples: [
+      "Where is MCA Lab 1 and how do I reach it?",
+      "where is mca lab",
+      "mca lab 1",
+      "how to reach mca lab",
+      "mca computing studio",
+      "mca lab elli ide",
+      "mca lab ge hege hogodu",
+      "mca lab kahan hai",
+      "ಎಂಸಿಎ ಲ್ಯಾಬ್ 1 ಎಲ್ಲಿದೆ",
+      "mca lab route pls",
+      "I have a practical session in MCA Lab 1, what is the fastest route?",
+      "Where are MCA computing laboratories?"
+    ],
+    answer_short: "MCA Lab 1 is located in the Department of MCA building. Tap below to launch turn-by-turn photographic corridor navigation to MCA Lab 1.",
+    answer_detail: "MCA Lab 1 Corridor Navigation:\n* **Block**: Department of MCA.\n* **Floor**: Main MCA Academic Corridor.\n* **Features**: High-speed networked terminals, database servers, and development workstations.\n* **Step-by-step route**: Follow the corridor photo walkthrough from the entrance staircase to the MCA Lab 1 entrance door.",
+    links: [
+      { title: "Launch MCA Lab 1 Walkthrough", url: "#room=MCA Lab 1", type: "walkthrough" }
+    ]
+  },
+  {
+    id: "nav_restrooms_water",
+    title: "Restrooms & Drinking Water Facilities",
+    category: "buildings_navigation",
+    keywords: ["restroom", "washroom", "toilet", "drinking water", "water cooler", "filter", "loo", "bathroom"],
+    aliases: ["where is washroom", "nearest toilet", "where to get drinking water", "restrooms location"],
+    question_examples: [
+      "Where are the restrooms and drinking water coolers located?",
+      "where is washroom",
+      "nearest toilet",
+      "drinking water location",
+      "water cooler",
+      "washroom elli ide",
+      "kudiyo neeru elli siguthe",
+      "toilet kahan hai",
+      "ಶೌಚಾಲಯ ಮತ್ತು ಕುಡಿಯುವ ನೀರು",
+      "washroom pls",
+      "I am a visitor looking for the nearest ladies/gents restroom",
+      "Is there filtered drinking water on every floor?"
+    ],
+    answer_short: "Restrooms (separate for ladies, gents, and staff) and RO filtered drinking water coolers are situated on every floor adjacent to Staircase Point A and Point B.",
+    answer_detail: "Restroom & Water Facilities:\n* **Locations**: Positioned on each floor of the Engineering Block, MBA/MCA Block, and BCA/Pharmacy Block, located right off the main stairwells (Point A and Point B corridor junctions).\n* **Drinking Water**: High-capacity RO water purification and chilled water coolers installed on every floor.\n* **Accessibility**: Ground floor accessible restrooms are available near the main foyer entrance.",
+    links: [
+      { title: "View Campus Walkthroughs", url: "#college=engineering", type: "college" }
+    ]
+  },
+  {
+    id: "nav_stairs_lifts",
+    title: "Staircases (Point A, B, C) & Campus Accessibility",
+    category: "buildings_navigation",
+    keywords: ["staircase", "stairs", "point a", "point b", "point c", "lift", "elevator", "entrance"],
+    aliases: ["point a admission staircase", "point b central staircase", "point c mech staircase", "how to go up floors"],
+    question_examples: [
+      "What are the main staircases and entrance points in the Engineering Block?",
+      "staircases in college",
+      "what is point a",
+      "what is point b",
+      "what is point c",
+      "point a staircase elli ide",
+      "lift ideya college alli",
+      "point b staircase kahan hai",
+      "ಮೆಟ್ಟಿಲುಗಳು ಮತ್ತು ಪ್ರವೇಶ ದ್ವಾರಗಳು",
+      "staircase routes pls",
+      "Which staircase should I take to reach 3rd floor CSE classrooms?",
+      "Where is Point C Mech Dept staircase located?"
+    ],
+    answer_short: "The Engineering Block features three designated staircase arteries: Point A (Admission / Main Entrance), Point B (Central Staircase), and Point C (Mechanical Dept Staircase).",
+    answer_detail: "Campus Staircase & Access Artery Guide:\n* **Point A (Admission Staircase)**: Located near the administrative foyer and reception on the north side.\n* **Point B (Central Staircase)**: Located in the center corridor, providing quickest access to 2nd, 3rd, and 4th-floor lecture halls.\n* **Point C (Mech Dept Staircase)**: Positioned at the workshop and heavy machinery wing on the south side.\n* MITM Navigo allows you to switch starting staircases for any room route.",
+    links: [
+      { title: "Explore Rooms Grid", url: "#college=engineering", type: "college" }
+    ]
+  },
+
+  // ==========================================
+  // 8. FACILITIES
+  // ==========================================
+  {
+    id: "facility_library",
+    title: "Central Library & Digital Information Centre",
+    category: "facilities",
+    keywords: ["library", "books", "reading room", "digital library", "journals", "timings", "borrow", "card", "book bank"],
+    aliases: ["library timings", "where is library", "college library", "how many books in library", "digital library access"],
+    question_examples: [
+      "What are the library timings and facilities?",
+      "library timings",
+      "where is central library",
+      "how to borrow books",
+      "digital library access",
+      "library yavaga open aguthe",
+      "library elli ide",
+      "library ka timing kya hai",
+      "ಗ್ರಂಥಾಲಯದ ಸಮಯ",
+      "library time pls",
+      "I am a student wanting to study in the reading room after class",
+      "does the library have IEEE digital access?"
+    ],
+    answer_short: "The Central Library is open from 8:30 AM to 8:00 PM on working days, offering tens of thousands of volumes, reference sections, book banks, and digital library terminals.",
+    answer_detail: "Central Library Highlights:\n* **Working Hours**: 8:30 AM – 8:00 PM (Monday to Friday), 9:00 AM – 2:00 PM (Saturday). Extended during semester exams.\n* **Collection**: Comprehensive collection of engineering, management, computer applications, and basic science volumes, national and international print journals.\n* **Digital Library**: High-speed networked systems providing direct access to IEEE, Springer, ScienceDirect, and VTU Consortium e-resources.\n* **Book Bank**: Dedicated Book Bank facility providing semester-long textbook lending for eligible students.",
+    links: [
+      { title: "VTU Consortium Portal", url: "https://vtu.ac.in", type: "external" }
+    ]
+  },
+  {
+    id: "facility_canteen",
+    title: "Campus Canteen & Cafeteria",
+    category: "facilities",
+    keywords: ["canteen", "cafeteria", "food", "mess", "lunch", "breakfast", "snacks", "coffee", "tea", "menu"],
+    aliases: ["canteen timings", "canteen menu", "where is canteen", "food court in campus", "college cafeteria"],
+    question_examples: [
+      "Where is the campus canteen and what are its timings?",
+      "canteen timings",
+      "where is the canteen",
+      "canteen food options",
+      "is food available now",
+      "canteen yavaga open",
+      "canteen elli ide",
+      "canteen kahan hai aur timing kya hai",
+      "ಕ್ಯಾಂಟೀನ್ ಸಮಯ ಮತ್ತು ಸ್ಥಳ",
+      "canteen time pls",
+      "I am a visitor looking for breakfast or coffee on campus",
+      "what vegetarian food is served in the cafeteria?"
+    ],
+    answer_short: "The campus canteen is situated near the main gardens and operates from 8:00 AM to 6:00 PM on all instructional days, serving hygienic vegetarian breakfast, lunch, and refreshments.",
+    answer_detail: "Campus Canteen Information:\n* **Timings**: 8:00 AM – 6:00 PM (Monday to Saturday).\n* **Cuisine**: Fresh South Indian and North Indian vegetarian meals, breakfast specials (dosas, idli, vada, poori), meals, sandwiches, snacks, fresh juices, tea, and coffee.\n* **Hygiene**: Clean dining area with separate seating sections for students and faculty.",
+    links: [
+      { title: "View Campus Entrance", url: "#college=engineering", type: "college" }
+    ]
+  },
+  {
+    id: "facility_hostels",
+    title: "On-Campus Hostels (Boys & Girls Accommodation)",
+    category: "facilities",
+    keywords: ["hostel", "hostels", "accommodation", "boys hostel", "girls hostel", "mess", "warden", "room", "stay", "fees"],
+    aliases: ["hostel facility", "hostel fees", "boys hostel in mitm", "girls hostel in mitm", "hostel rules"],
+    question_examples: [
+      "What are the hostel facilities and fees?",
+      "hostel fees",
+      "boys hostel",
+      "girls hostel",
+      "hostel warden contact",
+      "hostel fee eshtu",
+      "hostel room hegidhe",
+      "hostel ki fees kitni hai",
+      "ವಿದ್ಯಾರ್ಥಿ ನಿಲಯದ ವಿವರ",
+      "hostel info pls",
+      "I am a parent looking for safe on-campus hostel accommodation for my daughter",
+      "what amenities are provided in the hostel rooms?"
+    ],
+    answer_short: "MIT Mysore provides separate on-campus hostels for boys and girls with furnished rooms, 24/7 security, Wi-Fi, power backup, and hygienic vegetarian mess facilities.",
+    answer_detail: "Hostel Accommodation Details:\n* **Separate Blocks**: Secure independent hostel buildings for boys and girls inside the campus perimeter.\n* **Amenities**: Cot, study desk, chair, wardrobe, high-speed Wi-Fi connectivity, RO drinking water, hot water geysers, and 24/7 security with CCTV surveillance.\n* **Mess**: Hygienic vegetarian dining serving breakfast, lunch, evening tea, and dinner.\n* **Warden & Caretakers**: Resident wardens ensure student safety, discipline, and study hours.\n* **Registration**: Apply at the Administrative Office during admission reporting.",
+    links: [
+      { title: "Contact Office for Hostel", url: "tel:+918236292601", type: "external" }
+    ]
+  },
+  {
+    id: "facility_transport",
+    title: "College Bus Fleet & Transportation Network",
+    category: "facilities",
+    keywords: ["bus", "transport", "bus routes", "bus pass", "transportation", "fleet", "pickup", "ksrtc", "commute"],
+    aliases: ["college bus timing", "bus routes to mysore", "transport charges", "how to apply for bus pass", "bus fleet"],
+    question_examples: [
+      "What are the college bus routes and transportation details?",
+      "bus routes",
+      "college bus timings",
+      "how to get bus pass",
+      "does college bus go to mandya",
+      "bus pass hege madodu",
+      "bus route yavdu ide",
+      "college bus kahan se milti hai",
+      "ಕಾಲೇಜು ಬಸ್ ಸೌಲಭ್ಯ",
+      "bus timing pls",
+      "I am a day-scholar living in Mysore looking for the nearest bus pickup point",
+      "what time do buses leave in the evening after class?"
+    ],
+    answer_short: "MIT Mysore operates a fleet of over 100 buses connecting Mysore city, Mandya, Srirangapatna, and surrounding towns up to ~80 km. Buses depart campus at 4:50 PM.",
+    answer_detail: "College Transport Highlights:\n* **Fleet**: Over 100 dedicated buses covering major stops across Mysuru city (K.R. Circle, Vijayanagar, Kuvempunagar, Saraswathipuram, Gokulam, Bannimantap, Suburb Bus Stand), Srirangapatna, Mandya, Pandavapura, and surrounding areas.\n* **Morning Schedule**: Buses arrive at campus by 8:45 AM.\n* **Evening Departure**: Buses leave campus daily after instruction at 4:50 PM.\n* **Bus Pass**: Issued at the Transport Counter in the Administrative Block upon semester payment.",
+    links: [
+      { title: "Contact Transport Counter", url: "tel:+918236292601", type: "external" }
+    ]
+  },
+  {
+    id: "facility_sports_gym",
+    title: "Sports Grounds, Gymnasium & Athletics",
+    category: "facilities",
+    keywords: ["sports", "ground", "cricket", "football", "volleyball", "badminton", "gym", "athletics", "indoor games"],
+    aliases: ["sports facilities in mitm", "cricket ground", "gym facility", "college sports meet"],
+    question_examples: [
+      "What sports and gymnasium facilities are available on campus?",
+      "sports facilities",
+      "cricket ground in college",
+      "gym timings",
+      "badminton court",
+      "sports ground elli ide",
+      "college sports meet yavaga",
+      "sports kahan khele",
+      "ಕ್ರೀಡಾ ಸೌಲಭ್ಯಗಳು",
+      "sports details pls",
+      "I am an athlete wanting to know about VTU sports trials and tournaments",
+      "Are there indoor sports facilities like table tennis and chess?"
+    ],
+    answer_short: "MIT Mysore provides extensive sports infrastructure including a full-size cricket and football ground, volleyball and basketball courts, badminton courts, and indoor table tennis/chess rooms.",
+    answer_detail: "Sports & Physical Education:\n* **Outdoor Facilities**: Dedicated cricket ground, football pitch, standard volleyball courts, throwball courts, and athletic running tracks.\n* **Indoor Sports**: Table tennis suites, carrom, chess, and multi-gym fitness center.\n* **VTU Tournaments**: Regular participation in VTU Mysore Zone and Inter-Zone athletic meets and tournaments.",
+    links: [
+      { title: "View Campus Grounds", url: "index.html", type: "walkthrough" }
+    ]
+  },
+  {
+    id: "facility_medical_health",
+    title: "Campus Health Care & Emergency Medical Support",
+    category: "facilities",
+    keywords: ["medical", "health", "hospital", "clinic", "first aid", "doctor", "ayurveda hospital", "emergency"],
+    aliases: ["medical room on campus", "nearest hospital", "health center", "what to do if sick"],
+    question_examples: [
+      "What medical and healthcare facilities exist on campus?",
+      "medical facility",
+      "doctor on campus",
+      "first aid room location",
+      "ayurveda medical hospital",
+      "medical room elli ide",
+      "hushaaru thappadre ellige hogodu",
+      "medical emergency me kya kare",
+      "ಆರೋಗ್ಯ ಮತ್ತು ತುರ್ತು ಚಿಕಿತ್ಸೆ",
+      "medical help pls",
+      "I am a hostelite asking about night-time emergency medical care",
+      "Where is the Maharaja Ayurveda Hospital located?"
+    ],
+    answer_short: "A campus health clinic provides first aid and emergency consultations. The adjacent Maharaja Institute of Ayurveda Medical Sciences & Hospital provides comprehensive healthcare support.",
+    answer_detail: "Health & Medical Care:\n* **First Aid**: First-aid kits and emergency basic medicine kits are maintained at the administrative reception and hostel warden quarters.\n* **Campus Hospital**: The Maharaja Institute of Ayurveda Medical Sciences & Hospital is situated directly on campus grounds, providing doctor consultations and emergency clinical attention.\n* **Ambulance**: 24/7 on-call emergency ambulance transfer to tertiary hospitals in Mysore when necessary.",
+    links: [
+      { title: "Open Ayurveda Hospital Walkthrough", url: "#room=Maharaja Institute of Ayurveda Medical Sciences & Hospital", type: "walkthrough" }
+    ]
+  },
+
+  // ==========================================
+  // 9. ACADEMICS
+  // ==========================================
+  {
+    id: "academic_regulations",
+    title: "VTU Academic Regulations, Attendance & Examinations",
+    category: "academics",
+    keywords: ["attendance", "75 percent", "cie", "see", "internals", "exams", "grading", "sgpa", "cgpa", "results", "revaluation"],
+    aliases: ["attendance rules", "minimum attendance required", "internal assessment pattern", "vtu results portal", "revaluation process"],
+    question_examples: [
+      "What is the attendance rule and internal exam pattern?",
+      "attendance rule",
+      "minimum attendance percentage",
+      "cie exam pattern",
+      "how are internals calculated",
+      "attendance percentage eshtu beku",
+      "results yavaga baruthe",
+      "attendance kitna percent chahiye",
+      "ಹಾಜರಾತಿ ನಿಯಮಗಳು",
+      "attendance rule pls",
+      "I'm a first-year student wanting to know how CIE internals are scored",
+      "What happens if attendance is below 75%?"
+    ],
+    answer_short: "VTU mandates a minimum of 75% attendance in each subject to be eligible for examinations. Three Continuous Internal Evaluation (CIE) tests are held per semester.",
+    answer_detail: "VTU Academic Regulations:\n* **Attendance Mandate**: Minimum 75% attendance in both theory and practicals is compulsory. Up to 10% condonation is allowed by the Principal only on verified medical grounds.\n* **Continuous Internal Evaluation (CIE)**: Conducted 3 times per semester. Marks are awarded based on test scores, assignments, quizzes, and lab performance.\n* **Semester End Examination (SEE)**: University examinations conducted at the end of each semester under VTU guidelines.\n* **Results**: Officially published on results.vtu.ac.in.",
+    links: [
+      { title: "VTU Results Portal", url: "https://results.vtu.ac.in", type: "external" }
+    ]
+  },
+  {
+    id: "academic_calendar_timings",
+    title: "Daily Class Timings & Semester Calendar",
+    category: "academics",
+    keywords: ["class timing", "timings", "period", "lunch break", "semester dates", "academic calendar"],
+    aliases: ["what time do classes start", "daily schedule", "lunch break time", "college bell timing"],
+    question_examples: [
+      "What are the daily class timings and lecture schedules?",
+      "class timings",
+      "when do classes start",
+      "lunch break timings",
+      "daily schedule",
+      "class yavaga start aguthe",
+      "lunch break timing enu",
+      "class kitne baje shuru hoti hai",
+      "ತರಗತಿಗಳ ವೇಳಾಪಟ್ಟಿ",
+      "class timing pls",
+      "I'm a new student asking about the morning assembly and lecture periods",
+      "What time do evening practical sessions finish?"
+    ],
+    answer_short: "Classes run from 9:00 AM to 4:45 PM Monday through Friday, with a lunch break from 1:15 PM to 2:00 PM. Saturdays typically follow half-day schedules.",
+    answer_detail: "Daily Academic Schedule:\n* **Morning Sessions**: 9:00 AM to 1:15 PM (Four 55-minute lecture periods).\n* **Lunch Break**: 1:15 PM to 2:00 PM.\n* **Afternoon Sessions**: 2:00 PM to 4:45 PM (Practical lab sessions, project work, and tutorials).\n* **Bus Departure**: Buses depart campus at 4:50 PM.\n* **Academic Calendar**: Odd semesters span September to January; Even semesters span February to July.",
+    links: [
+      { title: "VTU Academic Calendar", url: "https://vtu.ac.in", type: "external" }
+    ]
+  },
+
+  // ==========================================
+  // 10. PLACEMENTS & CAREERS
+  // ==========================================
+  {
+    id: "placement_overview",
+    title: "Training & Placement Cell (Recruiters, Packages & ETSDP)",
+    category: "placements",
+    keywords: ["placement", "placements", "recruiters", "highest package", "average package", "infosys", "tcs", "wipro", "etsdp", "internships"],
+    aliases: ["placement statistics", "campus interview companies", "what is highest package", "placement cell office", "placement training"],
+    question_examples: [
+      "What are the placement statistics, packages, and recruiters?",
+      "placement statistics",
+      "highest package in mitm",
+      "average package",
+      "top recruiters list",
+      "placement hegidhe college alli",
+      "highest package eshtu",
+      "placement kaisa hai aur kitna package milta hai",
+      "ಉದ್ಯೋಗ ಮತ್ತು ಪ್ಲೇಸ್‌ಮೆಂಟ್",
+      "placement details pls",
+      "I am a prospective student asking about career and placement opportunities",
+      "Which IT companies visit for campus placement drives?"
+    ],
+    answer_short: "MIT Mysore's Placement Cell conducts regular training under ETSDP. The average package is around 4 LPA, with top offers reaching 15 to 19 LPA from recruiters like Infosys, TCS, and Wipro.",
+    answer_detail: "Training & Placement Cell Information:\n* **Training Program (ETSDP)**: Entrepreneur and Technical Skills Development Program provides continuous training in coding aptitude, data structures, soft skills, and mock interviews starting from early semesters.\n* **Top Recruiters**: Infosys, TCS, Wipro, Cognizant, Mindtree, Tech Mahindra, Capgemini, SLK Software, and core engineering enterprises.\n* **Packages**: Average packages typically range between 3.8 to 5 LPA, with dream offers up to 15 to 19 LPA in recent cycles.\n* **Placement Office**: Located on the first floor near the Administrative Block.",
+    links: [
+      { title: "Official Website Placement Page", url: "https://mitmysore.in", type: "external" }
+    ]
+  },
+  {
+    id: "placement_eligibility",
+    title: "Placement Registration & Eligibility Criteria",
+    category: "placements",
+    keywords: ["placement eligibility", "cgpa cutoff", "backlog criteria", "registration", "placement rules"],
+    aliases: ["how to register for campus placements", "cgpa required for placements", "can backlog students attend placement"],
+    question_examples: [
+      "What is the eligibility criteria to register for campus placements?",
+      "placement eligibility criteria",
+      "cgpa required for placements",
+      "backlog rules for campus drive",
+      "how to register for placement cell",
+      "placement ge cgpa eshtu beku",
+      "backlog iddre placement attend madboda",
+      "placement ke liye kitna cgpa chahiye",
+      "ಪ್ಲೇಸ್‌ಮೆಂಟ್ ನೋಂದಣಿ ನಿಯಮಗಳು",
+      "placement eligibility pls",
+      "I am a pre-final year student wanting to register with the placement cell",
+      "What are the attendance criteria for placement training sessions?"
+    ],
+    answer_short: "Students with 60% or 6.5+ CGPA and no active backlogs are eligible for most Tier-1 drives. Mandatory attendance in ETSDP training modules is required to sit for campus drives.",
+    answer_detail: "Placement Eligibility Guidelines:\n* **Academic Cut-off**: Most top recruiters mandate minimum 60% (or 6.5 CGPA) throughout 10th, 12th, and B.E. semesters.\n* **Backlog Policy**: No active backlogs at the time of appearing for recruitment drives.\n* **Training Attendance**: 85%+ attendance in ETSDP soft-skill and aptitude bootcamps is compulsory.\n* **Registration**: Pre-final year students register with the Placement Cell at the start of the 6th/7th semester.",
+    links: [
+      { title: "Contact Placement Officer", url: "tel:+918236292601", type: "external" }
+    ]
+  },
+
+  // ==========================================
+  // 11. STUDENT LIFE & CLUBS
+  // ==========================================
+  {
+    id: "student_life_clubs",
+    title: "Student Life, Clubs, Fests & Anti-Ragging Committee",
+    category: "student_life",
+    keywords: ["clubs", "fest", "mahotsav", "cultural", "sports", "nss", "anti ragging", "grievance", "hackathon", "events"],
+    aliases: ["student fests", "college fest name", "cultural activities", "anti ragging helpline", "student clubs"],
+    question_examples: [
+      "What clubs, fests, and student activities happen at MIT Mysore?",
+      "college fest",
+      "student clubs",
+      "annual fest name",
+      "anti ragging committee",
+      "cultural fest yavaga",
+      "clubs yav yav ide",
+      "college fest kab hota hai",
+      "ವಿದ್ಯಾರ್ಥಿ ಕ್ಲಬ್‌ಗಳು ಮತ್ತು ಹಬ್ಬ",
+      "fest info pls",
+      "I am a new student interested in technical hackathons and cultural clubs",
+      "Who do I contact regarding the Anti-Ragging Committee?"
+    ],
+    answer_short: "MIT Mysore hosts annual fests like Mahotsav, technical hackathons, cultural events, sports meets, and an active NSS unit. The college maintains a strict zero-tolerance anti-ragging policy.",
+    answer_detail: "Student Life & Extracurricular Activities:\n* **Flagship Fest (Mahotsav)**: Annual inter-collegiate cultural and technical fest featuring music, dance, coding hackathons, and literary competitions.\n* **Clubs**: Technical societies (Coding, Robotics, Web development), Cultural forum, Literary club, Photography and Media club.\n* **NSS Unit**: Regular social community service, tree planting, and voluntary blood donation camps.\n* **Anti-Ragging Committee**: Headed by the Principal and senior faculty with zero-tolerance enforcement under Supreme Court and UGC guidelines.",
+    links: [
+      { title: "Anti-Ragging Helpline", url: "tel:18001805522", type: "external" }
+    ]
+  },
+  {
+    id: "student_id_bus_pass",
+    title: "Student ID Card & KSRTC Bus Pass Process",
+    category: "student_life",
+    keywords: ["id card", "bus pass", "ksrtc", "pass counter", "lost id card", "attestation"],
+    aliases: ["how to get college id card", "how to get ksrtc bus pass", "duplicate id card process", "bus pass sign"],
+    question_examples: [
+      "How do I get my student ID card or KSRTC bus pass attested?",
+      "how to get id card",
+      "ksrtc bus pass process",
+      "lost id card duplicate",
+      "bus pass attestation counter",
+      "id card hege padoleyodu",
+      "ksrtc bus pass ge sign elli hakthare",
+      "id card aur bus pass kaise banaye",
+      "ಗುರುತಿನ ಚೀಟಿ ಮತ್ತು ಬಸ್ ಪಾಸ್",
+      "id card process pls",
+      "I lost my college ID card, what is the procedure to get a duplicate?",
+      "Where in the administrative office do I get my Seva Sindhu KSRTC pass signed?"
+    ],
+    answer_short: "Official ID cards are issued upon admission at the Administrative Office. For KSRTC bus passes, apply via Seva Sindhu portal and submit the verification slip at the college counter for seal and signature.",
+    answer_detail: "ID Card & KSRTC Pass Steps:\n* **ID Card**: Issued during first-year induction. Wear visibly at all times with the official lanyard. For duplicates, submit an application with fee receipt at the Administrative Counter.\n* **KSRTC Student Pass**: Register online on Seva Sindhu portal (Karnataka Gov), print the acknowledgment, get it stamped and signed by the designated college officer at the Admin Counter, and collect your smart card at the nearest KSRTC depot.",
+    links: [
+      { title: "Seva Sindhu Portal", url: "https://sevasindhu.karnataka.gov.in", type: "external" }
+    ]
+  },
+
+  // ==========================================
+  // 12. RULES & POLICIES
+  // ==========================================
+  {
+    id: "rules_policies_info",
+    title: "Campus Discipline, Dress Code & Mobile Phone Policy",
+    category: "rules_policies",
+    keywords: ["rules", "dress code", "mobile", "discipline", "id card", "uniform", "policy", "code of conduct"],
+    aliases: ["dress code rules", "is mobile allowed in class", "id card compulsory", "campus discipline rules"],
+    question_examples: [
+      "What are the campus rules on dress code, mobile phones, and ID cards?",
+      "dress code",
+      "is mobile allowed",
+      "id card rule",
+      "campus rules",
+      "dress code enu college alli",
+      "mobile use madboda class alli",
+      "dress code kya hai",
+      "ಶಿಸ್ತು ಮತ್ತು ವಸ್ತ್ರ ಸಂಹಿತೆ ನಿಯಮಗಳು",
+      "rules pls",
+      "I'm a new student asking about the mandatory uniform and ID card policy",
+      "What is the policy for visitors entering the campus?"
+    ],
+    answer_short: "Students must wear formal attire, mandatory lab aprons during practicals, and display their official ID card with lanyard at all times. Mobile phone usage is prohibited inside classrooms.",
+    answer_detail: "College Code of Conduct & Policies:\n* **Dress Code**: Neat, modest formal attire is compulsory. Lab uniforms/aprons must be worn during all workshop and laboratory sessions.\n* **ID Card**: Official college ID cards with lanyards must be visibly displayed at all times on campus premises.\n* **Mobile Phone Usage**: Restricted to designated open spaces. Use of mobile phones inside classrooms, lecture halls, and laboratories is strictly prohibited.\n* **Discipline**: Zero tolerance for ragging, smoking, or substance abuse.",
+    links: [
+      { title: "College Regulations", url: "https://mitmysore.in", type: "external" }
+    ]
+  },
+
+  // ==========================================
+  // 13. NOTICES & EVENTS
+  // ==========================================
+  {
+    id: "notices_events_info",
+    title: "Official Notices, Circulars & Event Boards",
+    category: "notices_events",
+    keywords: ["notices", "circulars", "updates", "events", "calendar", "bulletin", "announcements"],
+    aliases: ["where are circulars posted", "college notice board", "latest announcements", "how to see college notices"],
+    question_examples: [
+      "Where are the official college circulars and notices published?",
+      "college notices",
+      "where to see circulars",
+      "latest announcements",
+      "exam notices",
+      "notices elli nododu",
+      "circular elli hakthare",
+      "notices kahan aate hai",
+      "ಅಧಿಕೃತ ಸುತ್ತೋಲೆಗಳು",
+      "notices link",
+      "I want to check the latest timetable updates and semester circulars",
+      "Where is the main physical notice board on campus?"
+    ],
+    answer_short: "Official circulars and notices are posted on the college website mitmysore.in and displayed on the department notice boards situated near Staircase Point A on the ground floor.",
+    answer_detail: "Official Information & Circular Channels:\n* **Website Notice Board**: Check the official announcements section at mitmysore.in for administrative, exam, and holiday notifications.\n* **Physical Notice Boards**: Prominently located on the ground floor foyer near Point A (Admission Staircase) and on individual departmental floors.\n* **University Circulars**: Official VTU notifications are available directly on vtu.ac.in.",
+    links: [
+      { title: "MIT Mysore Notice Board", url: "https://mitmysore.in", type: "external" },
+      { title: "VTU Notifications", url: "https://vtu.ac.in", type: "external" }
+    ]
+  },
+
+  // ==========================================
+  // 14. ALUMNI & RESEARCH
+  // ==========================================
+  {
+    id: "alumni_research_info",
+    title: "Alumni Association, Research Centers & Industry MoUs",
+    category: "alumni_research",
+    keywords: ["alumni", "research", "patents", "mous", "industry", "phd", "research centers"],
+    aliases: ["alumni association", "research centers in mitm", "phd programs", "industry tie ups"],
+    question_examples: [
+      "Tell me about the alumni association and research centers",
+      "alumni association",
+      "research centers",
+      "phd research in mitm",
+      "industry partnerships and mous",
+      "alumni association ideya",
+      "research centers yav yav branch alli ide",
+      "alumni network kaisa hai",
+      "ಹಳೆಯ ವಿದ್ಯಾರ್ಥಿ ಸಂಘ",
+      "research details",
+      "I am an alumnus wanting to connect with the Maharaja Alumni Association",
+      "Which departments have recognized VTU research centers?"
+    ],
+    answer_short: "MIT Mysore has active VTU-recognized Research Centers in CSE, ECE, Mechanical, Civil, and Sciences, alongside the Maharaja Alumni Association (MAA) connecting global graduates.",
+    answer_detail: "Alumni & Research Ecosystem:\n* **Maharaja Alumni Association (MAA)**: Active alumni community providing mentorship, guest lectures, and placement referrals.\n* **VTU Research Centers**: Recognized research centers for Ph.D. and M.Sc. (Engg) by Research in Computer Science, Electronics, Mechanical, Civil, Chemistry, Physics, and Mathematics.\n* **Industry Collaborations**: MoUs signed with premier technical firms for student internships, faculty development, and specialized value-added courses.",
+    links: [
+      { title: "Official Website", url: "https://mitmysore.in", type: "external" }
+    ]
+  },
+
+  // ==========================================
+  // 15. EMERGENCY & WHO TO CONTACT
+  // ==========================================
+  {
+    id: "emergency_help_directory",
+    title: "Emergency Numbers & 'Who Do I Contact For What' Directory",
+    category: "emergency_help",
+    keywords: ["emergency", "ambulance", "security", "lost and found", "hospital", "who to contact", "helpdesk"],
+    aliases: ["emergency numbers", "who to contact for admissions", "lost and found office", "medical emergency"],
+    question_examples: [
+      "Who do I contact in case of an emergency, or for specific administrative queries?",
+      "emergency contact number",
+      "who to contact for what",
+      "lost and found office",
+      "medical emergency in campus",
+      "emergency number enu",
+      "lost and found elli ide",
+      "emergency me kisko phone kare",
+      "ತುರ್ತು ಸಂಪರ್ಕ ಸಂಖ್ಯೆಗಳು",
+      "emergency pls",
+      "I lost my ID card/belongings on campus, where do I go?",
+      "Who do I contact regarding fee payment issues or exam form verification?"
+    ],
+    answer_short: "For immediate campus emergencies, contact Campus Security or Administrative Office at +91 8236-292601. Medical support is available at the adjacent Maharaja Ayurveda Hospital on campus.",
+    answer_detail: "Who Do I Contact For What:\n* **Admissions & Enrolment**: Admissions Counter, Ground Floor near Point A.\n* **Examinations & Hall Tickets**: Exam Section, Administrative Block.\n* **Fee Receipts & Challans**: Accounts Section, Ground Floor.\n* **Bus Passes & Routes**: Transport In-Charge Counter.\n* **Hostels & Mess**: Resident Hostel Warden Office.\n* **Placements & Internships**: Training & Placement Officer, 1st Floor.\n* **Lost and Found**: Main Security Gate & Administrative Foyer.\n* **Medical Emergencies**: Health Center & adjacent Maharaja Ayurveda Hospital.\n* **National Anti-Ragging Helpline**: 1800-180-5522 (Toll-Free).",
+    links: [
+      { title: "Call College Office", url: "tel:+918236292601", type: "external" },
+      { title: "Anti-Ragging Helpline", url: "tel:18001805522", type: "external" }
+    ]
+  },
+
+  // ==========================================
+  // 16. APP HELP & GUIDES
+  // ==========================================
+  {
+    id: "app_help_navigation",
+    title: "How to Use MITM Navigo Corridor Wayfinding",
+    category: "app_help",
+    keywords: ["app help", "navigo", "how to use", "corridor photo", "teleport", "walkthrough", "navigation"],
+    aliases: ["how to use this app", "how does navigo work", "how to view corridor photos", "photo navigation guide"],
+    question_examples: [
+      "How do I use MITM Navigo to find classrooms and labs?",
+      "how to use app",
+      "how does navigo work",
+      "corridor navigation guide",
+      "how to share a room link",
+      "app hege use madodu",
+      "photo navigation hege nododu",
+      "app kaise use kare",
+      "ಆ್ಯಪ್ ಬಳಸುವ ವಿಧಾನ",
+      "help with app",
+      "I am a visitor trying to find my way to a specific room",
+      "What can the Ask Navigo chatbot do?"
+    ],
+    answer_short: "MITM Navigo provides 1-tap indoor visual navigation. Select your academic block, type or select any room number, and follow step-by-step corridor photographs to your destination.",
+    answer_detail: "How to Use MITM Navigo:\n1. **Select College or Block**: On the home portal, choose between Engineering, MBA, MCA, BCA, or Pharmacy.\n2. **Search or Select Room**: Type a room number (e.g., '117', '205', 'MCA Lab 1') in the search bar or pick from the floor grid.\n3. **Visual Corridor Walkthrough**: Follow step-by-step corridor photos showing every doorway and turn from the entrance staircase to the destination.\n4. **WhatsApp Sharing**: Tap the WhatsApp button to share the exact corridor route with friends or visitors.\n5. **Ask Navigo Chatbot**: Click the blue 'Ask Navigo' button anytime for instant answers.",
+    links: [
+      { title: "Start Visual Navigation", url: "index.html", type: "walkthrough" }
+    ]
+  },
+  {
+    id: "guide_first_day",
+    title: "First Day Guide for Newly Admitted Students",
+    category: "app_help",
+    keywords: ["first day", "induction", "reporting", "new student", "fresher", "welcome", "orientation"],
+    aliases: ["what to do on first day", "first day instructions", "induction program", "where to report on day 1"],
+    question_examples: [
+      "What should a first-year student do on their first day at MIT Mysore?",
+      "first day guide",
+      "where to go on day 1",
+      "induction program details",
+      "fresher reporting guide",
+      "modala dina en madbeku",
+      "first day ellige hogodu",
+      "first day kahan report kare",
+      "ಮೊದಲ ದಿನದ ಮಾರ್ಗದರ್ಶಿ",
+      "day 1 guide pls",
+      "I'm a first-year student arriving on campus for the first time",
+      "What should I bring on orientation day?"
+    ],
+    answer_short: "On your first day, arrive by 8:45 AM, report to the Administrative Block foyer near Point A for verification, collect your ID card / bus pass, and proceed to the orientation hall.",
+    answer_detail: "First Day Campus Checklist for Freshers:\n1. **Arrival**: Reach campus by 8:45 AM via college bus or city transit.\n2. **Reporting**: Head directly to the Administrative Block foyer near Point A (Admission Staircase).\n3. **Documents**: Carry original allotment order, fees challan, and 10th/12th marks cards.\n4. **Orientation**: Follow staff signs to the Belaku Auditorium or departmental lecture hall for the inaugural induction program.\n5. **Bus Pass & ID**: Get your college ID card lanyard and bus pass at the administrative desk.\n6. **Dress Code**: Wear neat formal attire with shoes.",
+    links: [
+      { title: "Navigate to Admin Block", url: "#room=114", type: "walkthrough" },
+      { title: "Navigate to Belaku Auditorium", url: "#room=Belaku", type: "walkthrough" }
+    ]
+  },
+  {
+    id: "guide_visitor_parent",
+    title: "Visitor & Parent Campus Guide",
+    category: "app_help",
+    keywords: ["visitor", "parent", "guest", "parking", "waiting room", "visiting hours"],
+    aliases: ["visitor guide", "parent guide", "where to park car", "where is principal office", "guest instructions"],
+    question_examples: [
+      "What is the visitor and parent guide for campus visits?",
+      "visitor guide",
+      "parent guide",
+      "where to park car",
+      "visiting principal office",
+      "parents elli wait madbodu",
+      "car parking elli ide",
+      "parents kahan wait kare",
+      "ಸಂದರ್ಶಕರ ಮಾರ್ಗದರ್ಶಿ",
+      "visitor info",
+      "I am a parent visiting for admission enquiry with my vehicle",
+      "Where can visitors wait and have refreshments?"
+    ],
+    answer_short: "Visitors should register at the main security gate, park at the designated vehicle lot, and proceed to the Administrative Foyer near Point A for admissions or principal appointments.",
+    answer_detail: "Visitor & Parent Information:\n* **Security Gate**: Register your vehicle and obtain a visitor pass at the main campus entrance gate.\n* **Parking**: Ample dedicated parking space for four-wheelers and two-wheelers right inside the main gate.\n* **Administrative & Principal Office**: Enter the Engineering Academic Block via Point A (Main Entrance); the Principal's chamber and reception are on the first level.\n* **Waiting & Refreshments**: Comfortable guest lounge in the administrative foyer; the campus canteen is open 8:00 AM – 6:00 PM for refreshments.",
+    links: [
+      { title: "Call Office", url: "tel:+918236292601", type: "external" },
+      { title: "Open Google Maps", url: "https://maps.google.com/?q=Maharaja+Institute+of+Technology+Mysore", type: "external" }
+    ]
+  },
+  {
+    id: "app_demo_mode",
+    title: "Navigo Demo Mode (Testing & Mock Data)",
+    category: "app_help",
+    keywords: ["demo mode", "test mode", "sample data", "mock", "testing"],
+    aliases: ["enable demo mode", "how to test missing fields", "sample room numbers"],
+    question_examples: [
+      "How do I enable demo mode in Ask Navigo?",
+      "demo mode",
+      "test mode",
+      "enable demo mode",
+      "show sample data",
+      "demo mode hege on madodu",
+      "test madodu hege",
+      "demo mode kaise on kare",
+      "ಡೆಮೊ ಮೋಡ್",
+      "demo pls",
+      "I am a developer wanting to test UI cards with sample values",
+      "how to toggle demo mode"
+    ],
+    answer_short: "Type '/demo' in the chat to toggle Demo Mode on or off. In Demo Mode, unverified fields display clearly labeled sample values like 'Room 000 (sample)' for UI testing.",
+    answer_detail: "Demo Mode Features:\n* **Activation**: Type `/demo` in the chat input and hit enter.\n* **Behavior**: Fills any unverified facts with visibly marked `[SAMPLE - DEMO MODE]` labels so you can test cards and buttons.\n* **Safety**: Sample mock data is strictly hidden during standard student and visitor mode.",
+    links: [
+      { title: "Toggle Demo Mode", url: "javascript:window.NavigoChatbot.toggleDemoMode()", type: "external" }
+    ]
+  }
+];
+
+function buildMasterKnowledgeBase() {
+  const outputPath = path.join(__dirname, 'campus-data.json');
+  const payload = {
+    metadata: {
+      institution: "Maharaja Institute of Technology Mysore (MITM)",
+      system: "MITM Navigo Zero-AI Knowledge Base",
+      version: "2.0.0",
+      total_entries: ENTRIES.length,
+      categories: [
+        "about", "contact", "courses", "admissions", "fees_scholarships",
+        "departments", "buildings_navigation", "facilities", "academics",
+        "placements", "student_life", "rules_policies", "notices_events",
+        "alumni_research", "emergency_help", "app_help"
+      ]
+    },
+    entries: ENTRIES,
+    blocks: [
+      {
+        id: "engineering",
+        name: "Engineering Academic Block",
+        aliases: ["engineering", "cse", "ise", "ece", "mech", "civil", "aids"],
+        description: "6-story central engineering block housing CSE, ISE, ECE, Mechanical, Civil, AI & DS, Dean, Principal Office, and research laboratories.",
+        departments: ["CSE", "ISE", "ECE", "Mechanical", "Civil", "AI & DS", "CSBS"],
+        link: "#college=engineering"
+      },
+      {
+        id: "mba",
+        name: "Department of MBA",
+        aliases: ["mba", "management", "belaku", "auditorium", "future skills", "board room"],
+        description: "Modern standalone management complex housing Belaku (ಬೆಳಕು) auditorium, Centre for Future Skills, Board Room 2, and faculty suites.",
+        departments: ["MBA", "Centre for Future Skills"],
+        link: "#college=mba"
+      },
+      {
+        id: "mca",
+        name: "Department of MCA",
+        aliases: ["mca", "computer applications", "mca lab", "mca lh"],
+        description: "Department of Master of Computer Applications with MCA Lecture Halls (LH 1 to 4) and specialized MCA Lab 1 computing studio.",
+        departments: ["MCA", "Software Studios"],
+        link: "#college=mca"
+      },
+      {
+        id: "bca",
+        name: "Department of BCA",
+        aliases: ["bca", "bca rooms", "bca labs"],
+        description: "Department of Bachelor of Computer Applications with 11 tech-enabled classrooms (Rooms 201 to 211) and dual software laboratories.",
+        departments: ["BCA", "Computing Studios"],
+        link: "#college=bca"
+      },
+      {
+        id: "pharmacy",
+        name: "Faculty of Pharmaceutical Sciences",
+        aliases: ["pharmacy", "pharmaceutical", "bpharm", "dpharm", "clinic", "ayurveda"],
+        description: "Comprehensive pharmaceutical sciences building with pharmaceutics, analysis, pharmacology, pharmacognosy research laboratories, and clinic.",
+        departments: ["Pharmacy", "Pharmacology", "Ayurveda Clinic"],
+        link: "#college=pharmacy"
+      }
+    ],
+    hotspots: [
+      {
+        name: "Belaku Auditorium",
+        aliases: ["belaku", "auditorium", "belku", "audi", "main stage"],
+        block: "Department of MBA",
+        location: "Ground Floor, MBA Block",
+        description: "Flagship 500+ seat air-conditioned auditorium hosting international symposiums, seminars, convocation, and cultural events.",
+        link: "#room=Belaku"
+      },
+      {
+        name: "Centre for Future Skills",
+        aliases: ["future skills", "skills centre", "incubation", "ai hub"],
+        block: "Department of MBA",
+        location: "1st Floor, MBA Block",
+        description: "Next-generation student technological innovation and incubation facility.",
+        link: "#room=Centre for Future Skills"
+      },
+      {
+        name: "MCA Lab 1",
+        aliases: ["mca lab", "mca lab 1", "computer applications lab"],
+        block: "Department of MCA",
+        location: "Department of MCA Block",
+        description: "Primary software development and database systems laboratory for MCA students.",
+        link: "#room=MCA Lab 1"
+      },
+      {
+        name: "Room 117 (ECE Lecture Hall)",
+        aliases: ["room 117", "117", "lh 117"],
+        block: "Engineering Academic Block",
+        location: "1st Floor, Main Corridor",
+        description: "Spacious interactive lecture hall equipped with digital projection systems.",
+        link: "#room=117"
+      },
+      {
+        name: "Maharaja Institute of Ayurveda Medical Sciences & Hospital",
+        aliases: ["ayurveda hospital", "clinic", "health center", "hospital", "medical room"],
+        block: "Campus Health Wing",
+        location: "Adjacent to MBA/Pharmacy Block",
+        description: "On-campus medical facility offering clinical outpatient support and emergency healthcare.",
+        link: "#room=Maharaja Institute of Ayurveda Medical Sciences & Hospital"
+      }
+    ]
+  };
+
+  fs.writeFileSync(outputPath, JSON.stringify(payload, null, 2), 'utf8');
+  console.log(`Master campus-data.json compiled successfully! Total entries: ${ENTRIES.length}`);
+}
+
+buildMasterKnowledgeBase();

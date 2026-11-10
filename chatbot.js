@@ -1,31 +1,43 @@
-// MITM Navigo Chatbot Engine
+// MITM Navigo Chatbot Engine - Version 2.0 (Complete Campus Knowledge Base & Multilingual Matcher)
 // Zero AI / LLM - Strictly local knowledge bases, rule-based intent router, and free keyless public APIs
 // Maharaja Institute of Technology Mysore (MITM)
 
 (function (window, document) {
   'use strict';
 
-  // Constants
+  // Constants & Storage Keys
   const STORAGE_KEYS = {
     HISTORY: 'navigo_chat_history',
     FEEDBACK: 'navigo_chat_feedback',
+    MISSED_QUESTIONS: 'navigo_missed_questions',
     CACHE_PREFIX: 'navigo_cache_',
-    PREFERRED_LANG: 'navigo_preferred_lang'
+    PREFERRED_LANG: 'navigo_preferred_lang',
+    DEMO_MODE: 'navigo_demo_mode'
   };
 
   const USER_AGENT_HEADER = {
-    'User-Agent': 'MITMNavigoBot/1.0 (https://mitm-room.vercel.app; navigo-bot@mitm.edu)',
-    'Api-User-Agent': 'MITMNavigoBot/1.0'
+    'User-Agent': 'MITMNavigoBot/2.0 (https://mitm-room.vercel.app; navigo-bot@mitm.edu)',
+    'Api-User-Agent': 'MITMNavigoBot/2.0'
   };
 
   const CACHE_TTL_DEFAULT = 24 * 60 * 60 * 1000; // 24 hours
   const CACHE_TTL_WEATHER = 30 * 60 * 1000;      // 30 minutes
 
-  // In-memory data stores
+  // In-memory data stores & runtime state
   let campusData = null;
   let codeSnippets = null;
+  let synonymsData = null;
   let isAwaitingResponse = false;
+  let isDemoMode = localStorage.getItem(STORAGE_KEYS.DEMO_MODE) === 'true';
   let activeLanguage = localStorage.getItem(STORAGE_KEYS.PREFERRED_LANG) || 'python';
+
+  // Conversation Context Tracking for Multi-turn Follow-ups
+  const chatContext = {
+    lastEntryId: null,
+    lastCategory: null,
+    lastTopic: null,
+    lastRoomKey: null
+  };
 
   // WMO Weather code dictionary
   const WMO_WEATHER_CODES = {
@@ -69,9 +81,22 @@
         campusData = await res.json();
       }
     } catch (e) {
-      console.warn('Campus data could not be loaded from file, using fallback cache');
+      console.warn('Campus data could not be loaded from network, using cache');
     }
     return campusData;
+  }
+
+  async function loadSynonymsData() {
+    if (synonymsData) return synonymsData;
+    try {
+      const res = await fetch('synonyms.json');
+      if (res.ok) {
+        synonymsData = await res.json();
+      }
+    } catch (e) {
+      console.warn('Synonyms dictionary could not be loaded');
+    }
+    return synonymsData;
   }
 
   async function loadCodeSnippets() {
@@ -82,7 +107,7 @@
         codeSnippets = await res.json();
       }
     } catch (e) {
-      console.warn('Code snippets could not be loaded from file');
+      console.warn('Code snippets could not be loaded');
     }
     return codeSnippets;
   }
@@ -111,14 +136,29 @@
       };
       localStorage.setItem(STORAGE_KEYS.CACHE_PREFIX + key, JSON.stringify(record));
     } catch (e) {
-      // LocalStorage quota might be full; gracefully ignore
+      // ignore quota exceeded
     }
   }
 
-  // Text normalization & fuzzy matching
+  function logMissedQuestion(query, reason = 'low_confidence') {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEYS.MISSED_QUESTIONS);
+      const list = raw ? JSON.parse(raw) : [];
+      list.push({
+        query: query,
+        reason: reason,
+        timestamp: new Date().toISOString()
+      });
+      localStorage.setItem(STORAGE_KEYS.MISSED_QUESTIONS, JSON.stringify(list.slice(-100)));
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  // Text normalization & Multilingual Tokenizer (Kannada, Kanglish, Hinglish)
   function normalizeText(str) {
     if (!str) return '';
-    return str
+    let norm = str
       .toLowerCase()
       .trim()
       .replace(/[\u2018\u2019]/g, "'")
@@ -126,6 +166,33 @@
       .replace(/^(can you please tell me|could you please tell me|please tell me|can you tell me|tell me about|tell me|what is the|what are the|can you give me|give me|show me|explain to me|explain|please|hey navigo|navigo)\s+/i, '')
       .replace(/[?!.,;:]+$/, '')
       .trim();
+
+    // Map common Kannada script keywords to canonical tokens
+    norm = norm
+      .replace(/ಕ್ಯಾಂಟೀನ್/g, 'canteen ')
+      .replace(/ಗ್ರಂಥಾಲಯ/g, 'library ')
+      .replace(/ಹಾಸ್ಟೆಲ್/g, 'hostel ')
+      .replace(/ಶುಲ್ಕ/g, 'fees ')
+      .replace(/ಬಸ್/g, 'bus ')
+      .replace(/ಪ್ರವೇಶ/g, 'admission ')
+      .replace(/ಬೆಳಕು/g, 'belaku ')
+      .replace(/ಶೌಚಾಲಯ/g, 'washroom restroom ')
+      .replace(/ಕುಡಿಯುವ ನೀರು/g, 'drinking water ')
+      .replace(/ಸಂಪರ್ಕ/g, 'contact phone ')
+      .replace(/ಮೆಟ್ಟಿಲು/g, 'staircase ')
+      .replace(/ಉದ್ಯೋಗ|ಪ್ಲೇಸ್‌ಮೆಂಟ್/g, 'placement job ')
+      .replace(/ತರಗತಿ/g, 'classroom class ')
+      .replace(/ಎಲ್ಲಿದೆ|ಯಾವಾಗ|ಹೇಗೆ/g, 'location route ');
+
+    return norm.trim();
+  }
+
+  function tokenize(str) {
+    return str
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .split(/\s+/)
+      .filter(t => t.length > 1);
   }
 
   function levenshteinDistance(s1, s2) {
@@ -160,8 +227,8 @@
   }
 
   function tokenOverlap(query, target) {
-    const qTokens = query.toLowerCase().split(/\s+/).filter(t => t.length > 2);
-    const tTokens = target.toLowerCase().split(/\s+/).filter(t => t.length > 2);
+    const qTokens = tokenize(query).filter(t => t.length > 2);
+    const tTokens = tokenize(target).filter(t => t.length > 2);
     if (!qTokens.length || !tTokens.length) return 0;
     let matches = 0;
     for (const q of qTokens) {
@@ -170,6 +237,34 @@
       }
     }
     return matches / qTokens.length;
+  }
+
+  // Synonym expansion helper
+  function expandTokensWithSynonyms(tokens, synonyms) {
+    if (!synonyms) return tokens;
+    const expanded = new Set(tokens);
+
+    for (const token of tokens) {
+      // Check Kannada and Hindi word maps
+      if (synonyms.kannada_words && synonyms.kannada_words[token]) {
+        tokenize(synonyms.kannada_words[token]).forEach(t => expanded.add(t));
+      }
+      if (synonyms.hindi_words && synonyms.hindi_words[token]) {
+        tokenize(synonyms.hindi_words[token]).forEach(t => expanded.add(t));
+      }
+
+      // Check root synonym groups
+      for (const [root, variants] of Object.entries(synonyms)) {
+        if (Array.isArray(variants)) {
+          if (variants.includes(token) || variants.some(v => similarityRatio(token, v) > 0.8)) {
+            expanded.add(root);
+            variants.forEach(v => expanded.add(v));
+          }
+        }
+      }
+    }
+
+    return Array.from(expanded);
   }
 
   // Escape HTML to prevent XSS
@@ -220,31 +315,25 @@
       </div>`;
     });
 
-    // Inline code
     html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-
-    // Bold
     html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-
-    // Italic
     html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-
-    // Markdown links (only https://)
     html = html.replace(/\[([^\]]+)\]\((https:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-
-    // Unordered lists
     html = html.replace(/(?:^|\n)[*-]\s+(.+)/g, '<li class="navigo-chat-li">$1</li>');
     html = html.replace(/(<li class="navigo-chat-li">.*<\/li>)/gs, '<ul class="navigo-chat-ul">$1</ul>');
-
-    // Paragraph breaks
     html = html.replace(/\n\n+/g, '</p><p>');
     html = html.replace(/\n/g, '<br/>');
 
     return `<p>${html}</p>`.replace(/<p><\/p>/g, '');
   }
 
-  // STEP 1: Intent Classifier
+  // STEP 1: Intent Classifier & Routing
   function classifyIntent(norm, raw) {
+    // 0. Hidden Demo Mode Command
+    if (norm === '/demo' || norm === 'demo mode' || norm === 'test mode') {
+      return { intent: 'demo_toggle' };
+    }
+
     // 1. Small talk & Greetings
     if (/^(hi|hello|hey|namaste|vanakkam|good\s*(morning|afternoon|evening)|howdy|sup)\b/i.test(norm)) {
       return { intent: 'greeting', type: 'hello' };
@@ -296,27 +385,44 @@
       return { intent: 'comparison', itemA: m[1].trim(), itemB: m[2].trim(), rawQuery: norm };
     }
 
-    // 7. Campus Knowledge Base (strictly offline, never internet)
+    // 7. Multi-Part Queries (e.g., "hostel fee and mess timing", "canteen and library timings")
+    if (/\b(and\s+(?:what\s+about|the|what\s+is|what\s+are)?|as\s+well\s+as)\b/i.test(norm) && !norm.includes('difference between')) {
+      const parts = norm.split(/\b(?:and|as well as)\b/i).map(p => p.trim()).filter(p => p.length > 2);
+      if (parts.length > 1) {
+        return { intent: 'multi_part', parts: parts, rawQuery: raw };
+      }
+    }
+
+    // 8. Follow-up query detection based on context
+    const followUpSignals = /^(what about|where is it|and the|how about|what is its|timings|fees|how to reach|contact number|where)$/i;
+    if (followUpSignals.test(norm) && chatContext.lastEntryId) {
+      return { intent: 'follow_up', query: norm, context: chatContext };
+    }
+
+    // 9. Campus Knowledge Base & Room Number Match
+    // Matches campus keywords or room IDs
     const campusKeywords = [
       'mca', 'mba', 'engineering', 'bca', 'pharmacy', 'belaku', 'auditorium',
       'corridor', 'hotspot', 'department', 'block', 'wing', 'floor', 'ground',
-      'first floor', 'second floor', 'third floor', 'principal', 'office',
-      'board room', 'placement', 'future skills', 'library', 'canteen', 'lab',
-      'lh', 'lecture hall', 'ayurveda', 'clinic', 'mitm', 'mysore campus'
+      'principal', 'office', 'board room', 'placement', 'future skills', 'library',
+      'canteen', 'lab', 'lh', 'lecture hall', 'ayurveda', 'clinic', 'mitm', 'mysore campus',
+      'admission', 'admissions', 'fee', 'fees', 'scholarship', 'hostel', 'bus', 'transport',
+      'attendance', 'cie', 'exam', 'dress code', 'rules', 'fest', 'mahotsav', 'washroom',
+      'restroom', 'toilet', 'water', 'first day', 'visitor', 'parent', 'notice', 'alumni'
     ];
     const isCampusExplicit = campusKeywords.some(kw => new RegExp(`\\b${kw}\\b`, 'i').test(norm));
     
-    // Explicit room number match: e.g. "room 117", "lab 1", or standalone 3-digit number like "117" or "205"
+    // Check room numbers
     let roomMatch = norm.match(/\b(?:room|lab|cabin|office|lh|hall|no\.?|#)\s*([0-9]{1,3}[a-z]?)\b/i);
     if (!roomMatch) {
-      roomMatch = norm.match(/\b(1[0-9]{2}|2[0-9]{2}|3[0-9]{2})\b/);
+      roomMatch = norm.match(/\b(1[0-9]{2}|2[0-9]{2}|3[0-9]{2}|4[0-9]{2}|5[0-9]{2})\b/);
     }
 
     if (isCampusExplicit || (roomMatch && roomMatch[1])) {
-      return { intent: 'campus', query: norm, roomKey: roomMatch ? roomMatch[1] : null };
+      return { intent: 'campus', query: norm, roomKey: roomMatch ? roomMatch[1] : null, rawQuery: raw };
     }
 
-    // 8. Coding Help
+    // 10. Coding Help
     const codeLangs = ['python', 'java', 'c++', 'cpp', 'javascript', 'js', 'html', 'css', 'sql', 'react'];
     const codeKeywords = [
       'code', 'program', 'snippet', 'function', 'syntax', 'algorithm', 'loop', 'array',
@@ -327,7 +433,6 @@
     const hasCodeLang = codeLangs.some(lang => new RegExp(`\\b${lang.replace('+', '\\+')}\\b`, 'i').test(norm));
     const hasCodeWord = codeKeywords.some(kw => new RegExp(`\\b${kw}\\b`, 'i').test(norm));
 
-    // Concept questions like "what is polymorphism", "what is a deadlock" go to Wikipedia (Step 2 H.4)
     const csConcepts = ['polymorphism', 'deadlock', 'encapsulation', 'inheritance', 'semaphore', 'process vs thread'];
     if (csConcepts.some(c => norm.includes(c))) {
       return { intent: 'general_knowledge', topic: norm };
@@ -337,17 +442,29 @@
       return { intent: 'coding', query: norm };
     }
 
-    // 9. General Knowledge (Wikipedia)
+    // 11. General Knowledge (Wikipedia)
     if (/^(who is|who was|what is|what are|where is|when did|history of|tell me about)\s+(.+)/i.test(norm)) {
       const m = norm.match(/^(?:who is|who was|what is|what are|where is|when did|history of|tell me about)\s+(.+)/i);
       return { intent: 'general_knowledge', topic: m[1].trim() };
     }
 
-    // Fallback intent
+    // Fallback
     return { intent: 'fallback', query: norm };
   }
 
   // STEP 2: Answer Handlers
+
+  // Demo Mode Toggle Handler
+  function handleDemoToggle() {
+    isDemoMode = !isDemoMode;
+    localStorage.setItem(STORAGE_KEYS.DEMO_MODE, isDemoMode ? 'true' : 'false');
+    return {
+      text: isDemoMode
+        ? '**[DEMO MODE ACTIVATED]**\n\nSample values such as `Room 000 (sample)` will now populate unverified fields so you can test all UI cards and buttons. Type `/demo` again to return to Normal Mode.'
+        : '**[NORMAL MODE RESTORED]**\n\nAll sample values have been cleared. Standard mode displays strictly verified facts from official project data.',
+      source: 'Navigo System'
+    };
+  }
 
   // A) Greetings & Small Talk
   function handleGreeting(intentData) {
@@ -355,35 +472,36 @@
     const chips = [
       'Where is MCA Lab 1',
       'Belaku auditorium',
-      'Weather in Mysore',
-      'Fibonacci in Python',
-      'Difference between RAM and ROM',
-      '15% of 800'
+      'College Bus Routes',
+      'Library Timings',
+      'Hostel Facilities',
+      'Admission Process',
+      'Weather in Mysore'
     ];
 
     switch (intentData.type) {
       case 'hello':
-        reply = 'Hello! I am **Navigo**, your intelligent assistant for Maharaja Institute of Technology Mysore (MITM). How can I assist your campus navigation, code learning, or calculations today?';
+        reply = 'Hello! I am **Navigo**, your dedicated campus assistant for Maharaja Institute of Technology Mysore (MITM). How can I assist your navigation, admissions, campus facilities, or coding queries today?';
         break;
       case 'identity':
-        reply = 'I am **Navigo**, built specifically for MITM Mysore students, faculty, and visitors. I work completely offline for campus navigation and code snippets, plus keyless instant lookup for weather, definitions, and encyclopedia topics.';
+        reply = 'I am **Navigo**, an offline-first assistant built for MITM students, parents, staff, and visitors. I provide instant classroom directions, departmental contacts, transport schedules, and academic guides without using any external AI models.';
         break;
       case 'help':
-        reply = 'Here is everything I can do for you:\n\n' +
-          '* **Campus Navigation**: Find departments, auditoriums, labs, and all 123 MITM rooms with one-click walkthroughs.\n' +
-          '* **Coding Snippets**: 80+ student programs in Python, Java, C, C++, SQL, and Web.\n' +
-          '* **Maths & Conversions**: Instant calculations, percentages, and unit conversions.\n' +
-          '* **Time & Weather**: Real-time Mysore weather and timezone clock.\n' +
-          '* **Definitions & Wikipedia**: Instant dictionary and encyclopedia summaries.';
+        reply = 'Here is everything I can help you with:\n\n' +
+          '* **Campus Navigation**: 123 classrooms, labs, and auditoriums with photo walkthroughs.\n' +
+          '* **Admissions & Courses**: Eligibility, documents, KCET/COMEDK, B.E., MBA, MCA, BCA, Pharmacy.\n' +
+          '* **Facilities**: Central Library, Canteen, Hostels, 100+ College Buses, Sports, Hospital.\n' +
+          '* **Student Life & Rules**: Placements, Mahotsav fest, dress code, Seva Sindhu KSRTC pass.\n' +
+          '* **Coding & Maths**: 120+ student programs, arithmetic, percentages, and conversions.';
         break;
       case 'thanks':
-        reply = 'You are very welcome! Let me know if you need any other rooms or study help.';
+        reply = 'You are very welcome! Feel free to ask if you need help finding any classroom or facility.';
         break;
       case 'bye':
-        reply = 'Goodbye! Have a productive and wonderful day at MIT Mysore!';
+        reply = 'Goodbye! Have a productive and pleasant day at Maharaja Institute of Technology Mysore!';
         break;
       default:
-        reply = 'Hello! How can I assist you with MITM campus or coding today?';
+        reply = 'Hello! How may I assist you with MIT Mysore campus information or directions today?';
     }
 
     return {
@@ -393,29 +511,56 @@
     };
   }
 
-  // B) Campus Knowledge Base (Local only, never internet)
+  // Room Card Builder
+  function buildRoomCard(roomId, roomData) {
+    const num = roomData.room_number || roomId;
+    const label = roomData.label || `Room ${num}`;
+    const floor = roomData.floor || 'Campus Building';
+    const college = roomData.college || 'Engineering';
+    const stepsCount = (roomData.access_points && roomData.access_points[0] && roomData.access_points[0].steps)
+      ? roomData.access_points[0].steps.length
+      : 'Step-by-step';
+
+    chatContext.lastRoomKey = roomId;
+    chatContext.lastTopic = label;
+
+    return {
+      text: `### **${label}**\n\n` +
+        `* **Room Number**: **${num}**\n` +
+        `* **Floor / Level**: ${floor}\n` +
+        `* **Department / Block**: ${college}\n` +
+        `* **Visual Navigation**: ${stepsCount} corridor photographs available from entrance.\n\n` +
+        `Click the blue button below to launch the photo walkthrough immediately:`,
+      actions: [
+        {
+          title: `Navigate to Room ${num}`,
+          action: `openRoom('${roomId}')`,
+          type: 'primary'
+        }
+      ],
+      chips: ['Back to Home View', 'Show Floor Restrooms', 'Nearest Staircase'],
+      source: 'MITM Navigo Visual Room Index'
+    };
+  }
+
+  // Campus Knowledge Matcher
   async function handleCampus(intentData) {
     const data = await loadCampusData();
+    const synonyms = await loadSynonymsData();
     const query = intentData.query.toLowerCase();
 
-    // 1. Check if user asked about a specific room key (e.g. "117", "205", "MCA Lab 1")
-    let targetRoom = null;
+    // 1. Check for specific room key or room card match
     const roomsMap = window.ROOMS_DATA || window.LOCOROM_DATA || null;
+    let targetRoom = null;
 
     if (roomsMap && intentData.roomKey && roomsMap[intentData.roomKey]) {
       targetRoom = { id: intentData.roomKey, data: roomsMap[intentData.roomKey] };
     } else if (roomsMap) {
-      // Search rooms data by label or room name with word boundary
       for (const [key, val] of Object.entries(roomsMap)) {
-        const label = (val.label || '').toLowerCase();
-        const num = (val.room_number || '').toLowerCase();
-        
-        // Exact number match or word match
-        const hasKeyMatch = new RegExp(`\\b${key}\\b`, 'i').test(query);
-        const hasNumMatch = num && new RegExp(`\\b${num}\\b`, 'i').test(query);
-        const hasLabelMatch = label && query.includes(label);
-
-        if (hasKeyMatch || hasNumMatch || hasLabelMatch) {
+        const hasKey = new RegExp(`\\b${key}\\b`, 'i').test(query);
+        const hasNum = val.room_number && new RegExp(`\\b${val.room_number}\\b`, 'i').test(query);
+        const hasLabel = val.label && query.includes(val.label.toLowerCase());
+        if (hasKey || hasNum || hasLabel) {
           targetRoom = { id: key, data: val };
           break;
         }
@@ -423,121 +568,201 @@
     }
 
     if (targetRoom) {
-      const r = targetRoom.data;
-      const roomNum = r.room_number || targetRoom.id;
-      const label = r.label || `Room ${roomNum}`;
-      const floor = r.floor || 'Campus Building';
-      const stepsCount = (r.access_points && r.access_points[0] && r.access_points[0].steps) ? r.access_points[0].steps.length : 'Multiple';
-
-      return {
-        text: `**${label}**\n\n` +
-          `* **Room Number**: ${roomNum}\n` +
-          `* **Floor / Level**: ${floor}\n` +
-          `* **Navigation Steps**: ${stepsCount} photographic corridor steps available.\n\n` +
-          `Click below to launch the photo step-by-step route right away.`,
-        actions: [
-          {
-            title: `Open Walkthrough ${roomNum}`,
-            action: `openRoom('${targetRoom.id}')`,
-            type: 'primary'
-          }
-        ],
-        source: 'MITM Campus Database'
-      };
+      return buildRoomCard(targetRoom.id, targetRoom.data);
     }
 
-    // 2. Search campus-data.json
-    if (data) {
-      // Search blocks
-      if (data.blocks) {
-        for (const block of data.blocks) {
-          const matchAlias = block.aliases && block.aliases.some(a => query.includes(a.toLowerCase()));
-          const matchName = query.includes(block.name.toLowerCase());
-          if (matchAlias || matchName) {
-            let deptList = '';
-            if (block.departments && block.departments.length) {
-              deptList = '\n\n**Departments & Facilities:**\n' + block.departments.map(d => `* ${d}`).join('\n');
+    // 2. Score campus-data.json structured entries
+    if (data && data.entries && data.entries.length) {
+      const qTokens = tokenize(query);
+      const expandedTokens = expandTokensWithSynonyms(qTokens, synonyms);
+
+      let bestEntry = null;
+      let highestScore = 0;
+      const candidates = [];
+
+      for (const entry of data.entries) {
+        let score = 0;
+        const entryTitle = entry.title.toLowerCase();
+        const keywords = (entry.keywords || []).map(k => k.toLowerCase());
+        const aliases = (entry.aliases || []).map(a => a.toLowerCase());
+        const examples = (entry.question_examples || []).map(e => e.toLowerCase());
+
+        // Exact title match
+        if (query.includes(entryTitle) || entryTitle.includes(query)) {
+          score += 20.0;
+        }
+
+        // Aliases match
+        for (const alias of aliases) {
+          if (query.includes(alias)) {
+            score += 15.0;
+          } else if (similarityRatio(query, alias) > 0.8) {
+            score += 12.0;
+          }
+        }
+
+        // Question examples match
+        for (const ex of examples) {
+          if (query === ex) {
+            score += 25.0;
+          } else {
+            const sim = similarityRatio(query, ex);
+            if (sim > 0.75) {
+              score += 15.0 * sim;
+            } else {
+              const overlap = tokenOverlap(query, ex);
+              if (overlap > 0.5) score += 10.0 * overlap;
             }
-            return {
-              text: `**${block.name}**\n\n${block.description}${deptList}`,
-              actions: [
-                {
-                  title: `Enter ${block.name}`,
-                  action: block.link ? `navigateUrl('${block.link}')` : `enterCollege('${block.id}')`,
-                  type: 'primary'
-                }
-              ],
-              source: 'MITM Campus Directory'
-            };
+          }
+        }
+
+        // Expanded tokens vs Keywords
+        for (const token of expandedTokens) {
+          if (keywords.includes(token)) {
+            score += 4.0;
+          }
+          if (entryTitle.includes(token)) {
+            score += 3.0;
+          }
+        }
+
+        if (score > 4.0) {
+          candidates.push({ entry, score });
+          if (score > highestScore) {
+            highestScore = score;
+            bestEntry = entry;
           }
         }
       }
 
-      // Search hotspots
-      if (data.hotspots) {
-        for (const spot of data.hotspots) {
-          const matchAlias = spot.aliases && spot.aliases.some(a => query.includes(a.toLowerCase()));
-          const matchName = query.includes(spot.name.toLowerCase());
-          if (matchAlias || matchName) {
-            return {
-              text: `**${spot.name}**\n\n` +
-                `* **Block**: ${spot.block}\n` +
-                `* **Location**: ${spot.location}\n\n` +
-                `${spot.description}`,
-              actions: [
-                {
-                  title: `Enter ${spot.block}`,
-                  action: `navigateUrl('${spot.link}')`,
-                  type: 'primary'
-                }
-              ],
-              source: 'MITM Campus Directory'
-            };
-          }
-        }
-      }
+      // Sort candidates by score
+      candidates.sort((a, b) => b.score - a.score);
 
-      // Search app features
-      if (data.app_features) {
-        for (const feat of data.app_features) {
-          const matchKeyword = feat.keywords && feat.keywords.some(k => query.includes(k.toLowerCase()));
-          const matchTitle = query.includes(feat.title.toLowerCase());
-          if (matchKeyword || matchTitle) {
-            return {
-              text: `**${feat.title}**\n\n${feat.description}`,
-              actions: [
-                {
-                  title: 'Explore Feature',
-                  action: `navigateUrl('${feat.action}')`,
-                  type: 'primary'
-                }
-              ],
-              source: 'MITM Navigo Guide'
-            };
+      if (bestEntry && highestScore >= 7.0) {
+        // Record context for follow-ups
+        chatContext.lastEntryId = bestEntry.id;
+        chatContext.lastCategory = bestEntry.category;
+        chatContext.lastTopic = bestEntry.title;
+
+        let responseText = `### **${bestEntry.title}**\n\n${bestEntry.answer_detail || bestEntry.answer_short}`;
+
+        // Inject sample label if demo mode is enabled
+        if (isDemoMode) {
+          responseText += `\n\n> *[SAMPLE - DEMO MODE: Room 000 (sample), Contact: 08236-000000 (sample)]*`;
+        }
+
+        const actions = [];
+        if (bestEntry.links && Array.isArray(bestEntry.links)) {
+          for (const l of bestEntry.links) {
+            actions.push({
+              title: l.title,
+              action: l.url.startsWith('#room=')
+                ? `openRoom('${l.url.replace('#room=', '')}')`
+                : (l.url.startsWith('#college=') ? `enterCollege('${l.url.replace('#college=', '')}')` : `navigateUrl('${l.url}')`),
+              type: l.type === 'walkthrough' ? 'primary' : 'secondary'
+            });
           }
         }
+
+        // Provide alternative suggestions if other candidates scored well
+        const suggestionChips = candidates
+          .slice(1, 4)
+          .map(c => c.entry.title.replace(/\s+\(.*?\)/g, ''));
+
+        if (!suggestionChips.length && bestEntry.question_examples) {
+          suggestionChips.push(...bestEntry.question_examples.slice(0, 3));
+        }
+
+        return {
+          text: responseText,
+          actions: actions,
+          chips: suggestionChips.slice(0, 4),
+          source: 'MITM Official Knowledge Base'
+        };
+      } else if (candidates.length > 0) {
+        // Medium confidence -> "Did you mean...?"
+        const top = candidates[0].entry;
+        const didYouMean = candidates.slice(0, 3).map(c => c.entry.title);
+
+        return {
+          text: `**${top.title}**\n\n${top.answer_short}\n\n*For further details, you can visit the Administrative Office at Point A, or choose one of the related topics below:*`,
+          chips: didYouMean,
+          source: 'MITM Knowledge Base (Best Suggestion)'
+        };
       }
     }
 
-    // Default campus response if specific item wasn't matched
+    // 3. Fallback when no campus entry matched with confidence
+    logMissedQuestion(intentData.rawQuery || intentData.query, 'campus_no_match');
+
     return {
-      text: 'MITM campus features 5 academic blocks:\n\n' +
-        '* **Engineering Academic Block**: CSE, ISE, ECE, Mechanical, Civil, AI & DS.\n' +
-        '* **Department of MBA**: Belaku auditorium, Centre for Future Skills, Board Room.\n' +
-        '* **Department of MCA**: MCA Labs, Lecture Halls LH 1 to 4.\n' +
-        '* **Department of BCA**: Coding studios and web technology labs.\n' +
-        '* **Faculty of Pharmaceutical Sciences**: Research labs and clinic.\n\n' +
-        'Which block or room would you like to explore?',
-      chips: ['Belaku auditorium', 'MCA Lab 1', 'Engineering Block', 'Room 117'],
-      source: 'MITM Campus Database'
+      text: `I could not find an exact match for **"${intentData.query}"** in the official campus database.\n\n` +
+        `For exact specific details, please inquire at the **College Administrative Office** (Ground Floor near Point A, Phone: +91 8236-292601, Email: principal@mitmysore.in).`,
+      actions: [
+        {
+          title: "Call College Office",
+          action: "window.location.href='tel:+918236292601'",
+          type: "primary"
+        },
+        {
+          title: "Report Missing Info",
+          action: `window.NavigoChatbot.reportWrongInfo('Missing Topic: ${intentData.query}', '${intentData.query}')`,
+          type: "secondary"
+        }
+      ],
+      chips: ['About MIT Mysore', 'Central Library', 'Hostel Facilities', 'College Bus Routes'],
+      source: 'MITM Office Guidance'
     };
+  }
+
+  // Multi-part Query Handler
+  async function handleMultiPart(intentData) {
+    const parts = intentData.parts || [];
+    let combinedText = `Here is information on your queries:\n\n`;
+    const combinedActions = [];
+    const combinedChips = new Set();
+
+    for (let i = 0; i < parts.length; i++) {
+      const part = parts[i];
+      const partNorm = normalizeText(part);
+      const res = await handleCampus({ query: partNorm, rawQuery: part });
+      combinedText += `#### Part ${i + 1}: ${part.toUpperCase()}\n${res.text}\n\n---\n\n`;
+      if (res.actions) res.actions.forEach(a => combinedActions.push(a));
+      if (res.chips) res.chips.forEach(c => combinedChips.add(c));
+    }
+
+    return {
+      text: combinedText.replace(/---\n\n$/, ''),
+      actions: combinedActions.slice(0, 3),
+      chips: Array.from(combinedChips).slice(0, 4),
+      source: 'MITM Multi-Query Resolver'
+    };
+  }
+
+  // Follow-up Query Handler
+  async function handleFollowUp(intentData) {
+    const context = intentData.context;
+    const data = await loadCampusData();
+
+    if (data && data.entries && context.lastEntryId) {
+      const entry = data.entries.find(e => e.id === context.lastEntryId);
+      if (entry) {
+        return {
+          text: `Regarding **${entry.title}**:\n\n${entry.answer_detail || entry.answer_short}`,
+          chips: entry.question_examples ? entry.question_examples.slice(0, 3) : null,
+          source: 'MITM Contextual Resolver'
+        };
+      }
+    }
+
+    // Default to standard campus routing if context not resolved
+    return handleCampus(intentData);
   }
 
   // C) Maths & Conversions
   function handleMath(intentData) {
     let expr = intentData.query;
 
-    // Handle percentage expressions: "X% of Y" or "X percent of Y"
     const pctMatch = expr.match(/(\d+(?:\.\d+)?)\s*(?:%|percent)\s*(?:of)\s*(\d+(?:\.\d+)?)/i);
     if (pctMatch) {
       const p = parseFloat(pctMatch[1]);
@@ -550,7 +775,6 @@
       };
     }
 
-    // Handle math.js evaluation
     try {
       let result = null;
       if (window.math && typeof window.math.evaluate === 'function') {
@@ -608,9 +832,7 @@
 
     const cacheKey = `weather_${cityName.toLowerCase()}`;
     const cached = getCached(cacheKey);
-    if (cached) {
-      return cached;
-    }
+    if (cached) return cached;
 
     try {
       const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityName)}&count=1`;
@@ -725,7 +947,6 @@
     if (cached) return cached;
 
     try {
-      // 1. Search for page
       const searchUrl = `https://en.wikipedia.org/w/rest.php/v1/search/page?q=${encodeURIComponent(topic)}&limit=3`;
       const searchRes = await fetch(searchUrl, { headers: USER_AGENT_HEADER });
       if (!searchRes.ok) return null;
@@ -776,7 +997,6 @@
       }
     }
 
-    // Fetch Wikipedia side-by-side comparison
     const [sumA, sumB] = await Promise.all([
       fetchWikiSummary(itemA),
       fetchWikiSummary(itemB)
@@ -842,7 +1062,6 @@
     const snippets = await loadCodeSnippets();
     const query = intentData.query.toLowerCase();
 
-    // Check for explicit language requested in prompt or saved preference
     const langs = [
       { name: 'python', label: 'Python' },
       { name: 'java', label: 'Java' },
@@ -866,7 +1085,6 @@
       }
     }
 
-    // 1. Search local snippet library
     if (snippets && snippets.length) {
       let bestMatch = null;
       let highestScore = 0;
@@ -877,27 +1095,24 @@
         const itemLang = item.language.toLowerCase();
         const tags = (item.tags || []).map(t => t.toLowerCase());
 
-        // Language matching bonus
         if (targetLang) {
           const isLangMatch = (itemLang === targetLang) ||
             (targetLang === 'c++' && itemLang === 'cpp') ||
             (targetLang === 'javascript' && itemLang === 'js');
 
           if (isLangMatch) {
-            score += 25.0; // Strong bonus for matching requested language!
+            score += 25.0;
           } else {
-            score -= 10.0; // Penalty if user requested a different language
+            score -= 10.0;
           }
         }
 
-        // Title match
         if (query.includes(itemTitle) || itemTitle.includes(query)) {
           score += 10.0;
         } else {
           score += tokenOverlap(query, itemTitle) * 6.0;
         }
 
-        // Tags match
         for (const tag of tags) {
           if (query.includes(tag)) {
             score += 3.0;
@@ -923,7 +1138,6 @@
       }
     }
 
-    // 2. MDN search API for web concepts (JavaScript, CSS, HTML, Web APIs)
     if (/\b(javascript|js|css|html|dom|fetch|promise|async|event|storage|canvas|api)\b/i.test(query)) {
       try {
         const mdnUrl = `https://developer.mozilla.org/api/v1/search?q=${encodeURIComponent(query)}&locale=en-US`;
@@ -942,18 +1156,15 @@
           }
         }
       } catch (e) {
-        // MDN search failed silently
+        // silent
       }
     }
 
-    // 3. Fallback: Check if it's a CS concept question and fetch Wikipedia
     const conceptTerms = ['polymorphism', 'deadlock', 'recursion', 'inheritance', 'encapsulation', 'thread', 'semaphore', 'process', 'compiler', 'cache'];
-    const isConcept = conceptTerms.some(t => query.includes(t));
-    if (isConcept) {
+    if (conceptTerms.some(t => query.includes(t))) {
       return await handleGeneralKnowledge({ topic: query });
     }
 
-    // 4. Try optional cheat.sh proxy if running on Vercel
     try {
       const cheatLang = targetLang || activeLanguage;
       const cheatUrl = `/api/cheat?q=${encodeURIComponent(cheatLang + '/' + query)}`;
@@ -969,10 +1180,9 @@
         }
       }
     } catch (e) {
-      // Cheat.sh unavailable, proceed to fallback
+      // silent
     }
 
-    // Coding fallback
     return {
       text: `I could not find an exact snippet for "${intentData.query}". Try specifying a language like "fibonacci in python", "reverse a string in java", or "sql inner join".`,
       chips: ['Fibonacci in Python', 'Reverse a String in Java', 'SQL inner join example', 'Binary search in C++'],
@@ -980,18 +1190,25 @@
     };
   }
 
-  // I) Last Fallback
+  // I) Fallback
   function handleFallback(intentData) {
     const q = intentData.query || '';
     const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(q)}`;
 
+    logMissedQuestion(q, 'fallback_unhandled');
+
     return {
-      text: `I couldn't find an exact answer for that. Try rephrasing, or search the web directly.`,
+      text: `I couldn't find an exact answer for that in the local MITM knowledge base. Try rephrasing, or search the web directly.`,
       actions: [
         {
           title: 'Search on Google',
           action: `window.open('${googleUrl}', '_blank', 'noopener,noreferrer')`,
           type: 'primary'
+        },
+        {
+          title: 'Report Missing Info',
+          action: `window.NavigoChatbot.reportWrongInfo('Unanswered Query', '${q}')`,
+          type: 'secondary'
         }
       ],
       chips: [
@@ -1017,8 +1234,14 @@
     const intentData = classifyIntent(norm, rawText);
 
     switch (intentData.intent) {
+      case 'demo_toggle':
+        return handleDemoToggle();
       case 'greeting':
         return handleGreeting(intentData);
+      case 'multi_part':
+        return await handleMultiPart(intentData);
+      case 'follow_up':
+        return await handleFollowUp(intentData);
       case 'campus':
         return await handleCampus(intentData);
       case 'math':
@@ -1050,8 +1273,8 @@
       this.bindEvents();
       this.renderHistory();
 
-      // Pre-load data in background
       loadCampusData();
+      loadSynonymsData();
       loadCodeSnippets();
     }
 
@@ -1112,7 +1335,9 @@
           </div>
 
           <!-- Message Stream -->
-          <div id="navigo-messages" class="navigo-messages-container" role="log" aria-live="polite"></div>
+          <div id="navigo-messages" class="navigo-messages-container" role="log" aria-live="polite">
+            <div id="navigo-messages-end" class="navigo-messages-end" aria-hidden="true"></div>
+          </div>
 
           <!-- Typing Indicator Bubble -->
           <div id="navigo-typing" class="navigo-typing-row" style="display: none;">
@@ -1133,7 +1358,7 @@
                 id="navigo-input"
                 class="navigo-chat-input"
                 type="text"
-                placeholder="Ask about MITM rooms, coding, math..."
+                placeholder="Ask about classrooms, bus, fees, library..."
                 autocomplete="off"
                 aria-label="Ask a question"
               />
@@ -1155,6 +1380,7 @@
       const closeBtn = document.getElementById('navigo-close-btn');
       const newChatBtn = document.getElementById('navigo-new-chat-btn');
       const chatForm = document.getElementById('navigo-chat-form');
+      const chatInput = document.getElementById('navigo-input');
 
       if (fabBtn) {
         fabBtn.addEventListener('click', () => this.toggleWindow());
@@ -1166,6 +1392,12 @@
 
       if (newChatBtn) {
         newChatBtn.addEventListener('click', () => this.clearHistory());
+      }
+
+      if (chatInput) {
+        chatInput.addEventListener('focus', () => {
+          setTimeout(() => this.scrollToBottom(true), 250);
+        });
       }
 
       if (chatForm) {
@@ -1212,6 +1444,11 @@
     clearHistory() {
       this.history = [];
       localStorage.removeItem(STORAGE_KEYS.HISTORY);
+      chatContext.lastEntryId = null;
+      chatContext.lastCategory = null;
+      chatContext.lastTopic = null;
+      chatContext.lastRoomKey = null;
+
       const messagesContainer = document.getElementById('navigo-messages');
       if (messagesContainer) messagesContainer.innerHTML = '';
       this.renderWelcome();
@@ -1220,8 +1457,8 @@
     renderWelcome() {
       this.appendBotMessage({
         text: 'Hello! I am **Navigo**, your instant assistant for Maharaja Institute of Technology Mysore (MITM).\n\n' +
-          'Ask me where any classroom or lab is, get code snippets, weather, math calculations, or definitions.',
-        chips: ['Where is MCA Lab 1', 'Belaku auditorium', 'Weather in Mysore', 'Fibonacci in Python', '15% of 800'],
+          'Ask where any classroom or lab is, get bus routes, admission info, library timings, fees, or coding snippets.',
+        chips: ['Where is MCA Lab 1', 'Belaku auditorium', 'College Bus Routes', 'Central Library', 'Hostel Facilities'],
         source: 'Navigo Local'
       }, false);
     }
@@ -1229,7 +1466,7 @@
     renderHistory() {
       const messagesContainer = document.getElementById('navigo-messages');
       if (!messagesContainer) return;
-      messagesContainer.innerHTML = '';
+      messagesContainer.innerHTML = '<div id="navigo-messages-end" class="navigo-messages-end" aria-hidden="true"></div>';
 
       if (!this.history || !this.history.length) {
         this.renderWelcome();
@@ -1258,7 +1495,12 @@
           <div class="navigo-msg-time">${timeStr || this.getCurrentTimeStr()}</div>
         </div>
       `;
-      container.appendChild(row);
+      const endAnchor = document.getElementById('navigo-messages-end');
+      if (endAnchor) {
+        container.insertBefore(row, endAnchor);
+      } else {
+        container.appendChild(row);
+      }
       this.scrollToBottom();
     }
 
@@ -1308,13 +1550,23 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M10 15v4a3 3 0 003 3l4-9V2H5.72a2 2 0 00-2 1.7l-1.38 9a2 2 0 002 2.3zm7-13h3a2 2 0 012 2v7a2 2 0 01-2 2h-3"/>
                 </svg>
               </button>
+              <button class="navigo-feedback-btn navigo-report-btn" onclick="window.NavigoChatbot.reportWrongInfo('${escapeHtml(msgData.source || 'General')}', '${escapeHtml(msgData.text ? msgData.text.slice(0, 40) : '')}')" title="Report incorrect information" aria-label="Report info">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+              </button>
             </div>
             <span class="navigo-msg-time">${timeStr || this.getCurrentTimeStr()}</span>
           </div>
         </div>
       `;
 
-      container.appendChild(row);
+      const endAnchor = document.getElementById('navigo-messages-end');
+      if (endAnchor) {
+        container.insertBefore(row, endAnchor);
+      } else {
+        container.appendChild(row);
+      }
       this.renderChips(msgData.chips);
       this.scrollToBottom();
 
@@ -1372,13 +1624,18 @@
       }
     }
 
-    scrollToBottom() {
-      const container = document.getElementById('navigo-messages');
-      if (container) {
-        setTimeout(() => {
-          container.scrollTop = container.scrollHeight;
-        }, 50);
-      }
+    scrollToBottom(smooth = true) {
+      setTimeout(() => {
+        const endAnchor = document.getElementById('navigo-messages-end');
+        if (endAnchor && typeof endAnchor.scrollIntoView === 'function') {
+          endAnchor.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'end' });
+        } else {
+          const container = document.getElementById('navigo-messages');
+          if (container) {
+            container.scrollTop = container.scrollHeight;
+          }
+        }
+      }, 40);
     }
 
     getCurrentTimeStr() {
@@ -1398,7 +1655,7 @@
       isAwaitingResponse = true;
       this.setTyping(true);
 
-      await new Promise(r => setTimeout(r, 150));
+      await new Promise(r => setTimeout(r, 120));
 
       try {
         const result = await routeMessage(cleanText);
@@ -1469,6 +1726,15 @@
     }
   }
 
+  // Report Wrong Information mailto trigger
+  function reportWrongInfo(topic, snippet) {
+    const subject = encodeURIComponent(`MITM Navigo Information Correction: ${topic}`);
+    const body = encodeURIComponent(
+      `Hello MITM Team,\n\nI noticed an issue with the following information in MITM Navigo:\nTopic: ${topic}\nDetails: ${snippet}\n\nSuggested correction:\n[Please provide the correct details here]\n\nThank you.`
+    );
+    window.location.href = `mailto:principal@mitmysore.in?subject=${subject}&body=${body}`;
+  }
+
   // Copy code handler
   function copyCode(btnEl) {
     if (!btnEl) return;
@@ -1492,7 +1758,6 @@
     const style = document.createElement('style');
     style.id = 'navigo-chat-styles';
     style.textContent = `
-      /* MITM Navigo Chatbot UI Styles - Blue #0B57D0, pill shapes, floating window & bottom sheet */
       :root {
         --navigo-primary: #0B57D0;
         --navigo-primary-hover: #0842a0;
@@ -1506,7 +1771,6 @@
         --navigo-shadow: 0 8px 24px rgba(11, 87, 208, 0.15), 0 2px 6px rgba(0,0,0,0.08);
       }
 
-      /* Floating Action Button */
       .navigo-fab-btn {
         position: fixed;
         bottom: 24px;
@@ -1536,14 +1800,14 @@
         transform: scale(0.96);
       }
 
-      /* Chat Window - Desktop Floating Window */
       .navigo-chat-window {
         position: fixed;
         bottom: 84px;
         right: 24px;
-        width: 380px;
-        height: 600px;
-        max-height: calc(100vh - 110px);
+        width: 390px;
+        height: 610px;
+        max-height: calc(100vh - 100px);
+        max-height: calc(100dvh - 100px);
         background: var(--navigo-surface);
         border-radius: 20px;
         box-shadow: var(--navigo-shadow);
@@ -1562,7 +1826,6 @@
         to { opacity: 1; transform: translateY(0); }
       }
 
-      /* Mobile Bottom Sheet (<768px) */
       @media (max-width: 768px) {
         .navigo-fab-btn {
           bottom: 16px;
@@ -1574,8 +1837,9 @@
           right: 0;
           left: 0;
           width: 100%;
-          height: 85vh;
-          max-height: 85vh;
+          height: 90vh;
+          height: 90dvh;
+          max-height: 100dvh;
           border-radius: 24px 24px 0 0;
           border-bottom: none;
           animation: navigoBottomSheet 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1587,7 +1851,6 @@
         to { transform: translateY(0); }
       }
 
-      /* Header */
       .navigo-chat-header {
         display: flex;
         align-items: center;
@@ -1595,6 +1858,7 @@
         padding: 14px 18px;
         background: #ffffff;
         border-bottom: 1px solid var(--navigo-border);
+        flex-shrink: 0;
       }
       .navigo-chat-header-title {
         display: flex;
@@ -1645,11 +1909,12 @@
         color: var(--navigo-text);
       }
 
-      /* Message Stream */
       .navigo-messages-container {
-        flex: 1;
+        flex: 1 1 auto;
         overflow-y: auto;
-        padding: 16px;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+        padding: 16px 16px 24px 16px;
         display: flex;
         flex-direction: column;
         gap: 14px;
@@ -1657,10 +1922,19 @@
         scroll-behavior: smooth;
       }
 
+      .navigo-messages-end {
+        height: 1px;
+        width: 100%;
+        flex-shrink: 0;
+        pointer-events: none;
+        margin: 0;
+        padding: 0;
+      }
+
       .navigo-msg-row {
         display: flex;
         gap: 8px;
-        max-width: 85%;
+        max-width: 86%;
       }
       .navigo-msg-user {
         align-self: flex-end;
@@ -1707,6 +1981,16 @@
         border: 1px solid #e3e8ee;
       }
 
+      .navigo-msg-content h3 {
+        font-size: 14.5px;
+        margin: 0 0 6px 0;
+        color: #0B57D0;
+      }
+      .navigo-msg-content h4 {
+        font-size: 13.5px;
+        margin: 6px 0 4px 0;
+        color: #333;
+      }
       .navigo-msg-content p {
         margin: 0 0 8px 0;
       }
@@ -1725,13 +2009,7 @@
         text-decoration: underline;
         font-weight: 500;
       }
-      .navigo-msg-thumb img {
-        max-width: 100%;
-        border-radius: 8px;
-        margin-bottom: 8px;
-      }
 
-      /* Code Blocks */
       .navigo-code-wrapper {
         margin: 8px 0;
         background: #1e1e1e;
@@ -1768,7 +2046,6 @@
         color: #f8f8f2;
       }
 
-      /* Actions & Pills */
       .navigo-msg-actions {
         display: flex;
         flex-wrap: wrap;
@@ -1800,12 +2077,11 @@
         background-color: #d2e3fc;
       }
 
-      /* Message Footer & Feedback */
       .navigo-msg-footer {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-top: 6px;
+        margin-top: 8px;
         font-size: 10.5px;
         color: var(--navigo-muted);
         gap: 8px;
@@ -1813,6 +2089,7 @@
       .navigo-feedback-btns {
         display: flex;
         gap: 2px;
+        align-items: center;
       }
       .navigo-feedback-btn {
         background: transparent;
@@ -1828,12 +2105,14 @@
       .navigo-feedback-active {
         color: #0B57D0 !important;
       }
+      .navigo-report-btn:hover {
+        color: #d93025 !important;
+      }
       .navigo-msg-time {
         font-size: 10px;
         color: var(--navigo-muted);
       }
 
-      /* Suggestion Chips */
       .navigo-chips-container {
         display: flex;
         overflow-x: auto;
@@ -1842,6 +2121,7 @@
         background: #ffffff;
         border-top: 1px solid var(--navigo-border);
         scrollbar-width: none;
+        flex-shrink: 0;
       }
       .navigo-chips-container::-webkit-scrollbar {
         display: none;
@@ -1862,10 +2142,10 @@
         background: #d3e3fd;
       }
 
-      /* Typing Bubble */
       .navigo-typing-row {
         padding: 0 16px 8px 16px;
         background-color: var(--navigo-bg);
+        flex-shrink: 0;
       }
       .navigo-typing-bubble {
         background: var(--navigo-bubble-bot);
@@ -1890,11 +2170,12 @@
         40% { transform: scale(1); }
       }
 
-      /* Footer Form */
       .navigo-chat-footer {
         padding: 10px 14px;
+        padding-bottom: max(10px, env(safe-area-inset-bottom, 10px));
         background: #ffffff;
         border-top: 1px solid var(--navigo-border);
+        flex-shrink: 0;
       }
       .navigo-chat-form {
         display: flex;
@@ -1952,10 +2233,11 @@
     routeMessage: routeMessage,
     classifyIntent: classifyIntent,
     sendFeedback: sendFeedback,
+    reportWrongInfo: reportWrongInfo,
+    toggleDemoMode: handleDemoToggle,
     copyCode: copyCode
   };
 
-  // Auto-initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => window.NavigoChatbot.init());
   } else {
