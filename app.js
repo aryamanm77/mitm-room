@@ -195,7 +195,7 @@ function buildWhatsAppShareUrl(roomKey, apIndex = 0) {
 
   const directionsSentence = route?.info || room.info || room.landmark || "Follow walkthrough photos.";
   const message = [
-    `*MIT Maps — ${titleLabel}*`,
+    `*MITM Navigo — ${titleLabel}*`,
     `College: ${room.college || "Maharaja Institute of Technology Mysore"}`,
     `Floor: ${room.floor}${room.dept ? " · " + room.dept : ""}`,
     `Route (${route ? route.label : "Main Route"}): ${directionsSentence}`,
@@ -1336,7 +1336,7 @@ function bindEvents() {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: `MIT Maps — ${roomName}`,
+          title: `MITM Navigo — ${roomName}`,
           text: `Direct walkthrough for ${roomName} (${room?.college || "MIT Mysore"}):`,
           url: fullUrl
         });
