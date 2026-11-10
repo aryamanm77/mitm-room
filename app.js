@@ -361,6 +361,18 @@ function showPortalView(pushHistory = true) {
   if (walkthroughScreen) walkthroughScreen.style.display = "none";
   if (topPortalBtn) topPortalBtn.style.display = "none";
 
+  const viewWings = document.getElementById("viewModeWings");
+  const viewDepts = document.getElementById("viewModeDepartments");
+  const viewHotspots = document.getElementById("viewModeHotspots");
+  if (viewWings) viewWings.style.display = "block";
+  if (viewDepts) viewDepts.style.display = "none";
+  if (viewHotspots) viewHotspots.style.display = "none";
+
+  document.querySelectorAll("[data-nav-mode]").forEach(b => {
+    const m = b.getAttribute("data-nav-mode");
+    b.classList.toggle("active", m === "wings" || m === "blocks");
+  });
+
   window.scrollTo({ top: 0, behavior: "smooth" });
 
   if (pushHistory) {
@@ -1424,7 +1436,15 @@ function bindEvents() {
   });
 
   // 11. Browser Back / Forward (popstate)
+  let isNavReady = false;
+  setTimeout(() => { isNavReady = true; }, 600);
+
   window.addEventListener("popstate", (e) => {
+    // Ignore any synthetic popstate event fired by browser during tab restoration / page load
+    if (!isNavReady) {
+      showPortalView(false);
+      return;
+    }
     if (e.state && e.state.view === "walkthrough" && e.state.room) {
       const matchedRoomKey = findRoomKey(e.state.room);
       if (matchedRoomKey) {

@@ -19,18 +19,16 @@
   <meta name="apple-mobile-web-app-title" content="MITM Navigo" />
   <link rel="apple-touch-icon" href="icon-192.png" />
 
-  <!-- Highlight.js CSS theme for code blocks -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
   <script>
-    // Guaranteed Instant First View: Always load College Selection Page first on open
+    // Guaranteed Instant First View: Always reset history state to portal view on fresh open/reload
     (function() {
       try {
+        var p = new URLSearchParams(window.location.search);
         var isReload = Boolean(
           (window.performance && performance.getEntriesByType && performance.getEntriesByType('navigation')[0] && performance.getEntriesByType('navigation')[0].type === 'reload') ||
           (window.performance && window.performance.navigation && window.performance.navigation.type === 1)
         );
-        if (isReload && window.location.search) {
+        if (isReload || !p.get('room')) {
           window.history.replaceState({ view: 'portal' }, '', window.location.pathname);
         }
       } catch (e) {}
@@ -2956,14 +2954,7 @@
 
   <div class="toast-host" id="toastHost"></div>
 
-  <script src="rooms_data.js?v=20261110-15"></script>
-  <script type="module" src="app.js?v=20261110-15"></script>
-
-  <!-- Highlight.js for Chatbot code syntax highlighting -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <!-- Math.js for Chatbot expressions & unit conversions -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.1/math.min.js"></script>
-  <!-- MITM Navigo Chatbot Engine -->
-  <script src="chatbot.js?v=20261110-15"></script>
+  <script src="rooms_data.js?v=20261110-16"></script>
+  <script type="module" src="app.js?v=20261110-16"></script>
 </body>
 </html>
