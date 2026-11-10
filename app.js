@@ -43,17 +43,43 @@ function escapeHtml(str) {
 }
 
 
-// Fast Preloading of Room Route Media into Browser Cache
+// High-Performance Prioritized Preloading of Corridor Media
 function preloadRoomMedia(room) {
   if (!room) return;
   const routes = getRoutesForRoom(room);
-  routes.forEach(route => {
-    (route.photos || []).forEach(src => {
+  const currentRoute = routes[state.activeApIndex] || routes[0];
+  const photos = currentRoute.photos || [];
+  if (photos.length === 0) return;
+
+  // 1. Immediately preload the first 2 photos with highest priority
+  photos.slice(0, 2).forEach(src => {
+    if (!/\.(mp4|webm)$/i.test(src)) {
       const img = new Image();
       img.decoding = "async";
+      img.fetchPriority = "high";
       img.src = resolveMediaUrl(src);
-    });
+    }
   });
+
+  // 2. Progressively preload remaining photos in background idle time
+  const remaining = photos.slice(2);
+  if (remaining.length > 0) {
+    const queue = [...remaining];
+    const loadNext = () => {
+      if (queue.length === 0) return;
+      const file = queue.shift();
+      if (!/\.(mp4|webm)$/i.test(file)) {
+        const nextImg = new Image();
+        nextImg.decoding = "async";
+        nextImg.onload = () => setTimeout(loadNext, 40);
+        nextImg.onerror = () => setTimeout(loadNext, 40);
+        nextImg.src = resolveMediaUrl(file);
+      } else {
+        setTimeout(loadNext, 40);
+      }
+    };
+    setTimeout(loadNext, 120);
+  }
 }
 
 function friendlyStairName(rawName) {
@@ -751,74 +777,29 @@ function renderActiveStepPhoto() {
     }
   }
 
-  // Media Display with smooth crossfade
+  // Instantaneous Media Display
   if (stage) {
     if (isVideo) {
       stage.innerHTML = `<video src="${url}" controls autoplay muted loop playsinline class="wt-main-media is-ready" onerror="if(!this.dataset.cdn){this.dataset.cdn='1';this.src='${cdnUrl}';}"></video>`;
     } else {
-      // Remove any pending transitioning images from rapid clicking
-      stage.querySelectorAll(".wt-main-media.is-transitioning").forEach(el => el.remove());
-
-      const existingMedia = stage.querySelector(".wt-main-media:not(.is-old)");
-      if (!existingMedia) {
-        const img = document.createElement("img");
-        img.className = "wt-main-media is-ready";
-        img.alt = `Step ${idx + 1} towards Room ${room.name}`;
-        img.decoding = "async";
-        img.referrerPolicy = "no-referrer";
-        img.src = url;
-        img.onerror = function() {
-          if (!this.dataset.cdn) {
-            this.dataset.cdn = "1";
-            this.src = cdnUrl;
-          }
-        };
-        stage.appendChild(img);
-      } else if (existingMedia.tagName === "IMG" && (existingMedia.getAttribute("src") === url || existingMedia.getAttribute("src") === cdnUrl)) {
-        existingMedia.className = "wt-main-media is-ready";
+      let mainImg = stage.querySelector("img.wt-main-media");
+      if (!mainImg) {
+        stage.innerHTML = `
+          <img
+            src="${url}"
+            alt="Step ${idx + 1} towards Room ${room.name}"
+            class="wt-main-media is-ready"
+            decoding="async"
+            fetchpriority="high"
+            referrerpolicy="no-referrer"
+            onerror="if(!this.dataset.cdn){this.dataset.cdn='1';this.src='${cdnUrl}';}"
+          />
+        `;
       } else {
-        const newImg = document.createElement("img");
-        newImg.className = "wt-main-media is-transitioning";
-        newImg.alt = `Step ${idx + 1} towards Room ${room.name}`;
-        newImg.decoding = "async";
-        newImg.referrerPolicy = "no-referrer";
-
-        let transitioned = false;
-        const swapNow = () => {
-          if (transitioned) return;
-          transitioned = true;
-          stage.querySelectorAll(".wt-main-media").forEach(m => {
-            if (m !== newImg) m.classList.add("is-old");
-          });
-          newImg.classList.remove("is-transitioning");
-          newImg.classList.add("is-ready");
-
-          setTimeout(() => {
-            stage.querySelectorAll(".wt-main-media.is-old").forEach(m => {
-              if (m.parentNode === stage) stage.removeChild(m);
-            });
-          }, 250);
-        };
-
-        newImg.onload = swapNow;
-        newImg.onerror = function() {
-          if (!this.dataset.cdn) {
-            this.dataset.cdn = "1";
-            this.src = cdnUrl;
-          } else {
-            swapNow();
-          }
-        };
-
-        newImg.src = url;
-        stage.appendChild(newImg);
-
-        if (newImg.complete) {
-          if (typeof newImg.decode === "function") {
-            newImg.decode().then(swapNow).catch(swapNow);
-          } else {
-            swapNow();
-          }
+        mainImg.alt = `Step ${idx + 1} towards Room ${room.name}`;
+        mainImg.fetchPriority = "high";
+        if (mainImg.getAttribute("src") !== url && mainImg.getAttribute("src") !== cdnUrl) {
+          mainImg.src = url;
         }
       }
     }
@@ -868,10 +849,11 @@ function renderActiveStepPhoto() {
     const next1 = photos[(idx + 1) % total];
     const next2 = photos[(idx + 2) % total];
     const prev1 = photos[(idx - 1 + total) % total];
-    [next1, next2, prev1].forEach(file => {
+    [next1, next2, prev1].forEach((file, priorityIdx) => {
       if (file && !/\.(mp4|webm)$/i.test(file)) {
         const pre = new Image();
         pre.decoding = "async";
+        pre.fetchPriority = priorityIdx === 0 ? "high" : "low";
         pre.src = resolveMediaUrl(file);
       }
     });
@@ -965,37 +947,11 @@ function stopAutoPlay(reachedDestination = false) {
   }
 }
 
-function toggleFullscreen() {
-  const viewerBox = document.querySelector(".viewer-box");
-  const fsBtn = document.getElementById("wtFullscreenBtn");
-  if (!viewerBox) return;
-
-  const isFs = viewerBox.classList.contains("is-fullscreen") || document.fullscreenElement != null;
-
-  if (isFs) {
-    exitFullscreenViewer();
-  } else {
-    viewerBox.classList.add("is-fullscreen");
-    if (viewerBox.requestFullscreen) {
-      viewerBox.requestFullscreen().catch(() => {});
-    }
-    if (fsBtn) {
-      fsBtn.title = "Exit Fullscreen View (F / Esc)";
-      fsBtn.innerHTML = `<svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 14h6m0 0v6m0-6-7 7m17-11h-6m0 0V4m0 6 7-7m-7 17h6m0 0v-6m0 6-7-7M3 7h6m0 0V1m0 6-7-7"/></svg>`;
-    }
-  }
-}
-
 function exitFullscreenViewer() {
   const viewerBox = document.querySelector(".viewer-box");
-  const fsBtn = document.getElementById("wtFullscreenBtn");
   if (viewerBox) viewerBox.classList.remove("is-fullscreen");
   if (document.fullscreenElement && document.exitFullscreen) {
     document.exitFullscreen().catch(() => {});
-  }
-  if (fsBtn) {
-    fsBtn.title = "Toggle Fullscreen View (F)";
-    fsBtn.innerHTML = `<svg class="icon-svg" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>`;
   }
 }
 
@@ -1329,15 +1285,6 @@ function bindEvents() {
     stepPhoto(1);
   });
   document.getElementById("wtAutoPlayBtn")?.addEventListener("click", toggleAutoPlay);
-  document.getElementById("wtFullscreenBtn")?.addEventListener("click", toggleFullscreen);
-
-  const stageWrap = document.getElementById("wtPhotoStageWrap");
-  if (stageWrap) {
-    stageWrap.addEventListener("dblclick", (e) => {
-      if (e.target.closest(".stage-arrow")) return;
-      toggleFullscreen();
-    });
-  }
 
   document.getElementById("wtShareBtn")?.addEventListener("click", () => {
     if (!state.selectedRoomKey) return;
@@ -1378,7 +1325,6 @@ function bindEvents() {
 
     if (e.key === "/") {
       e.preventDefault();
-      exitFullscreenViewer();
       if (state.selectedRoomKey) showHomeView(true);
       searchInput?.focus();
     } else if (state.selectedRoomKey) {
@@ -1393,30 +1339,9 @@ function bindEvents() {
       } else if (e.key === " " || e.key === "Spacebar") {
         e.preventDefault();
         toggleAutoPlay();
-      } else if (e.key === "f" || e.key === "F") {
-        e.preventDefault();
-        toggleFullscreen();
       } else if (e.key === "Escape") {
-        const viewerBox = document.querySelector(".viewer-box");
-        if (viewerBox && (viewerBox.classList.contains("is-fullscreen") || document.fullscreenElement)) {
-          e.preventDefault();
-          exitFullscreenViewer();
-          return;
-        }
         if (state.activeCollege) enterCollege(state.activeCollege);
         else showPortalView();
-      }
-    }
-  });
-
-  document.addEventListener("fullscreenchange", () => {
-    const viewerBox = document.querySelector(".viewer-box");
-    const fsBtn = document.getElementById("wtFullscreenBtn");
-    if (!document.fullscreenElement && viewerBox) {
-      viewerBox.classList.remove("is-fullscreen");
-      if (fsBtn) {
-        fsBtn.title = "Toggle Fullscreen View (F)";
-        fsBtn.innerHTML = `<svg class="icon-svg" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>`;
       }
     }
   });
