@@ -1,9 +1,9 @@
-const CACHE_NAME = "navigo-v38";
+const CACHE_NAME = "navigo-v40";
 const PRECACHE_ASSETS = [
   "./",
   "index.html",
-  "app.js?v=20261110-16",
-  "rooms_data.js?v=20261110-16",
+  "app.js?v=20261110-18",
+  "rooms_data.js?v=20261110-18",
   "rooms_data.json",
   "logo.png",
   "whatsapp.png",
@@ -13,11 +13,11 @@ const PRECACHE_ASSETS = [
 ];
 
 self.addEventListener("install", (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches
       .open(CACHE_NAME)
       .then((cache) => cache.addAll(PRECACHE_ASSETS))
-      .then(() => self.skipWaiting())
   );
 });
 

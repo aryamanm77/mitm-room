@@ -20,18 +20,29 @@
   <link rel="apple-touch-icon" href="icon-192.png" />
 
   <script>
-    // Guaranteed Instant First View: Always reset history state to portal view on fresh open/reload
+    // Guaranteed Instant First View:
+    // Always resets navigation history state to portal view so the app launches on the College Selection Portal.
     (function() {
       try {
-        var p = new URLSearchParams(window.location.search);
-        var isReload = Boolean(
-          (window.performance && performance.getEntriesByType && performance.getEntriesByType('navigation')[0] && performance.getEntriesByType('navigation')[0].type === 'reload') ||
-          (window.performance && window.performance.navigation && window.performance.navigation.type === 1)
-        );
-        if (isReload || !p.get('room')) {
+        if (window.history && window.history.replaceState) {
           window.history.replaceState({ view: 'portal' }, '', window.location.pathname);
         }
       } catch (e) {}
+
+      // Force update Service Worker and reload on controller change
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(regs) {
+          for (var reg of regs) {
+            reg.update();
+          }
+        }).catch(function() {});
+        navigator.serviceWorker.addEventListener('controllerchange', function() {
+          if (!window.__swRefreshed) {
+            window.__swRefreshed = true;
+            window.location.reload();
+          }
+        });
+      }
     })();
   </script>
 
@@ -1492,6 +1503,93 @@
       padding: 36px 20px 80px 20px;
     }
 
+    /* Shared Route Banner */
+    .shared-room-banner {
+      background: linear-gradient(135deg, rgba(11, 87, 208, 0.08) 0%, rgba(11, 87, 208, 0.03) 100%);
+      border: 1px solid rgba(11, 87, 208, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 12px 16px;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 16px rgba(11, 87, 208, 0.08);
+    }
+
+    .shared-banner-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .shared-banner-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .shared-badge {
+      display: inline-flex;
+      align-items: center;
+      background: var(--color-primary);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+    }
+
+    .shared-room-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .shared-banner-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-shared-launch {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--color-primary);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-full);
+      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .btn-shared-launch:hover {
+      background: var(--color-primary-dark);
+    }
+
+    .btn-shared-dismiss {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: transparent;
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-full);
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    .btn-shared-dismiss:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+
     /* Terminal Brand Hero */
     .navigo-hero {
       text-align: center;
@@ -2309,6 +2407,25 @@
        SCREEN 0: CAMPUS WAYFINDING HUB (MITM NAVIGO)
        ========================================================================== -->
   <section id="collegePortalScreen" class="navigo-portal-wrap">
+    <!-- Shared Route Fast-Access Banner -->
+    <aside id="sharedRoomBanner" class="shared-room-banner" style="display: none;" aria-label="Shared Destination">
+      <div class="shared-banner-content">
+        <div class="shared-banner-info">
+          <span class="shared-badge">Shared Destination</span>
+          <span class="shared-room-title" id="sharedRoomName"></span>
+        </div>
+        <div class="shared-banner-actions">
+          <button type="button" class="btn-shared-launch" id="sharedRoomOpenBtn">
+            <span>Open Walkthrough</span>
+            <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+          <button type="button" class="btn-shared-dismiss" id="sharedRoomDismissBtn" aria-label="Dismiss banner" title="Dismiss">
+            <svg class="icon-svg" viewBox="0 0 24 24" style="width:16px;height:16px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+
     <!-- Hub Hero -->
     <div class="navigo-hero">
       <h1 class="navigo-title">Explore MIT Mysore Campus</h1>
@@ -2954,7 +3071,7 @@
 
   <div class="toast-host" id="toastHost"></div>
 
-  <script src="rooms_data.js?v=20261110-16"></script>
-  <script type="module" src="app.js?v=20261110-16"></script>
+  <script src="rooms_data.js?v=20261110-18"></script>
+  <script type="module" src="app.js?v=20261110-18"></script>
 </body>
 </html>

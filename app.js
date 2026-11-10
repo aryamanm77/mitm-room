@@ -291,31 +291,44 @@ async function initApp() {
   const urlAp = parseInt(params.get("ap") || "0", 10);
   const matchedRoomKey = findRoomKey(rawRoom);
 
-  const isReload = Boolean(
-    (window.performance && performance.getEntriesByType && performance.getEntriesByType("navigation")[0]?.type === "reload") ||
-    (window.performance && window.performance.navigation && window.performance.navigation.type === 1)
-  );
+  // 1. Guaranteed Instant First View: ALWAYS present College Selection Portal first on every launch
+  showPortalView(false);
 
-  const alreadyConsumed = rawRoom ? sessionStorage.getItem("navigo_share_consumed_" + rawRoom) : null;
-
-  if (matchedRoomKey && !isReload && !alreadyConsumed) {
-    // Only direct shared room link opens walkthrough directly on the first navigation
-    sessionStorage.setItem("navigo_share_consumed_" + matchedRoomKey, "1");
-    const room = state.rooms[matchedRoomKey];
-    const collegeKeys = getCollegeKeysForRoom(room);
-    if (rawCollege && collegeKeys.includes(rawCollege.toLowerCase())) {
-      state.activeCollege = rawCollege.toLowerCase();
-    } else {
-      state.activeCollege = collegeKeys[0] || "engineering";
-    }
-    openRoom(matchedRoomKey, false, isNaN(urlAp) ? 0 : urlAp);
-    // Normalize address bar immediately so reopening or refreshing the app ALWAYS presents College Selection Portal
-    window.history.replaceState({ view: "portal" }, "", window.location.pathname);
-  } else {
-    // Fresh app launch / open / restore: Always present the College Selection Portal first
-    showPortalView(false);
-    if (window.location.search) {
+  // 2. Normalize address bar immediately so closing, reopening, or refreshing the app
+  // NEVER restores a previously viewed room or bypasses the College Selection Portal
+  if (window.location.search || window.location.hash) {
+    try {
       window.history.replaceState({ view: "portal" }, "", window.location.pathname);
+    } catch (e) {}
+  }
+
+  // 3. If launched from a shared room link, show a prominent banner on the College Selection Portal
+  // giving the user the choice to jump to the room walkthrough without auto-navigating away
+  if (matchedRoomKey) {
+    const room = state.rooms[matchedRoomKey];
+    if (room) {
+      const collegeKeys = getCollegeKeysForRoom(room);
+      state.activeCollege = collegeKeys[0] || "engineering";
+      const roomLabel = room.name.length <= 5 ? `Room ${room.name}` : room.name;
+
+      const banner = document.getElementById("sharedRoomBanner");
+      const nameEl = document.getElementById("sharedRoomName");
+      const openBtn = document.getElementById("sharedRoomOpenBtn");
+      const dismissBtn = document.getElementById("sharedRoomDismissBtn");
+
+      if (banner && nameEl && openBtn) {
+        nameEl.textContent = `${roomLabel} (${room.college || "Campus"})`;
+        banner.style.display = "block";
+        openBtn.onclick = () => {
+          banner.style.display = "none";
+          openRoom(matchedRoomKey, true, isNaN(urlAp) ? 0 : urlAp);
+        };
+        if (dismissBtn) {
+          dismissBtn.onclick = () => {
+            banner.style.display = "none";
+          };
+        }
+      }
     }
   }
 }
