@@ -866,7 +866,7 @@
     .auto-play-btn {
       background-color: var(--bg-elevated);
       border: 1px solid var(--border-strong);
-      border-radius: 7px;
+      border-radius: 8px;
       padding: 7px 14px;
       font-size: 13px;
       font-weight: 600;
@@ -875,12 +875,46 @@
       display: inline-flex;
       align-items: center;
       gap: 7px;
+      transition: all 180ms ease;
     }
 
     .auto-play-btn.playing {
       background-color: var(--accent);
       border-color: var(--accent);
       color: #ffffff;
+      box-shadow: 0 0 16px rgba(14, 165, 233, 0.4);
+      animation: autoWalkPulse 1.8s infinite;
+    }
+
+    @keyframes autoWalkPulse {
+      0%, 100% { box-shadow: 0 0 12px rgba(14, 165, 233, 0.35); }
+      50% { box-shadow: 0 0 20px rgba(14, 165, 233, 0.7); }
+    }
+
+    .auto-play-btn.reached {
+      background-color: #10b981;
+      border-color: #10b981;
+      color: #ffffff;
+    }
+
+    .btn-icon-square {
+      background-color: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: all 160ms ease;
+    }
+
+    .btn-icon-square:hover {
+      color: var(--text-primary);
+      border-color: var(--accent);
+      background-color: var(--bg-surface);
     }
 
     .progress-bar-track {
@@ -893,32 +927,139 @@
       height: 100%;
       width: 0%;
       background-color: var(--accent);
-      transition: width 160ms ease;
+      transition: width 240ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .photo-stage-wrap {
       position: relative;
-      height: 500px;
-      background-color: var(--bg-stage);
+      height: clamp(380px, 60vh, 580px);
+      background: radial-gradient(circle at center, #131b2e 0%, #060911 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .photo-stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
     }
 
-    .photo-stage {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
     .wt-main-media {
       max-width: 100%;
       max-height: 100%;
+      width: auto;
+      height: auto;
       object-fit: contain;
       user-select: none;
+      border-radius: 6px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      transition: opacity 220ms ease, transform 240ms ease;
+      will-change: opacity, transform;
+    }
+
+    .wt-main-media.is-transitioning {
+      opacity: 0;
+      transform: scale(0.985);
+    }
+
+    .wt-main-media.is-ready {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .wt-main-media.is-old {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .stage-overlay-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 12;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #f1f5f9;
+      pointer-events: none;
+      transition: all 200ms ease;
+    }
+
+    .stage-overlay-badge.destination {
+      background: rgba(16, 185, 129, 0.9);
+      border-color: rgba(52, 211, 153, 0.6);
+      color: #ffffff;
+      font-weight: 700;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.4);
+    }
+
+    .step-tag-dest {
+      color: #10b981;
+      font-weight: 700;
+    }
+
+    .step-tag-walk {
+      color: var(--text-secondary);
+    }
+
+    .step-nav-btn.arrived-btn {
+      background-color: #10b981;
+      border-color: #10b981;
+      color: #ffffff;
+    }
+
+    /* Fullscreen Mode */
+    .viewer-box.is-fullscreen {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      border-radius: 0;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      background-color: #050811;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .viewer-box.is-fullscreen .photo-stage-wrap {
+      flex: 1;
+      height: auto;
+      max-height: none;
+      border-radius: 0;
+      background: #000000;
+    }
+
+    .viewer-box.is-fullscreen .wt-main-media {
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .viewer-box.is-fullscreen .viewer-top-bar {
+      background-color: #0a0f1d;
+      border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .viewer-box.is-fullscreen .viewer-bottom-controls {
+      background-color: #0a0f1d;
+      border-top-color: rgba(255, 255, 255, 0.1);
+      padding: 12px 18px;
     }
 
     .stage-arrow {
@@ -936,10 +1077,12 @@
       align-items: center;
       justify-content: center;
       z-index: 15;
+      transition: all 160ms ease;
     }
 
     .stage-arrow:hover {
       background-color: var(--accent);
+      transform: translateY(-50%) scale(1.08);
     }
 
     .stage-arrow.left { left: 14px; }
@@ -1058,7 +1201,7 @@
         gap: 14px;
       }
       .photo-stage-wrap {
-        height: 360px;
+        height: clamp(340px, 64vh, 500px);
       }
     }
 
@@ -2587,11 +2730,12 @@
         <span class="step-counter tabular-nums" id="wtStepCounter">Step 1 of 9</span>
 
         <div class="viewer-top-right">
-          
-
-          <button type="button" class="auto-play-btn" id="wtAutoPlayBtn">
+          <button type="button" class="auto-play-btn" id="wtAutoPlayBtn" title="Play through route photos automatically">
             <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             <span id="wtAutoPlayLabel">Auto-Walk</span>
+          </button>
+          <button type="button" class="btn-icon-square" id="wtFullscreenBtn" title="Toggle Fullscreen View (F)" aria-label="Toggle Fullscreen View">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
           </button>
         </div>
       </div>
@@ -2601,8 +2745,9 @@
       </div>
 
       <!-- Photo Stage -->
-      <div class="photo-stage-wrap" id="wtPhotoStageWrap">
+      <div class="photo-stage-wrap" id="wtPhotoStageWrap" title="Double-click to toggle fullscreen">
         <div class="photo-stage" id="wtPhotoStage"></div>
+        <div class="stage-overlay-badge" id="wtStageBadge" style="display: none;" aria-live="polite"></div>
         <button type="button" class="stage-arrow left" id="wtStagePrev" aria-label="Previous photo">
           <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
@@ -2630,7 +2775,7 @@
 
   <div class="toast-host" id="toastHost"></div>
 
-  <script src="rooms_data.js?v=20261110-01"></script>
-  <script type="module" src="app.js?v=20261110-01"></script>
+  <script src="rooms_data.js?v=20261110-02"></script>
+  <script type="module" src="app.js?v=20261110-02"></script>
 </body>
 </html>

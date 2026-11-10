@@ -275,6 +275,7 @@ function showToast(msg) {
 // ============================================================================
 function showPortalView(pushHistory = true) {
   setTimeout(init3DTiltAndSpotlight, 50);
+  exitFullscreenViewer();
   stopAutoPlay();
   state.selectedRoomKey = null;
   state.activeCollege = null;
@@ -313,6 +314,7 @@ function enterCollegeWithFloor(collegeKey, floorKey) {
 }
 
 function enterCollege(collegeKey, pushHistory = true) {
+  exitFullscreenViewer();
   stopAutoPlay();
   state.selectedRoomKey = null;
   state.activeCollege = collegeKey || "engineering";
@@ -653,6 +655,12 @@ function renderWalkthroughView() {
   document.getElementById("wtDirectionText").textContent =
     currentRoute.info || room.info || room.landmark || `Follow the photos step-by-step to reach Room ${room.name}.`;
 
+  const stage = document.getElementById("wtPhotoStage");
+  if (stage && stage.dataset.roomKey !== state.selectedRoomKey) {
+    stage.dataset.roomKey = state.selectedRoomKey;
+    stage.innerHTML = "";
+  }
+
   renderActiveStepPhoto();
 }
 
@@ -669,17 +677,20 @@ function renderActiveStepPhoto() {
   const thumbsRow = document.getElementById("wtThumbsRow");
   const prevBtn = document.getElementById("wtPrevBtn");
   const nextBtn = document.getElementById("wtNextBtn");
+  const stageBadge = document.getElementById("wtStageBadge");
+  const autoPlayBtn = document.getElementById("wtAutoPlayBtn");
 
   if (photos.length === 0) {
-    stepCounter.textContent = "Directions available";
-    progressFill.style.width = "100%";
-    stage.innerHTML = `<div class="no-photo-msg">Written directions are shown above. Follow the signs to reach Room ${escapeHtml(room.name)}.</div>`;
-    thumbsRow.innerHTML = "";
+    if (stepCounter) stepCounter.textContent = "Directions available";
+    if (progressFill) progressFill.style.width = "100%";
+    if (stage) stage.innerHTML = `<div class="no-photo-msg">Written directions are shown above. Follow the signs to reach Room ${escapeHtml(room.name)}.</div>`;
+    if (thumbsRow) thumbsRow.innerHTML = "";
+    if (stageBadge) stageBadge.style.display = "none";
     return;
   }
 
-  if (state.activePhotoIndex >= photos.length) state.activePhotoIndex = 0;
-  if (state.activePhotoIndex < 0) state.activePhotoIndex = photos.length - 1;
+  if (state.activePhotoIndex >= photos.length) state.activePhotoIndex = photos.length - 1;
+  if (state.activePhotoIndex < 0) state.activePhotoIndex = 0;
 
   const idx = state.activePhotoIndex;
   const total = photos.length;
@@ -687,89 +698,183 @@ function renderActiveStepPhoto() {
   const url = resolveMediaUrl(currentFile);
   const cdnUrl = resolveFallbackCdnUrl(currentFile);
   const isVideo = /\.(mp4|webm)$/i.test(currentFile);
+  const isAtDestination = idx === total - 1;
 
-  const stepTag = idx === 0 ? "Start" : idx === total - 1 ? "Destination Reached" : `Corridor Step`;
-  stepCounter.textContent = `Step ${idx + 1} of ${total} · ${stepTag}`;
-  progressFill.style.width = `${((idx + 1) / total) * 100}%`;
+  // Counter & Progress
+  const stepTag = idx === 0 ? "Start" : isAtDestination ? "Destination Reached" : "Walking Step";
+  if (stepCounter) {
+    stepCounter.innerHTML = `Step <span class="step-num">${idx + 1}</span> of ${total} &middot; <span class="${isAtDestination ? "step-tag-dest" : "step-tag-walk"}">${stepTag}</span>`;
+  }
+  if (progressFill) {
+    progressFill.style.width = `${((idx + 1) / total) * 100}%`;
+  }
 
-  if (prevBtn) prevBtn.disabled = total <= 1;
-  if (nextBtn) nextBtn.disabled = total <= 1;
-
-  if (isVideo) {
-    stage.innerHTML = `<video src="${url}" controls autoplay muted loop playsinline class="wt-main-media" onerror="if(!this.dataset.cdn){this.dataset.cdn='1';this.src='${cdnUrl}';}"></video>`;
-  } else {
-    let mainImg = stage.querySelector("img.wt-main-media");
-    if (!mainImg) {
-      stage.innerHTML = `
-        <img
-          src="${url}"
-          alt="Step ${idx + 1} towards Room ${escapeHtml(room.name)}"
-          class="wt-main-media"
-          decoding="async"
-          referrerpolicy="no-referrer"
-          onerror="if(!this.dataset.cdn){this.dataset.cdn='1';this.src='${cdnUrl}';}"
-        />
-      `;
+  // Floating Stage Badge
+  if (stageBadge) {
+    stageBadge.style.display = "inline-flex";
+    if (isAtDestination) {
+      stageBadge.className = "stage-overlay-badge destination";
+      stageBadge.innerHTML = `<svg class="icon-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> <span>Arrived at ${escapeHtml(room.name)}</span>`;
+    } else if (idx === 0) {
+      stageBadge.className = "stage-overlay-badge";
+      stageBadge.innerHTML = `<svg class="icon-svg" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg> <span>Starting Point &middot; Step 1 of ${total}</span>`;
     } else {
-      mainImg.src = url;
-      mainImg.alt = `Step ${idx + 1} towards Room ${escapeHtml(room.name)}`;
+      stageBadge.className = "stage-overlay-badge";
+      stageBadge.innerHTML = `<svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg> <span>Follow Route &middot; Step ${idx + 1} of ${total}</span>`;
     }
   }
 
-  // Render or update clickable step thumbnails without destroying DOM
-  const currentKeyAp = `${state.selectedRoomKey}-${state.activeApIndex}`;
-  if (thumbsRow.dataset.roomAp !== currentKeyAp) {
-    thumbsRow.dataset.roomAp = currentKeyAp;
-    thumbsRow.innerHTML = photos.map((p, i) => {
-      const u = resolveMediaUrl(p);
-      const cUrl = resolveFallbackCdnUrl(p);
-      const isVid = /\.(mp4|webm)$/i.test(p);
-      return `
-        <button type="button" class="step-thumb-btn ${i === idx ? "active" : ""}" data-step-idx="${i}">
-          ${isVid
-            ? `<span class="vid-label">Video</span>`
-            : `<img src="${u}" alt="Step ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(!this.dataset.cdn){this.dataset.cdn='1';this.src='${cUrl}';}" />`
+  // Prev / Next button states
+  if (prevBtn) {
+    prevBtn.disabled = idx === 0;
+  }
+  if (nextBtn) {
+    if (isAtDestination) {
+      nextBtn.classList.add("arrived-btn");
+      nextBtn.innerHTML = `<span>Arrived at Destination</span> <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>`;
+    } else {
+      nextBtn.classList.remove("arrived-btn");
+      nextBtn.innerHTML = `<span>Next Step</span> <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>`;
+    }
+    nextBtn.disabled = false;
+  }
+
+  // Auto-play button state when not playing
+  if (autoPlayBtn && !state.isPlaying) {
+    if (isAtDestination) {
+      autoPlayBtn.classList.add("reached");
+      autoPlayBtn.innerHTML = `<svg class="icon-svg" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg><span id="wtAutoPlayLabel">Replay Walk</span>`;
+    } else {
+      autoPlayBtn.classList.remove("reached");
+      autoPlayBtn.innerHTML = `<svg class="icon-svg" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg><span id="wtAutoPlayLabel">Auto-Walk</span>`;
+    }
+  }
+
+  // Media Display with smooth crossfade
+  if (stage) {
+    if (isVideo) {
+      stage.innerHTML = `<video src="${url}" controls autoplay muted loop playsinline class="wt-main-media is-ready" onerror="if(!this.dataset.cdn){this.dataset.cdn='1';this.src='${cdnUrl}';}"></video>`;
+    } else {
+      const existingMedia = stage.querySelector(".wt-main-media:not(.is-old)");
+      if (!existingMedia) {
+        const img = document.createElement("img");
+        img.className = "wt-main-media is-ready";
+        img.alt = `Step ${idx + 1} towards Room ${room.name}`;
+        img.decoding = "async";
+        img.referrerPolicy = "no-referrer";
+        img.src = url;
+        img.onerror = function() {
+          if (!this.dataset.cdn) {
+            this.dataset.cdn = "1";
+            this.src = cdnUrl;
           }
-          <span class="step-thumb-num tabular-nums">${i + 1}</span>
-        </button>
-      `;
-    }).join("");
+        };
+        stage.appendChild(img);
+      } else if (existingMedia.tagName === "IMG" && (existingMedia.getAttribute("src") === url || existingMedia.getAttribute("src") === cdnUrl)) {
+        existingMedia.className = "wt-main-media is-ready";
+      } else {
+        const newImg = document.createElement("img");
+        newImg.className = "wt-main-media is-transitioning";
+        newImg.alt = `Step ${idx + 1} towards Room ${room.name}`;
+        newImg.decoding = "async";
+        newImg.referrerPolicy = "no-referrer";
 
-    thumbsRow.querySelectorAll("[data-step-idx]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        state.activePhotoIndex = parseInt(btn.getAttribute("data-step-idx"), 10);
-        renderActiveStepPhoto();
+        let transitioned = false;
+        const swapNow = () => {
+          if (transitioned) return;
+          transitioned = true;
+          stage.querySelectorAll(".wt-main-media").forEach(m => {
+            if (m !== newImg) m.classList.add("is-old");
+          });
+          newImg.classList.remove("is-transitioning");
+          newImg.classList.add("is-ready");
+
+          setTimeout(() => {
+            stage.querySelectorAll(".wt-main-media.is-old").forEach(m => {
+              if (m.parentNode === stage) stage.removeChild(m);
+            });
+          }, 250);
+        };
+
+        newImg.onload = swapNow;
+        newImg.onerror = function() {
+          if (!this.dataset.cdn) {
+            this.dataset.cdn = "1";
+            this.src = cdnUrl;
+          } else {
+            swapNow();
+          }
+        };
+
+        newImg.src = url;
+        stage.appendChild(newImg);
+
+        if (newImg.complete) {
+          if (typeof newImg.decode === "function") {
+            newImg.decode().then(swapNow).catch(swapNow);
+          } else {
+            swapNow();
+          }
+        }
+      }
+    }
+  }
+
+  // Thumbnails row management
+  const currentKeyAp = `${state.selectedRoomKey}-${state.activeApIndex}`;
+  if (thumbsRow) {
+    if (thumbsRow.dataset.roomAp !== currentKeyAp) {
+      thumbsRow.dataset.roomAp = currentKeyAp;
+      thumbsRow.innerHTML = photos.map((p, i) => {
+        const u = resolveMediaUrl(p);
+        const cUrl = resolveFallbackCdnUrl(p);
+        const isVid = /\.(mp4|webm)$/i.test(p);
+        return `
+          <button type="button" class="step-thumb-btn ${i === idx ? "active" : ""}" data-step-idx="${i}" aria-label="Go to step ${i + 1}">
+            ${isVid
+              ? `<span class="vid-label">Video</span>`
+              : `<img src="${u}" alt="Step ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(!this.dataset.cdn){this.dataset.cdn='1';this.src='${cUrl}';}" />`
+            }
+            <span class="step-thumb-num tabular-nums">${i + 1}</span>
+          </button>
+        `;
+      }).join("");
+
+      thumbsRow.querySelectorAll("[data-step-idx]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          stopAutoPlay();
+          state.activePhotoIndex = parseInt(btn.getAttribute("data-step-idx"), 10);
+          renderActiveStepPhoto();
+        });
       });
-    });
-  } else {
-    thumbsRow.querySelectorAll(".step-thumb-btn").forEach((btn, i) => {
-      btn.classList.toggle("active", i === idx);
-    });
+    } else {
+      thumbsRow.querySelectorAll(".step-thumb-btn").forEach((btn, i) => {
+        btn.classList.toggle("active", i === idx);
+      });
+    }
+
+    const activeThumb = thumbsRow.querySelector(".step-thumb-btn.active");
+    if (activeThumb) {
+      activeThumb.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }
   }
 
-  const activeThumb = thumbsRow.querySelector(".step-thumb-btn.active");
-  if (activeThumb) {
-    activeThumb.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-  }
-
-  // Preload adjacent steps immediately
+  // Preload ahead and behind for instantaneous rendering
   if (total > 1) {
-    const nextFile = photos[(idx + 1) % total];
-    const prevFile = photos[(idx - 1 + total) % total];
-    if (nextFile) {
-      const p1 = new Image();
-      p1.decoding = "async";
-      p1.src = resolveMediaUrl(nextFile);
-    }
-    if (prevFile) {
-      const p2 = new Image();
-      p2.decoding = "async";
-      p2.src = resolveMediaUrl(prevFile);
-    }
+    const next1 = photos[(idx + 1) % total];
+    const next2 = photos[(idx + 2) % total];
+    const prev1 = photos[(idx - 1 + total) % total];
+    [next1, next2, prev1].forEach(file => {
+      if (file && !/\.(mp4|webm)$/i.test(file)) {
+        const pre = new Image();
+        pre.decoding = "async";
+        pre.src = resolveMediaUrl(file);
+      }
+    });
   }
 }
 
-function stepPhoto(delta) {
+function stepPhoto(delta, isAutoWalk = false) {
   const room = state.rooms[state.selectedRoomKey];
   if (!room) return;
   const routes = getRoutesForRoom(room);
@@ -777,7 +882,28 @@ function stepPhoto(delta) {
   const photos = currentRoute.photos || [];
   if (photos.length <= 1) return;
 
-  state.activePhotoIndex = (state.activePhotoIndex + delta + photos.length) % photos.length;
+  const total = photos.length;
+  const target = state.activePhotoIndex + delta;
+
+  if (isAutoWalk) {
+    if (target >= total - 1) {
+      state.activePhotoIndex = total - 1;
+      stopAutoPlay(true);
+      renderActiveStepPhoto();
+      showToast(`Arrived at Room ${room.name}!`);
+      return;
+    }
+    state.activePhotoIndex = Math.max(0, target);
+  } else {
+    if (target >= total) {
+      state.activePhotoIndex = 0;
+    } else if (target < 0) {
+      state.activePhotoIndex = total - 1;
+    } else {
+      state.activePhotoIndex = target;
+    }
+  }
+
   renderActiveStepPhoto();
 }
 
@@ -796,27 +922,77 @@ function startAutoPlay() {
   const photos = (routes[state.activeApIndex] || routes[0]).photos || [];
   if (photos.length <= 1) return;
 
+  // If already at the destination, restart from beginning
+  if (state.activePhotoIndex >= photos.length - 1) {
+    state.activePhotoIndex = 0;
+    renderActiveStepPhoto();
+  }
+
   state.isPlaying = true;
   const playBtn = document.getElementById("wtAutoPlayBtn");
-  const playLabel = document.getElementById("wtAutoPlayLabel");
-  if (playBtn) playBtn.classList.add("playing");
-  if (playLabel) playLabel.textContent = "Pause";
+  if (playBtn) {
+    playBtn.classList.remove("reached");
+    playBtn.classList.add("playing");
+    playBtn.innerHTML = `<svg class="icon-svg" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg><span id="wtAutoPlayLabel">Pause Walk</span>`;
+  }
 
+  if (state.playTimer) clearInterval(state.playTimer);
   state.playTimer = setInterval(() => {
-    stepPhoto(1);
-  }, 1800);
+    stepPhoto(1, true);
+  }, 2400);
 }
 
-function stopAutoPlay() {
+function stopAutoPlay(reachedDestination = false) {
   state.isPlaying = false;
   if (state.playTimer) {
     clearInterval(state.playTimer);
     state.playTimer = null;
   }
   const playBtn = document.getElementById("wtAutoPlayBtn");
-  const playLabel = document.getElementById("wtAutoPlayLabel");
-  if (playBtn) playBtn.classList.remove("playing");
-  if (playLabel) playLabel.textContent = "Auto-Walk";
+  if (playBtn) {
+    playBtn.classList.remove("playing");
+    if (reachedDestination) {
+      playBtn.classList.add("reached");
+      playBtn.innerHTML = `<svg class="icon-svg" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg><span id="wtAutoPlayLabel">Replay Walk</span>`;
+    } else {
+      playBtn.classList.remove("reached");
+      playBtn.innerHTML = `<svg class="icon-svg" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg><span id="wtAutoPlayLabel">Auto-Walk</span>`;
+    }
+  }
+}
+
+function toggleFullscreen() {
+  const viewerBox = document.querySelector(".viewer-box");
+  const fsBtn = document.getElementById("wtFullscreenBtn");
+  if (!viewerBox) return;
+
+  const isFs = viewerBox.classList.contains("is-fullscreen") || document.fullscreenElement != null;
+
+  if (isFs) {
+    exitFullscreenViewer();
+  } else {
+    viewerBox.classList.add("is-fullscreen");
+    if (viewerBox.requestFullscreen) {
+      viewerBox.requestFullscreen().catch(() => {});
+    }
+    if (fsBtn) {
+      fsBtn.title = "Exit Fullscreen View (F / Esc)";
+      fsBtn.innerHTML = `<svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 14h6m0 0v6m0-6-7 7m17-11h-6m0 0V4m0 6 7-7m-7 17h6m0 0v-6m0 6-7-7M3 7h6m0 0V1m0 6-7-7"/></svg>`;
+    }
+  }
+}
+
+function exitFullscreenViewer() {
+  const viewerBox = document.querySelector(".viewer-box");
+  const fsBtn = document.getElementById("wtFullscreenBtn");
+  if (viewerBox) viewerBox.classList.remove("is-fullscreen");
+  if (document.fullscreenElement && document.exitFullscreen) {
+    document.exitFullscreen().catch(() => {});
+  }
+  if (fsBtn) {
+    fsBtn.title = "Toggle Fullscreen View (F)";
+    fsBtn.innerHTML = `<svg class="icon-svg" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>`;
+  }
 }
 
 function syncFloorNavButtons() {
@@ -1124,6 +1300,7 @@ function bindEvents() {
 
   // 8. Walkthrough Screen Controls
   document.getElementById("wtBackBtn")?.addEventListener("click", () => {
+    exitFullscreenViewer();
     if (state.activeCollege) {
       enterCollege(state.activeCollege);
     } else {
@@ -1131,11 +1308,32 @@ function bindEvents() {
     }
   });
 
-  document.getElementById("wtPrevBtn")?.addEventListener("click", () => stepPhoto(-1));
-  document.getElementById("wtNextBtn")?.addEventListener("click", () => stepPhoto(1));
-  document.getElementById("wtStagePrev")?.addEventListener("click", () => stepPhoto(-1));
-  document.getElementById("wtStageNext")?.addEventListener("click", () => stepPhoto(1));
+  document.getElementById("wtPrevBtn")?.addEventListener("click", () => {
+    stopAutoPlay();
+    stepPhoto(-1);
+  });
+  document.getElementById("wtNextBtn")?.addEventListener("click", () => {
+    stopAutoPlay();
+    stepPhoto(1);
+  });
+  document.getElementById("wtStagePrev")?.addEventListener("click", () => {
+    stopAutoPlay();
+    stepPhoto(-1);
+  });
+  document.getElementById("wtStageNext")?.addEventListener("click", () => {
+    stopAutoPlay();
+    stepPhoto(1);
+  });
   document.getElementById("wtAutoPlayBtn")?.addEventListener("click", toggleAutoPlay);
+  document.getElementById("wtFullscreenBtn")?.addEventListener("click", toggleFullscreen);
+
+  const stageWrap = document.getElementById("wtPhotoStageWrap");
+  if (stageWrap) {
+    stageWrap.addEventListener("dblclick", (e) => {
+      if (e.target.closest(".stage-arrow")) return;
+      toggleFullscreen();
+    });
+  }
 
   document.getElementById("wtShareBtn")?.addEventListener("click", () => {
     if (!state.selectedRoomKey) return;
@@ -1152,13 +1350,17 @@ function bindEvents() {
   const stage = document.getElementById("wtPhotoStageWrap");
   if (stage) {
     let startX = 0;
+    let startY = 0;
     stage.addEventListener("touchstart", (e) => {
       startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
     }, { passive: true });
     stage.addEventListener("touchend", (e) => {
-      const diff = e.changedTouches[0].clientX - startX;
-      if (Math.abs(diff) > 40) {
-        stepPhoto(diff > 0 ? -1 : 1);
+      const diffX = e.changedTouches[0].clientX - startX;
+      const diffY = e.changedTouches[0].clientY - startY;
+      if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+        stopAutoPlay();
+        stepPhoto(diffX > 0 ? -1 : 1);
       }
     }, { passive: true });
   }
@@ -1172,21 +1374,45 @@ function bindEvents() {
 
     if (e.key === "/") {
       e.preventDefault();
+      exitFullscreenViewer();
       if (state.selectedRoomKey) showHomeView(true);
       searchInput?.focus();
     } else if (state.selectedRoomKey) {
       if (e.key === "ArrowLeft") {
         e.preventDefault();
+        stopAutoPlay();
         stepPhoto(-1);
       } else if (e.key === "ArrowRight") {
         e.preventDefault();
+        stopAutoPlay();
         stepPhoto(1);
-      } else if (e.key === " ") {
+      } else if (e.key === " " || e.key === "Spacebar") {
         e.preventDefault();
         toggleAutoPlay();
+      } else if (e.key === "f" || e.key === "F") {
+        e.preventDefault();
+        toggleFullscreen();
       } else if (e.key === "Escape") {
+        const viewerBox = document.querySelector(".viewer-box");
+        if (viewerBox && (viewerBox.classList.contains("is-fullscreen") || document.fullscreenElement)) {
+          e.preventDefault();
+          exitFullscreenViewer();
+          return;
+        }
         if (state.activeCollege) enterCollege(state.activeCollege);
         else showPortalView();
+      }
+    }
+  });
+
+  document.addEventListener("fullscreenchange", () => {
+    const viewerBox = document.querySelector(".viewer-box");
+    const fsBtn = document.getElementById("wtFullscreenBtn");
+    if (!document.fullscreenElement && viewerBox) {
+      viewerBox.classList.remove("is-fullscreen");
+      if (fsBtn) {
+        fsBtn.title = "Toggle Fullscreen View (F)";
+        fsBtn.innerHTML = `<svg class="icon-svg" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>`;
       }
     }
   });
