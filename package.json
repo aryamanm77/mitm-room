@@ -1,9 +1,11 @@
 {
   "name": "mitm-navigo",
-  "version": "1.2.0",
-  "description": "MITM Navigo • Indoor Campus Navigation [Maharaja Institute of Technology Mysore]",
+  "version": "1.3.0",
+  "type": "module",
+  "description": "MITM Navigo - Indoor Campus Navigation [Maharaja Institute of Technology Mysore]",
   "scripts": {
     "start": "npx serve .",
+    "test": "node test_chatbot.js",
     "build": "echo 'Build complete'"
   },
   "keywords": [

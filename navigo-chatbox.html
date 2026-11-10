@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Ask Navigo - MITM Mysore Campus Assistant</title>
+  
+  <!-- Highlight.js for code syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+  <!-- Math.js for calculations and unit conversions -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.1/math.min.js"></script>
+
+  <style>
+    :root {
+      --primary: #0B57D0;
+      --primary-hover: #0842a0;
+      --bg: #f8fafd;
+      --card-bg: #ffffff;
+      --text: #1f1f1f;
+      --muted: #5e5e5e;
+      --border: #e0e2ec;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 0;
+    }
+
+    .brand-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .header-links a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      background: #fff;
+      transition: background-color 0.2s;
+    }
+
+    .header-links a:hover {
+      background: #f0f4f9;
+    }
+
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      width: 100%;
+    }
+
+    .hero-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 36px 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .hero-card h1 {
+      font-size: 28px;
+      color: var(--primary);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .hero-card p {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 24px auto;
+    }
+
+    .open-chat-hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background-color: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 9999px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(11, 87, 208, 0.35);
+      transition: background-color 0.2s, transform 0.15s;
+    }
+
+    .open-chat-hero-btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .feature-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .sample-pill {
+      display: inline-block;
+      background: #f0f4f9;
+      color: var(--primary);
+      border: 1px solid #d3e3fd;
+      border-radius: 9999px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      margin: 4px 4px 4px 0;
+      transition: background-color 0.15s;
+    }
+
+    .sample-pill:hover {
+      background: #d3e3fd;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      background: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand">
+      <div class="brand-logo">M</div>
+      <div>
+        <h2 class="brand-title">MITM Navigo</h2>
+        <p class="brand-sub">Maharaja Institute of Technology Mysore</p>
+      </div>
+    </a>
+    <div class="header-links">
+      <a href="index.html">Campus Walkthroughs</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-card">
+      <h1>Ask Navigo Campus Assistant</h1>
+      <p>Instant, offline-first assistant for MITM students, faculty, and visitors. Find campus classrooms, view coding snippets, perform calculations, check local weather, and look up encyclopedic definitions.</p>
+      <button class="open-chat-hero-btn" onclick="window.navigoChatInstance && window.navigoChatInstance.openWindow()">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+        </svg>
+        <span>Open Ask Navigo</span>
+      </button>
+    </section>
+
+    <section class="feature-grid">
+      <div class="feature-card">
+        <h3>Campus Navigation</h3>
+        <p>123 rooms, auditoriums, and labs with photographic corridor walkthroughs.</p>
+        <span class="sample-pill" onclick="window.navigoChatInstance && window.navigoChatInstance.submitQuery('where is MCA lab')">where is MCA lab</span>
+        <span class="sample-pill" onclick="window.navigoChatInstance && window.navigoChatInstance.submitQuery('belaku auditorium')">belaku auditorium</span>
+      </div>
+
+      <div class="feature-card">
+        <h3>Coding Help</h3>
+        <p>80+ student programs in Python, Java, C, C++, and SQL with syntax highlighting.</p>
+        <span class="sample-pill" onclick="window.navigoChatInstance && window.navigoChatInstance.submitQuery('fibonacci in python')">fibonacci in python</span>
+        <span class="sample-pill" onclick="window.navigoChatInstance && window.navigoChatInstance.submitQuery('reverse a string in java')">reverse a string in java</span>
+      </div>
+
+      <div class="feature-card">
+        <h3>Maths & Conversions</h3>
+        <p>Instant math evaluations, unit conversions, and percentage calculations.</p>
+        <span class="sample-pill" onclick="window.navigoChatInstance && window.navigoChatInstance.submitQuery('2+2*5')">2+2*5</span>
+        <span class="sample-pill" onclick="window.navigoChatInstance && window.navigoChatInstance.submitQuery('15% of 800')">15% of 800</span>
+      </div>
+
+      <div class="feature-card">
+        <h3>Weather & Time</h3>
+        <p>Real-time Mysore weather conditions and current local time clock.</p>
+        <span class="sample-pill" onclick="window.navigoChatInstance && window.navigoChatInstance.submitQuery('weather in Mysore')">weather in Mysore</span>
+        <span class="sample-pill" onclick="window.navigoChatInstance && window.navigoChatInstance.submitQuery('what time is it')">what time is it</span>
+      </div>
+
+      <div class="feature-card">
+        <h3>Definitions & General Knowledge</h3>
+        <p>Wiktionary definitions and Wikipedia encyclopedic summaries.</p>
+        <span class="sample-pill" onclick="window.navigoChatInstance && window.navigoChatInstance.submitQuery('meaning of ephemeral')">meaning of ephemeral</span>
+        <span class="sample-pill" onclick="window.navigoChatInstance && window.navigoChatInstance.submitQuery('who is APJ Abdul Kalam')">who is APJ Abdul Kalam</span>
+      </div>
+
+      <div class="feature-card">
+        <h3>Comparisons</h3>
+        <p>Side-by-side conceptual differences and comparisons.</p>
+        <span class="sample-pill" onclick="window.navigoChatInstance && window.navigoChatInstance.submitQuery('difference between RAM and ROM')">difference between RAM and ROM</span>
+        <span class="sample-pill" onclick="window.navigoChatInstance && window.navigoChatInstance.submitQuery('difference between let and var')">difference between let and var</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Maharaja Institute of Technology Mysore - MITM Navigo - Zero AI / LLM Client-Side Architecture</p>
+  </footer>
+
+  <!-- Load campus rooms dataset and chatbot script -->
+  <script src="rooms_data.js"></script>
+  <script src="chatbot.js"></script>
+</body>
+</html>

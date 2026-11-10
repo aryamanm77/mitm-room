@@ -1,0 +1,335 @@
+{
+  "campus": {
+    "name": "Maharaja Institute of Technology Mysore",
+    "shortName": "MIT Mysore",
+    "abbreviation": "MITM",
+    "location": "Belawadi, Srirangapatna Taluk, Mandya - 571477, Karnataka, India",
+    "affiliation": "Visvesvaraya Technological University (VTU), Belagavi",
+    "approval": "AICTE, New Delhi",
+    "accreditation": "Accredited by NAAC & NBA"
+  },
+  "blocks": [
+    {
+      "id": "engineering",
+      "collegeKey": "engineering",
+      "name": "Engineering Academic Block",
+      "aliases": [
+        "engineering",
+        "engineering block",
+        "main block",
+        "eng block",
+        "btech block",
+        "be block",
+        "engineering campus"
+      ],
+      "keywords": [
+        "cse",
+        "computer science",
+        "ise",
+        "information science",
+        "ece",
+        "electronics",
+        "mechanical",
+        "civil",
+        "ai",
+        "ds",
+        "artificial intelligence",
+        "data science",
+        "aiml",
+        "workshops",
+        "drawing theater",
+        "cad lab"
+      ],
+      "floorCount": 6,
+      "floors": [
+        "Ground Floor (ECE labs, Mechanical workshops, CAD center, Admission section)",
+        "1st Floor (Dean, Examination section, basic sciences, physics/chem labs)",
+        "2nd Floor (Computer Science & Engineering department, CS labs, 201-232)",
+        "3rd Floor (Information Science & Engineering department, classrooms 301-325)",
+        "4th Floor (AI & Machine Learning department, Data Science labs, 401-427)",
+        "5th Floor (Civil Engineering classrooms, postgraduate research suites, 501+)"
+      ],
+      "description": "The Main Academic Block houses all undergraduate engineering disciplines: CSE, ISE, ECE, Mechanical, Civil, AI & DS. It features 60+ classrooms across 6 levels, high-performance computing centers, drawing theaters, and research laboratories.",
+      "action": "college:engineering",
+      "buttonText": "Enter Engineering Block"
+    },
+    {
+      "id": "mba",
+      "collegeKey": "mba",
+      "name": "Department of MBA",
+      "aliases": [
+        "mba",
+        "mba block",
+        "management studies",
+        "department of mba",
+        "management block"
+      ],
+      "keywords": [
+        "belaku",
+        "belaku auditorium",
+        "future skills",
+        "centre for future skills",
+        "board room",
+        "mba lab",
+        "mba staff room",
+        "ethnotech",
+        "seminar hall"
+      ],
+      "floorCount": 2,
+      "floors": [
+        "Ground Floor (Main entrance, administrative lobby, parking corridor)",
+        "1st Floor (Belaku Auditorium, Centre for Future Skills, Board Room 2, Faculty Staff Room 1, Lecture Classrooms 102-106, MBA/MCA Computing Lab)"
+      ],
+      "description": "A standalone academic block for Master of Business Administration. Home to the prestigious Belaku (ಬೆಳಕು) primary college auditorium, the Centre for Future Skills (Ethnotech Academy), Executive Board Room 2, faculty chambers, and smart lecture suites.",
+      "action": "college:mba",
+      "buttonText": "Enter MBA Block"
+    },
+    {
+      "id": "mca",
+      "collegeKey": "mca",
+      "name": "Department of MCA",
+      "aliases": [
+        "mca",
+        "mca block",
+        "department of mca",
+        "computer applications pg",
+        "postgraduate it"
+      ],
+      "keywords": [
+        "mca lh 1",
+        "mca lh 2",
+        "mca lh 3",
+        "mca lh 4",
+        "mca lab",
+        "mca lab 1",
+        "lecture hall",
+        "coding studio",
+        "software engineering"
+      ],
+      "floorCount": 2,
+      "floors": [
+        "Ground Floor (Lecture Halls MCA LH 1, LH 2, LH 3, LH 4, Department Office)",
+        "1st Floor (MCA Lab 1 computing laboratories, software engineering studios)"
+      ],
+      "description": "Master of Computer Applications postgraduate academic building. Features high-capacity lecture halls (MCA LH 1 through LH 4), dedicated postgraduate computing laboratories (MCA Lab 1), and full-stack software development studios.",
+      "action": "college:mca",
+      "buttonText": "Enter MCA Block"
+    },
+    {
+      "id": "bca",
+      "collegeKey": "bca",
+      "name": "Department of BCA",
+      "aliases": [
+        "bca",
+        "bca block",
+        "department of bca",
+        "computer applications ug",
+        "undergraduate it"
+      ],
+      "keywords": [
+        "bca 201",
+        "bca 202",
+        "bca 203",
+        "bca 204",
+        "bca 205",
+        "bca 206",
+        "bca 207",
+        "bca 208",
+        "bca 209",
+        "bca 210",
+        "bca 211",
+        "bca lab",
+        "bca lab 1 & 2",
+        "web tech lab"
+      ],
+      "floorCount": 3,
+      "floors": [
+        "1st Floor (Corridor connection to Room 117)",
+        "2nd Floor (Classrooms BCA 201 to 211, BCA Computing Laboratories 1 & 2)"
+      ],
+      "description": "Bachelor of Computer Applications undergraduate facility. Houses modern coding studios, web technologies laboratories (BCA Lab 1 & 2), and interactive smart lecture halls (BCA 201 to 211).",
+      "action": "college:bca",
+      "buttonText": "Enter BCA Block"
+    },
+    {
+      "id": "pharmacy",
+      "collegeKey": "pharmacy",
+      "name": "Faculty of Pharmaceutical Sciences",
+      "aliases": [
+        "pharmacy",
+        "pharmacy block",
+        "pharmaceutical sciences",
+        "nursing",
+        "health sciences",
+        "ayurveda",
+        "ayurveda hospital"
+      ],
+      "keywords": [
+        "pharmaceutics",
+        "pharmacology",
+        "pharmaceutical chemistry",
+        "pharmacognosy",
+        "pharmacy museum",
+        "microbiology lab",
+        "machine room",
+        "nursing foundation",
+        "medical surgical",
+        "ayurveda medical sciences",
+        "ayurveda hospital"
+      ],
+      "floorCount": 3,
+      "floors": [
+        "Ground Floor (Administrative block, Principal & Vice-Principal chambers, Staff room)",
+        "1st Floor (Room 118, Nursing Foundation department, AV Aids lab, Counselling suite)",
+        "2nd Floor (Health Sciences Corridor: Pharmaceutical Chemistry labs, Pharmacology, Pharmaceutics, Pharmacognosy, Museum, Lecture Classrooms 1-4, Exam Hall, and Ayurveda Hospital glass entrance)"
+      ],
+      "description": "Dedicated health sciences research and academic facility. Accommodates formulation suites, organic chemistry research chambers, pharmacology and pharmacognosy laboratories, museum, and Maharaja Institute of Ayurveda Medical Sciences & Hospital.",
+      "action": "college:pharmacy",
+      "buttonText": "Enter Pharmacy Block"
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "belaku-auditorium",
+      "roomKey": "Belaku",
+      "name": "Belaku (ಬೆಳಕು) Auditorium",
+      "aliases": [
+        "belaku",
+        "belaku auditorium",
+        "auditorium",
+        "mba auditorium",
+        "main auditorium"
+      ],
+      "location": "Department of MBA Block, 1st Floor",
+      "description": "The primary campus amphitheater and cultural auditorium of MIT Mysore. Used for international conferences, placement drives, guest lectures, college festivals, and formal academic convocations.",
+      "action": "room:Belaku",
+      "buttonText": "Open Belaku Walkthrough"
+    },
+    {
+      "id": "centre-for-future-skills",
+      "roomKey": "Centre for Future Skills",
+      "name": "Centre for Future Skills (Ethnotech Academy)",
+      "aliases": [
+        "future skills",
+        "centre for future skills",
+        "ethnotech",
+        "skill india",
+        "cloud computing lab"
+      ],
+      "location": "Department of MBA Block, 1st Floor, Corridor Left",
+      "description": "Specialized training center partnering with Skill India, NSDC, and Ethnotech Academy for advanced certifications in cloud computing, cybersecurity, and artificial intelligence.",
+      "action": "room:Centre for Future Skills",
+      "buttonText": "Open Future Skills Walkthrough"
+    },
+    {
+      "id": "mba-board-room",
+      "roomKey": "2",
+      "name": "MBA Board & Conference Room (Room 2)",
+      "aliases": [
+        "board room",
+        "mba board room",
+        "conference room",
+        "room 2"
+      ],
+      "location": "Department of MBA Block, 1st Floor",
+      "description": "Executive boardroom and conference hall for academic council summits, departmental reviews, and administrative leadership meetings.",
+      "action": "room:2",
+      "buttonText": "Open Room 2 Walkthrough"
+    },
+    {
+      "id": "mca-lab-1",
+      "roomKey": "MCA Lab 1",
+      "name": "MCA Lab 1 Computing Center",
+      "aliases": [
+        "mca lab",
+        "mca lab 1",
+        "mca computing lab",
+        "mca computer lab"
+      ],
+      "location": "Department of MCA Block, 1st Floor",
+      "description": "Postgraduate computing suite equipped with Linux/Windows development environments, database servers, and modern compilers for software engineering practicals.",
+      "action": "room:MCA Lab 1",
+      "buttonText": "Open MCA Lab 1 Walkthrough"
+    },
+    {
+      "id": "bca-lab-1-2",
+      "roomKey": "BCA Lab 1 & 2",
+      "name": "BCA Laboratories 1 & 2",
+      "aliases": [
+        "bca lab",
+        "bca lab 1",
+        "bca lab 2",
+        "bca coding lab"
+      ],
+      "location": "Department of BCA Block, 2nd Floor",
+      "description": "Undergraduate programming laboratories with web development servers, Python and Java IDEs, and networking equipment.",
+      "action": "room:BCA Lab 1 & 2",
+      "buttonText": "Open BCA Lab Walkthrough"
+    },
+    {
+      "id": "room-114-ece",
+      "roomKey": "114",
+      "name": "Engineering Room 114 (ECE & Labs)",
+      "aliases": [
+        "room 114",
+        "114",
+        "ece lab",
+        "electronics lab"
+      ],
+      "location": "Engineering Academic Block, Ground Floor, West Block",
+      "description": "Core electronics and communication laboratory complex accessed via direct quadrangle entrance near admission and scholarship section.",
+      "action": "room:114",
+      "buttonText": "Open Room 114 Walkthrough"
+    },
+    {
+      "id": "room-117-bca",
+      "roomKey": "117",
+      "name": "Room 117 (BCA Section)",
+      "aliases": [
+        "room 117",
+        "117"
+      ],
+      "location": "Ground Floor Main Corridor, Point A Access",
+      "description": "Dedicated BCA classroom accessible from Point A staircase ground corridor, adjacent to department corridors.",
+      "action": "room:117",
+      "buttonText": "Open Room 117 Walkthrough"
+    },
+    {
+      "id": "ayurveda-hospital",
+      "roomKey": "Maharaja Institute of Ayurveda Medical Sciences & Hospital",
+      "name": "Maharaja Institute of Ayurveda Medical Sciences & Hospital",
+      "aliases": [
+        "ayurveda",
+        "ayurveda hospital",
+        "ayurveda medical sciences",
+        "hospital"
+      ],
+      "location": "Health Sciences Building, 2nd Floor Glass Entrance",
+      "description": "Ayurveda hospital entrance located on the 2nd floor corridor of the Health Sciences block past the lift lobby.",
+      "action": "room:Maharaja Institute of Ayurveda Medical Sciences & Hospital",
+      "buttonText": "Open Ayurveda Walkthrough"
+    }
+  ],
+  "appHelp": [
+    {
+      "topic": "Colleges & Blocks",
+      "keywords": ["colleges", "blocks", "colleges and blocks", "home screen", "switch college"],
+      "answer": "The Colleges & Blocks view is the home screen of MITM Navigo. Tap any academic block (Engineering, MBA, MCA, BCA, or Pharmacy) to explore that department's rooms and laboratories."
+    },
+    {
+      "topic": "Department Hub",
+      "keywords": ["department hub", "departments", "depts", "specializations"],
+      "answer": "The Department Hub organizes the campus by academic specialization: CSE & AI, MBA, ISE, ECE, Mechanical & Civil, and BCA/Pharmacy. It features direct 1-tap room launchers."
+    },
+    {
+      "topic": "Popular Hotspots",
+      "keywords": ["hotspots", "popular hotspots", "auditorium", "seminar hall"],
+      "answer": "Popular Hotspots highlights major campus destinations such as Belaku Auditorium, Centre for Future Skills, MCA Lab 1, and Room 114 for instant 1-tap walkthrough launching."
+    },
+    {
+      "topic": "Indoor Corridor Walkthrough",
+      "keywords": ["walkthrough", "navigation", "auto walk", "photos", "staircase", "access point"],
+      "answer": "Every room has a step-by-step visual photo walkthrough from campus staircases (Point A, Point B, Point C). Use the Auto-Walk button to tour automatically, or step forward/back with arrow buttons. You can also share the exact room on WhatsApp!"
+    }
+  ]
+}

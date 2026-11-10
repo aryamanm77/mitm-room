@@ -1480,6 +1480,12 @@ function findExactOrBestMatch(query) {
   return null;
 }
 
+// Expose core navigation methods for chatbot and external deep linking
+window.openRoom = openRoom;
+window.enterCollege = enterCollege;
+window.showPortalView = showPortalView;
+window.showHomeView = showHomeView;
+
 // Start application when DOM is ready
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initApp);

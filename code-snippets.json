@@ -1,0 +1,1662 @@
+[
+  {
+    "id": "hello-world-python",
+    "title": "Hello World in Python",
+    "language": "python",
+    "category": "basics",
+    "tags": [
+      "hello world",
+      "basic",
+      "intro",
+      "print"
+    ],
+    "description": "The simplest Python program using the built-in print() function.",
+    "code": "# Hello World in Python\nprint(\"Hello, World!\")"
+  },
+  {
+    "id": "hello-world-java",
+    "title": "Hello World in Java",
+    "language": "java",
+    "category": "basics",
+    "tags": [
+      "hello world",
+      "basic",
+      "intro",
+      "main class"
+    ],
+    "description": "Standard entry-point Java program with public static void main.",
+    "code": "// Hello World in Java\npublic class HelloWorld {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, World!\");\n    }\n}"
+  },
+  {
+    "id": "hello-world-c",
+    "title": "Hello World in C",
+    "language": "c",
+    "category": "basics",
+    "tags": [
+      "hello world",
+      "basic",
+      "intro",
+      "printf",
+      "stdio"
+    ],
+    "description": "Standard introductory C program with stdio.h and main function.",
+    "code": "// Hello World in C\n#include <stdio.h>\n\nint main() {\n    printf(\"Hello, World!\\n\");\n    return 0;\n}"
+  },
+  {
+    "id": "hello-world-cpp",
+    "title": "Hello World in C++",
+    "language": "cpp",
+    "category": "basics",
+    "tags": [
+      "hello world",
+      "basic",
+      "intro",
+      "cout",
+      "iostream"
+    ],
+    "description": "Standard C++ hello world using iostream and std::cout.",
+    "code": "// Hello World in C++\n#include <iostream>\nusing namespace std;\n\nint main() {\n    cout << \"Hello, World!\" << endl;\n    return 0;\n}"
+  },
+  {
+    "id": "hello-world-js",
+    "title": "Hello World in JavaScript",
+    "language": "javascript",
+    "category": "basics",
+    "tags": [
+      "hello world",
+      "basic",
+      "intro",
+      "console.log"
+    ],
+    "description": "Standard JavaScript output using console.log.",
+    "code": "// Hello World in JavaScript\nconsole.log(\"Hello, World!\");"
+  },
+  {
+    "id": "fibonacci-python",
+    "title": "Fibonacci Series in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "fibonacci",
+      "series",
+      "sequence",
+      "iterative",
+      "math"
+    ],
+    "description": "Generates the Fibonacci series up to n terms iteratively.",
+    "code": "def fibonacci(n):\n    a, b = 0, 1\n    series = []\n    for _ in range(n):\n        series.append(a)\n        a, b = b, a + b\n    return series\n\n# Example usage:\nn = 10\nprint(f\"Fibonacci series of {n} terms: {fibonacci(n)}\")\n# Output: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]"
+  },
+  {
+    "id": "fibonacci-recursive-python",
+    "title": "Recursive Fibonacci in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "fibonacci",
+      "recursion",
+      "recursive"
+    ],
+    "description": "Calculates the nth Fibonacci number using recursion.",
+    "code": "def fibonacci_recursive(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2)\n\n# Print first 8 numbers:\nfor i in range(8):\n    print(fibonacci_recursive(i), end=\" \")\n# Output: 0 1 1 2 3 5 8 13"
+  },
+  {
+    "id": "fibonacci-java",
+    "title": "Fibonacci Series in Java",
+    "language": "java",
+    "category": "algorithms",
+    "tags": [
+      "fibonacci",
+      "series",
+      "loop"
+    ],
+    "description": "Prints first n Fibonacci numbers using an iterative loop in Java.",
+    "code": "public class Fibonacci {\n    public static void main(String[] args) {\n        int n = 10;\n        int first = 0, second = 1;\n        System.out.print(\"Fibonacci Series: \");\n\n        for (int i = 1; i <= n; ++i) {\n            System.out.print(first + \" \");\n            int next = first + second;\n            first = second;\n            second = next;\n        }\n    }\n}"
+  },
+  {
+    "id": "fibonacci-c",
+    "title": "Fibonacci Series in C",
+    "language": "c",
+    "category": "algorithms",
+    "tags": [
+      "fibonacci",
+      "series",
+      "c programming"
+    ],
+    "description": "Iterative calculation of Fibonacci series in C.",
+    "code": "#include <stdio.h>\n\nint main() {\n    int n = 10, t1 = 0, t2 = 1, nextTerm;\n    printf(\"Fibonacci Series: \");\n\n    for (int i = 1; i <= n; ++i) {\n        printf(\"%d, \", t1);\n        nextTerm = t1 + t2;\n        t1 = t2;\n        t2 = nextTerm;\n    }\n    return 0;\n}"
+  },
+  {
+    "id": "fibonacci-cpp",
+    "title": "Fibonacci Series in C++",
+    "language": "cpp",
+    "category": "algorithms",
+    "tags": [
+      "fibonacci",
+      "cpp"
+    ],
+    "description": "Fibonacci series generator in modern C++.",
+    "code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n = 10, t1 = 0, t2 = 1, nextTerm = 0;\n    cout << \"Fibonacci Series: \";\n\n    for (int i = 1; i <= n; ++i) {\n        cout << t1 << \" \";\n        nextTerm = t1 + t2;\n        t1 = t2;\n        t2 = nextTerm;\n    }\n    cout << endl;\n    return 0;\n}"
+  },
+  {
+    "id": "factorial-python",
+    "title": "Factorial in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "factorial",
+      "math",
+      "recursive"
+    ],
+    "description": "Calculates the factorial of a non-negative integer using recursion and iteration.",
+    "code": "def factorial(n):\n    if n < 0:\n        raise ValueError(\"Factorial is not defined for negative numbers.\")\n    if n == 0 or n == 1:\n        return 1\n    return n * factorial(n - 1)\n\n# Example:\nnum = 5\nprint(f\"Factorial of {num} is {factorial(num)}\")  # Output: 120"
+  },
+  {
+    "id": "factorial-java",
+    "title": "Factorial in Java",
+    "language": "java",
+    "category": "algorithms",
+    "tags": [
+      "factorial",
+      "loop"
+    ],
+    "description": "Calculates the factorial of a number using a loop in Java.",
+    "code": "public class Factorial {\n    public static long calculateFactorial(int n) {\n        long fact = 1;\n        for (int i = 1; i <= n; i++) {\n            fact *= i;\n        }\n        return fact;\n    }\n\n    public static void main(String[] args) {\n        int num = 6;\n        System.out.println(\"Factorial of \" + num + \" = \" + calculateFactorial(num));\n        // Output: 720\n    }\n}"
+  },
+  {
+    "id": "factorial-c",
+    "title": "Factorial in C",
+    "language": "c",
+    "category": "algorithms",
+    "tags": [
+      "factorial",
+      "math",
+      "c"
+    ],
+    "description": "Computes factorial of a given number in C.",
+    "code": "#include <stdio.h>\n\nlong long factorial(int n) {\n    long long fact = 1;\n    for (int i = 1; i <= n; ++i) {\n        fact *= i;\n    }\n    return fact;\n}\n\nint main() {\n    int num = 5;\n    printf(\"Factorial of %d = %lld\\n\", num, factorial(num));\n    return 0;\n}"
+  },
+  {
+    "id": "prime-check-python",
+    "title": "Prime Number Check in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "prime",
+      "prime number",
+      "check prime",
+      "math"
+    ],
+    "description": "Efficiently checks whether a given integer is prime in O(sqrt(n)) time.",
+    "code": "import math\n\ndef is_prime(n):\n    if n <= 1:\n        return False\n    if n <= 3:\n        return True\n    if n % 2 == 0 or n % 3 == 0:\n        return False\n    # Check divisors up to square root of n\n    i = 5\n    while i * i <= n:\n        if n % i == 0 or n % (i + 2) == 0:\n            return False\n        i += 6\n    return True\n\n# Example:\nprint(is_prime(29))  # True\nprint(is_prime(30))  # False"
+  },
+  {
+    "id": "prime-check-java",
+    "title": "Prime Number Check in Java",
+    "language": "java",
+    "category": "algorithms",
+    "tags": [
+      "prime",
+      "prime number",
+      "java"
+    ],
+    "description": "Determines if a number is prime using sqrt(n) bound in Java.",
+    "code": "public class PrimeCheck {\n    public static boolean isPrime(int n) {\n        if (n <= 1) return false;\n        for (int i = 2; i <= Math.sqrt(n); i++) {\n            if (n % i == 0) return false;\n        }\n        return true;\n    }\n\n    public static void main(String[] args) {\n        int n = 17;\n        System.out.println(n + \" is prime? \" + isPrime(n)); // true\n    }\n}"
+  },
+  {
+    "id": "prime-check-c",
+    "title": "Prime Number Check in C",
+    "language": "c",
+    "category": "algorithms",
+    "tags": [
+      "prime",
+      "check prime",
+      "c"
+    ],
+    "description": "C function to test whether an integer is prime.",
+    "code": "#include <stdio.h>\n#include <stdbool.h>\n\nbool isPrime(int n) {\n    if (n <= 1) return false;\n    for (int i = 2; i * i <= n; i++) {\n        if (n % i == 0) return false;\n    }\n    return true;\n}\n\nint main() {\n    int n = 23;\n    if (isPrime(n)) printf(\"%d is a prime number.\\n\", n);\n    else printf(\"%d is not a prime number.\\n\", n);\n    return 0;\n}"
+  },
+  {
+    "id": "palindrome-python",
+    "title": "Palindrome String & Number in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "palindrome",
+      "string palindrome",
+      "reverse"
+    ],
+    "description": "Checks if a string or number reads the same forwards and backwards.",
+    "code": "def is_palindrome_string(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]\n\ndef is_palindrome_number(n):\n    temp = n\n    rev = 0\n    while n > 0:\n        rev = (rev * 10) + (n % 10)\n        n //= 10\n    return temp == rev\n\nprint(is_palindrome_string(\"A man, a plan, a canal: Panama\"))  # True\nprint(is_palindrome_number(12321))                              # True"
+  },
+  {
+    "id": "palindrome-java",
+    "title": "Palindrome Check in Java",
+    "language": "java",
+    "category": "algorithms",
+    "tags": [
+      "palindrome",
+      "string",
+      "java"
+    ],
+    "description": "Validates string and number palindromes in Java.",
+    "code": "public class Palindrome {\n    public static boolean isPalindrome(String s) {\n        int left = 0, right = s.length() - 1;\n        while (left < right) {\n            if (s.charAt(left++) != s.charAt(right--)) return false;\n        }\n        return true;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(isPalindrome(\"madam\")); // true\n        System.out.println(isPalindrome(\"hello\")); // false\n    }\n}"
+  },
+  {
+    "id": "palindrome-c",
+    "title": "Palindrome Number in C",
+    "language": "c",
+    "category": "algorithms",
+    "tags": [
+      "palindrome",
+      "number",
+      "c"
+    ],
+    "description": "Reverses a number to determine if it is a palindrome.",
+    "code": "#include <stdio.h>\n\nint main() {\n    int n = 1221, reversed = 0, remainder, original;\n    original = n;\n\n    while (n != 0) {\n        remainder = n % 10;\n        reversed = reversed * 10 + remainder;\n        n /= 10;\n    }\n\n    if (original == reversed)\n        printf(\"%d is a palindrome.\\n\", original);\n    else\n        printf(\"%d is not a palindrome.\\n\", original);\n    return 0;\n}"
+  },
+  {
+    "id": "reverse-string-python",
+    "title": "Reverse a String in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "reverse",
+      "reverse string",
+      "string manipulation"
+    ],
+    "description": "Reverses a string using slicing and two-pointer approach.",
+    "code": "# Method 1: Slicing (Fastest & most idiomatic)\ns = \"MIT Mysore\"\nreversed_s = s[::-1]\nprint(reversed_s)  # erosyM TIM\n\n# Method 2: Two-pointer in-place (character list)\nchars = list(s)\nleft, right = 0, len(chars) - 1\nwhile left < right:\n    chars[left], chars[right] = chars[right], chars[left]\n    left += 1\n    right -= 1\nprint(\"\".join(chars))"
+  },
+  {
+    "id": "reverse-string-java",
+    "title": "Reverse a String in Java",
+    "language": "java",
+    "category": "algorithms",
+    "tags": [
+      "reverse",
+      "reverse string",
+      "stringbuilder",
+      "java"
+    ],
+    "description": "Reverses a string in Java using StringBuilder and character array.",
+    "code": "public class ReverseString {\n    public static String reverseWithBuilder(String str) {\n        return new StringBuilder(str).reverse().toString();\n    }\n\n    public static String reverseManually(String str) {\n        char[] arr = str.toCharArray();\n        int left = 0, right = arr.length - 1;\n        while (left < right) {\n            char temp = arr[left];\n            arr[left++] = arr[right];\n            arr[right--] = temp;\n        }\n        return new String(arr);\n    }\n\n    public static void main(String[] args) {\n        String original = \"Engineering\";\n        System.out.println(\"Reversed: \" + reverseManually(original));\n        // Output: gnireenignE\n    }\n}"
+  },
+  {
+    "id": "reverse-string-c",
+    "title": "Reverse a String in C",
+    "language": "c",
+    "category": "algorithms",
+    "tags": [
+      "reverse string",
+      "string",
+      "pointers",
+      "c"
+    ],
+    "description": "In-place string reversal using pointers in C.",
+    "code": "#include <stdio.h>\n#include <string.h>\n\nvoid reverseString(char* str) {\n    int i = 0, j = strlen(str) - 1;\n    while (i < j) {\n        char temp = str[i];\n        str[i++] = str[j];\n        str[j--] = temp;\n    }\n}\n\nint main() {\n    char s[] = \"Navigo\";\n    reverseString(s);\n    printf(\"Reversed: %s\\n\", s); // ogivaN\n    return 0;\n}"
+  },
+  {
+    "id": "reverse-string-js",
+    "title": "Reverse a String in JavaScript",
+    "language": "javascript",
+    "category": "algorithms",
+    "tags": [
+      "reverse string",
+      "split reverse join",
+      "javascript"
+    ],
+    "description": "Reverses a string in JavaScript using split/reverse/join and reduction.",
+    "code": "// Method 1: Built-in array methods\nconst str = \"Maharaja\";\nconst reversed = str.split(\"\").reverse().join(\"\");\nconsole.log(reversed); // ajarahM\n\n// Method 2: Reduce\nconst rev2 = [...str].reduce((acc, char) => char + acc, \"\");\nconsole.log(rev2);"
+  },
+  {
+    "id": "armstrong-python",
+    "title": "Armstrong Number in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "armstrong",
+      "armstrong number",
+      "math"
+    ],
+    "description": "Checks if the sum of digits raised to the power of digit count equals the number.",
+    "code": "def is_armstrong(n):\n    num_str = str(n)\n    power = len(num_str)\n    return sum(int(digit) ** power for digit in num_str) == n\n\n# 153 = 1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153\nprint(is_armstrong(153))  # True\nprint(is_armstrong(370))  # True\nprint(is_armstrong(123))  # False"
+  },
+  {
+    "id": "armstrong-java",
+    "title": "Armstrong Number in Java",
+    "language": "java",
+    "category": "algorithms",
+    "tags": [
+      "armstrong",
+      "java"
+    ],
+    "description": "Checks if a number is an Armstrong number in Java.",
+    "code": "public class Armstrong {\n    public static boolean checkArmstrong(int n) {\n        int original = n, sum = 0;\n        int digits = String.valueOf(n).length();\n        while (n > 0) {\n            int rem = n % 10;\n            sum += Math.pow(rem, digits);\n            n /= 10;\n        }\n        return sum == original;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(checkArmstrong(153)); // true\n        System.out.println(checkArmstrong(9474)); // true\n    }\n}"
+  },
+  {
+    "id": "armstrong-c",
+    "title": "Armstrong Number in C",
+    "language": "c",
+    "category": "algorithms",
+    "tags": [
+      "armstrong",
+      "c"
+    ],
+    "description": "Armstrong number verification in C.",
+    "code": "#include <stdio.h>\n#include <math.h>\n\nint main() {\n    int num = 153, original, remainder, n = 0;\n    float result = 0.0;\n\n    original = num;\n    for (original = num; original != 0; ++n) original /= 10;\n\n    original = num;\n    while (original != 0) {\n        remainder = original % 10;\n        result += pow(remainder, n);\n        original /= 10;\n    }\n\n    if ((int)result == num)\n        printf(\"%d is an Armstrong number.\\n\", num);\n    else\n        printf(\"%d is not an Armstrong number.\\n\", num);\n    return 0;\n}"
+  },
+  {
+    "id": "swap-python",
+    "title": "Swap Two Numbers in Python",
+    "language": "python",
+    "category": "basics",
+    "tags": [
+      "swap",
+      "swap numbers",
+      "python tuple unpack"
+    ],
+    "description": "Swaps two numbers in Python with tuple unpacking or arithmetic.",
+    "code": "a = 10\nb = 20\n\n# Pythonic tuple unpacking:\na, b = b, a\nprint(f\"a = {a}, b = {b}\")  # a = 20, b = 10\n\n# Without extra variable using arithmetic:\na = a + b\nb = a - b\na = a - b"
+  },
+  {
+    "id": "swap-c",
+    "title": "Swap Two Numbers without 3rd Variable in C",
+    "language": "c",
+    "category": "basics",
+    "tags": [
+      "swap",
+      "without third variable",
+      "bitwise xor",
+      "c"
+    ],
+    "description": "Swaps two numbers in C using XOR bitwise operators.",
+    "code": "#include <stdio.h>\n\nint main() {\n    int x = 15, y = 25;\n    printf(\"Before: x = %d, y = %d\\n\", x, y);\n\n    // Using XOR (no overflow risk)\n    x = x ^ y;\n    y = x ^ y;\n    x = x ^ y;\n\n    printf(\"After:  x = %d, y = %d\\n\", x, y);\n    return 0;\n}"
+  },
+  {
+    "id": "bubble-sort-python",
+    "title": "Bubble Sort in Python",
+    "language": "python",
+    "category": "sorting",
+    "tags": [
+      "bubble sort",
+      "sorting",
+      "algorithm"
+    ],
+    "description": "Optimized bubble sort algorithm with early termination flag in Python.",
+    "code": "def bubble_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        swapped = False\n        for j in range(0, n - i - 1):\n            if arr[j] > arr[j + 1]:\n                arr[j], arr[j + 1] = arr[j + 1], arr[j]\n                swapped = True\n        # If no two elements were swapped, array is already sorted\n        if not swapped:\n            break\n    return arr\n\n# Example:\ndata = [64, 34, 25, 12, 22, 11, 90]\nprint(\"Sorted array:\", bubble_sort(data))\n# Output: [11, 12, 22, 25, 34, 64, 90]"
+  },
+  {
+    "id": "bubble-sort-java",
+    "title": "Bubble Sort in Java",
+    "language": "java",
+    "category": "sorting",
+    "tags": [
+      "bubble sort",
+      "sorting",
+      "java"
+    ],
+    "description": "Classic bubble sort implementation on an integer array in Java.",
+    "code": "public class BubbleSort {\n    public static void sort(int[] arr) {\n        int n = arr.length;\n        for (int i = 0; i < n - 1; i++) {\n            boolean swapped = false;\n            for (int j = 0; j < n - i - 1; j++) {\n                if (arr[j] > arr[j + 1]) {\n                    int temp = arr[j];\n                    arr[j] = arr[j + 1];\n                    arr[j + 1] = temp;\n                    swapped = true;\n                }\n            }\n            if (!swapped) break;\n        }\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {5, 1, 4, 2, 8};\n        sort(arr);\n        for (int v : arr) System.out.print(v + \" \");\n    }\n}"
+  },
+  {
+    "id": "bubble-sort-c",
+    "title": "Bubble Sort in C",
+    "language": "c",
+    "category": "sorting",
+    "tags": [
+      "bubble sort",
+      "c"
+    ],
+    "description": "Bubble sort routine in C.",
+    "code": "#include <stdio.h>\n\nvoid bubbleSort(int arr[], int n) {\n    for (int i = 0; i < n - 1; i++) {\n        for (int j = 0; j < n - i - 1; j++) {\n            if (arr[j] > arr[j + 1]) {\n                int temp = arr[j];\n                arr[j] = arr[j + 1];\n                arr[j + 1] = temp;\n            }\n        }\n    }\n}\n\nint main() {\n    int arr[] = {64, 25, 12, 22, 11};\n    int n = sizeof(arr) / sizeof(arr[0]);\n    bubbleSort(arr, n);\n    for (int i = 0; i < n; i++) printf(\"%d \", arr[i]);\n    return 0;\n}"
+  },
+  {
+    "id": "selection-sort-python",
+    "title": "Selection Sort in Python",
+    "language": "python",
+    "category": "sorting",
+    "tags": [
+      "selection sort",
+      "sorting",
+      "minimum"
+    ],
+    "description": "Finds the minimum element from unsorted part and swaps it to the front.",
+    "code": "def selection_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        min_idx = i\n        for j in range(i + 1, n):\n            if arr[j] < arr[min_idx]:\n                min_idx = j\n        arr[i], arr[min_idx] = arr[min_idx], arr[i]\n    return arr\n\nprint(selection_sort([29, 10, 14, 37, 13]))\n# Output: [10, 13, 14, 29, 37]"
+  },
+  {
+    "id": "selection-sort-c",
+    "title": "Selection Sort in C",
+    "language": "c",
+    "category": "sorting",
+    "tags": [
+      "selection sort",
+      "c"
+    ],
+    "description": "Selection sort in C with pointer swap.",
+    "code": "#include <stdio.h>\n\nvoid selectionSort(int arr[], int n) {\n    for (int i = 0; i < n - 1; i++) {\n        int min_idx = i;\n        for (int j = i + 1; j < n; j++) {\n            if (arr[j] < arr[min_idx]) min_idx = j;\n        }\n        int temp = arr[min_idx];\n        arr[min_idx] = arr[i];\n        arr[i] = temp;\n    }\n}\n\nint main() {\n    int arr[] = {64, 25, 12, 22, 11};\n    selectionSort(arr, 5);\n    for (int i = 0; i < 5; i++) printf(\"%d \", arr[i]);\n    return 0;\n}"
+  },
+  {
+    "id": "insertion-sort-python",
+    "title": "Insertion Sort in Python",
+    "language": "python",
+    "category": "sorting",
+    "tags": [
+      "insertion sort",
+      "sorting"
+    ],
+    "description": "Builds the sorted array one item at a time by shifting larger elements.",
+    "code": "def insertion_sort(arr):\n    for i in range(1, len(arr)):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and key < arr[j]:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n    return arr\n\nprint(insertion_sort([12, 11, 13, 5, 6]))\n# Output: [5, 6, 11, 12, 13]"
+  },
+  {
+    "id": "merge-sort-python",
+    "title": "Merge Sort in Python",
+    "language": "python",
+    "category": "sorting",
+    "tags": [
+      "merge sort",
+      "divide and conquer",
+      "o(n log n)"
+    ],
+    "description": "Classic O(n log n) divide-and-conquer merge sort in Python.",
+    "code": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left = merge_sort(arr[:mid])\n    right = merge_sort(arr[mid:])\n\n    return merge(left, right)\n\ndef merge(left, right):\n    result = []\n    i = j = 0\n    while i < len(left) and j < len(right):\n        if left[i] <= right[j]:\n            result.append(left[i])\n            i += 1\n        else:\n            result.append(right[j])\n            j += 1\n    result.extend(left[i:])\n    result.extend(right[j:])\n    return result\n\nprint(merge_sort([38, 27, 43, 3, 9, 82, 10]))\n# Output: [3, 9, 10, 27, 38, 43, 82]"
+  },
+  {
+    "id": "merge-sort-java",
+    "title": "Merge Sort in Java",
+    "language": "java",
+    "category": "sorting",
+    "tags": [
+      "merge sort",
+      "divide and conquer",
+      "java"
+    ],
+    "description": "Recursive merge sort implementation in Java.",
+    "code": "public class MergeSort {\n    public static void mergeSort(int[] arr, int l, int r) {\n        if (l < r) {\n            int m = l + (r - l) / 2;\n            mergeSort(arr, l, m);\n            mergeSort(arr, m + 1, r);\n            merge(arr, l, m, r);\n        }\n    }\n\n    private static void merge(int[] arr, int l, int m, int r) {\n        int n1 = m - l + 1, n2 = r - m;\n        int[] L = new int[n1];\n        int[] R = new int[n2];\n        for (int i = 0; i < n1; ++i) L[i] = arr[l + i];\n        for (int j = 0; j < n2; ++j) R[j] = arr[m + 1 + j];\n\n        int i = 0, j = 0, k = l;\n        while (i < n1 && j < n2) {\n            if (L[i] <= R[j]) arr[k++] = L[i++];\n            else arr[k++] = R[j++];\n        }\n        while (i < n1) arr[k++] = L[i++];\n        while (j < n2) arr[k++] = R[j++];\n    }\n\n    public static void main(String[] args) {\n        int[] a = {12, 11, 13, 5, 6, 7};\n        mergeSort(a, 0, a.length - 1);\n        for (int v : a) System.out.print(v + \" \");\n    }\n}"
+  },
+  {
+    "id": "quick-sort-python",
+    "title": "Quick Sort in Python",
+    "language": "python",
+    "category": "sorting",
+    "tags": [
+      "quick sort",
+      "partition",
+      "divide and conquer"
+    ],
+    "description": "Quick sort using list comprehensions and median pivot approach.",
+    "code": "def quick_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x < pivot]\n    middle = [x for x in arr if x == pivot]\n    right = [x for x in arr if x > pivot]\n    return quick_sort(left) + middle + quick_sort(right)\n\nprint(quick_sort([10, 7, 8, 9, 1, 5]))\n# Output: [1, 5, 7, 8, 9, 10]"
+  },
+  {
+    "id": "binary-search-python",
+    "title": "Binary Search in Python",
+    "language": "python",
+    "category": "searching",
+    "tags": [
+      "binary search",
+      "search",
+      "o(log n)"
+    ],
+    "description": "Iterative binary search algorithm on a sorted list.",
+    "code": "def binary_search(arr, target):\n    low = 0\n    high = len(arr) - 1\n\n    while low <= high:\n        mid = (low + high) // 2\n        if arr[mid] == target:\n            return mid  # Index found\n        elif arr[mid] < target:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return -1  # Target not in list\n\nnums = [2, 5, 8, 12, 16, 23, 38, 56, 72, 91]\ntarget = 23\nidx = binary_search(nums, target)\nprint(f\"Target {target} found at index {idx}\")  # Index 5"
+  },
+  {
+    "id": "binary-search-java",
+    "title": "Binary Search in Java",
+    "language": "java",
+    "category": "searching",
+    "tags": [
+      "binary search",
+      "java"
+    ],
+    "description": "Binary search in Java with integer overflow safe mid calculation.",
+    "code": "public class BinarySearch {\n    public static int search(int[] arr, int target) {\n        int low = 0, high = arr.length - 1;\n        while (low <= high) {\n            int mid = low + (high - low) / 2;\n            if (arr[mid] == target) return mid;\n            if (arr[mid] < target) low = mid + 1;\n            else high = mid - 1;\n        }\n        return -1;\n    }\n\n    public static void main(String[] args) {\n        int[] nums = {10, 20, 30, 40, 50};\n        System.out.println(\"Index of 30: \" + search(nums, 30)); // 2\n    }\n}"
+  },
+  {
+    "id": "binary-search-c",
+    "title": "Binary Search in C",
+    "language": "c",
+    "category": "searching",
+    "tags": [
+      "binary search",
+      "c"
+    ],
+    "description": "Standard binary search implementation in C.",
+    "code": "#include <stdio.h>\n\nint binarySearch(int arr[], int n, int target) {\n    int low = 0, high = n - 1;\n    while (low <= high) {\n        int mid = low + (high - low) / 2;\n        if (arr[mid] == target) return mid;\n        if (arr[mid] < target) low = mid + 1;\n        else high = mid - 1;\n    }\n    return -1;\n}\n\nint main() {\n    int arr[] = {2, 3, 4, 10, 40};\n    int res = binarySearch(arr, 5, 10);\n    printf(\"Result index: %d\\n\", res); // 3\n    return 0;\n}"
+  },
+  {
+    "id": "linked-list-python",
+    "title": "Singly Linked List in Python",
+    "language": "python",
+    "category": "data-structures",
+    "tags": [
+      "linked list",
+      "singly linked list",
+      "node"
+    ],
+    "description": "Singly linked list with insert at end, delete, and traversal methods.",
+    "code": "class Node:\n    def __init__(self, data):\n        self.data = data\n        self.next = None\n\nclass LinkedList:\n    def __init__(self):\n        self.head = None\n\n    def append(self, data):\n        new_node = Node(data)\n        if not self.head:\n            self.head = new_node\n            return\n        curr = self.head\n        while curr.next:\n            curr = curr.next\n        curr.next = new_node\n\n    def display(self):\n        elements = []\n        curr = self.head\n        while curr:\n            elements.append(str(curr.data))\n            curr = curr.next\n        print(\" -> \".join(elements) + \" -> None\")\n\n# Usage:\nll = LinkedList()\nll.append(10)\nll.append(20)\nll.append(30)\nll.display()  # 10 -> 20 -> 30 -> None"
+  },
+  {
+    "id": "linked-list-c",
+    "title": "Singly Linked List in C",
+    "language": "c",
+    "category": "data-structures",
+    "tags": [
+      "linked list",
+      "malloc",
+      "pointers",
+      "c"
+    ],
+    "description": "Node creation, insertion, and traversal using malloc in C.",
+    "code": "#include <stdio.h>\n#include <stdlib.h>\n\nstruct Node {\n    int data;\n    struct Node* next;\n};\n\nvoid printList(struct Node* n) {\n    while (n != NULL) {\n        printf(\"%d -> \", n->data);\n        n = n->next;\n    }\n    printf(\"NULL\\n\");\n}\n\nint main() {\n    struct Node* head = (struct Node*)malloc(sizeof(struct Node));\n    struct Node* second = (struct Node*)malloc(sizeof(struct Node));\n    struct Node* third = (struct Node*)malloc(sizeof(struct Node));\n\n    head->data = 1;\n    head->next = second;\n\n    second->data = 2;\n    second->next = third;\n\n    third->data = 3;\n    third->next = NULL;\n\n    printList(head); // 1 -> 2 -> 3 -> NULL\n    return 0;\n}"
+  },
+  {
+    "id": "linked-list-java",
+    "title": "Singly Linked List in Java",
+    "language": "java",
+    "category": "data-structures",
+    "tags": [
+      "linked list",
+      "node",
+      "java"
+    ],
+    "description": "Object-oriented linked list implementation in Java.",
+    "code": "public class CustomLinkedList {\n    static class Node {\n        int data;\n        Node next;\n        Node(int d) { data = d; next = null; }\n    }\n\n    Node head;\n\n    public void add(int data) {\n        Node newNode = new Node(data);\n        if (head == null) { head = newNode; return; }\n        Node temp = head;\n        while (temp.next != null) temp = temp.next;\n        temp.next = newNode;\n    }\n\n    public void print() {\n        Node curr = head;\n        while (curr != null) {\n            System.out.print(curr.data + \" -> \");\n            curr = curr.next;\n        }\n        System.out.println(\"null\");\n    }\n\n    public static void main(String[] args) {\n        CustomLinkedList list = new CustomLinkedList();\n        list.add(10); list.add(20); list.add(30);\n        list.print();\n    }\n}"
+  },
+  {
+    "id": "stack-python",
+    "title": "Stack Implementation in Python",
+    "language": "python",
+    "category": "data-structures",
+    "tags": [
+      "stack",
+      "lifo",
+      "push",
+      "pop"
+    ],
+    "description": "LIFO stack implementation with push, pop, peek, and is_empty methods.",
+    "code": "class Stack:\n    def __init__(self):\n        self.items = []\n\n    def push(self, item):\n        self.items.append(item)\n\n    def pop(self):\n        if not self.is_empty():\n            return self.items.pop()\n        raise IndexError(\"pop from empty stack\")\n\n    def peek(self):\n        if not self.is_empty():\n            return self.items[-1]\n        return None\n\n    def is_empty(self):\n        return len(self.items) == 0\n\ns = Stack()\ns.push(10)\ns.push(20)\nprint(s.pop())   # 20\nprint(s.peek())  # 10"
+  },
+  {
+    "id": "stack-c",
+    "title": "Stack using Array in C",
+    "language": "c",
+    "category": "data-structures",
+    "tags": [
+      "stack",
+      "lifo",
+      "array",
+      "c"
+    ],
+    "description": "Array-based stack in C with overflow and underflow checks.",
+    "code": "#include <stdio.h>\n#define MAX 100\n\nint stack[MAX];\nint top = -1;\n\nvoid push(int x) {\n    if (top >= MAX - 1) {\n        printf(\"Stack Overflow\\n\");\n        return;\n    }\n    stack[++top] = x;\n}\n\nint pop() {\n    if (top < 0) {\n        printf(\"Stack Underflow\\n\");\n        return -1;\n    }\n    return stack[top--];\n}\n\nint main() {\n    push(10);\n    push(20);\n    printf(\"Popped: %d\\n\", pop()); // 20\n    printf(\"Popped: %d\\n\", pop()); // 10\n    return 0;\n}"
+  },
+  {
+    "id": "queue-python",
+    "title": "Queue Implementation in Python",
+    "language": "python",
+    "category": "data-structures",
+    "tags": [
+      "queue",
+      "fifo",
+      "collections.deque"
+    ],
+    "description": "FIFO Queue implementation in Python using collections.deque.",
+    "code": "from collections import deque\n\nclass Queue:\n    def __init__(self):\n        self.items = deque()\n\n    def enqueue(self, item):\n        self.items.append(item)\n\n    def dequeue(self):\n        if not self.is_empty():\n            return self.items.popleft()\n        raise IndexError(\"dequeue from empty queue\")\n\n    def is_empty(self):\n        return len(self.items) == 0\n\nq = Queue()\nq.enqueue(\"Customer 1\")\nq.enqueue(\"Customer 2\")\nprint(q.dequeue())  # Customer 1"
+  },
+  {
+    "id": "queue-c",
+    "title": "Queue using Array in C",
+    "language": "c",
+    "category": "data-structures",
+    "tags": [
+      "queue",
+      "fifo",
+      "c"
+    ],
+    "description": "Linear queue with front and rear pointers in C.",
+    "code": "#include <stdio.h>\n#define SIZE 5\n\nint items[SIZE], front = -1, rear = -1;\n\nvoid enQueue(int value) {\n    if (rear == SIZE - 1) {\n        printf(\"Queue is Full!\\n\");\n        return;\n    }\n    if (front == -1) front = 0;\n    items[++rear] = value;\n}\n\nint deQueue() {\n    if (front == -1 || front > rear) {\n        printf(\"Queue is Empty!\\n\");\n        return -1;\n    }\n    return items[front++];\n}\n\nint main() {\n    enQueue(10);\n    enQueue(20);\n    printf(\"Dequeued: %d\\n\", deQueue()); // 10\n    return 0;\n}"
+  },
+  {
+    "id": "tree-traversal-python",
+    "title": "Binary Tree Traversals in Python",
+    "language": "python",
+    "category": "data-structures",
+    "tags": [
+      "tree",
+      "binary tree",
+      "inorder",
+      "preorder",
+      "postorder"
+    ],
+    "description": "Inorder (LNR), Preorder (NLR), and Postorder (LRN) tree traversals.",
+    "code": "class TreeNode:\n    def __init__(self, val=0):\n        self.val = val\n        self.left = None\n        self.right = None\n\ndef inorder(root):\n    return inorder(root.left) + [root.val] + inorder(root.right) if root else []\n\ndef preorder(root):\n    return [root.val] + preorder(root.left) + preorder(root.right) if root else []\n\ndef postorder(root):\n    return postorder(root.left) + postorder(root.right) + [root.val] if root else []\n\n#       1\n#      / \\\n#     2   3\n#    / \\\n#   4   5\nroot = TreeNode(1)\nroot.left = TreeNode(2)\nroot.right = TreeNode(3)\nroot.left.left = TreeNode(4)\nroot.left.right = TreeNode(5)\n\nprint(\"Inorder:  \", inorder(root))    # [4, 2, 5, 1, 3]\nprint(\"Preorder: \", preorder(root))   # [1, 2, 4, 5, 3]\nprint(\"Postorder:\", postorder(root))  # [4, 5, 2, 3, 1]"
+  },
+  {
+    "id": "bst-python",
+    "title": "Binary Search Tree (BST) in Python",
+    "language": "python",
+    "category": "data-structures",
+    "tags": [
+      "bst",
+      "binary search tree",
+      "insert",
+      "search"
+    ],
+    "description": "Binary search tree insert and lookup methods in Python.",
+    "code": "class Node:\n    def __init__(self, key):\n        self.key = key\n        self.left = None\n        self.right = None\n\ndef insert(root, key):\n    if root is None:\n        return Node(key)\n    if key < root.key:\n        root.left = insert(root.left, key)\n    elif key > root.key:\n        root.right = insert(root.right, key)\n    return root\n\ndef search(root, key):\n    if root is None or root.key == key:\n        return root\n    if key < root.key:\n        return search(root.left, key)\n    return search(root.right, key)\n\nr = None\nfor val in [50, 30, 20, 40, 70, 60, 80]:\n    r = insert(r, val)\n\nprint(\"Found 40:\", search(r, 40) is not None)  # True\nprint(\"Found 99:\", search(r, 99) is not None)  # False"
+  },
+  {
+    "id": "oop-class-python",
+    "title": "Class and Object in Python",
+    "language": "python",
+    "category": "oop",
+    "tags": [
+      "class",
+      "object",
+      "oop",
+      "init",
+      "self"
+    ],
+    "description": "Defines a class with attributes, methods, and instance instantiation in Python.",
+    "code": "class Student:\n    # Class attribute\n    college = \"Maharaja Institute of Technology Mysore\"\n\n    def __init__(self, name, usn, branch):\n        # Instance attributes\n        self.name = name\n        self.usn = usn\n        self.branch = branch\n\n    def display(self):\n        return f\"{self.name} ({self.usn}) - {self.branch} at {self.college}\"\n\n# Instantiate:\ns1 = Student(\"Arya\", \"4MH21CS001\", \"CSE\")\nprint(s1.display())"
+  },
+  {
+    "id": "oop-inheritance-python",
+    "title": "Inheritance in Python",
+    "language": "python",
+    "category": "oop",
+    "tags": [
+      "inheritance",
+      "oop",
+      "super",
+      "polymorphism"
+    ],
+    "description": "Single and multilevel inheritance demonstrating super() method.",
+    "code": "class Person:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\n    def introduce(self):\n        return f\"Hi, I am {self.name}, age {self.age}.\"\n\nclass EngineeringStudent(Person):\n    def __init__(self, name, age, usn, branch):\n        super().__init__(name, age)\n        self.usn = usn\n        self.branch = branch\n\n    def introduce(self):\n        base_intro = super().introduce()\n        return f\"{base_intro} I study {self.branch} (USN: {self.usn}).\"\n\nstudent = EngineeringStudent(\"Kavya\", 20, \"4MH21IS042\", \"ISE\")\nprint(student.introduce())"
+  },
+  {
+    "id": "oop-polymorphism-java",
+    "title": "Method Overriding (Runtime Polymorphism) in Java",
+    "language": "java",
+    "category": "oop",
+    "tags": [
+      "polymorphism",
+      "method overriding",
+      "dynamic dispatch",
+      "java"
+    ],
+    "description": "Runtime polymorphism using superclass reference and overridden methods.",
+    "code": "class Animal {\n    void sound() {\n        System.out.println(\"Animal makes a generic sound\");\n    }\n}\n\nclass Dog extends Animal {\n    @Override\n    void sound() {\n        System.out.println(\"Dog barks: Woof Woof!\");\n    }\n}\n\nclass Cat extends Animal {\n    @Override\n    void sound() {\n        System.out.println(\"Cat meows: Meow!\");\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Animal myAnimal; // Superclass reference\n        myAnimal = new Dog();\n        myAnimal.sound(); // Output: Dog barks: Woof Woof!\n\n        myAnimal = new Cat();\n        myAnimal.sound(); // Output: Cat meows: Meow!\n    }\n}"
+  },
+  {
+    "id": "oop-overloading-java",
+    "title": "Method Overloading (Compile-time Polymorphism) in Java",
+    "language": "java",
+    "category": "oop",
+    "tags": [
+      "overloading",
+      "polymorphism",
+      "compile-time",
+      "java"
+    ],
+    "description": "Method overloading by changing parameter count and types.",
+    "code": "public class Calculator {\n    // Overloaded add method with 2 ints\n    public int add(int a, int b) {\n        return a + b;\n    }\n\n    // Overloaded add method with 3 ints\n    public int add(int a, int b, int c) {\n        return a + b + c;\n    }\n\n    // Overloaded add method with 2 doubles\n    public double add(double a, double b) {\n        return a + b;\n    }\n\n    public static void main(String[] args) {\n        Calculator calc = new Calculator();\n        System.out.println(calc.add(2, 3));       // 5\n        System.out.println(calc.add(2, 3, 4));    // 9\n        System.out.println(calc.add(2.5, 3.5));   // 6.0\n    }\n}"
+  },
+  {
+    "id": "oop-encapsulation-java",
+    "title": "Encapsulation with Getters & Setters in Java",
+    "language": "java",
+    "category": "oop",
+    "tags": [
+      "encapsulation",
+      "data hiding",
+      "getters setters",
+      "java"
+    ],
+    "description": "Private instance variables with public getter and setter validation.",
+    "code": "public class BankAccount {\n    private String accountNumber;\n    private double balance;\n\n    public BankAccount(String accNo, double initialBalance) {\n        this.accountNumber = accNo;\n        this.balance = initialBalance >= 0 ? initialBalance : 0;\n    }\n\n    public double getBalance() {\n        return this.balance;\n    }\n\n    public void deposit(double amount) {\n        if (amount > 0) this.balance += amount;\n    }\n\n    public boolean withdraw(double amount) {\n        if (amount > 0 && amount <= this.balance) {\n            this.balance -= amount;\n            return true;\n        }\n        return false;\n    }\n}"
+  },
+  {
+    "id": "oop-interface-java",
+    "title": "Interface and Abstract Class in Java",
+    "language": "java",
+    "category": "oop",
+    "tags": [
+      "interface",
+      "abstract class",
+      "multiple inheritance",
+      "java"
+    ],
+    "description": "Defines contracts using Java interfaces and partial implementations.",
+    "code": "interface Drivable {\n    void accelerate();\n    void brake();\n}\n\nabstract class Vehicle implements Drivable {\n    String brand;\n    Vehicle(String b) { this.brand = b; }\n    void honk() { System.out.println(\"Beep beep!\"); }\n}\n\nclass Car extends Vehicle {\n    Car(String b) { super(b); }\n    public void accelerate() { System.out.println(brand + \" accelerating\"); }\n    public void brake() { System.out.println(brand + \" braking\"); }\n}"
+  },
+  {
+    "id": "file-handling-python",
+    "title": "File Read & Write in Python",
+    "language": "python",
+    "category": "file-io",
+    "tags": [
+      "file handling",
+      "read file",
+      "write file",
+      "open with"
+    ],
+    "description": "Reading, writing, and appending files safely using Python's with context manager.",
+    "code": "# 1. Write text to a file\nwith open(\"sample.txt\", \"w\", encoding=\"utf-8\") as f:\n    f.write(\"Line 1: MITM Navigo\\nLine 2: Indoor Navigation\\n\")\n\n# 2. Append text to the file\nwith open(\"sample.txt\", \"a\", encoding=\"utf-8\") as f:\n    f.write(\"Line 3: Srirangapatna, Mandya\\n\")\n\n# 3. Read entire file\nwith open(\"sample.txt\", \"r\", encoding=\"utf-8\") as f:\n    content = f.read()\n    print(\"Content:\\n\", content)\n\n# 4. Read line-by-line\nwith open(\"sample.txt\", \"r\", encoding=\"utf-8\") as f:\n    for line in f:\n        print(\"Line:\", line.strip())"
+  },
+  {
+    "id": "file-handling-c",
+    "title": "File Handling in C (fopen, fread, fwrite)",
+    "language": "c",
+    "category": "file-io",
+    "tags": [
+      "file handling",
+      "fopen",
+      "fprintf",
+      "fscanf",
+      "c"
+    ],
+    "description": "Opening, writing, reading, and closing files in C.",
+    "code": "#include <stdio.h>\n\nint main() {\n    FILE *fp;\n    char buffer[255];\n\n    // Write to file\n    fp = fopen(\"test.txt\", \"w\");\n    if (fp == NULL) return 1;\n    fprintf(fp, \"Maharaja Institute of Technology\\n\");\n    fclose(fp);\n\n    // Read from file\n    fp = fopen(\"test.txt\", \"r\");\n    if (fp == NULL) return 1;\n    while (fgets(buffer, 255, fp) != NULL) {\n        printf(\"%s\", buffer);\n    }\n    fclose(fp);\n    return 0;\n}"
+  },
+  {
+    "id": "exception-handling-python",
+    "title": "Exception Handling in Python",
+    "language": "python",
+    "category": "exceptions",
+    "tags": [
+      "exception handling",
+      "try except",
+      "finally",
+      "raise"
+    ],
+    "description": "Handling runtime errors with try, except, else, finally blocks.",
+    "code": "def safe_divide(a, b):\n    try:\n        result = a / b\n    except ZeroDivisionError:\n        print(\"Error: Cannot divide by zero!\")\n        return None\n    except TypeError:\n        print(\"Error: Both inputs must be numeric.\")\n        return None\n    else:\n        print(\"Division successful.\")\n        return result\n    finally:\n        print(\"Cleanup operations finished.\")\n\nprint(safe_divide(10, 2))\nprint(safe_divide(10, 0))"
+  },
+  {
+    "id": "exception-handling-java",
+    "title": "Exception Handling in Java",
+    "language": "java",
+    "category": "exceptions",
+    "tags": [
+      "exception handling",
+      "try catch",
+      "finally",
+      "java"
+    ],
+    "description": "Try, catch, multi-catch, and finally block error handling in Java.",
+    "code": "public class ExceptionDemo {\n    public static void main(String[] args) {\n        try {\n            int[] arr = {1, 2, 3};\n            System.out.println(arr[5]); // ArrayIndexOutOfBoundsException\n        } catch (ArrayIndexOutOfBoundsException e) {\n            System.err.println(\"Index error caught: \" + e.getMessage());\n        } catch (Exception e) {\n            System.err.println(\"General error: \" + e.getMessage());\n        } finally {\n            System.out.println(\"Finally block always executes.\");\n        }\n    }\n}"
+  },
+  {
+    "id": "sql-inner-join",
+    "title": "SQL INNER JOIN Example",
+    "language": "sql",
+    "category": "database",
+    "tags": [
+      "sql",
+      "join",
+      "inner join",
+      "sql join",
+      "database"
+    ],
+    "description": "Combines records from two tables that have matching values in both tables.",
+    "code": "-- INNER JOIN: Returns rows when there is a match in both tables\nSELECT \n    students.usn,\n    students.name,\n    departments.dept_name,\n    departments.building_block\nFROM students\nINNER JOIN departments \n    ON students.dept_id = departments.dept_id\nWHERE students.semester = 6\nORDER BY students.name ASC;"
+  },
+  {
+    "id": "sql-left-join",
+    "title": "SQL LEFT JOIN Example",
+    "language": "sql",
+    "category": "database",
+    "tags": [
+      "sql",
+      "left join",
+      "left outer join"
+    ],
+    "description": "Returns all records from the left table and matched records from the right table.",
+    "code": "-- LEFT JOIN: Returns all students and their library borrow records (if any)\nSELECT \n    s.usn,\n    s.name,\n    b.book_title,\n    b.borrow_date\nFROM students s\nLEFT JOIN book_loans b \n    ON s.usn = b.student_usn;"
+  },
+  {
+    "id": "sql-group-by-having",
+    "title": "SQL GROUP BY & HAVING Clause",
+    "language": "sql",
+    "category": "database",
+    "tags": [
+      "sql",
+      "group by",
+      "having",
+      "aggregate",
+      "count"
+    ],
+    "description": "Groups rows sharing a property and filters aggregated groups with HAVING.",
+    "code": "-- Find departments with more than 50 enrolled students\nSELECT \n    dept_name,\n    COUNT(student_id) AS total_students,\n    AVG(cgpa) AS avg_cgpa\nFROM students\nGROUP BY dept_name\nHAVING COUNT(student_id) > 50\nORDER BY avg_cgpa DESC;"
+  },
+  {
+    "id": "sql-subquery",
+    "title": "SQL Subquery Example",
+    "language": "sql",
+    "category": "database",
+    "tags": [
+      "sql",
+      "subquery",
+      "nested query"
+    ],
+    "description": "Subquery nested inside a WHERE clause to filter records.",
+    "code": "-- Find all students whose CGPA is higher than the department average\nSELECT name, branch, cgpa\nFROM students s\nWHERE cgpa > (\n    SELECT AVG(cgpa)\n    FROM students\n    WHERE branch = s.branch\n);"
+  },
+  {
+    "id": "sql-create-table",
+    "title": "SQL CREATE TABLE & Constraints",
+    "language": "sql",
+    "category": "database",
+    "tags": [
+      "sql",
+      "create table",
+      "primary key",
+      "foreign key"
+    ],
+    "description": "Creates relational tables with primary keys, foreign keys, and constraints.",
+    "code": "CREATE TABLE rooms (\n    room_id VARCHAR(20) PRIMARY KEY,\n    room_name VARCHAR(100) NOT NULL,\n    college_block VARCHAR(50) NOT NULL,\n    floor_level VARCHAR(30) NOT NULL,\n    capacity INT CHECK (capacity > 0),\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);"
+  },
+  {
+    "id": "let-vs-var-vs-const",
+    "title": "Difference between let, var, and const in JavaScript",
+    "language": "javascript",
+    "category": "javascript",
+    "tags": [
+      "let vs var",
+      "difference between let and var",
+      "var",
+      "let",
+      "const",
+      "scope",
+      "hoisting"
+    ],
+    "description": "Explains scope (function vs block), hoisting, and reassignment differences.",
+    "code": "// 1. var: Function-scoped, hoisted with undefined, allows redeclaration\nvar x = 10;\nif (true) {\n    var x = 20; // overwrites outer x!\n}\nconsole.log(x); // 20\n\n// 2. let: Block-scoped, temporal dead zone, no redeclaration\nlet y = 10;\nif (true) {\n    let y = 20; // distinct inner variable\n}\nconsole.log(y); // 10\n\n// 3. const: Block-scoped, cannot be reassigned (mutations on objects still allowed)\nconst PI = 3.14159;\n// PI = 3.14; // TypeError: Assignment to constant variable"
+  },
+  {
+    "id": "fetch-api-javascript",
+    "title": "Fetch API with async/await in JavaScript",
+    "language": "javascript",
+    "category": "javascript",
+    "tags": [
+      "fetch",
+      "async await",
+      "api call",
+      "json",
+      "promises"
+    ],
+    "description": "Modern asynchronous API fetching with error handling in JavaScript.",
+    "code": "async function fetchCampusData() {\n    try {\n        const response = await fetch(\"campus-data.json\");\n        if (!response.ok) {\n            throw new Error(`HTTP error! status: ${response.status}`);\n        }\n        const data = await response.json();\n        console.log(\"Loaded blocks:\", data.blocks.length);\n        return data;\n    } catch (error) {\n        console.error(\"Fetch failed:\", error);\n    }\n}"
+  },
+  {
+    "id": "array-methods-javascript",
+    "title": "JavaScript Array Methods (map, filter, reduce)",
+    "language": "javascript",
+    "category": "javascript",
+    "tags": [
+      "map",
+      "filter",
+      "reduce",
+      "array methods"
+    ],
+    "description": "Functional array processing examples using map, filter, and reduce.",
+    "code": "const numbers = [1, 2, 3, 4, 5, 6];\n\n// 1. filter: select even numbers\nconst evens = numbers.filter(n => n % 2 === 0); // [2, 4, 6]\n\n// 2. map: double every number\nconst doubled = numbers.map(n => n * 2);        // [2, 4, 6, 8, 10, 12]\n\n// 3. reduce: calculate sum\nconst total = numbers.reduce((sum, n) => sum + n, 0); // 21"
+  },
+  {
+    "id": "css-flexbox-center",
+    "title": "CSS Flexbox Perfect Centering",
+    "language": "css",
+    "category": "web",
+    "tags": [
+      "flexbox",
+      "center",
+      "css",
+      "layout"
+    ],
+    "description": "Perfect horizontal and vertical centering using CSS flexbox.",
+    "code": ".center-container {\n    display: flex;\n    justify-content: center; /* Horizontal alignment */\n    align-items: center;     /* Vertical alignment */\n    min-height: 100vh;\n}"
+  },
+  {
+    "id": "css-grid-responsive",
+    "title": "CSS Grid Responsive Auto-Fit",
+    "language": "css",
+    "category": "web",
+    "tags": [
+      "grid",
+      "css grid",
+      "responsive",
+      "auto-fit"
+    ],
+    "description": "Fluid responsive card grid with no media queries required.",
+    "code": ".card-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));\n    gap: 1.5rem;\n    padding: 1rem;\n}"
+  },
+  {
+    "id": "gcd-lcm-python",
+    "title": "GCD and LCM in Python",
+    "language": "python",
+    "category": "math",
+    "tags": [
+      "gcd",
+      "lcm",
+      "euclidean algorithm",
+      "math"
+    ],
+    "description": "Calculates Greatest Common Divisor and Least Common Multiple using Euclidean algorithm.",
+    "code": "import math\n\ndef gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a\n\ndef lcm(a, b):\n    return abs(a * b) // gcd(a, b)\n\nprint(\"GCD(48, 18) =\", gcd(48, 18))  # 6\nprint(\"LCM(48, 18) =\", lcm(48, 18))  # 144"
+  },
+  {
+    "id": "gcd-lcm-c",
+    "title": "GCD and LCM in C",
+    "language": "c",
+    "category": "math",
+    "tags": [
+      "gcd",
+      "lcm",
+      "c"
+    ],
+    "description": "Euclidean algorithm for GCD and LCM in C.",
+    "code": "#include <stdio.h>\n\nint gcd(int a, int b) {\n    if (b == 0) return a;\n    return gcd(b, a % b);\n}\n\nint lcm(int a, int b) {\n    return (a * b) / gcd(a, b);\n}\n\nint main() {\n    printf(\"GCD: %d, LCM: %d\\n\", gcd(24, 36), lcm(24, 36));\n    return 0;\n}"
+  },
+  {
+    "id": "sum-of-digits-python",
+    "title": "Sum of Digits in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "sum of digits",
+      "digits",
+      "math"
+    ],
+    "description": "Computes the sum of all digits in an integer.",
+    "code": "def sum_of_digits(n):\n    total = 0\n    while n > 0:\n        total += n % 10\n        n //= 10\n    return total\n\nprint(sum_of_digits(12345))  # 15"
+  },
+  {
+    "id": "sum-of-digits-c",
+    "title": "Sum of Digits in C",
+    "language": "c",
+    "category": "algorithms",
+    "tags": [
+      "sum of digits",
+      "c"
+    ],
+    "description": "Calculates sum of digits using modulo and division in C.",
+    "code": "#include <stdio.h>\n\nint main() {\n    int n = 4567, sum = 0;\n    while (n != 0) {\n        sum += n % 10;\n        n /= 10;\n    }\n    printf(\"Sum of digits = %d\\n\", sum); // 22\n    return 0;\n}"
+  },
+  {
+    "id": "leap-year-c",
+    "title": "Leap Year Program in C",
+    "language": "c",
+    "category": "basics",
+    "tags": [
+      "leap year",
+      "conditional",
+      "c"
+    ],
+    "description": "Determines if a given year is a leap year using standard divisibility rules.",
+    "code": "#include <stdio.h>\n\nint main() {\n    int year = 2024;\n    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))\n        printf(\"%d is a leap year.\\n\", year);\n    else\n        printf(\"%d is not a leap year.\\n\", year);\n    return 0;\n}"
+  },
+  {
+    "id": "linear-search-c",
+    "title": "Linear Search in C",
+    "language": "c",
+    "category": "searching",
+    "tags": [
+      "linear search",
+      "searching",
+      "c"
+    ],
+    "description": "Sequential search through an array in C.",
+    "code": "#include <stdio.h>\n\nint linearSearch(int arr[], int n, int key) {\n    for (int i = 0; i < n; i++) {\n        if (arr[i] == key) return i;\n    }\n    return -1;\n}\n\nint main() {\n    int a[] = {10, 50, 30, 70, 80};\n    printf(\"Found at: %d\\n\", linearSearch(a, 5, 30)); // 2\n    return 0;\n}"
+  },
+  {
+    "id": "matrix-multiplication-c",
+    "title": "Matrix Multiplication in C",
+    "language": "c",
+    "category": "algorithms",
+    "tags": [
+      "matrix",
+      "matrix multiplication",
+      "2d array",
+      "c"
+    ],
+    "description": "Multiplies two 2D matrices in C with dimension compatibility checks.",
+    "code": "#include <stdio.h>\n\nint main() {\n    int a[2][2] = {{1, 2}, {3, 4}};\n    int b[2][2] = {{5, 6}, {7, 8}};\n    int c[2][2] = {0};\n\n    for (int i = 0; i < 2; i++) {\n        for (int j = 0; j < 2; j++) {\n            for (int k = 0; k < 2; k++) {\n                c[i][j] += a[i][k] * b[k][j];\n            }\n            printf(\"%d \", c[i][j]);\n        }\n        printf(\"\\n\");\n    }\n    return 0;\n}"
+  },
+  {
+    "id": "matrix-transpose-python",
+    "title": "Matrix Transpose in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "matrix",
+      "transpose",
+      "python"
+    ],
+    "description": "Transposes a 2D matrix using list comprehension or zip.",
+    "code": "matrix = [\n    [1, 2, 3],\n    [4, 5, 6]\n]\n\n# Using zip unpacking\ntranspose = [list(row) for row in zip(*matrix)]\nprint(transpose)\n# Output: [[1, 4], [2, 5], [3, 6]]"
+  },
+  {
+    "id": "circular-queue-c",
+    "title": "Circular Queue in C",
+    "language": "c",
+    "category": "data-structures",
+    "tags": [
+      "circular queue",
+      "queue",
+      "modulo",
+      "c"
+    ],
+    "description": "Circular queue implementation using modulo indexing in C.",
+    "code": "#include <stdio.h>\n#define SIZE 5\n\nint queue[SIZE];\nint front = -1, rear = -1;\n\nint isFull() {\n    return (front == (rear + 1) % SIZE);\n}\n\nint isEmpty() {\n    return (front == -1);\n}\n\nvoid enqueue(int item) {\n    if (isFull()) {\n        printf(\"Queue Full!\\n\");\n        return;\n    }\n    if (front == -1) front = 0;\n    rear = (rear + 1) % SIZE;\n    queue[rear] = item;\n}\n\nint dequeue() {\n    if (isEmpty()) return -1;\n    int item = queue[front];\n    if (front == rear) front = rear = -1;\n    else front = (front + 1) % SIZE;\n    return item;\n}"
+  },
+  {
+    "id": "depth-first-search-python",
+    "title": "Depth First Search (DFS) in Python",
+    "language": "python",
+    "category": "graph",
+    "tags": [
+      "dfs",
+      "depth first search",
+      "graph",
+      "recursion"
+    ],
+    "description": "Graph traversal using Depth First Search (DFS) in Python.",
+    "code": "def dfs(graph, start, visited=None):\n    if visited is None:\n        visited = set()\n    visited.add(start)\n    print(start, end=\" \")\n\n    for neighbor in graph.get(start, []):\n        if neighbor not in visited:\n            dfs(graph, neighbor, visited)\n    return visited\n\n# Example graph represented as adjacency list\ngraph = {\n    'A': ['B', 'C'],\n    'B': ['D', 'E'],\n    'C': ['F'],\n    'D': [],\n    'E': ['F'],\n    'F': []\n}\ndfs(graph, 'A') # Output: A B D E F C"
+  },
+  {
+    "id": "breadth-first-search-python",
+    "title": "Breadth First Search (BFS) in Python",
+    "language": "python",
+    "category": "graph",
+    "tags": [
+      "bfs",
+      "breadth first search",
+      "graph",
+      "queue"
+    ],
+    "description": "Level-order graph traversal using Breadth First Search (BFS) in Python.",
+    "code": "from collections import deque\n\ndef bfs(graph, start):\n    visited = set([start])\n    queue = deque([start])\n\n    while queue:\n        vertex = queue.popleft()\n        print(vertex, end=\" \")\n\n        for neighbor in graph.get(vertex, []):\n            if neighbor not in visited:\n                visited.add(neighbor)\n                queue.append(neighbor)\n\ngraph = {'A': ['B', 'C'], 'B': ['D'], 'C': ['E'], 'D': [], 'E': []}\nbfs(graph, 'A') # Output: A B C D E"
+  },
+  {
+    "id": "dijkstra-algorithm-python",
+    "title": "Dijkstra's Shortest Path Algorithm in Python",
+    "language": "python",
+    "category": "graph",
+    "tags": [
+      "dijkstra",
+      "shortest path",
+      "heapq",
+      "greedy"
+    ],
+    "description": "Computes single-source shortest paths on weighted graphs using a min-heap.",
+    "code": "import heapq\n\ndef dijkstra(graph, start):\n    distances = {node: float('inf') for node in graph}\n    distances[start] = 0\n    pq = [(0, start)]\n\n    while pq:\n        curr_dist, curr_node = heapq.heappop(pq)\n        if curr_dist > distances[curr_node]:\n            continue\n\n        for neighbor, weight in graph[curr_node].items():\n            distance = curr_dist + weight\n            if distance < distances[neighbor]:\n                distances[neighbor] = distance\n                heapq.heappush(pq, (distance, neighbor))\n    return distances\n\ngraph = {\n    'A': {'B': 4, 'C': 2},\n    'B': {'A': 4, 'C': 1, 'D': 5},\n    'C': {'A': 2, 'B': 1, 'D': 8},\n    'D': {'B': 5, 'C': 8}\n}\nprint(dijkstra(graph, 'A'))"
+  },
+  {
+    "id": "sql-aggregate-functions",
+    "title": "SQL Aggregate Functions (COUNT, SUM, AVG, MIN, MAX)",
+    "language": "sql",
+    "category": "database",
+    "tags": [
+      "sql",
+      "aggregate",
+      "count",
+      "sum",
+      "avg",
+      "min",
+      "max"
+    ],
+    "description": "Standard SQL aggregate functions for summary reporting.",
+    "code": "SELECT \n    COUNT(*) AS total_students,\n    AVG(marks) AS average_marks,\n    MAX(marks) AS highest_marks,\n    MIN(marks) AS lowest_marks,\n    SUM(fee_paid) AS total_collection\nFROM student_records;"
+  },
+  {
+    "id": "sql-crud-operations",
+    "title": "SQL CRUD Operations (Insert, Select, Update, Delete)",
+    "language": "sql",
+    "category": "database",
+    "tags": [
+      "sql",
+      "crud",
+      "insert",
+      "update",
+      "delete",
+      "select"
+    ],
+    "description": "Fundamental data manipulation operations in SQL.",
+    "code": "-- 1. CREATE (Insert)\nINSERT INTO faculties (name, dept, designation)\nVALUES ('Dr. Sharma', 'CSE', 'Professor');\n\n-- 2. READ (Select)\nSELECT * FROM faculties WHERE dept = 'CSE';\n\n-- 3. UPDATE\nUPDATE faculties \nSET designation = 'HOD' \nWHERE name = 'Dr. Sharma';\n\n-- 4. DELETE\nDELETE FROM faculties WHERE id = 101;"
+  },
+  {
+    "id": "localstorage-helper-js",
+    "title": "LocalStorage Helper in JavaScript",
+    "language": "javascript",
+    "category": "javascript",
+    "tags": [
+      "localstorage",
+      "json",
+      "caching",
+      "javascript"
+    ],
+    "description": "Safe LocalStorage wrapper with automatic JSON serialization and expiry.",
+    "code": "const Storage = {\n    set(key, value, ttlSeconds = 86400) {\n        const item = {\n            value: value,\n            expiry: Date.now() + ttlSeconds * 1000\n        };\n        try {\n            localStorage.setItem(key, JSON.stringify(item));\n        } catch (e) {\n            console.warn(\"Storage quota exceeded\", e);\n        }\n    },\n    get(key) {\n        const raw = localStorage.getItem(key);\n        if (!raw) return null;\n        try {\n            const item = JSON.parse(raw);\n            if (Date.now() > item.expiry) {\n                localStorage.removeItem(key);\n                return null;\n            }\n            return item.value;\n        } catch (e) {\n            return null;\n        }\n    }\n};"
+  },
+  {
+    "id": "debounce-throttle-js",
+    "title": "Debounce Function in JavaScript",
+    "language": "javascript",
+    "category": "javascript",
+    "tags": [
+      "debounce",
+      "performance",
+      "timing",
+      "javascript"
+    ],
+    "description": "Debounce function to delay execution until user stops typing.",
+    "code": "function debounce(func, waitMs = 300) {\n    let timeout;\n    return function executedFunction(...args) {\n        const later = () => {\n            clearTimeout(timeout);\n            func(...args);\n        };\n        clearTimeout(timeout);\n        timeout = setTimeout(later, waitMs);\n    };\n}\n\n// Example usage:\nconst handleSearch = debounce((query) => {\n    console.log(\"Searching for:\", query);\n}, 300);"
+  },
+  {
+    "id": "string-anagram-python",
+    "title": "Anagram Check in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "anagram",
+      "string",
+      "hashmap",
+      "python"
+    ],
+    "description": "Checks if two strings are anagrams using character frequency counters.",
+    "code": "from collections import Counter\n\ndef is_anagram(s1, s2):\n    return Counter(s1.lower().replace(\" \", \"\")) == Counter(s2.lower().replace(\" \", \"\"))\n\nprint(is_anagram(\"listen\", \"silent\"))  # True\nprint(is_anagram(\"triangle\", \"integral\"))  # True\nprint(is_anagram(\"apple\", \"pale\"))  # False"
+  },
+  {
+    "id": "two-sum-python",
+    "title": "Two Sum Problem in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "two sum",
+      "hash map",
+      "leetcode",
+      "o(n)"
+    ],
+    "description": "Finds two indices that add up to target in O(n) time using a dictionary.",
+    "code": "def two_sum(nums, target):\n    seen = {}\n    for i, num in enumerate(nums):\n        complement = target - num\n        if complement in seen:\n            return [seen[complement], i]\n        seen[num] = i\n    return []\n\nprint(two_sum([2, 7, 11, 15], 9))  # [0, 1]"
+  },
+  {
+    "id": "valid-parentheses-python",
+    "title": "Valid Parentheses (Bracket Matching) in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "parentheses",
+      "stack",
+      "brackets"
+    ],
+    "description": "Verifies if bracket combinations (), {}, [] are properly closed and ordered.",
+    "code": "def is_valid_parentheses(s):\n    stack = []\n    mapping = {\")\": \"(\", \"}\": \"{\", \"]\": \"[\"}\n    for char in s:\n        if char in mapping:\n            top = stack.pop() if stack else '#'\n            if mapping[char] != top:\n                return False\n        else:\n            stack.append(char)\n    return not stack\n\nprint(is_valid_parentheses(\"{[()]}\"))  # True\nprint(is_valid_parentheses(\"{[(])}\"))  # False"
+  },
+  {
+    "id": "longest-common-prefix-python",
+    "title": "Longest Common Prefix in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "string",
+      "prefix",
+      "python"
+    ],
+    "description": "Finds the longest common prefix string amongst an array of strings.",
+    "code": "def longest_common_prefix(strs):\n    if not strs:\n        return \"\"\n    prefix = strs[0]\n    for s in strs[1:]:\n        while not s.startswith(prefix):\n            prefix = prefix[:-1]\n            if not prefix:\n                return \"\"\n    return prefix\n\nprint(longest_common_prefix([\"flower\", \"flow\", \"flight\"]))  # \"fl\""
+  },
+  {
+    "id": "c-pointers-basics",
+    "title": "Pointers and Memory Addresses in C",
+    "language": "c",
+    "category": "basics",
+    "tags": [
+      "pointers",
+      "memory",
+      "dereferencing",
+      "c"
+    ],
+    "description": "Demonstrates pointer declaration, address operator &, and dereference operator *.",
+    "code": "#include <stdio.h>\n\nint main() {\n    int var = 20;\n    int *ptr = &var; // ptr stores address of var\n\n    printf(\"Value of var: %d\\n\", var);\n    printf(\"Address of var: %p\\n\", (void*)&var);\n    printf(\"Pointer value: %p\\n\", (void*)ptr);\n    printf(\"Value pointed to (*ptr): %d\\n\", *ptr);\n\n    // Modify through pointer\n    *ptr = 50;\n    printf(\"New value of var: %d\\n\", var); // 50\n    return 0;\n}"
+  },
+  {
+    "id": "c-dynamic-memory-allocation",
+    "title": "Dynamic Memory Allocation in C (malloc, free)",
+    "language": "c",
+    "category": "basics",
+    "tags": [
+      "malloc",
+      "calloc",
+      "realloc",
+      "free",
+      "dynamic memory",
+      "c"
+    ],
+    "description": "Allocating and freeing dynamic arrays on the heap in C.",
+    "code": "#include <stdio.h>\n#include <stdlib.h>\n\nint main() {\n    int n = 5;\n    int *arr = (int*)malloc(n * sizeof(int));\n    if (arr == NULL) {\n        printf(\"Memory allocation failed!\\n\");\n        return 1;\n    }\n\n    for (int i = 0; i < n; i++) arr[i] = (i + 1) * 10;\n    for (int i = 0; i < n; i++) printf(\"%d \", arr[i]);\n\n    free(arr); // Always free allocated memory\n    return 0;\n}"
+  },
+  {
+    "id": "java-multithreading",
+    "title": "Multithreading using Runnable in Java",
+    "language": "java",
+    "category": "concurrency",
+    "tags": [
+      "threads",
+      "multithreading",
+      "runnable",
+      "java"
+    ],
+    "description": "Creating concurrent background execution threads using Runnable interface.",
+    "code": "class Worker implements Runnable {\n    private String name;\n    Worker(String n) { this.name = n; }\n\n    public void run() {\n        for (int i = 1; i <= 3; i++) {\n            System.out.println(name + \" step \" + i);\n            try { Thread.sleep(200); } catch (InterruptedException e) {}\n        }\n    }\n}\n\npublic class ThreadDemo {\n    public static void main(String[] args) {\n        Thread t1 = new Thread(new Worker(\"Task-A\"));\n        Thread t2 = new Thread(new Worker(\"Task-B\"));\n        t1.start();\n        t2.start();\n    }\n}"
+  },
+  {
+    "id": "python-decorators",
+    "title": "Function Decorators in Python",
+    "language": "python",
+    "category": "advanced",
+    "tags": [
+      "decorators",
+      "wrapper",
+      "functions",
+      "python"
+    ],
+    "description": "Creating higher-order wrapper functions to log timing and calls.",
+    "code": "import time\nfrom functools import wraps\n\ndef time_it(func):\n    @wraps(func)\n    def wrapper(*args, **kwargs):\n        start = time.time()\n        result = func(*args, **kwargs)\n        duration = time.time() - start\n        print(f\"{func.__name__} took {duration:.6f}s\")\n        return result\n    return wrapper\n\n@time_it\ndef compute():\n    return sum(i * i for i in range(100000))\n\ncompute()"
+  },
+  {
+    "id": "python-generators",
+    "title": "Generators and yield in Python",
+    "language": "python",
+    "category": "advanced",
+    "tags": [
+      "generators",
+      "yield",
+      "memory efficiency",
+      "python"
+    ],
+    "description": "Memory-efficient lazy sequences with yield.",
+    "code": "def count_up_to(max_val):\n    count = 1\n    while count <= max_val:\n        yield count\n        count += 1\n\n# Consuming values on demand:\ncounter = count_up_to(5)\nfor num in counter:\n    print(num, end=\" \")  # 1 2 3 4 5"
+  },
+  {
+    "id": "html-semantic-structure",
+    "title": "Semantic HTML5 Page Structure",
+    "language": "html",
+    "category": "web",
+    "tags": [
+      "html",
+      "semantic",
+      "seo",
+      "accessibility"
+    ],
+    "description": "Standard accessible semantic HTML5 layout template.",
+    "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Accessible Web Page</title>\n</head>\n<body>\n    <header role=\"banner\">\n        <nav aria-label=\"Main Navigation\">\n            <a href=\"/\">Home</a>\n        </nav>\n    </header>\n    <main role=\"main\">\n        <article>\n            <h1>Campus Navigation</h1>\n            <p>Indoor corridor directions.</p>\n        </article>\n    </main>\n    <footer role=\"contentinfo\">\n        <p>&copy; 2026 MIT Mysore</p>\n    </footer>\n</body>\n</html>"
+  },
+  {
+    "id": "react-usestate-useeffect",
+    "title": "React useState & useEffect Example",
+    "language": "javascript",
+    "category": "react",
+    "tags": [
+      "react",
+      "usestate",
+      "useeffect",
+      "hooks"
+    ],
+    "description": "Core React hooks managing component state and side effects.",
+    "code": "import React, { useState, useEffect } from 'react';\n\nfunction CampusCounter() {\n    const [count, setCount] = useState(0);\n\n    useEffect(() => {\n        document.title = `Toured ${count} rooms`;\n    }, [count]);\n\n    return (\n        <button onClick={() => setCount(prev => prev + 1)}>\n            Visited: {count}\n        </button>\n    );\n}"
+  },
+  {
+    "id": "reverse-array-python",
+    "title": "Reverse an Array in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "reverse an array",
+      "reverse array",
+      "python"
+    ],
+    "description": "Implementation of reverse an array in Python.",
+    "code": "def reverse_array(arr):\n    return arr[::-1]"
+  },
+  {
+    "id": "reverse-array-c",
+    "title": "Reverse an Array in C",
+    "language": "c",
+    "category": "algorithms",
+    "tags": [
+      "reverse an array",
+      "reverse array",
+      "c"
+    ],
+    "description": "Implementation of reverse an array in C.",
+    "code": "void reverseArray(int a[], int n) {\n    int l = 0, r = n - 1;\n    while(l < r) {\n        int t = a[l]; a[l++] = a[r]; a[r--] = t;\n    }\n}"
+  },
+  {
+    "id": "min-max-array-python",
+    "title": "Find Largest and Smallest in Array in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "find largest and smallest in array",
+      "min max array",
+      "python"
+    ],
+    "description": "Implementation of find largest and smallest in array in Python.",
+    "code": "def find_min_max(arr):\n    return min(arr), max(arr)"
+  },
+  {
+    "id": "min-max-array-c",
+    "title": "Find Largest and Smallest in Array in C",
+    "language": "c",
+    "category": "algorithms",
+    "tags": [
+      "find largest and smallest in array",
+      "min max array",
+      "c"
+    ],
+    "description": "Implementation of find largest and smallest in array in C.",
+    "code": "void findMinMax(int a[], int n, int *min, int *max) {\n    *min = *max = a[0];\n    for(int i = 1; i < n; i++) {\n        if (a[i] < *min) *min = a[i];\n        if (a[i] > *max) *max = a[i];\n    }\n}"
+  },
+  {
+    "id": "substring-search-python",
+    "title": "Check Substring in String in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "check substring in string",
+      "substring search",
+      "python"
+    ],
+    "description": "Implementation of check substring in string in Python.",
+    "code": "text = \"MIT Mysore Campus\"\npattern = \"Mysore\"\nprint(pattern in text)  # True"
+  },
+  {
+    "id": "substring-search-js",
+    "title": "Check Substring in String in JavaScript",
+    "language": "javascript",
+    "category": "javascript",
+    "tags": [
+      "check substring in string",
+      "substring search",
+      "javascript"
+    ],
+    "description": "Implementation of check substring in string in JavaScript.",
+    "code": "const text = \"MIT Mysore Campus\";\nconsole.log(text.includes(\"Mysore\")); // true"
+  },
+  {
+    "id": "count-vowels-python",
+    "title": "Count Vowels and Consonants in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "count vowels and consonants",
+      "count vowels",
+      "python"
+    ],
+    "description": "Implementation of count vowels and consonants in Python.",
+    "code": "def count_vowels(s):\n    vowels = set(\"aeiouAEIOU\")\n    return sum(1 for c in s if c in vowels)"
+  },
+  {
+    "id": "count-vowels-c",
+    "title": "Count Vowels and Consonants in C",
+    "language": "c",
+    "category": "algorithms",
+    "tags": [
+      "count vowels and consonants",
+      "count vowels",
+      "c"
+    ],
+    "description": "Implementation of count vowels and consonants in C.",
+    "code": "int countVowels(char s[]) {\n    int count = 0;\n    for(int i = 0; s[i]; i++) {\n        char c = tolower(s[i]);\n        if(c=='a'||c=='e'||c=='i'||c=='o'||c=='u') count++;\n    }\n    return count;\n}"
+  },
+  {
+    "id": "merge-sorted-arrays-python",
+    "title": "Merge Two Sorted Arrays in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "merge two sorted arrays",
+      "merge sorted arrays",
+      "python"
+    ],
+    "description": "Implementation of merge two sorted arrays in Python.",
+    "code": "def merge_sorted(a, b):\n    i = j = 0\n    res = []\n    while i < len(a) and j < len(b):\n        if a[i] < b[j]:\n            res.append(a[i])\n            i += 1\n        else:\n            res.append(b[j])\n            j += 1\n    return res + a[i:] + b[j:]"
+  },
+  {
+    "id": "merge-sorted-arrays-java",
+    "title": "Merge Two Sorted Arrays in Java",
+    "language": "java",
+    "category": "algorithms",
+    "tags": [
+      "merge two sorted arrays",
+      "merge sorted arrays",
+      "java"
+    ],
+    "description": "Implementation of merge two sorted arrays in Java.",
+    "code": "public static int[] merge(int[] a, int[] b) {\n    int[] res = new int[a.length + b.length];\n    int i = 0, j = 0, k = 0;\n    while (i < a.length && j < b.length) {\n        res[k++] = (a[i] <= b[j]) ? a[i++] : b[j++];\n    }\n    while (i < a.length) res[k++] = a[i++];\n    while (j < b.length) res[k++] = b[j++];\n    return res;\n}"
+  },
+  {
+    "id": "string-to-int-python",
+    "title": "String to Integer (atoi) in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "string to integer (atoi)",
+      "string to int",
+      "python"
+    ],
+    "description": "Implementation of string to integer (atoi) in Python.",
+    "code": "val = int(\"-42\")\nprint(val) # -42"
+  },
+  {
+    "id": "string-to-int-c",
+    "title": "String to Integer (atoi) in C",
+    "language": "c",
+    "category": "algorithms",
+    "tags": [
+      "string to integer (atoi)",
+      "string to int",
+      "c"
+    ],
+    "description": "Implementation of string to integer (atoi) in C.",
+    "code": "#include <stdlib.h>\nint num = atoi(\"12345\");"
+  },
+  {
+    "id": "power-calc-python",
+    "title": "Power of a Number (Pow) in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "power of a number (pow)",
+      "power calc",
+      "python"
+    ],
+    "description": "Implementation of power of a number (pow) in Python.",
+    "code": "def power(base, exp):\n    if exp == 0: return 1\n    half = power(base, exp // 2)\n    return half * half * (base if exp % 2 else 1)"
+  },
+  {
+    "id": "power-calc-c",
+    "title": "Power of a Number (Pow) in C",
+    "language": "c",
+    "category": "algorithms",
+    "tags": [
+      "power of a number (pow)",
+      "power calc",
+      "c"
+    ],
+    "description": "Implementation of power of a number (pow) in C.",
+    "code": "double power(double b, int e) {\n    if (e == 0) return 1;\n    double h = power(b, e / 2);\n    return h * h * (e % 2 ? b : 1);\n}"
+  },
+  {
+    "id": "second-largest-python",
+    "title": "Second Largest Element in Array in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "second largest element in array",
+      "second largest",
+      "python"
+    ],
+    "description": "Implementation of second largest element in array in Python.",
+    "code": "def second_largest(arr):\n    unique = list(set(arr))\n    if len(unique) < 2: return None\n    unique.sort()\n    return unique[-2]"
+  },
+  {
+    "id": "second-largest-java",
+    "title": "Second Largest Element in Array in Java",
+    "language": "java",
+    "category": "algorithms",
+    "tags": [
+      "second largest element in array",
+      "second largest",
+      "java"
+    ],
+    "description": "Implementation of second largest element in array in Java.",
+    "code": "public static int getSecondLargest(int[] a) {\n    int first = Integer.MIN_VALUE, second = Integer.MIN_VALUE;\n    for (int n : a) {\n        if (n > first) { second = first; first = n; }\n        else if (n > second && n != first) { second = n; }\n    }\n    return second;\n}"
+  },
+  {
+    "id": "power-of-two-python",
+    "title": "Check if Number is Power of Two in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "check if number is power of two",
+      "power of two",
+      "python"
+    ],
+    "description": "Implementation of check if number is power of two in Python.",
+    "code": "def is_power_of_two(n):\n    return n > 0 and (n & (n - 1)) == 0"
+  },
+  {
+    "id": "power-of-two-c",
+    "title": "Check if Number is Power of Two in C",
+    "language": "c",
+    "category": "algorithms",
+    "tags": [
+      "check if number is power of two",
+      "power of two",
+      "c"
+    ],
+    "description": "Implementation of check if number is power of two in C.",
+    "code": "int isPowerOfTwo(int n) {\n    return n > 0 && (n & (n - 1)) == 0;\n}"
+  },
+  {
+    "id": "remove-duplicates-python",
+    "title": "Remove Duplicates from List / Array in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "remove duplicates from list / array",
+      "remove duplicates",
+      "python"
+    ],
+    "description": "Implementation of remove duplicates from list / array in Python.",
+    "code": "def remove_duplicates(lst):\n    return list(dict.fromkeys(lst))\nprint(remove_duplicates([1, 2, 2, 3, 4, 4, 5])) # [1, 2, 3, 4, 5]"
+  },
+  {
+    "id": "remove-duplicates-js",
+    "title": "Remove Duplicates from List / Array in JavaScript",
+    "language": "javascript",
+    "category": "javascript",
+    "tags": [
+      "remove duplicates from list / array",
+      "remove duplicates",
+      "javascript"
+    ],
+    "description": "Implementation of remove duplicates from list / array in JavaScript.",
+    "code": "const nums = [1, 2, 2, 3, 4, 4, 5];\nconst unique = [...new Set(nums)];"
+  },
+  {
+    "id": "leap-year-py-python",
+    "title": "Check Leap Year in Python in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "check leap year in python",
+      "leap year py",
+      "python"
+    ],
+    "description": "Implementation of check leap year in python in Python.",
+    "code": "def is_leap_year(year):\n    return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)"
+  },
+  {
+    "id": "flatten-list-py-python",
+    "title": "Flatten a Nested List in Python in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "flatten a nested list in python",
+      "flatten list py",
+      "python"
+    ],
+    "description": "Implementation of flatten a nested list in python in Python.",
+    "code": "def flatten(nested):\n    res = []\n    for item in nested:\n        if isinstance(item, list):\n            res.extend(flatten(item))\n        else:\n            res.append(item)\n    return res\nprint(flatten([1, [2, [3, 4]], 5])) # [1, 2, 3, 4, 5]"
+  },
+  {
+    "id": "counter-py-python",
+    "title": "Count Occurrences of Elements in Python in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "count occurrences of elements in python",
+      "counter py",
+      "python"
+    ],
+    "description": "Implementation of count occurrences of elements in python in Python.",
+    "code": "from collections import Counter\nwords = [\"cse\", \"ise\", \"cse\", \"ece\", \"cse\", \"ise\"]\nprint(Counter(words)) # {'cse': 3, 'ise': 2, 'ece': 1}"
+  },
+  {
+    "id": "http-server-py-python",
+    "title": "Simple HTTP Server in Python in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "simple http server in python",
+      "http server py",
+      "python"
+    ],
+    "description": "Implementation of simple http server in python in Python.",
+    "code": "# Run in terminal:\n# python -m http.server 8000\nprint(\"Serving HTTP on port 8000...\")"
+  },
+  {
+    "id": "bin-to-dec-py-python",
+    "title": "Binary to Decimal Conversion in Python in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "binary to decimal conversion in python",
+      "bin to dec py",
+      "python"
+    ],
+    "description": "Implementation of binary to decimal conversion in python in Python.",
+    "code": "binary_str = \"10110\"\ndecimal = int(binary_str, 2)\nprint(decimal) # 22"
+  },
+  {
+    "id": "dec-to-bin-py-python",
+    "title": "Decimal to Binary Conversion in Python in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "decimal to binary conversion in python",
+      "dec to bin py",
+      "python"
+    ],
+    "description": "Implementation of decimal to binary conversion in python in Python.",
+    "code": "num = 22\nbin_str = bin(num)[2:]\nprint(bin_str) # 10110"
+  },
+  {
+    "id": "celsius-fahrenheit-py-python",
+    "title": "Convert Celsius to Fahrenheit in Python in Python",
+    "language": "python",
+    "category": "algorithms",
+    "tags": [
+      "convert celsius to fahrenheit in python",
+      "celsius fahrenheit py",
+      "python"
+    ],
+    "description": "Implementation of convert celsius to fahrenheit in python in Python.",
+    "code": "def c_to_f(c):\n    return (c * 9/5) + 32\ndef f_to_c(f):\n    return (f - 32) * 5/9\nprint(\"25 C =\", c_to_f(25), \"F\") # 77.0 F"
+  }
+]
